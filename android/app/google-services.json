@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "235222897305",
+    "project_id": "rideal-426b8",
+    "storage_bucket": "rideal-426b8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:235222897305:android:beed26c91744d9f8709e08",
+        "android_client_info": {
+          "package_name": "com.rds.ridealuser"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZLPd8T4J6RBmFIccqCYMxedNxdN2ERGw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
