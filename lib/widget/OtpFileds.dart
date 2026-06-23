@@ -56,7 +56,7 @@ class _OtpFieldsState extends State<OtpFields> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: List.generate(widget.length, (index) {
         return SizedBox(
-          width: 50,
+          width: 42,
           child: TextField(
             controller: widget.controllers[index],
             focusNode: _focusNodes[index],
@@ -66,6 +66,8 @@ class _OtpFieldsState extends State<OtpFields> {
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             decoration: InputDecoration(
               counterText: "",
+              isDense: true,
+              contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(color: widget.borderColor),

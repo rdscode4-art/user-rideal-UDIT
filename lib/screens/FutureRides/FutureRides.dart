@@ -468,20 +468,7 @@ class _FutureRidesState extends State<FutureRides> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      GestureDetector(
-                        onTap: () => Navigator.of(context).pop(),
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.15),
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                                color: Colors.white.withOpacity(0.3)),
-                          ),
-                          child: const Icon(Icons.arrow_back,
-                              color: Colors.white, size: 20),
-                        ),
-                      ),
+                      const SizedBox(width: 42, height: 42),
                       const Text(
                         'Future Rides',
                         style: TextStyle(

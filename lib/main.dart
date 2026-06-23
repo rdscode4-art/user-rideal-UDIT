@@ -10,6 +10,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'fcm_service.dart'; // Create this file with the code I provided
 import 'package:upgrader/upgrader.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   try {
@@ -32,7 +34,12 @@ void main()async {
   
   // Initialize FCM
   await FCMService.initialize();
-  runApp(const RideShareApp());
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => const RideShareApp(),
+    ),
+  );
 }
 
 class RideShareApp extends StatefulWidget {
@@ -77,6 +84,7 @@ class _RideShareAppState extends State<RideShareApp> {
   Widget build(BuildContext context) {
     
     return MaterialApp(
+      locale: DevicePreview.locale(context),
       title: 'Rideal',
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
@@ -105,6 +113,7 @@ class _RideShareAppState extends State<RideShareApp> {
         ),
       ),
       builder: (context, child) {
+        child = DevicePreview.appBuilder(context, child);
         return UpgradeAlert(
           navigatorKey: navigatorKey,
           showIgnore: false,
@@ -115,7 +124,7 @@ class _RideShareAppState extends State<RideShareApp> {
             debugLogging: true, // Console mein logs show karne ke liye
             // debugDisplayAlways: true, // Testing ke liye isse uncomment kar sakte hain
           ),
-          child: child ?? const SizedBox.shrink(),
+          child: child,
         );
       },
       home: const SplashScreen(),

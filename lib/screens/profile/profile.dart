@@ -703,26 +703,8 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
         children: [
           // Top bar row
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.06),
-                        blurRadius: 10,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: const Icon(Icons.arrow_back, color: Colors.black87, size: 20),
-                ),
-              ),
               const Text(
                 "Profile",
                 style: TextStyle(
@@ -731,7 +713,6 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                   color: Colors.black87,
                 ),
               ),
-              const SizedBox(width: 40),
             ],
           ),
 

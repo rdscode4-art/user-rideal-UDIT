@@ -24,7 +24,7 @@ class CustomBottomNavBar extends StatelessWidget {
     final labels = [
       'Home',
       // 'Wallet',
-      'Rideal Feed',
+      'RiDeal Feed',
       'Future Rides',
       'Profile',
     ];

@@ -227,16 +227,7 @@ class _Home2State extends State<Home2> {
   }
 
   String _getTimeBasedGreeting() {
-    final hour = DateTime.now().hour;
-    if (hour < 12) {
-      return "Good RiDeal morning,";
-    } else if (hour < 17) {
-      return "Good RiDeal afternoon,";
-    } else if (hour < 21) {
-      return "Good RiDeal evening,";
-    } else {
-      return "Good RiDeal night,";
-    }
+    return "Good RiDeal morning,";
   }
 
   @override

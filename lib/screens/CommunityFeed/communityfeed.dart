@@ -96,25 +96,6 @@ class _RiDealFeedScreenState extends State<RiDealFeedScreen>
               padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
               child: Row(
                 children: [
-                  GestureDetector(
-                    onTap: () => Navigator.of(context).pop(),
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
-                            blurRadius: 10,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                      ),
-                      child: const Icon(Icons.arrow_back, color: Colors.black87, size: 20),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
                   Container(
                     padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
