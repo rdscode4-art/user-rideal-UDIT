@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -218,7 +219,7 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
     if (pickup.isEmpty || drop.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text("⚠️ Please enter both pickup and dropoff locations"),
+          content: Text("⚠️ Please enter both pickup and dropoff locations"),
           backgroundColor: Colors.red.shade600,
           behavior: SnackBarBehavior.floating,
         ),
@@ -229,7 +230,7 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
     if (_isScheduled && (_selectedDate == null || _selectedTime == null)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text("⚠️ Please select both Date and Time for scheduling"),
+          content: Text("⚠️ Please select both Date and Time for scheduling"),
           backgroundColor: Colors.red.shade600,
           behavior: SnackBarBehavior.floating,
         ),
@@ -306,20 +307,20 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
         child: Stack(
           children: [
             SingleChildScrollView(
-              padding: const EdgeInsets.only(bottom: 120),
+              padding: EdgeInsets.only(bottom: 120.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Custom Header
                   Padding(
-                    padding: const EdgeInsets.only(top: 8, left: 16, right: 16, bottom: 20),
+                    padding: EdgeInsets.only(top: 8.w, left: 16.w, right: 16.w, bottom: 20.w),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         GestureDetector(
                           onTap: () => Navigator.pop(context),
                           child: Container(
-                            padding: const EdgeInsets.all(8),
+                            padding: EdgeInsets.all(8.w),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               shape: BoxShape.circle,
@@ -331,7 +332,7 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
                                 ),
                               ],
                             ),
-                            child: const Icon(Icons.arrow_back, color: Colors.black87, size: 18),
+                            child: Icon(Icons.arrow_back, color: Colors.black87, size: 18),
                           ),
                         ),
                         GestureDetector(
@@ -344,7 +345,7 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
                             );
                           },
                           child: Container(
-                            padding: const EdgeInsets.all(8),
+                            padding: EdgeInsets.all(8.w),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               shape: BoxShape.circle,
@@ -356,7 +357,7 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
                                 ),
                               ],
                             ),
-                            child: const Icon(Icons.history, color: Colors.black87, size: 18),
+                            child: Icon(Icons.history, color: Colors.black87, size: 18),
                           ),
                         ),
                       ],
@@ -365,25 +366,25 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
 
                   // Large Typography Intro
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           "Need a truck?",
                           style: TextStyle(
-                            fontSize: 28,
+                            fontSize: 28.sp,
                             fontWeight: FontWeight.w800,
-                            height: 1.1,
+                            height: 1.1.w,
                             letterSpacing: -1,
                             color: Colors.black87,
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8.w),
                         Text(
                           "Transport goods across the city easily.",
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             color: Colors.grey.shade600,
                             fontWeight: FontWeight.w500,
                           ),
@@ -391,14 +392,14 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24.w),
 
                   // Locations Card
                   Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 16),
+                    margin: EdgeInsets.symmetric(horizontal: 16.w),
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(24),
+                      borderRadius: BorderRadius.circular(24.r),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.03),
@@ -408,45 +409,45 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
                       ],
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: EdgeInsets.all(16.0.w),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           // Pickup Field
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+                            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 0),
                             decoration: BoxDecoration(
                               color: Colors.grey.shade50,
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(16.r),
                               border: Border.all(color: Colors.grey.shade200),
                             ),
                             child: Row(
                               children: [
-                                const Icon(Icons.circle, size: 12, color: Color(0xFF0F9D58)),
-                                const SizedBox(width: 12),
+                                Icon(Icons.circle, size: 12, color: Color(0xFF0F9D58)),
+                                SizedBox(width: 12.w),
                                 Expanded(
                                   child: TextField(
                                     controller: _pickupController,
                                     onChanged: _onPickupChanged,
                                     textAlignVertical: TextAlignVertical.center,
-                                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                                    style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
                                     decoration: InputDecoration(
                                       hintText: "Pickup location",
-                                      hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 14),
+                                      hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 14.sp),
                                       border: InputBorder.none,
-                                      contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                                      contentPadding: EdgeInsets.symmetric(vertical: 16.w),
                                       isDense: true,
                                       suffixIcon: _isGeocodingPickup
-                                          ? const Padding(
-                                              padding: EdgeInsets.all(14.0),
+                                          ? Padding(
+                                              padding: EdgeInsets.all(14.0.w),
                                               child: SizedBox(
-                                                width: 16, height: 16,
+                                                width: 16.w, height: 16.w,
                                                 child: CircularProgressIndicator(strokeWidth: 2, color: Color(0xFF0F9D58)),
                                               ),
                                             )
                                           : _pickupController.text.isNotEmpty
                                               ? IconButton(
-                                                  icon: const Icon(Icons.close, size: 16, color: Colors.black45),
+                                                  icon: Icon(Icons.close, size: 16, color: Colors.black45),
                                                   onPressed: () {
                                                     _pickupController.clear();
                                                     setState(() {
@@ -464,18 +465,18 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
                           ),
                           if (_pickupSuggestions.isNotEmpty)
                             Container(
-                              constraints: const BoxConstraints(maxHeight: 200),
+                              constraints: BoxConstraints(maxHeight: 200),
                               child: ListView.separated(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemCount: _pickupSuggestions.length > 3 ? 3 : _pickupSuggestions.length,
-                                separatorBuilder: (context, idx) => Divider(height: 1, color: Colors.grey.shade100),
+                                separatorBuilder: (context, idx) => Divider(height: 1.w, color: Colors.grey.shade100),
                                 itemBuilder: (context, index) {
                                   final suggestion = _pickupSuggestions[index];
                                   return ListTile(
                                     visualDensity: VisualDensity.compact,
-                                    leading: const Icon(Icons.location_on_outlined, color: Colors.black54, size: 18),
-                                    title: Text(suggestion["description"]!, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
+                                    leading: Icon(Icons.location_on_outlined, color: Colors.black54, size: 18),
+                                    title: Text(suggestion["description"]!, style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500)),
                                     onTap: () {
                                       _pickupController.text = suggestion["description"]!;
                                       setState(() => _pickupSuggestions = []);
@@ -486,46 +487,46 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
                               ),
                             ),
                           
-                          const Padding(
-                            padding: EdgeInsets.only(left: 17, top: 4, bottom: 4),
-                            child: SizedBox(height: 16, child: VerticalDivider(color: Colors.grey, thickness: 1)),
+                          Padding(
+                            padding: EdgeInsets.only(left: 17.w, top: 4.w, bottom: 4.w),
+                            child: SizedBox(height: 16.w, child: VerticalDivider(color: Colors.grey, thickness: 1)),
                           ),
 
                           // Dropoff Field
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+                            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 0),
                             decoration: BoxDecoration(
                               color: Colors.grey.shade50,
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(16.r),
                               border: Border.all(color: Colors.grey.shade200),
                             ),
                             child: Row(
                               children: [
-                                const Icon(Icons.circle, size: 12, color: Colors.redAccent),
-                                const SizedBox(width: 12),
+                                Icon(Icons.circle, size: 12, color: Colors.redAccent),
+                                SizedBox(width: 12.w),
                                 Expanded(
                                   child: TextField(
                                     controller: _dropController,
                                     onChanged: _onDropChanged,
                                     textAlignVertical: TextAlignVertical.center,
-                                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                                    style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
                                     decoration: InputDecoration(
                                       hintText: "Where to?",
-                                      hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 14),
+                                      hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 14.sp),
                                       border: InputBorder.none,
-                                      contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                                      contentPadding: EdgeInsets.symmetric(vertical: 16.w),
                                       isDense: true,
                                       suffixIcon: _isGeocodingDrop
-                                          ? const Padding(
-                                              padding: EdgeInsets.all(14.0),
+                                          ? Padding(
+                                              padding: EdgeInsets.all(14.0.w),
                                               child: SizedBox(
-                                                width: 16, height: 16,
+                                                width: 16.w, height: 16.w,
                                                 child: CircularProgressIndicator(strokeWidth: 2, color: Colors.redAccent),
                                               ),
                                             )
                                           : _dropController.text.isNotEmpty
                                               ? IconButton(
-                                                  icon: const Icon(Icons.close, size: 16, color: Colors.black45),
+                                                  icon: Icon(Icons.close, size: 16, color: Colors.black45),
                                                   onPressed: () {
                                                     _dropController.clear();
                                                     setState(() {
@@ -543,18 +544,18 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
                           ),
                           if (_dropSuggestions.isNotEmpty)
                             Container(
-                              constraints: const BoxConstraints(maxHeight: 200),
+                              constraints: BoxConstraints(maxHeight: 200),
                               child: ListView.separated(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemCount: _dropSuggestions.length > 3 ? 3 : _dropSuggestions.length,
-                                separatorBuilder: (context, idx) => Divider(height: 1, color: Colors.grey.shade100),
+                                separatorBuilder: (context, idx) => Divider(height: 1.w, color: Colors.grey.shade100),
                                 itemBuilder: (context, index) {
                                   final suggestion = _dropSuggestions[index];
                                   return ListTile(
                                     visualDensity: VisualDensity.compact,
-                                    leading: const Icon(Icons.location_on_outlined, color: Colors.black54, size: 18),
-                                    title: Text(suggestion["description"]!, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
+                                    leading: Icon(Icons.location_on_outlined, color: Colors.black54, size: 18),
+                                    title: Text(suggestion["description"]!, style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500)),
                                     onTap: () {
                                       _dropController.text = suggestion["description"]!;
                                       setState(() => _dropSuggestions = []);
@@ -566,20 +567,20 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
                             ),
                           
                           if (_estimatedDistance > 0) ...[
-                            const SizedBox(height: 16),
+                            SizedBox(height: 16.w),
                             Container(
-                              padding: const EdgeInsets.all(12),
+                              padding: EdgeInsets.all(12.w),
                               decoration: BoxDecoration(
                                 color: const Color(0xFF0F9D58).withOpacity(0.05),
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(12.r),
                               ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Text("Trip Distance", style: TextStyle(color: Colors.black54, fontSize: 13, fontWeight: FontWeight.w500)),
+                                  Text("Trip Distance", style: TextStyle(color: Colors.black54, fontSize: 13.sp, fontWeight: FontWeight.w500)),
                                   Text(
                                     "${_estimatedDistance.toStringAsFixed(1)} km",
-                                    style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14, color: Color(0xFF0F9D58)),
+                                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14.sp, color: Color(0xFF0F9D58)),
                                   ),
                                 ],
                               ),
@@ -590,19 +591,19 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24.w),
                   
                   // Vehicles Section
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
                     child: Text(
                       "Select Goods Carrier",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87),
+                      style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold, color: Colors.black87),
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12.w),
                   ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: _vehicles.length,
@@ -619,14 +620,14 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
                         },
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 200),
-                          margin: const EdgeInsets.only(bottom: 12),
-                          padding: const EdgeInsets.all(16),
+                          margin: EdgeInsets.only(bottom: 12.w),
+                          padding: EdgeInsets.all(16.w),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(20.r),
                             border: Border.all(
                               color: isSelected ? const Color(0xFF0F9D58) : Colors.transparent,
-                              width: 2,
+                              width: 2.w,
                             ),
                             boxShadow: [
                               BoxShadow(
@@ -640,49 +641,49 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                padding: const EdgeInsets.all(12),
+                                padding: EdgeInsets.all(12.w),
                                 decoration: BoxDecoration(
                                   color: Colors.grey.shade50,
                                   shape: BoxShape.circle,
                                 ),
-                                child: Text(v['icon'] as String, style: const TextStyle(fontSize: 24)),
+                                child: Text(v['icon'] as String, style: TextStyle(fontSize: 24.sp)),
                               ),
-                              const SizedBox(width: 16),
+                              SizedBox(width: 16.w),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       v['name'] as String,
-                                      style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black87),
+                                      style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold, color: Colors.black87),
                                     ),
-                                    const SizedBox(height: 4),
+                                    SizedBox(height: 4.w),
                                     Text(
                                       "Max: ${v['capacity']} • ${v['size']}",
-                                      style: TextStyle(fontSize: 12, color: Colors.grey.shade600, fontWeight: FontWeight.w500),
+                                      style: TextStyle(fontSize: 12.sp, color: Colors.grey.shade600, fontWeight: FontWeight.w500),
                                     ),
-                                    const SizedBox(height: 6),
+                                    SizedBox(height: 6.w),
                                     Text(
                                       v['description'] as String,
-                                      style: TextStyle(fontSize: 11, color: Colors.grey.shade500),
+                                      style: TextStyle(fontSize: 11.sp, color: Colors.grey.shade500),
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ],
                                 ),
                               ),
-                              const SizedBox(width: 12),
+                              SizedBox(width: 12.w),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
                                     "₹${price.toStringAsFixed(0)}",
-                                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.black87),
+                                    style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w800, color: Colors.black87),
                                   ),
-                                  const SizedBox(height: 4),
+                                  SizedBox(height: 4.w),
                                   Text(
                                     "₹${v['basePrice']}+₹${v['perKmRate']}/km",
-                                    style: TextStyle(fontSize: 10, color: Colors.grey.shade400, fontWeight: FontWeight.w500),
+                                    style: TextStyle(fontSize: 10.sp, color: Colors.grey.shade400, fontWeight: FontWeight.w500),
                                   ),
                                 ],
                               ),
@@ -692,30 +693,30 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
                       );
                     },
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.w),
 
                   // Payment Method Section
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
                     child: Text(
                       "Payment Method",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87),
+                      style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold, color: Colors.black87),
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12.w),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: Row(
                       children: [
                         _buildPaymentOption('Cash', Icons.money, Colors.orange),
-                        const SizedBox(width: 12),
+                        SizedBox(width: 12.w),
                         _buildPaymentOption('UPI', Icons.account_balance, Colors.blue),
-                        const SizedBox(width: 12),
+                        SizedBox(width: 12.w),
                         _buildPaymentOption('Wallet', Icons.account_balance_wallet, const Color(0xFF0F9D58)),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 40),
+                  SizedBox(height: 40.w),
                 ],
               ),
             ),
@@ -728,7 +729,7 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
                   filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                   child: Container(
                     padding: EdgeInsets.only(
-                      top: 16, left: 20, right: 20,
+                      top: 16.w, left: 20.w, right: 20.w,
                       bottom: MediaQuery.of(context).padding.bottom + 16,
                     ),
                     decoration: BoxDecoration(
@@ -747,22 +748,22 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Text("Total Estimate", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Colors.black54)),
+                            Text("Total Estimate", style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500, color: Colors.black54)),
                             Text(
                               "₹${calculatedFare.toStringAsFixed(0)}",
-                              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: Colors.black87),
+                              style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.w800, color: Colors.black87),
                             ),
                           ],
                         ),
-                        const SizedBox(width: 20),
+                        SizedBox(width: 20.w),
                         Expanded(
                           child: GestureDetector(
                             onTap: _confirmBooking,
                             child: Container(
-                              height: 52,
+                              height: 52.w,
                               decoration: BoxDecoration(
                                 color: const Color(0xFF0F9D58),
-                                borderRadius: BorderRadius.circular(16),
+                                borderRadius: BorderRadius.circular(16.r),
                                 boxShadow: [
                                   BoxShadow(
                                     color: const Color(0xFF0F9D58).withOpacity(0.3),
@@ -773,7 +774,7 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
                               child: Center(
                                 child: Text(
                                   "Book Truck",
-                                  style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
+                                  style: TextStyle(color: Colors.white, fontSize: 16.sp, fontWeight: FontWeight.w700),
                                 ),
                               ),
                             ),
@@ -792,10 +793,10 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
                 color: Colors.black.withOpacity(0.5),
                 child: Center(
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                    padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.w),
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(24),
+                      borderRadius: BorderRadius.circular(24.r),
                       boxShadow: [
                         BoxShadow(color: Colors.black.withOpacity(0.2), blurRadius: 20)
                       ],
@@ -803,19 +804,19 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const SizedBox(
-                          width: 40, height: 40,
+                        SizedBox(
+                          width: 40.w, height: 40.w,
                           child: CircularProgressIndicator(strokeWidth: 3, valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF0F9D58))),
                         ),
-                        const SizedBox(height: 20),
-                        const Text(
+                        SizedBox(height: 20.w),
+                        Text(
                           "Finding drivers...",
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.black87),
+                          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w700, color: Colors.black87),
                         ),
-                        const SizedBox(height: 4),
+                        SizedBox(height: 4.w),
                         Text(
                           "Looking for nearby ${selectedVehicle['name']}",
-                          style: TextStyle(fontSize: 13, color: Colors.grey.shade600),
+                          style: TextStyle(fontSize: 13.sp, color: Colors.grey.shade600),
                         ),
                       ],
                     ),
@@ -839,10 +840,10 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
           });
         },
         child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 14),
+          padding: EdgeInsets.symmetric(vertical: 14.w),
           decoration: BoxDecoration(
             color: isSelected ? color.withOpacity(0.1) : Colors.white,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(12.r),
             border: Border.all(
               color: isSelected ? color : Colors.grey.shade300,
               width: isSelected ? 2 : 1,
@@ -851,13 +852,13 @@ class _GoodsTransportScreenState extends State<GoodsTransportScreen> {
           child: Column(
             children: [
               Icon(icon, color: isSelected ? color : Colors.grey, size: 24),
-              const SizedBox(height: 6),
+              SizedBox(height: 6.w),
               Text(
                 title,
                 style: TextStyle(
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                   color: isSelected ? color : Colors.black87,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                 ),
               ),
             ],

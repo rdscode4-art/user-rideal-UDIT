@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 
 class Favorites extends StatefulWidget {
@@ -55,14 +56,14 @@ class _FavoritesState extends State<Favorites> with SingleTickerProviderStateMix
             children: [
               // Custom Floating Header
               Padding(
-                padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
+                padding: EdgeInsets.fromLTRB(20, 12, 20, 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
                       onTap: () => Navigator.of(context).pop(),
                       child: Container(
-                        padding: const EdgeInsets.all(10),
+                        padding: EdgeInsets.all(10.w),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           shape: BoxShape.circle,
@@ -74,13 +75,13 @@ class _FavoritesState extends State<Favorites> with SingleTickerProviderStateMix
                             ),
                           ],
                         ),
-                        child: const Icon(Icons.arrow_back, color: Colors.black87, size: 20),
+                        child: Icon(Icons.arrow_back, color: Colors.black87, size: 20),
                       ),
                     ),
-                    const Text(
+                    Text(
                       'Favourites',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 20.sp,
                         fontWeight: FontWeight.w800,
                         color: Colors.black87,
                         letterSpacing: -0.5,
@@ -91,15 +92,15 @@ class _FavoritesState extends State<Favorites> with SingleTickerProviderStateMix
                         // Quick feedback to indicate place creation
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: const Text("📍 Select a place to add to Favourites"),
+                            content: Text("📍 Select a place to add to Favourites"),
                             backgroundColor: brandGreen,
                             behavior: SnackBarBehavior.floating,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
                           ),
                         );
                       },
                       child: Container(
-                        padding: const EdgeInsets.all(10),
+                        padding: EdgeInsets.all(10.w),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           shape: BoxShape.circle,
@@ -111,7 +112,7 @@ class _FavoritesState extends State<Favorites> with SingleTickerProviderStateMix
                             ),
                           ],
                         ),
-                        child: const Icon(Icons.add_location_alt_rounded, color: brandGreen, size: 20),
+                        child: Icon(Icons.add_location_alt_rounded, color: brandGreen, size: 20),
                       ),
                     ),
                   ],
@@ -120,25 +121,25 @@ class _FavoritesState extends State<Favorites> with SingleTickerProviderStateMix
 
               // Count chip with premium branding
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                    padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.w),
                     decoration: BoxDecoration(
                       color: brandGreen.withOpacity(0.08),
-                      borderRadius: BorderRadius.circular(24),
+                      borderRadius: BorderRadius.circular(24.r),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.favorite_rounded, color: brandGreen, size: 14),
-                        const SizedBox(width: 6),
+                        Icon(Icons.favorite_rounded, color: brandGreen, size: 14),
+                        SizedBox(width: 6.w),
                         Text(
                           '${_favorites.length} saved places',
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: brandGreen,
-                            fontSize: 12,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w800,
                             letterSpacing: 0.2,
                           ),
@@ -149,7 +150,7 @@ class _FavoritesState extends State<Favorites> with SingleTickerProviderStateMix
                 ),
               ),
 
-              const SizedBox(height: 16),
+              SizedBox(height: 16.w),
 
               // List View
               Expanded(
@@ -157,7 +158,7 @@ class _FavoritesState extends State<Favorites> with SingleTickerProviderStateMix
                     ? _buildEmptyState()
                     : ListView.builder(
                         physics: const BouncingScrollPhysics(),
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+                        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 4.w),
                         itemCount: _favorites.length,
                         itemBuilder: (context, index) {
                           return _buildFavoriteCard(_favorites[index], index);
@@ -173,10 +174,10 @@ class _FavoritesState extends State<Favorites> with SingleTickerProviderStateMix
 
   Widget _buildFavoriteCard(Map<String, dynamic> item, int index) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: EdgeInsets.only(bottom: 12.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.03),
@@ -186,9 +187,9 @@ class _FavoritesState extends State<Favorites> with SingleTickerProviderStateMix
         ],
       ),
       child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.w),
         leading: Container(
-          padding: const EdgeInsets.all(10),
+          padding: EdgeInsets.all(10.w),
           decoration: BoxDecoration(
             color: brandGreen.withOpacity(0.08),
             shape: BoxShape.circle,
@@ -197,19 +198,19 @@ class _FavoritesState extends State<Favorites> with SingleTickerProviderStateMix
         ),
         title: Text(
           item['title'] as String,
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.w800,
-            fontSize: 15,
+            fontSize: 15.sp,
             color: Colors.black87,
             letterSpacing: -0.3,
           ),
         ),
         subtitle: Padding(
-          padding: const EdgeInsets.only(top: 4),
+          padding: EdgeInsets.only(top: 4.w),
           child: Text(
             item['subtitle'] as String,
             style: TextStyle(
-              fontSize: 12,
+              fontSize: 12.sp,
               color: Colors.grey.shade500,
               fontWeight: FontWeight.w500,
             ),
@@ -220,7 +221,7 @@ class _FavoritesState extends State<Favorites> with SingleTickerProviderStateMix
         trailing: GestureDetector(
           onTap: () => _showDeleteConfirm(index),
           child: Container(
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.all(8.w),
             decoration: BoxDecoration(
               color: Colors.red.shade50,
               shape: BoxShape.circle,
@@ -236,20 +237,20 @@ class _FavoritesState extends State<Favorites> with SingleTickerProviderStateMix
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28.r)),
         title: Row(
           children: [
             Icon(Icons.warning_amber_rounded, color: Colors.red.shade500),
-            const SizedBox(width: 10),
-            const Text(
+            SizedBox(width: 10.w),
+            Text(
               'Remove Place',
-              style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18),
+              style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18.sp),
             ),
           ],
         ),
-        content: const Text(
+        content: Text(
           'Are you sure you want to remove this place from your Favourites?',
-          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14, height: 1.4),
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14.sp, height: 1.4.w),
         ),
         actions: [
           TextButton(
@@ -267,11 +268,11 @@ class _FavoritesState extends State<Favorites> with SingleTickerProviderStateMix
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red.shade500,
               foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.w),
               elevation: 0,
             ),
-            child: const Text('Remove', style: TextStyle(fontWeight: FontWeight.bold)),
+            child: Text('Remove', style: TextStyle(fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -284,7 +285,7 @@ class _FavoritesState extends State<Favorites> with SingleTickerProviderStateMix
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            padding: const EdgeInsets.all(28),
+            padding: EdgeInsets.all(28.w),
             decoration: BoxDecoration(
               color: Colors.white,
               shape: BoxShape.circle,
@@ -296,27 +297,27 @@ class _FavoritesState extends State<Favorites> with SingleTickerProviderStateMix
                 ),
               ],
             ),
-            child: const Icon(
+            child: Icon(
               Icons.favorite_border_rounded,
               size: 56,
               color: Colors.grey,
             ),
           ),
-          const SizedBox(height: 24),
-          const Text(
+          SizedBox(height: 24.w),
+          Text(
             'No Favourites Yet',
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 20.sp,
               fontWeight: FontWeight.w800,
               color: Colors.black87,
               letterSpacing: -0.5,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.w),
           Text(
             'Save your frequent places for quick access',
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 14.sp,
               color: Colors.grey.shade400,
               fontWeight: FontWeight.w500,
             ),

@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:rideal/widget/CommunityFeedCardWidget.dart';
 import 'package:rideal/authservices.dart';
@@ -93,35 +94,35 @@ class _RiDealFeedScreenState extends State<RiDealFeedScreen>
           children: [
             // Floating Header
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+              padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
               child: Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(6),
+                    padding: EdgeInsets.all(6.w),
                     decoration: BoxDecoration(
                       color: brandGreen.withOpacity(0.08),
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10.r),
                     ),
                     child: Image.asset(
                       "assets/images/logorideal.png",
-                      height: 32,
-                      width: 32,
+                      height: 32.w,
+                      width: 32.w,
                     ),
                   ),
-                  const SizedBox(width: 10),
-                  const Text(
+                  SizedBox(width: 10.w),
+                  Text(
                     'Community Feed',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
                   ),
-                  const Spacer(),
+                  Spacer(),
                   GestureDetector(
                     onTap: _loadCommunityFeed,
                     child: Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10.w),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,
@@ -133,7 +134,7 @@ class _RiDealFeedScreenState extends State<RiDealFeedScreen>
                           ),
                         ],
                       ),
-                      child: const Icon(Icons.refresh_rounded, color: Colors.black54, size: 20),
+                      child: Icon(Icons.refresh_rounded, color: Colors.black54, size: 20),
                     ),
                   ),
                 ],
@@ -154,7 +155,7 @@ class _RiDealFeedScreenState extends State<RiDealFeedScreen>
                             child: feedItems.isEmpty
                                 ? _buildEmptyState()
                                 : ListView.builder(
-                                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+                                    padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
                                     itemCount: feedItems.length,
                                     itemBuilder: (context, index) {
                                       final item = feedItems[index];
@@ -179,10 +180,10 @@ class _RiDealFeedScreenState extends State<RiDealFeedScreen>
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.all(20.w),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(20.r),
               boxShadow: [
                 BoxShadow(
                   color: brandGreen.withOpacity(0.08),
@@ -196,10 +197,10 @@ class _RiDealFeedScreenState extends State<RiDealFeedScreen>
               valueColor: AlwaysStoppedAnimation<Color>(brandGreen),
             ),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.w),
           Text(
             'Loading community posts...',
-            style: TextStyle(color: Colors.grey.shade500, fontSize: 14),
+            style: TextStyle(color: Colors.grey.shade500, fontSize: 14.sp),
           ),
         ],
       ),
@@ -209,15 +210,15 @@ class _RiDealFeedScreenState extends State<RiDealFeedScreen>
   Widget _buildErrorState() {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(32),
+        padding: EdgeInsets.all(32.w),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: const EdgeInsets.all(20),
+              padding: EdgeInsets.all(20.w),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(20.r),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.red.withOpacity(0.06),
@@ -228,28 +229,28 @@ class _RiDealFeedScreenState extends State<RiDealFeedScreen>
               ),
               child: Icon(Icons.wifi_off_rounded, size: 48, color: Colors.red.shade300),
             ),
-            const SizedBox(height: 20),
-            const Text(
+            SizedBox(height: 20.w),
+            Text(
               'Could not load feed',
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
+              style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w700),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8.w),
             Text(
               _errorMessage,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 13, color: Colors.grey.shade500),
+              style: TextStyle(fontSize: 13.sp, color: Colors.grey.shade500),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20.w),
             ElevatedButton(
               onPressed: _loadCommunityFeed,
               style: ElevatedButton.styleFrom(
                 backgroundColor: brandGreen,
                 foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 12),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.r)),
+                padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 12.w),
                 elevation: 0,
               ),
-              child: const Text('Retry', style: TextStyle(fontWeight: FontWeight.bold)),
+              child: Text('Retry', style: TextStyle(fontWeight: FontWeight.bold)),
             ),
           ],
         ),
@@ -264,7 +265,7 @@ class _RiDealFeedScreenState extends State<RiDealFeedScreen>
         Column(
           children: [
             Container(
-              padding: const EdgeInsets.all(24),
+              padding: EdgeInsets.all(24.w),
               decoration: BoxDecoration(
                 color: Colors.white,
                 shape: BoxShape.circle,
@@ -279,15 +280,15 @@ class _RiDealFeedScreenState extends State<RiDealFeedScreen>
               child: Icon(Icons.people_outline_rounded,
                   size: 48, color: Colors.grey.shade300),
             ),
-            const SizedBox(height: 20),
-            const Text(
+            SizedBox(height: 20.w),
+            Text(
               'No Posts Yet',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+              style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w700),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8.w),
             Text(
               'Be the first to post in the community!',
-              style: TextStyle(fontSize: 13, color: Colors.grey.shade400),
+              style: TextStyle(fontSize: 13.sp, color: Colors.grey.shade400),
             ),
           ],
         ),

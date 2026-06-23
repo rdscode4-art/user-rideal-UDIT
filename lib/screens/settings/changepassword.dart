@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
@@ -42,32 +43,32 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Change Password"),
+        title: Text("Change Password"),
         leading: BackButton(),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0.5,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16.w),
         child: Column(
           children: [
             _buildTextField("Old Password", oldPasswordController),
-            const SizedBox(height: 16),
+            SizedBox(height: 16.w),
             _buildTextField("New Password", newPasswordController),
-            const SizedBox(height: 16),
+            SizedBox(height: 16.w),
             _buildTextField("Confirm Password", confirmPasswordController),
-            const SizedBox(height: 32),
+            SizedBox(height: 32.w),
             SizedBox(
               width: double.infinity,
-              height: 50,
+              height: 50.w,
               child: ElevatedButton(
                 onPressed: _changePassword,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green.shade700,
                   foregroundColor: Colors.white,
                 ),
-                child: const Text("Save"),
+                child: Text("Save"),
               ),
             ),
           ],
@@ -82,7 +83,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       obscureText: true,
       decoration: InputDecoration(
         hintText: hint,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.r)),
         filled: true,
         fillColor: Colors.grey[100],
       ),

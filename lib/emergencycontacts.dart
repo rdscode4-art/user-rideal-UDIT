@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -107,13 +108,13 @@ class _EmergencyContactsScreenState extends State<EmergencyContactsScreen>
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-          title: const Text('Remove Contact'),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
+          title: Text('Remove Contact'),
           content: Text('Are you sure you want to remove ${contact['name']} from your emergency contacts?'),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Cancel'),
+              child: Text('Cancel'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -135,7 +136,7 @@ class _EmergencyContactsScreenState extends State<EmergencyContactsScreen>
                 backgroundColor: Colors.red,
                 foregroundColor: Colors.white,
               ),
-              child: const Text('Remove'),
+              child: Text('Remove'),
             ),
           ],
         );
@@ -162,14 +163,14 @@ class _EmergencyContactsScreenState extends State<EmergencyContactsScreen>
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
       ),
       builder: (context) => Padding(
         padding: EdgeInsets.only(
-          left: 20,
-          right: 20,
-          top: 20,
+          left: 20.w,
+          right: 20.w,
+          top: 20.w,
           bottom: MediaQuery.of(context).viewInsets.bottom + 20,
         ),
         child: Column(
@@ -179,14 +180,14 @@ class _EmergencyContactsScreenState extends State<EmergencyContactsScreen>
             Row(
               children: [
                 Icon(Icons.person_add, color: Colors.red.shade600, size: 28),
-                const SizedBox(width: 12),
-                const Text(
+                SizedBox(width: 12.w),
+                Text(
                   'Add Emergency Contact',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20.w),
             Form(
               key: _formKey,
               child: Column(
@@ -198,9 +199,9 @@ class _EmergencyContactsScreenState extends State<EmergencyContactsScreen>
                     ],
                     decoration: InputDecoration(
                       labelText: 'Contact Name',
-                      prefixIcon: const Icon(Icons.person),
+                      prefixIcon: Icon(Icons.person),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(12.r),
                       ),
                       filled: true,
                       fillColor: Colors.grey.shade50,
@@ -213,7 +214,7 @@ class _EmergencyContactsScreenState extends State<EmergencyContactsScreen>
                       return null;
                     },
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.w),
                   TextFormField(
                     controller: _numberController,
                     keyboardType: TextInputType.number,
@@ -223,9 +224,9 @@ class _EmergencyContactsScreenState extends State<EmergencyContactsScreen>
                     ],
                     decoration: InputDecoration(
                       labelText: 'Phone Number',
-                      prefixIcon: const Icon(Icons.phone),
+                      prefixIcon: Icon(Icons.phone),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(12.r),
                       ),
                       filled: true,
                       fillColor: Colors.grey.shade50,
@@ -243,22 +244,22 @@ class _EmergencyContactsScreenState extends State<EmergencyContactsScreen>
                       return null;
                     },
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24.w),
                   SizedBox(
                     width: double.infinity,
-                    height: 50,
+                    height: 50.w,
                     child: ElevatedButton.icon(
                       onPressed: () {
                         _addContact();
                         Navigator.pop(context);
                       },
-                      icon: const Icon(Icons.add),
-                      label: const Text('Add Contact'),
+                      icon: Icon(Icons.add),
+                      label: Text('Add Contact'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red.shade600,
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(12.r),
                         ),
                       ),
                     ),
@@ -277,7 +278,7 @@ class _EmergencyContactsScreenState extends State<EmergencyContactsScreen>
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Emergency Contacts',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
@@ -287,18 +288,18 @@ class _EmergencyContactsScreenState extends State<EmergencyContactsScreen>
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
           child: Container(
-            height: 1,
+            height: 1.w,
             color: Colors.grey.shade200,
           ),
         ),
       ),
       body: _isLoading
-          ? const Center(
+          ? Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CircularProgressIndicator(color: Colors.red),
-                  SizedBox(height: 16),
+                  SizedBox(height: 16.w),
                   Text('Loading contacts...', style: TextStyle(color: Colors.grey)),
                 ],
               ),
@@ -307,19 +308,19 @@ class _EmergencyContactsScreenState extends State<EmergencyContactsScreen>
               children: [
                 // Emergency Notice
                 Container(
-                  margin: const EdgeInsets.all(16),
-                  padding: const EdgeInsets.all(16),
+                  margin: EdgeInsets.all(16.w),
+                  padding: EdgeInsets.all(16.w),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [Colors.red.shade50, Colors.red.shade100],
                     ),
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                     border: Border.all(color: Colors.red.shade200),
                   ),
                   child: Row(
                     children: [
                       Icon(Icons.warning_amber_rounded, color: Colors.red.shade700, size: 28),
-                      const SizedBox(width: 12),
+                      SizedBox(width: 12.w),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -329,15 +330,15 @@ class _EmergencyContactsScreenState extends State<EmergencyContactsScreen>
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.red.shade700,
-                                fontSize: 16,
+                                fontSize: 16.sp,
                               ),
                             ),
-                            const SizedBox(height: 4),
+                            SizedBox(height: 4.w),
                             Text(
                               'These contacts can be reached quickly in case of emergency',
                               style: TextStyle(
                                 color: Colors.red.shade600,
-                                fontSize: 12,
+                                fontSize: 12.sp,
                               ),
                             ),
                           ],
@@ -359,34 +360,34 @@ class _EmergencyContactsScreenState extends State<EmergencyContactsScreen>
                                 size: 80,
                                 color: Colors.grey.shade400,
                               ),
-                              const SizedBox(height: 16),
+                              SizedBox(height: 16.w),
                               Text(
                                 'No Emergency Contacts',
                                 style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 20.sp,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.grey.shade600,
                                 ),
                               ),
-                              const SizedBox(height: 8),
+                              SizedBox(height: 8.w),
                               Text(
                                 'Add trusted contacts for emergencies',
                                 style: TextStyle(
                                   color: Colors.grey.shade500,
-                                  fontSize: 14,
+                                  fontSize: 14.sp,
                                 ),
                               ),
-                              const SizedBox(height: 24),
+                              SizedBox(height: 24.w),
                               ElevatedButton.icon(
                                 onPressed: _showAddContactDialog,
-                                icon: const Icon(Icons.add),
-                                label: const Text('Add First Contact'),
+                                icon: Icon(Icons.add),
+                                label: Text('Add First Contact'),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.red.shade600,
                                   foregroundColor: Colors.white,
-                                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                                  padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.w),
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25),
+                                    borderRadius: BorderRadius.circular(25.r),
                                   ),
                                 ),
                               ),
@@ -397,7 +398,7 @@ class _EmergencyContactsScreenState extends State<EmergencyContactsScreen>
                           animation: _animationController,
                           builder: (context, child) {
                             return ListView.builder(
-                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                              padding: EdgeInsets.symmetric(horizontal: 16.w),
                               itemCount: contacts.length,
                               itemBuilder: (context, index) {
                                 final contact = contacts[index];
@@ -416,10 +417,10 @@ class _EmergencyContactsScreenState extends State<EmergencyContactsScreen>
                                   child: FadeTransition(
                                     opacity: _animationController,
                                     child: Container(
-                                      margin: const EdgeInsets.only(bottom: 12),
+                                      margin: EdgeInsets.only(bottom: 12.w),
                                       decoration: BoxDecoration(
                                         color: Colors.white,
-                                        borderRadius: BorderRadius.circular(16),
+                                        borderRadius: BorderRadius.circular(16.r),
                                         boxShadow: [
                                           BoxShadow(
                                             color: Colors.black.withOpacity(0.05),
@@ -429,13 +430,13 @@ class _EmergencyContactsScreenState extends State<EmergencyContactsScreen>
                                         ],
                                       ),
                                       child: ListTile(
-                                        contentPadding: const EdgeInsets.symmetric(
-                                          horizontal: 20,
-                                          vertical: 8,
+                                        contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 20.w,
+                                          vertical: 8.w,
                                         ),
                                         leading: Container(
-                                          width: 50,
-                                          height: 50,
+                                          width: 50.w,
+                                          height: 50.w,
                                           decoration: BoxDecoration(
                                             color: Colors.red.shade100,
                                             shape: BoxShape.circle,
@@ -448,16 +449,16 @@ class _EmergencyContactsScreenState extends State<EmergencyContactsScreen>
                                         ),
                                         title: Text(
                                           contact['name']!,
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             fontWeight: FontWeight.w600,
-                                            fontSize: 16,
+                                            fontSize: 16.sp,
                                           ),
                                         ),
                                         subtitle: Text(
                                           contact['number']!,
                                           style: TextStyle(
                                             color: Colors.grey.shade600,
-                                            fontSize: 14,
+                                            fontSize: 14.sp,
                                           ),
                                         ),
                                         trailing: Row(
@@ -478,7 +479,7 @@ class _EmergencyContactsScreenState extends State<EmergencyContactsScreen>
                                                 tooltip: 'Call ${contact['name']}',
                                               ),
                                             ),
-                                            const SizedBox(width: 8),
+                                            SizedBox(width: 8.w),
                                             Container(
                                               decoration: BoxDecoration(
                                                 color: Colors.red.shade100,
@@ -510,8 +511,8 @@ class _EmergencyContactsScreenState extends State<EmergencyContactsScreen>
       floatingActionButton: contacts.isNotEmpty
           ? FloatingActionButton.extended(
               onPressed: _showAddContactDialog,
-              icon: const Icon(Icons.add),
-              label: const Text('Add Contact'),
+              icon: Icon(Icons.add),
+              label: Text('Add Contact'),
               backgroundColor: Colors.red.shade600,
               foregroundColor: Colors.white,
             )

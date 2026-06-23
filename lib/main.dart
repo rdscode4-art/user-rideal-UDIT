@@ -1,5 +1,6 @@
 // ignore_for_file: unused_local_variable
 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rideal/screens/dashboard/BottomNavigation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -36,7 +37,7 @@ void main()async {
   await FCMService.initialize();
   runApp(
     DevicePreview(
-      enabled: !kReleaseMode,
+      enabled: false,
       builder: (context) => const RideShareApp(),
     ),
   );
@@ -83,6 +84,11 @@ class _RideShareAppState extends State<RideShareApp> {
   @override
   Widget build(BuildContext context) {
     
+    return ScreenUtilInit(
+      designSize: const Size(411, 891), // Increased base size to make UI smaller
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, child) {
     return MaterialApp(
       locale: DevicePreview.locale(context),
       title: 'Rideal',
@@ -129,6 +135,8 @@ class _RideShareAppState extends State<RideShareApp> {
       },
       home: const SplashScreen(),
       navigatorObservers: [routeObserver],
+    );
+      },
     );
   }
 }
@@ -181,4 +189,3 @@ class _SplashScreenState extends State<SplashScreen> {
     );   
   }
 }
-

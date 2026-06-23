@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 // ignore_for_file: use_build_context_synchronously, deprecated_member_use
 
 import 'package:flutter/material.dart';
@@ -112,7 +113,7 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
               title: Row(
                 children: [
                   Icon(Icons.support_agent, color: Colors.green.shade400),
-                  SizedBox(width: 8),
+                  SizedBox(width: 8.w),
                   Text('Create Support Ticket'),
                 ],
               ),
@@ -122,7 +123,7 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Category', style: TextStyle(fontWeight: FontWeight.w500)),
-                    SizedBox(height: 8),
+                    SizedBox(height: 8.w),
                     DropdownButtonFormField<String>(
                       initialValue: selectedCategory,
                       items: categories.map((category) {
@@ -133,7 +134,7 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
                       }).toList(),
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.w),
                       ),
                       onChanged: (value) {
                         if (value != null) {
@@ -143,20 +144,20 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
                         }
                       },
                     ),
-                    // SizedBox(height: 16),
+                    // SizedBox(height: 16.w),
                     // Text('Ride ID (Optional)', style: TextStyle(fontWeight: FontWeight.w500)),
-                    // SizedBox(height: 8),
+                    // SizedBox(height: 8.w),
                     // TextFormField(
                     //   controller: rideIdController,
                     //   decoration: InputDecoration(
                     //     hintText: 'Enter ride ID if applicable',
                     //     border: OutlineInputBorder(),
-                    //     contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    //     contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.w),
                     //   ),
                     // ),
-                    SizedBox(height: 16),
+                    SizedBox(height: 16.w),
                     Text('Message', style: TextStyle(fontWeight: FontWeight.w500)),
-                    SizedBox(height: 8),
+                    SizedBox(height: 8.w),
                     TextFormField(
                       controller: messageController,
                       minLines: 3,
@@ -164,7 +165,7 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
                       decoration: InputDecoration(
                         hintText: 'Describe your issue in detail (minimum 10 characters)',
                         border: OutlineInputBorder(),
-                        contentPadding: EdgeInsets.all(12),
+                        contentPadding: EdgeInsets.all(12.w),
                       ),
                     ),
                   ],
@@ -227,8 +228,8 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
                   },
                   child: isSubmitting
                       ? SizedBox(
-                          width: 16,
-                          height: 16,
+                          width: 16.w,
+                          height: 16.w,
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
                             valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
@@ -324,7 +325,7 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
 
   Widget _buildMessageBubble(Message message) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+      margin: EdgeInsets.symmetric(vertical: 4.w, horizontal: 16.w),
       child: Row(
         mainAxisAlignment: message.isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -335,39 +336,39 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
               backgroundColor: Colors.orange,
               child: Icon(Icons.support_agent, color: Colors.white, size: 20),
             ),
-            SizedBox(width: 8),
+            SizedBox(width: 8.w),
           ],
           Flexible(
             child: Column(
               crossAxisAlignment: message.isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: EdgeInsets.all(12),
+                  padding: EdgeInsets.all(12.w),
                   decoration: BoxDecoration(
                     color: message.isUser ? Colors.green.shade400 : Colors.grey[100],
-                    borderRadius: BorderRadius.circular(18),
+                    borderRadius: BorderRadius.circular(18.r),
                   ),
                   child: Text(
                     message.text,
                     style: TextStyle(
                       color: message.isUser ? Colors.white : Colors.black87,
-                      fontSize: 16,
+                      fontSize: 16.sp,
                     ),
                   ),
                 ),
-                SizedBox(height: 4),
+                SizedBox(height: 4.w),
                 Text(
                   _formatTime(message.timestamp),
                   style: TextStyle(
                     color: Colors.grey[600],
-                    fontSize: 12,
+                    fontSize: 12.sp,
                   ),
                 ),
               ],
             ),
           ),
           if (message.isUser) ...[
-            SizedBox(width: 8),
+            SizedBox(width: 8.w),
             CircleAvatar(
               radius: 20,
               backgroundColor: Colors.grey[300],
@@ -381,7 +382,7 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
 
   Widget _buildTypingIndicator() {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+      margin: EdgeInsets.symmetric(vertical: 4.w, horizontal: 16.w),
       child: Row(
         children: [
           CircleAvatar(
@@ -389,27 +390,27 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
             backgroundColor: Colors.green.shade400,
             child: Icon(Icons.support_agent, color: Colors.white, size: 20),
           ),
-          SizedBox(width: 8),
+          SizedBox(width: 8.w),
           Container(
-            padding: EdgeInsets.all(12),
+            padding: EdgeInsets.all(12.w),
             decoration: BoxDecoration(
               color: Colors.grey[100],
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(18.r),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(
-                  width: 20,
-                  height: 20,
+                  width: 20.w,
+                  height: 20.w,
                   child: Icon(Icons.more_horiz)
                 ),
-                SizedBox(width: 8),
+                SizedBox(width: 8.w),
                 Text(
                   "Typing...",
                   style: TextStyle(
                     color: Colors.grey[600],
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontStyle: FontStyle.italic,
                   ),
                 ),
@@ -439,7 +440,7 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
               backgroundColor: Colors.white.withOpacity(0.2),
               child: Icon(Icons.support_agent, color: Colors.white, size: 16),
             ),
-            SizedBox(width: 8),
+            SizedBox(width: 8.w),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -447,7 +448,7 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
                   'RiDeal Support',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -455,7 +456,7 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
                   'Online',
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.8),
-                    fontSize: 12,
+                    fontSize: 12.sp,
                   ),
                 ),
               ],
@@ -484,23 +485,23 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
         children: [
           // Info banner about ticket creation
           Container(
-            margin: EdgeInsets.all(16),
-            padding: EdgeInsets.all(12),
+            margin: EdgeInsets.all(16.w),
+            padding: EdgeInsets.all(12.w),
             decoration: BoxDecoration(
               color: Colors.blue.shade50,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(8.r),
               border: Border.all(color: Colors.blue.shade200),
             ),
             child: Row(
               children: [
                 Icon(Icons.info_outline, color: Colors.blue.shade600, size: 20),
-                SizedBox(width: 8),
+                SizedBox(width: 8.w),
                 Expanded(
                   child: Text(
                     'For formal support requests, create a ticket using the button above',
                     style: TextStyle(
                       color: Colors.blue.shade700,
-                      fontSize: 12,
+                      fontSize: 12.sp,
                     ),
                   ),
                 ),
@@ -510,7 +511,7 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
           Expanded(
             child: ListView.builder(
               controller: _scrollController,
-              padding: EdgeInsets.symmetric(vertical: 16),
+              padding: EdgeInsets.symmetric(vertical: 16.w),
               itemCount: messages.length + (isTyping ? 1 : 0),
               itemBuilder: (context, index) {
                 if (index == messages.length && isTyping) {
@@ -521,7 +522,7 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
             ),
           ),
           Container(
-            padding: EdgeInsets.all(16),
+            padding: EdgeInsets.all(16.w),
             decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: [
@@ -538,7 +539,7 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.grey[100],
-                      borderRadius: BorderRadius.circular(25),
+                      borderRadius: BorderRadius.circular(25.r),
                     ),
                     child: TextField(
                       controller: _messageController,
@@ -546,13 +547,13 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
                         hintText: 'Type your message...',
                         hintStyle: TextStyle(color: Colors.grey[600]),
                         border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.w),
                       ),
                       onSubmitted: (value) => _sendMessage(),
                     ),
                   ),
                 ),
-                SizedBox(width: 8),
+                SizedBox(width: 8.w),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.orange,

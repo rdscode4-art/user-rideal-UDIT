@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:rideal/model/ridermodel.dart';
@@ -229,12 +230,12 @@ class _AmountState extends State<Amount> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Payment Failed'),
-          content: const Text('Would you like to try again?'),
+          title: Text('Payment Failed'),
+          content: Text('Would you like to try again?'),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Cancel'),
+              child: Text('Cancel'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -244,7 +245,7 @@ class _AmountState extends State<Amount> {
                   openCheckout();
                 }
               },
-              child: const Text('Retry'),
+              child: Text('Retry'),
             ),
           ],
         );
@@ -281,18 +282,18 @@ class _AmountState extends State<Amount> {
       backgroundColor: const Color(0xFFF8F9FA),
       body: SafeArea(
         child: isLoading
-            ? const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF0F9D58))))
+            ? Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF0F9D58))))
             : Column(
                 children: [
                   // Floating Header
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
+                    padding: EdgeInsets.fromLTRB(16, 8, 16, 20),
                     child: Row(
                       children: [
                         GestureDetector(
                           onTap: () => Navigator.pop(context),
                           child: Container(
-                            padding: const EdgeInsets.all(10),
+                            padding: EdgeInsets.all(10.w),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               shape: BoxShape.circle,
@@ -304,14 +305,14 @@ class _AmountState extends State<Amount> {
                                 ),
                               ],
                             ),
-                            child: const Icon(Icons.arrow_back, color: Colors.black87, size: 20),
+                            child: Icon(Icons.arrow_back, color: Colors.black87, size: 20),
                           ),
                         ),
-                        const SizedBox(width: 16),
-                        const Text(
+                        SizedBox(width: 16.w),
+                        Text(
                           "Add Money",
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 20.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.black87,
                           ),
@@ -322,32 +323,32 @@ class _AmountState extends State<Amount> {
 
                   Expanded(
                     child: SingleChildScrollView(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      padding: EdgeInsets.symmetric(horizontal: 24.w),
                       child: Column(
                         children: [
-                          const SizedBox(height: 40),
+                          SizedBox(height: 40.w),
                           
                           // Massive Amount Input Field
-                          const Text(
+                          Text(
                             "Enter Amount",
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black54),
+                            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600, color: Colors.black54),
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16.w),
                           IntrinsicWidth(
                             child: TextField(
                               controller: _amountController,
                               textAlign: TextAlign.center,
                               keyboardType: TextInputType.number,
-                              style: const TextStyle(
-                                fontSize: 64,
+                              style: TextStyle(
+                                fontSize: 64.sp,
                                 fontWeight: FontWeight.w800,
                                 color: Colors.black87,
                                 letterSpacing: -2,
                               ),
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 prefixText: "₹ ",
                                 prefixStyle: TextStyle(
-                                  fontSize: 48,
+                                  fontSize: 48.sp,
                                   fontWeight: FontWeight.w700,
                                   color: Colors.black45,
                                 ),
@@ -357,12 +358,12 @@ class _AmountState extends State<Amount> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          SizedBox(height: 8.w),
                           Text(
                             "Minimum amount: ₹10",
-                            style: TextStyle(fontSize: 13, color: Colors.grey.shade500, fontWeight: FontWeight.w500),
+                            style: TextStyle(fontSize: 13.sp, color: Colors.grey.shade500, fontWeight: FontWeight.w500),
                           ),
-                          const SizedBox(height: 50),
+                          SizedBox(height: 50.w),
 
                           // Quick Add Chips
                           Wrap(
@@ -375,10 +376,10 @@ class _AmountState extends State<Amount> {
                                   _amountController.text = amount.toString();
                                 },
                                 child: Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                                  padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.w),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.circular(16),
+                                    borderRadius: BorderRadius.circular(16.r),
                                     boxShadow: [
                                       BoxShadow(
                                         color: Colors.black.withOpacity(0.04),
@@ -389,8 +390,8 @@ class _AmountState extends State<Amount> {
                                   ),
                                   child: Text(
                                     "₹$amount",
-                                    style: const TextStyle(
-                                      fontSize: 16,
+                                    style: TextStyle(
+                                      fontSize: 16.sp,
                                       fontWeight: FontWeight.w700,
                                       color: Colors.black87,
                                     ),
@@ -400,15 +401,15 @@ class _AmountState extends State<Amount> {
                             }).toList(),
                           ),
 
-                          const SizedBox(height: 40),
+                          SizedBox(height: 40.w),
 
                           // Payment Method Section (if provided)
                           if (widget.paymentOptionWidget != null) ...[
                             Container(
-                              padding: const EdgeInsets.all(20),
+                              padding: EdgeInsets.all(20.w),
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(20.r),
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.black.withOpacity(0.03),
@@ -419,7 +420,7 @@ class _AmountState extends State<Amount> {
                               ),
                               child: widget.paymentOptionWidget!,
                             ),
-                            const SizedBox(height: 32),
+                            SizedBox(height: 32.w),
                           ],
                         ],
                       ),
@@ -428,7 +429,7 @@ class _AmountState extends State<Amount> {
 
                   // Proceed Button and Security Note
                   Container(
-                    padding: const EdgeInsets.all(24),
+                    padding: EdgeInsets.all(24.w),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [
@@ -446,37 +447,37 @@ class _AmountState extends State<Amount> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Icon(Icons.lock_outline_rounded, color: Colors.black45, size: 16),
-                            const SizedBox(width: 8),
+                            Icon(Icons.lock_outline_rounded, color: Colors.black45, size: 16),
+                            SizedBox(width: 8.w),
                             Text(
                               "100% Secure & Encrypted Payments",
-                              style: TextStyle(fontSize: 12, color: Colors.grey.shade600, fontWeight: FontWeight.w500),
+                              style: TextStyle(fontSize: 12.sp, color: Colors.grey.shade600, fontWeight: FontWeight.w500),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16.w),
                         
                         // Proceed Button
                         SizedBox(
                           width: double.infinity,
-                          height: 56,
+                          height: 56.w,
                           child: ElevatedButton(
                             onPressed: isProcessingPayment ? null : openCheckout,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF0F9D58),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
+                                borderRadius: BorderRadius.circular(16.r),
                               ),
                               elevation: 0,
                             ),
                             child: isProcessingPayment
-                                ? const SizedBox(
-                                    width: 24, height: 24,
+                                ? SizedBox(
+                                    width: 24.w, height: 24.w,
                                     child: CircularProgressIndicator(strokeWidth: 3, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)),
                                   )
-                                : const Text(
+                                : Text(
                                     "Proceed to Pay",
-                                    style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                                    style: TextStyle(color: Colors.white, fontSize: 18.sp, fontWeight: FontWeight.bold),
                                   ),
                           ),
                         ),

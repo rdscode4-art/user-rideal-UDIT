@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:rideal/authservices.dart';
 
@@ -57,10 +58,10 @@ class _ComplainScreenState extends State<ComplainScreen>
     if (messageController.text.isEmpty || messageController.text.length < 10) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text("❌ Please write at least 10 characters"),
+          content: Text("❌ Please write at least 10 characters"),
           backgroundColor: Colors.red.shade600,
           behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
         ),
       );
       return;
@@ -88,7 +89,7 @@ class _ComplainScreenState extends State<ComplainScreen>
           content: Text("❌ Error: $e"),
           backgroundColor: Colors.red.shade600,
           behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
         ),
       );
     }
@@ -105,14 +106,14 @@ class _ComplainScreenState extends State<ComplainScreen>
             children: [
               // Signature Custom Header Row
               Padding(
-                padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
+                padding: EdgeInsets.fromLTRB(20, 12, 20, 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
                       onTap: () => Navigator.of(context).pop(),
                       child: Container(
-                        padding: const EdgeInsets.all(10),
+                        padding: EdgeInsets.all(10.w),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           shape: BoxShape.circle,
@@ -124,19 +125,19 @@ class _ComplainScreenState extends State<ComplainScreen>
                             ),
                           ],
                         ),
-                        child: const Icon(Icons.arrow_back, color: Colors.black87, size: 20),
+                        child: Icon(Icons.arrow_back, color: Colors.black87, size: 20),
                       ),
                     ),
-                    const Text(
+                    Text(
                       "Lodge a Complaint",
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 20.sp,
                         fontWeight: FontWeight.w800,
                         color: Colors.black87,
                         letterSpacing: -0.5,
                       ),
                     ),
-                    const SizedBox(width: 40), // Balanced spacing
+                    SizedBox(width: 40.w), // Balanced spacing
                   ],
                 ),
               ),
@@ -144,20 +145,20 @@ class _ComplainScreenState extends State<ComplainScreen>
               Expanded(
                 child: SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: Column(
                     children: [
                       // Editorial Support Banner Card
                       Container(
                         width: double.infinity,
-                        height: 110,
+                        height: 110.w,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [brandGreen, Colors.green.shade700],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
-                          borderRadius: BorderRadius.circular(24),
+                          borderRadius: BorderRadius.circular(24.r),
                           boxShadow: [
                             BoxShadow(
                               color: brandGreen.withOpacity(0.15),
@@ -174,8 +175,8 @@ class _ComplainScreenState extends State<ComplainScreen>
                               right: -20,
                               top: -20,
                               child: Container(
-                                width: 130,
-                                height: 130,
+                                width: 130.w,
+                                height: 130.w,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: Colors.white.withOpacity(0.06),
@@ -183,11 +184,11 @@ class _ComplainScreenState extends State<ComplainScreen>
                               ),
                             ),
                             Positioned(
-                              left: 80,
+                              left: 80.w,
                               bottom: -30,
                               child: Container(
-                                width: 90,
-                                height: 90,
+                                width: 90.w,
+                                height: 90.w,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: Colors.white.withOpacity(0.04),
@@ -196,42 +197,42 @@ class _ComplainScreenState extends State<ComplainScreen>
                             ),
                             // Main content
                             Padding(
-                              padding: const EdgeInsets.all(20),
+                              padding: EdgeInsets.all(20.w),
                               child: Row(
                                 children: [
                                   Container(
-                                    padding: const EdgeInsets.all(12),
+                                    padding: EdgeInsets.all(12.w),
                                     decoration: BoxDecoration(
                                       color: Colors.white.withOpacity(0.15),
-                                      borderRadius: BorderRadius.circular(16),
+                                      borderRadius: BorderRadius.circular(16.r),
                                     ),
-                                    child: const Icon(
+                                    child: Icon(
                                       Icons.support_agent_rounded,
                                       color: Colors.white,
                                       size: 26,
                                     ),
                                   ),
-                                  const SizedBox(width: 16),
+                                  SizedBox(width: 16.w),
                                   Expanded(
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        const Text(
+                                        Text(
                                           'We take complains seriously',
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w800,
-                                            fontSize: 16,
+                                            fontSize: 16.sp,
                                             letterSpacing: -0.3,
                                           ),
                                         ),
-                                        const SizedBox(height: 4),
+                                        SizedBox(height: 4.w),
                                         Text(
                                           'Ride ID: ${widget.rideId}',
                                           style: TextStyle(
                                             color: Colors.white.withOpacity(0.85),
-                                            fontSize: 13,
+                                            fontSize: 13.sp,
                                             fontWeight: FontWeight.w500,
                                           ),
                                         ),
@@ -245,14 +246,14 @@ class _ComplainScreenState extends State<ComplainScreen>
                         ),
                       ),
 
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.w),
 
                       // Issue selection card
                       Container(
-                        padding: const EdgeInsets.all(20),
+                        padding: EdgeInsets.all(20.w),
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(24),
+                          borderRadius: BorderRadius.circular(24.r),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.03),
@@ -267,22 +268,22 @@ class _ComplainScreenState extends State<ComplainScreen>
                             Row(
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.all(8),
+                                  padding: EdgeInsets.all(8.w),
                                   decoration: BoxDecoration(
                                     color: brandGreen.withOpacity(0.08),
                                     shape: BoxShape.circle,
                                   ),
-                                  child: const Icon(
+                                  child: Icon(
                                     Icons.category_rounded,
                                     color: brandGreen,
                                     size: 18,
                                   ),
                                 ),
-                                const SizedBox(width: 10),
-                                const Text(
+                                SizedBox(width: 10.w),
+                                Text(
                                   'Select Issue Type',
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 16.sp,
                                     fontWeight: FontWeight.w800,
                                     color: Colors.black87,
                                     letterSpacing: -0.3,
@@ -290,20 +291,20 @@ class _ComplainScreenState extends State<ComplainScreen>
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 18),
+                            SizedBox(height: 18.w),
                             ...reasons.map((reason) {
                               final isSelected = selectedReason == reason['label'];
                               return GestureDetector(
                                 onTap: () => setState(() => selectedReason = reason['label']),
                                 child: AnimatedContainer(
                                   duration: const Duration(milliseconds: 200),
-                                  margin: const EdgeInsets.only(bottom: 10),
-                                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                                  margin: EdgeInsets.only(bottom: 10.w),
+                                  padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.w),
                                   decoration: BoxDecoration(
                                     color: isSelected
                                         ? brandGreen.withOpacity(0.04)
                                         : const Color(0xFFF8F9FA),
-                                    borderRadius: BorderRadius.circular(16),
+                                    borderRadius: BorderRadius.circular(16.r),
                                     border: Border.all(
                                       color: isSelected ? brandGreen : Colors.grey.shade100,
                                       width: isSelected ? 1.5 : 1,
@@ -312,7 +313,7 @@ class _ComplainScreenState extends State<ComplainScreen>
                                   child: Row(
                                     children: [
                                       Container(
-                                        padding: const EdgeInsets.all(8),
+                                        padding: EdgeInsets.all(8.w),
                                         decoration: BoxDecoration(
                                           color: isSelected
                                               ? brandGreen.withOpacity(0.1)
@@ -325,19 +326,19 @@ class _ComplainScreenState extends State<ComplainScreen>
                                           color: isSelected ? brandGreen : Colors.grey.shade500,
                                         ),
                                       ),
-                                      const SizedBox(width: 14),
+                                      SizedBox(width: 14.w),
                                       Expanded(
                                         child: Text(
                                           reason['label'] as String,
                                           style: TextStyle(
-                                            fontSize: 14,
+                                            fontSize: 14.sp,
                                             fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
                                             color: isSelected ? Colors.black87 : Colors.black54,
                                           ),
                                         ),
                                       ),
                                       if (isSelected)
-                                        const Icon(
+                                        Icon(
                                           Icons.check_circle_rounded,
                                           color: brandGreen,
                                           size: 20,
@@ -351,14 +352,14 @@ class _ComplainScreenState extends State<ComplainScreen>
                         ),
                       ),
 
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.w),
 
                       // Describe Issue card
                       Container(
-                        padding: const EdgeInsets.all(20),
+                        padding: EdgeInsets.all(20.w),
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(24),
+                          borderRadius: BorderRadius.circular(24.r),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.03),
@@ -376,22 +377,22 @@ class _ComplainScreenState extends State<ComplainScreen>
                                 Row(
                                   children: [
                                     Container(
-                                      padding: const EdgeInsets.all(8),
+                                      padding: EdgeInsets.all(8.w),
                                       decoration: BoxDecoration(
                                         color: brandGreen.withOpacity(0.08),
                                         shape: BoxShape.circle,
                                       ),
-                                      child: const Icon(
+                                      child: Icon(
                                         Icons.edit_note_rounded,
                                         color: brandGreen,
                                         size: 18,
                                       ),
                                     ),
-                                    const SizedBox(width: 10),
-                                    const Text(
+                                    SizedBox(width: 10.w),
+                                    Text(
                                       'Describe Your Issue',
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 16.sp,
                                         fontWeight: FontWeight.w800,
                                         color: Colors.black87,
                                         letterSpacing: -0.3,
@@ -402,14 +403,14 @@ class _ComplainScreenState extends State<ComplainScreen>
                                 Text(
                                   '$characterCount char',
                                   style: TextStyle(
-                                    fontSize: 11,
+                                    fontSize: 11.sp,
                                     fontWeight: FontWeight.bold,
                                     color: characterCount >= 10 ? brandGreen : Colors.orange.shade600,
                                   ),
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 18),
+                            SizedBox(height: 18.w),
                             Focus(
                               child: Builder(
                                 builder: (context) {
@@ -418,7 +419,7 @@ class _ComplainScreenState extends State<ComplainScreen>
                                     duration: const Duration(milliseconds: 200),
                                     decoration: BoxDecoration(
                                       color: const Color(0xFFF8F9FA),
-                                      borderRadius: BorderRadius.circular(18),
+                                      borderRadius: BorderRadius.circular(18.r),
                                       border: Border.all(
                                         color: isFocused ? brandGreen : Colors.grey.shade100,
                                         width: isFocused ? 1.5 : 1,
@@ -428,8 +429,8 @@ class _ComplainScreenState extends State<ComplainScreen>
                                       controller: messageController,
                                       minLines: 4,
                                       maxLines: 7,
-                                      style: const TextStyle(
-                                        fontSize: 14,
+                                      style: TextStyle(
+                                        fontSize: 14.sp,
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black87,
                                       ),
@@ -437,11 +438,11 @@ class _ComplainScreenState extends State<ComplainScreen>
                                         hintText: 'Write your complaint here (min. 10 characters)...',
                                         hintStyle: TextStyle(
                                           color: Colors.grey.shade400,
-                                          fontSize: 13,
+                                          fontSize: 13.sp,
                                           fontWeight: FontWeight.w500,
                                         ),
                                         border: InputBorder.none,
-                                        contentPadding: const EdgeInsets.all(16),
+                                        contentPadding: EdgeInsets.all(16.w),
                                       ),
                                     ),
                                   );
@@ -452,40 +453,40 @@ class _ComplainScreenState extends State<ComplainScreen>
                         ),
                       ),
 
-                      const SizedBox(height: 28),
+                      SizedBox(height: 28.w),
 
                       // Submit button
                       SizedBox(
                         width: double.infinity,
-                        height: 56,
+                        height: 56.w,
                         child: ElevatedButton(
                           onPressed: isLoading ? null : _submitTicket,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: brandGreen,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(28),
+                              borderRadius: BorderRadius.circular(28.r),
                             ),
                             elevation: 0,
                           ),
                           child: isLoading
-                              ? const SizedBox(
-                                  width: 22,
-                                  height: 22,
+                              ? SizedBox(
+                                  width: 22.w,
+                                  height: 22.w,
                                   child: CircularProgressIndicator(
                                     strokeWidth: 2.5,
                                     valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                                   ),
                                 )
-                              : const Row(
+                              : Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Icon(Icons.send_rounded, size: 18),
-                                    SizedBox(width: 8),
+                                    SizedBox(width: 8.w),
                                     Text(
                                       'Submit Complaint',
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 16.sp,
                                         fontWeight: FontWeight.bold,
                                         letterSpacing: 0.2,
                                       ),
@@ -494,7 +495,7 @@ class _ComplainScreenState extends State<ComplainScreen>
                                 ),
                         ),
                       ),
-                      const SizedBox(height: 40),
+                      SizedBox(height: 40.w),
                     ],
                   ),
                 ),
@@ -515,55 +516,55 @@ class ComplaintSuccessDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28.r)),
       child: Padding(
-        padding: const EdgeInsets.all(28),
+        padding: EdgeInsets.all(28.w),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              padding: const EdgeInsets.all(18),
+              padding: EdgeInsets.all(18.w),
               decoration: BoxDecoration(
                 color: brandGreen.withOpacity(0.08),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.check_circle_rounded,
                 color: brandGreen,
                 size: 54,
               ),
             ),
-            const SizedBox(height: 20),
-            const Text(
+            SizedBox(height: 20.w),
+            Text(
               'Complaint Submitted!',
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 20.sp,
                 fontWeight: FontWeight.w800,
                 color: Colors.black87,
                 letterSpacing: -0.5,
               ),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10.w),
             Text(
               'Your complaint has been sent successfully. Our team will review it shortly.',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.grey.shade500,
-                fontSize: 14,
-                height: 1.5,
+                fontSize: 14.sp,
+                height: 1.5.w,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(height: 26),
+            SizedBox(height: 26.w),
             SizedBox(
               width: double.infinity,
-              height: 50,
+              height: 50.w,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: brandGreen,
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
+                    borderRadius: BorderRadius.circular(25.r),
                   ),
                   elevation: 0,
                 ),
@@ -571,11 +572,11 @@ class ComplaintSuccessDialog extends StatelessWidget {
                   Navigator.pop(context);
                   Navigator.pop(context);
                 },
-                child: const Text(
+                child: Text(
                   'Done',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 15,
+                    fontSize: 15.sp,
                   ),
                 ),
               ),

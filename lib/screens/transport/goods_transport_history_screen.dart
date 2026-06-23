@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
@@ -51,15 +52,15 @@ class _GoodsTransportHistoryScreenState extends State<GoodsTransportHistoryScree
     final confirm = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Row(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
+        title: Row(
           children: [
             Icon(Icons.warning_amber_rounded, color: Colors.red),
-            SizedBox(width: 10),
+            SizedBox(width: 10.w),
             Text("Clear History"),
           ],
         ),
-        content: const Text("Are you sure you want to clear all your booking history? This action cannot be undone."),
+        content: Text("Are you sure you want to clear all your booking history? This action cannot be undone."),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -70,9 +71,9 @@ class _GoodsTransportHistoryScreenState extends State<GoodsTransportHistoryScree
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red,
               foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
             ),
-            child: const Text("Clear All"),
+            child: Text("Clear All"),
           ),
         ],
       ),
@@ -102,8 +103,8 @@ class _GoodsTransportHistoryScreenState extends State<GoodsTransportHistoryScree
     final confirm = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text("Cancel Scheduled Ride"),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
+        title: Text("Cancel Scheduled Ride"),
         content: Text("Are you sure you want to cancel your scheduled booking for ${booking['vehicle']}?"),
         actions: [
           TextButton(
@@ -115,9 +116,9 @@ class _GoodsTransportHistoryScreenState extends State<GoodsTransportHistoryScree
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red.shade600,
               foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
             ),
-            child: const Text("Cancel Ride"),
+            child: Text("Cancel Ride"),
           ),
         ],
       ),
@@ -149,7 +150,7 @@ class _GoodsTransportHistoryScreenState extends State<GoodsTransportHistoryScree
           
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: const Text("❌ Scheduled ride cancelled successfully"),
+              content: Text("❌ Scheduled ride cancelled successfully"),
               backgroundColor: Colors.red.shade600,
               behavior: SnackBarBehavior.floating,
             ),
@@ -211,22 +212,22 @@ class _GoodsTransportHistoryScreenState extends State<GoodsTransportHistoryScree
           ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text(
+        title: Text(
           'Booking History',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 22,
+            fontSize: 22.sp,
           ),
         ),
         centerTitle: true,
         actions: [
           if (_bookings.isNotEmpty)
             IconButton(
-              icon: const Icon(Icons.delete_sweep, color: Colors.white),
+              icon: Icon(Icons.delete_sweep, color: Colors.white),
               tooltip: "Clear All History",
               onPressed: _clearHistory,
             ),
@@ -234,11 +235,11 @@ class _GoodsTransportHistoryScreenState extends State<GoodsTransportHistoryScree
         elevation: 4,
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator(color: Colors.green))
+          ? Center(child: CircularProgressIndicator(color: Colors.green))
           : _bookings.isEmpty
               ? _buildEmptyState()
               : ListView.builder(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16.w),
                   itemCount: _bookings.length,
                   itemBuilder: (context, index) {
                     final booking = _bookings[index];
@@ -248,13 +249,13 @@ class _GoodsTransportHistoryScreenState extends State<GoodsTransportHistoryScree
 
                     return Card(
                       elevation: 2,
-                      margin: const EdgeInsets.only(bottom: 16),
+                      margin: EdgeInsets.only(bottom: 16.w),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius: BorderRadius.circular(16.r),
                       ),
                       color: Colors.white,
                       child: Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: EdgeInsets.all(16.0.w),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -263,34 +264,34 @@ class _GoodsTransportHistoryScreenState extends State<GoodsTransportHistoryScree
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.all(10),
+                                  padding: EdgeInsets.all(10.w),
                                   decoration: BoxDecoration(
                                     color: Colors.green.shade50,
                                     shape: BoxShape.circle,
                                   ),
                                   child: Text(
                                     booking['vehicleIcon'] ?? '🚚',
-                                    style: const TextStyle(fontSize: 22),
+                                    style: TextStyle(fontSize: 22.sp),
                                   ),
                                 ),
-                                const SizedBox(width: 12),
+                                SizedBox(width: 12.w),
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         booking['vehicle'] ?? 'Goods Carrier',
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 16,
+                                          fontSize: 16.sp,
                                           color: Colors.black87,
                                         ),
                                       ),
-                                      const SizedBox(height: 2),
+                                      SizedBox(height: 2.w),
                                       Text(
                                         "ID: ${booking['id'] ?? 'N/A'}",
                                         style: TextStyle(
-                                          fontSize: 12,
+                                          fontSize: 12.sp,
                                           color: Colors.grey.shade600,
                                           fontWeight: FontWeight.w500,
                                         ),
@@ -299,13 +300,13 @@ class _GoodsTransportHistoryScreenState extends State<GoodsTransportHistoryScree
                                   ),
                                 ),
                                 Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                                  padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.w),
                                   decoration: BoxDecoration(
                                     color: _getStatusBg(status),
-                                    borderRadius: BorderRadius.circular(20),
+                                    borderRadius: BorderRadius.circular(20.r),
                                     border: Border.all(
                                       color: _getStatusColor(status).withOpacity(0.3),
-                                      width: 1,
+                                      width: 1.w,
                                     ),
                                   ),
                                   child: Text(
@@ -313,13 +314,13 @@ class _GoodsTransportHistoryScreenState extends State<GoodsTransportHistoryScree
                                     style: TextStyle(
                                       color: _getStatusColor(status),
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 12,
+                                      fontSize: 12.sp,
                                     ),
                                   ),
                                 ),
                               ],
                             ),
-                            const Divider(height: 24),
+                            Divider(height: 24.w),
 
                             // Details: Pickup & Dropoff timeline
                             Row(
@@ -327,19 +328,19 @@ class _GoodsTransportHistoryScreenState extends State<GoodsTransportHistoryScree
                               children: [
                                 Column(
                                   children: [
-                                    const Icon(Icons.radio_button_checked, color: Colors.green, size: 18),
+                                    Icon(Icons.radio_button_checked, color: Colors.green, size: 18),
                                     Container(
-                                      width: 2,
-                                      height: 35,
+                                      width: 2.w,
+                                      height: 35.w,
                                       decoration: BoxDecoration(
                                         color: Colors.grey.shade300,
-                                        borderRadius: BorderRadius.circular(1),
+                                        borderRadius: BorderRadius.circular(1.r),
                                       ),
                                     ),
-                                    const Icon(Icons.location_on, color: Colors.red, size: 18),
+                                    Icon(Icons.location_on, color: Colors.red, size: 18),
                                   ],
                                 ),
-                                const SizedBox(width: 12),
+                                SizedBox(width: 12.w),
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -348,19 +349,19 @@ class _GoodsTransportHistoryScreenState extends State<GoodsTransportHistoryScree
                                         booking['pickup'] ?? 'Pickup location',
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
-                                        style: const TextStyle(
-                                          fontSize: 14,
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
                                           color: Colors.black87,
                                           fontWeight: FontWeight.w500,
                                         ),
                                       ),
-                                      const SizedBox(height: 28),
+                                      SizedBox(height: 28.w),
                                       Text(
                                         booking['drop'] ?? 'Dropoff location',
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
-                                        style: const TextStyle(
-                                          fontSize: 14,
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
                                           color: Colors.black87,
                                           fontWeight: FontWeight.w500,
                                         ),
@@ -370,7 +371,7 @@ class _GoodsTransportHistoryScreenState extends State<GoodsTransportHistoryScree
                                 ),
                               ],
                             ),
-                            const Divider(height: 24),
+                            Divider(height: 24.w),
 
                             // Footer details: Date and Price
                             Row(
@@ -381,13 +382,13 @@ class _GoodsTransportHistoryScreenState extends State<GoodsTransportHistoryScree
                                   children: [
                                     Text(
                                       "Booked on:",
-                                      style: TextStyle(fontSize: 11, color: Colors.grey.shade500),
+                                      style: TextStyle(fontSize: 11.sp, color: Colors.grey.shade500),
                                     ),
-                                    const SizedBox(height: 2),
+                                    SizedBox(height: 2.w),
                                     Text(
                                       _formatBookingTime(booking['bookingTime'] ?? ''),
                                       style: TextStyle(
-                                        fontSize: 12,
+                                        fontSize: 12.sp,
                                         color: Colors.grey.shade700,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -399,13 +400,13 @@ class _GoodsTransportHistoryScreenState extends State<GoodsTransportHistoryScree
                                   children: [
                                     Text(
                                       "Fare (${booking['distance'] != null ? '${(booking['distance'] as double).toStringAsFixed(1)} KM' : 'N/A'}):",
-                                      style: TextStyle(fontSize: 11, color: Colors.grey.shade500),
+                                      style: TextStyle(fontSize: 11.sp, color: Colors.grey.shade500),
                                     ),
-                                    const SizedBox(height: 2),
+                                    SizedBox(height: 2.w),
                                     Text(
                                       "₹$price",
-                                      style: const TextStyle(
-                                        fontSize: 18,
+                                      style: TextStyle(
+                                        fontSize: 18.sp,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black87,
                                       ),
@@ -417,28 +418,28 @@ class _GoodsTransportHistoryScreenState extends State<GoodsTransportHistoryScree
 
                             // If scheduled, show target schedule date & time
                             if (isScheduled && booking['scheduledDate'] != null && booking['scheduledTime'] != null) ...[
-                              const SizedBox(height: 12),
+                              SizedBox(height: 12.w),
                               Container(
                                 width: double.infinity,
-                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.w),
                                 decoration: BoxDecoration(
                                   color: Colors.orange.shade50.withOpacity(0.5),
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10.r),
                                   border: Border.all(color: Colors.orange.shade100),
                                 ),
                                 child: Row(
                                   children: [
                                     Icon(Icons.schedule, color: Colors.orange.shade700, size: 18),
-                                    const SizedBox(width: 8),
+                                    SizedBox(width: 8.w),
                                     Expanded(
                                       child: RichText(
                                         text: TextSpan(
-                                          style: const TextStyle(fontSize: 13, color: Colors.black87),
+                                          style: TextStyle(fontSize: 13.sp, color: Colors.black87),
                                           children: [
-                                            const TextSpan(text: "Scheduled for: "),
+                                            TextSpan(text: "Scheduled for: "),
                                             TextSpan(
                                               text: "${booking['scheduledDate']} at ${booking['scheduledTime']}",
-                                              style: const TextStyle(fontWeight: FontWeight.bold),
+                                              style: TextStyle(fontWeight: FontWeight.bold),
                                             ),
                                           ],
                                         ),
@@ -451,23 +452,23 @@ class _GoodsTransportHistoryScreenState extends State<GoodsTransportHistoryScree
 
                             // Show cancel action button if status is Scheduled
                             if (status == 'Scheduled') ...[
-                              const SizedBox(height: 16),
+                              SizedBox(height: 16.w),
                               SizedBox(
                                 width: double.infinity,
                                 child: OutlinedButton.icon(
                                   onPressed: () => _cancelBooking(index, booking),
-                                  icon: const Icon(Icons.cancel, size: 16),
-                                  label: const Text(
+                                  icon: Icon(Icons.cancel, size: 16),
+                                  label: Text(
                                     "Cancel Scheduled Booking",
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.sp),
                                   ),
                                   style: OutlinedButton.styleFrom(
                                     foregroundColor: Colors.red.shade700,
                                     side: BorderSide(color: Colors.red.shade200),
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8),
+                                      borderRadius: BorderRadius.circular(8.r),
                                     ),
-                                    padding: const EdgeInsets.symmetric(vertical: 10),
+                                    padding: EdgeInsets.symmetric(vertical: 10.w),
                                   ),
                                 ),
                               ),
@@ -484,13 +485,13 @@ class _GoodsTransportHistoryScreenState extends State<GoodsTransportHistoryScree
   Widget _buildEmptyState() {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(32.0),
+        padding: EdgeInsets.all(32.0.w),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              padding: const EdgeInsets.all(24),
+              padding: EdgeInsets.all(24.w),
               decoration: BoxDecoration(
                 color: Colors.green.shade50,
                 shape: BoxShape.circle,
@@ -501,37 +502,37 @@ class _GoodsTransportHistoryScreenState extends State<GoodsTransportHistoryScree
                 color: Colors.green.shade600,
               ),
             ),
-            const SizedBox(height: 24),
-            const Text(
+            SizedBox(height: 24.w),
+            Text(
               "No Booking History",
               style: TextStyle(
-                fontSize: 22,
+                fontSize: 22.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10.w),
             Text(
               "You haven't booked any goods carrier transport rides yet. Make your first booking now!",
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 14.sp,
                 color: Colors.grey.shade600,
-                height: 1.5,
+                height: 1.5.w,
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 32),
+            SizedBox(height: 32.w),
             ElevatedButton.icon(
               onPressed: () => Navigator.pop(context),
-              icon: const Icon(Icons.add),
-              label: const Text("Book Now"),
+              icon: Icon(Icons.add),
+              label: Text("Book Now"),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green.shade700,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
+                padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 14.w),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
                 elevation: 2,
               ),

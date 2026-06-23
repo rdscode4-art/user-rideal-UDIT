@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:rideal/screens/FutureRides/thankyoufuture.dart';
 import 'package:rideal/screens/transport/thankyou.dart';
@@ -19,22 +20,22 @@ class _SelectPaymentState extends State<SelectPayment> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Select Payment Method',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 25),),
-            SizedBox(height: 5),
-            Text('Select payment method you want to use',style: TextStyle(fontSize: 15,color: Colors.grey),)
+            Text('Select Payment Method',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 25.sp),),
+            SizedBox(height: 5.w),
+            Text('Select payment method you want to use',style: TextStyle(fontSize: 15.sp,color: Colors.grey),)
           ],
         ),
       ),
       body: SingleChildScrollView(
-        child:  Padding(padding: EdgeInsets.all(16.0),
+        child:  Padding(padding: EdgeInsets.all(16.0.w),
         child: Column(
           children: [
             Container(
               child: widget.paymentOptionWidget),
-              SizedBox(height: 50),
+              SizedBox(height: 50.w),
               SizedBox(
                 width: double.infinity,
-                height: 60,
+                height: 60.w,
                 child: ElevatedButton(onPressed: (){
                   if(widget.isConfirmed){
                     Navigator.push(context, MaterialPageRoute(builder: (context)=>ThankYou()));
@@ -45,10 +46,10 @@ class _SelectPaymentState extends State<SelectPayment> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green.shade700,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)
+                    borderRadius: BorderRadius.circular(12.r)
                   )
                 ),
-                 child: Text("Confirm",style: TextStyle(color: Colors.white,fontSize: 15))),
+                 child: Text("Confirm",style: TextStyle(color: Colors.white,fontSize: 15.sp))),
               )
           ],
         ),

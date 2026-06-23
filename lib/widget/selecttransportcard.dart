@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:rideal/model/selecttransportcard.dart';
 class buildingselecttransportcard extends StatelessWidget {
@@ -8,23 +9,23 @@ class buildingselecttransportcard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 90,
+      height: 90.w,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(10), // ✅ Clip the image
+            borderRadius: BorderRadius.circular(10.r), // ✅ Clip the image
             child: Image.asset(
               card.imagepath,
-              height: 140,
-              width: 140,
+              height: 140.w,
+              width: 140.w,
               fit: BoxFit.contain, // ✅ Ensures it doesn't overflow
             ),
           ),
-          // const SizedBox(height: 5),
+          // SizedBox(height: 5.w),
           Text(
             card.description,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
           ),
         ],
       ),

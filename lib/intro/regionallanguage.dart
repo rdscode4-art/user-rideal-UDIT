@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:rideal/intro/onboardScreen.dart';
 class Language extends StatefulWidget {
@@ -18,7 +19,7 @@ class _LanguageState extends State<Language> {
       body:  Column(
         children: [
           SizedBox(
-            height: 700,
+            height: 700.w,
             child: ListView(
                 children: [
             languageBuilder("English", _selectedLanguage, (value) {
@@ -114,7 +115,7 @@ class _LanguageState extends State<Language> {
                 ],
               ), 
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 20.w),
           ElevatedButton(onPressed: (){
             Navigator.push(context, MaterialPageRoute(builder: (context)=>WelcomeScreen()));
           },

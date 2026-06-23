@@ -32,12 +32,25 @@ class _PromoCodeWidgetState extends State<PromoCodeWidget> {
   static const Color accentGreen = Color(0xFF66BB6A);
 
   @override
+    @override
   void initState() {
     super.initState();
     print('🎟️ PromoCodeWidget initialized:');
     print('  - Ride Type: ${widget.rideType}');
     print('  - Estimated Amount: ${widget.estimatedAmount}');
     _loadAvailablePromoCodes();
+  }
+
+  @override
+  void didUpdateWidget(PromoCodeWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.rideType != widget.rideType ||
+        oldWidget.estimatedAmount != widget.estimatedAmount) {
+      _loadAvailablePromoCodes();
+      if (_appliedPromo != null && _promoCodeController.text.isNotEmpty) {
+        _validateAndApplyPromo(_promoCodeController.text);
+      }
+    }
   }
 
   Future<void> _loadAvailablePromoCodes() async {
@@ -163,7 +176,7 @@ class _PromoCodeWidgetState extends State<PromoCodeWidget> {
                   child: Column(
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
                         decoration: BoxDecoration(
                           color: primaryGreen.withOpacity(0.1),
                           borderRadius: const BorderRadius.vertical(
@@ -307,7 +320,7 @@ class _PromoCodeWidgetState extends State<PromoCodeWidget> {
                   ),
                 ),
               ],
-              const SizedBox(height: 12),
+              const SizedBox(height: 8),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -346,49 +359,50 @@ class _PromoCodeWidgetState extends State<PromoCodeWidget> {
   Widget build(BuildContext context) {
     if (_appliedPromo != null) {
       return Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
           color: primaryGreen.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: primaryGreen, width: 1.5),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: primaryGreen, width: 1),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                const Icon(Icons.check_circle, color: primaryGreen, size: 20),
-                const SizedBox(width: 8),
-                const Text(
-                  'Promo Applied!',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: primaryGreen,
-                    fontSize: 16,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(Icons.check_circle, color: primaryGreen, size: 16),
+                      const SizedBox(width: 4),
+                      Text(
+                        'Code: ${_appliedPromo!.code} Applied!',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: primaryGreen,
+                          fontSize: 13,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                const Spacer(),
-                TextButton(
-                  onPressed: _removePromo,
-                  child: const Text(
-                    'Remove',
-                    style: TextStyle(color: Colors.red),
+                  const SizedBox(height: 2),
+                  Text(
+                    'You saved ₹${_appliedPromo!.discountAmount.toStringAsFixed(0)}',
+                    style: const TextStyle(
+                      color: primaryGreen,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-            const SizedBox(height: 8),
-            Text(
-              'Code: ${_appliedPromo!.code}',
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              'You saved ₹${_appliedPromo!.discountAmount.toStringAsFixed(0)}',
-              style: const TextStyle(
-                color: primaryGreen,
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
+            InkWell(
+              onTap: _removePromo,
+              child: const Padding(
+                padding: EdgeInsets.all(4),
+                child: Icon(Icons.close, color: Colors.red, size: 20),
               ),
             ),
           ],
@@ -412,11 +426,11 @@ class _PromoCodeWidgetState extends State<PromoCodeWidget> {
               const SizedBox(width: 8),
               const Text(
                 'Have a promo code?',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 8),
           Row(
             children: [
               Expanded(
@@ -477,7 +491,7 @@ class _PromoCodeWidgetState extends State<PromoCodeWidget> {
             ],
           ),
           if (_availablePromoCodes.isNotEmpty) ...[
-            const SizedBox(height: 12),
+            const SizedBox(height: 8),
             InkWell(
               onTap: _showAvailablePromoCodes,
               child: Container(
@@ -514,9 +528,9 @@ class _PromoCodeWidgetState extends State<PromoCodeWidget> {
               ),
             ),
           ] else if (!_isLoadingPromoCodes) ...[
-            const SizedBox(height: 12),
+            const SizedBox(height: 8),
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
               decoration: BoxDecoration(
                 color: Colors.grey.shade100,
                 borderRadius: BorderRadius.circular(8),

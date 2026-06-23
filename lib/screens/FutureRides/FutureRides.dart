@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:rideal/screens/FutureRides/FutureRidesList.dart';
@@ -394,7 +395,7 @@ class _FutureRidesState extends State<FutureRides> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("Try these suggestions:"),
-            SizedBox(height: 8),
+            SizedBox(height: 8.w),
             Text("• Adjust your departure time"),
             Text("• Try a different date"),
             Text("• Consider nearby pickup/drop locations"),
@@ -464,16 +465,16 @@ class _FutureRidesState extends State<FutureRides> {
               children: [
                 // Floating Header over image
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                  padding: EdgeInsets.fromLTRB(16, 8, 16, 0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const SizedBox(width: 42, height: 42),
-                      const Text(
+                      SizedBox(width: 42.w, height: 42.w),
+                      Text(
                         'Future Rides',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 20,
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.bold,
                           shadows: [
                             Shadow(
@@ -492,14 +493,14 @@ class _FutureRidesState extends State<FutureRides> {
                           );
                         },
                         child: Container(
-                          padding: const EdgeInsets.all(10),
+                          padding: EdgeInsets.all(10.w),
                           decoration: BoxDecoration(
                             color: Colors.white.withOpacity(0.15),
                             shape: BoxShape.circle,
                             border: Border.all(
                                 color: Colors.white.withOpacity(0.3)),
                           ),
-                          child: const Icon(Icons.history_rounded,
+                          child: Icon(Icons.history_rounded,
                               color: Colors.white, size: 20),
                         ),
                       ),
@@ -518,11 +519,11 @@ class _FutureRidesState extends State<FutureRides> {
                         // Search Form Card
                         Padding(
                           padding:
-                              const EdgeInsets.symmetric(horizontal: 20),
+                              EdgeInsets.symmetric(horizontal: 20.w),
                           child: Container(
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(24),
+                              borderRadius: BorderRadius.circular(24.r),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.08),
@@ -536,7 +537,7 @@ class _FutureRidesState extends State<FutureRides> {
                                 // Pickup
                                 _buildPickupRow(),
                                 Divider(
-                                    height: 1,
+                                    height: 1.w,
                                     color: Colors.grey.shade100,
                                     indent: 20,
                                     endIndent: 20),
@@ -546,7 +547,7 @@ class _FutureRidesState extends State<FutureRides> {
                                 // Drop
                                 _buildDropRow(),
                                 Divider(
-                                    height: 1,
+                                    height: 1.w,
                                     color: Colors.grey.shade100,
                                     indent: 20,
                                     endIndent: 20),
@@ -562,7 +563,7 @@ class _FutureRidesState extends State<FutureRides> {
                                   keyboardType: TextInputType.number,
                                 ),
                                 Divider(
-                                    height: 1,
+                                    height: 1.w,
                                     color: Colors.grey.shade100,
                                     indent: 20,
                                     endIndent: 20),
@@ -570,7 +571,7 @@ class _FutureRidesState extends State<FutureRides> {
                                 // Date
                                 buildDatePickerRow(context),
                                 Divider(
-                                    height: 1,
+                                    height: 1.w,
                                     color: Colors.grey.shade100,
                                     indent: 20,
                                     endIndent: 20),
@@ -578,20 +579,20 @@ class _FutureRidesState extends State<FutureRides> {
                                 // Time
                                 buildTimePickerRow(context),
 
-                                const SizedBox(height: 6),
+                                SizedBox(height: 6.w),
                               ],
                             ),
                           ),
                         ),
 
-                        const SizedBox(height: 20),
+                        SizedBox(height: 20.w),
 
                         // Search button
                         Padding(
                           padding:
-                              const EdgeInsets.symmetric(horizontal: 20),
+                              EdgeInsets.symmetric(horizontal: 20.w),
                           child: SizedBox(
-                            height: 56,
+                            height: 56.w,
                             width: double.infinity,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
@@ -600,7 +601,7 @@ class _FutureRidesState extends State<FutureRides> {
                                 disabledBackgroundColor:
                                     Colors.grey.shade200,
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(16),
+                                  borderRadius: BorderRadius.circular(16.r),
                                 ),
                                 elevation: 0,
                               ),
@@ -608,39 +609,39 @@ class _FutureRidesState extends State<FutureRides> {
                                   ? null
                                   : _searchFutureRides,
                               child: _isLoading
-                                  ? const Row(
+                                  ? Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
                                         SizedBox(
-                                          width: 20,
-                                          height: 20,
+                                          width: 20.w,
+                                          height: 20.w,
                                           child: CircularProgressIndicator(
                                             color: Colors.white,
                                             strokeWidth: 2.5,
                                           ),
                                         ),
-                                        SizedBox(width: 12),
+                                        SizedBox(width: 12.w),
                                         Text(
                                           'Searching...',
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 16,
+                                            fontSize: 16.sp,
                                           ),
                                         ),
                                       ],
                                     )
-                                  : const Row(
+                                  : Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
                                         Icon(Icons.search_rounded, size: 20),
-                                        SizedBox(width: 8),
+                                        SizedBox(width: 8.w),
                                         Text(
                                           'Search Rides',
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 16,
+                                            fontSize: 16.sp,
                                           ),
                                         ),
                                       ],
@@ -649,25 +650,25 @@ class _FutureRidesState extends State<FutureRides> {
                           ),
                         ),
 
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16.w),
 
                         // Info chips row
                         Padding(
                           padding:
-                              const EdgeInsets.symmetric(horizontal: 20),
+                              EdgeInsets.symmetric(horizontal: 20.w),
                           child: Row(
                             children: [
                               _infoChip(Icons.verified_user_outlined,
                                   'Safe rides'),
-                              const SizedBox(width: 8),
+                              SizedBox(width: 8.w),
                               _infoChip(
                                   Icons.savings_rounded, 'Save money'),
-                              const SizedBox(width: 8),
+                              SizedBox(width: 8.w),
                               _infoChip(Icons.eco_rounded, 'Go green'),
                             ],
                           ),
                         ),
-                        const SizedBox(height: 24),
+                        SizedBox(height: 24.w),
                       ],
                     ),
                   ),
@@ -683,10 +684,10 @@ class _FutureRidesState extends State<FutureRides> {
   Widget _infoChip(IconData icon, String label) {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        padding: EdgeInsets.symmetric(vertical: 8.w),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.r),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.03),
@@ -698,11 +699,11 @@ class _FutureRidesState extends State<FutureRides> {
         child: Column(
           children: [
             Icon(icon, size: 16, color: const Color(0xFF0F9D58)),
-            const SizedBox(height: 4),
+            SizedBox(height: 4.w),
             Text(
               label,
-              style: const TextStyle(
-                fontSize: 10,
+              style: TextStyle(
+                fontSize: 10.sp,
                 fontWeight: FontWeight.w600,
                 color: Colors.black54,
               ),
@@ -715,34 +716,34 @@ class _FutureRidesState extends State<FutureRides> {
 
   Widget _buildPickupRow() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.w),
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.all(8.w),
             decoration: BoxDecoration(
               color: const Color(0xFF0F9D58).withOpacity(0.08),
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.location_on_rounded,
+            child: Icon(Icons.location_on_rounded,
                 color: Color(0xFF0F9D58), size: 18),
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12.w),
           Expanded(
             child: TextFormField(
               controller: _pickupController,
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
               decoration: InputDecoration(
                 hintText: "Pickup location",
                 hintStyle:
-                    TextStyle(color: Colors.grey.shade400, fontSize: 14),
+                    TextStyle(color: Colors.grey.shade400, fontSize: 14.sp),
                 border: InputBorder.none,
                 suffixIcon: _isLoadingLocation
-                    ? const SizedBox(
-                        width: 16,
-                        height: 16,
+                    ? SizedBox(
+                        width: 16.w,
+                        height: 16.w,
                         child: Padding(
-                          padding: EdgeInsets.all(10),
+                          padding: EdgeInsets.all(10.w),
                           child: CircularProgressIndicator(
                               strokeWidth: 2,
                               valueColor: AlwaysStoppedAnimation<Color>(
@@ -762,12 +763,12 @@ class _FutureRidesState extends State<FutureRides> {
           GestureDetector(
             onTap: _getCurrentLocation,
             child: Container(
-              padding: const EdgeInsets.all(8),
+              padding: EdgeInsets.all(8.w),
               decoration: BoxDecoration(
                 color: Colors.blue.withOpacity(0.08),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.my_location_rounded,
+              child: Icon(Icons.my_location_rounded,
                   color: Colors.blue, size: 16),
             ),
           ),
@@ -778,11 +779,11 @@ class _FutureRidesState extends State<FutureRides> {
 
   Widget _buildDropRow() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.w),
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.all(8.w),
             decoration: BoxDecoration(
               color: Colors.red.withOpacity(0.08),
               shape: BoxShape.circle,
@@ -790,15 +791,15 @@ class _FutureRidesState extends State<FutureRides> {
             child: Icon(Icons.location_on_rounded,
                 color: Colors.red.shade400, size: 18),
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12.w),
           Expanded(
             child: TextFormField(
               controller: _dropController,
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
               decoration: InputDecoration(
                 hintText: "Drop location",
                 hintStyle:
-                    TextStyle(color: Colors.grey.shade400, fontSize: 14),
+                    TextStyle(color: Colors.grey.shade400, fontSize: 14.sp),
                 border: InputBorder.none,
               ),
               onChanged: (value) => _searchPlaces(value, false),
@@ -817,10 +818,10 @@ class _FutureRidesState extends State<FutureRides> {
   Widget _buildSuggestionsList(bool isPickup) {
     final suggestions = isPickup ? _pickupSuggestions : _dropSuggestions;
     return Container(
-      margin: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+      margin: EdgeInsets.fromLTRB(16, 0, 16, 8),
       decoration: BoxDecoration(
         color: const Color(0xFFF8F9FA),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.r),
         border: Border.all(color: Colors.grey.shade100),
       ),
       child: ListView.separated(
@@ -828,25 +829,25 @@ class _FutureRidesState extends State<FutureRides> {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: suggestions.length > 5 ? 5 : suggestions.length,
         separatorBuilder: (_, __) =>
-            Divider(height: 1, color: Colors.grey.shade100),
+            Divider(height: 1.w, color: Colors.grey.shade100),
         itemBuilder: (context, index) {
           final suggestion = suggestions[index];
           return InkWell(
             onTap: () => _getPlaceDetails(suggestion['place_id'], isPickup),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(12.r),
             child: Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                  EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.w),
               child: Row(
                 children: [
                   Icon(Icons.place_rounded,
                       size: 15, color: Colors.grey.shade400),
-                  const SizedBox(width: 10),
+                  SizedBox(width: 10.w),
                   Expanded(
                     child: Text(
                       suggestion['description'],
-                      style: const TextStyle(
-                          fontSize: 13, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          fontSize: 13.sp, fontWeight: FontWeight.w500),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -867,27 +868,27 @@ class _FutureRidesState extends State<FutureRides> {
     TextInputType keyboardType = TextInputType.text,
   }) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.w),
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.all(8.w),
             decoration: BoxDecoration(
               color: iconColor.withOpacity(0.08),
               shape: BoxShape.circle,
             ),
             child: Icon(icon, color: iconColor, size: 18),
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12.w),
           Expanded(
             child: TextFormField(
               controller: controller,
               keyboardType: keyboardType,
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
               decoration: InputDecoration(
                 hintText: hint,
                 hintStyle:
-                    TextStyle(color: Colors.grey.shade400, fontSize: 14),
+                    TextStyle(color: Colors.grey.shade400, fontSize: 14.sp),
                 border: InputBorder.none,
               ),
             ),
@@ -899,28 +900,28 @@ class _FutureRidesState extends State<FutureRides> {
 
   Widget buildDatePickerRow(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.w),
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.all(8.w),
             decoration: BoxDecoration(
               color: Colors.orange.withOpacity(0.08),
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.calendar_month_rounded,
+            child: Icon(Icons.calendar_month_rounded,
                 color: Colors.orange, size: 18),
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12.w),
           Expanded(
             child: TextFormField(
               controller: _dateController,
               readOnly: true,
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
               decoration: InputDecoration(
                 hintText: "Select date",
                 hintStyle:
-                    TextStyle(color: Colors.grey.shade400, fontSize: 14),
+                    TextStyle(color: Colors.grey.shade400, fontSize: 14.sp),
                 border: InputBorder.none,
               ),
               onTap: () async {
@@ -954,28 +955,28 @@ class _FutureRidesState extends State<FutureRides> {
 
   Widget buildTimePickerRow(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.w),
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.all(8.w),
             decoration: BoxDecoration(
               color: Colors.purple.withOpacity(0.08),
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.access_time_rounded,
+            child: Icon(Icons.access_time_rounded,
                 color: Colors.purple, size: 18),
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12.w),
           Expanded(
             child: TextFormField(
               controller: _timeController,
               readOnly: true,
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
               decoration: InputDecoration(
                 hintText: "Select time",
                 hintStyle:
-                    TextStyle(color: Colors.grey.shade400, fontSize: 14),
+                    TextStyle(color: Colors.grey.shade400, fontSize: 14.sp),
                 border: InputBorder.none,
               ),
               onTap: () async {

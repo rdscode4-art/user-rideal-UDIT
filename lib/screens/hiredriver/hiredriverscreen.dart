@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 // Save this file as: lib/screens/hiredriver/hiredriverscreen.dart
 
 import 'package:flutter/material.dart';
@@ -370,17 +371,17 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
       builder: (BuildContext context) {
         return Dialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
+            borderRadius: BorderRadius.circular(20.0.r),
           ),
           elevation: 10,
           backgroundColor: Colors.white,
           child: Padding(
-            padding: const EdgeInsets.all(24.0),
+            padding: EdgeInsets.all(24.0.w),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16.w),
                   decoration: BoxDecoration(
                     color: Colors.red.shade50,
                     shape: BoxShape.circle,
@@ -391,56 +392,56 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                     color: Colors.red.shade600,
                   ),
                 ),
-                const SizedBox(height: 20),
-                const Text(
+                SizedBox(height: 20.w),
+                Text(
                   'Insufficient Balance',
                   style: TextStyle(
-                    fontSize: 22,
+                    fontSize: 22.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                   ),
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12.w),
                 RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
-                    style: const TextStyle(
-                      fontSize: 15,
+                    style: TextStyle(
+                      fontSize: 15.sp,
                       color: Colors.black54,
-                      height: 1.5,
+                      height: 1.5.w,
                     ),
                     children: [
-                      const TextSpan(text: 'Your current wallet balance is '),
+                      TextSpan(text: 'Your current wallet balance is '),
                       TextSpan(
                         text: '₹${currentBalance.toStringAsFixed(2)}',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
                         ),
                       ),
-                      const TextSpan(text: ', which is not enough for this booking of '),
+                      TextSpan(text: ', which is not enough for this booking of '),
                       TextSpan(
                         text: '₹${totalPrice.toStringAsFixed(0)}',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
                         ),
                       ),
-                      const TextSpan(text: '.\n\nPlease add money to your wallet to proceed.'),
+                      TextSpan(text: '.\n\nPlease add money to your wallet to proceed.'),
                     ],
                   ),
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24.w),
                 Row(
                   children: [
                     Expanded(
                       child: OutlinedButton(
                         onPressed: () => Navigator.pop(context),
                         style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          padding: EdgeInsets.symmetric(vertical: 14.w),
                           side: BorderSide(color: Colors.grey.shade300),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(12.r),
                           ),
                         ),
                         child: Text(
@@ -448,12 +449,12 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                           style: TextStyle(
                             color: Colors.grey.shade700,
                             fontWeight: FontWeight.w600,
-                            fontSize: 16,
+                            fontSize: 16.sp,
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12.w),
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () async {
@@ -474,19 +475,19 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          padding: EdgeInsets.symmetric(vertical: 14.w),
                           backgroundColor: Colors.green,
                           foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(12.r),
                           ),
                           elevation: 2,
                         ),
-                        child: const Text(
+                        child: Text(
                           'Add Money',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                            fontSize: 16.sp,
                           ),
                         ),
                       ),
@@ -507,11 +508,11 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
       backgroundColor: const Color(0xFFF8F9FA),
       body: SafeArea(
         child: isLoadingRiderId
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : riderId == null
               ? Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(24.0),
+                    padding: EdgeInsets.all(24.0.w),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -520,28 +521,28 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                           size: 64,
                           color: Colors.red.shade300,
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16.w),
                         Text(
                           errorMessage ?? 'User ID not found',
-                          style: const TextStyle(
-                            fontSize: 18,
+                          style: TextStyle(
+                            fontSize: 18.sp,
                             fontWeight: FontWeight.w500,
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 24),
+                        SizedBox(height: 24.w),
                         ElevatedButton.icon(
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          icon: const Icon(Icons.login),
-                          label: const Text('Go to Login'),
+                          icon: Icon(Icons.login),
+                          label: Text('Go to Login'),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.green,
                             foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 24,
-                              vertical: 12,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 24.w,
+                              vertical: 12.w,
                             ),
                           ),
                         ),
@@ -552,13 +553,13 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
               : Stack(
                   children: [
                     SingleChildScrollView(
-                      padding: const EdgeInsets.only(bottom: 120), // Space for bottom bar
+                      padding: EdgeInsets.only(bottom: 120.w), // Space for bottom bar
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           // Custom Header
                           Padding(
-                            padding: const EdgeInsets.only(top: 8, left: 16, right: 16, bottom: 20),
+                            padding: EdgeInsets.only(top: 8.w, left: 16.w, right: 16.w, bottom: 20.w),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -567,7 +568,7 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                                     GestureDetector(
                                       onTap: () => Navigator.pop(context),
                                       child: Container(
-                                        padding: const EdgeInsets.all(8),
+                                        padding: EdgeInsets.all(8.w),
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                           shape: BoxShape.circle,
@@ -579,14 +580,14 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                                             ),
                                           ],
                                         ),
-                                        child: const Icon(Icons.arrow_back, color: Colors.black87, size: 18),
+                                        child: Icon(Icons.arrow_back, color: Colors.black87, size: 18),
                                       ),
                                     ),
-                                    const SizedBox(width: 12),
-                                    const Text(
+                                    SizedBox(width: 12.w),
+                                    Text(
                                       "Hire Driver",
                                       style: TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 18.sp,
                                         fontWeight: FontWeight.w700,
                                         letterSpacing: -0.3,
                                         color: Colors.black87,
@@ -602,7 +603,7 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                                     );
                                   },
                                   child: Container(
-                                    padding: const EdgeInsets.all(8),
+                                    padding: EdgeInsets.all(8.w),
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       shape: BoxShape.circle,
@@ -614,7 +615,7 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                                         ),
                                       ],
                                     ),
-                                    child: const Icon(Icons.history, color: Colors.black87, size: 18),
+                                    child: Icon(Icons.history, color: Colors.black87, size: 18),
                                   ),
                                 ),
                               ],
@@ -623,25 +624,25 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
 
                           // Large Typography Intro
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            padding: EdgeInsets.symmetric(horizontal: 20.w),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   "Need a driver\nfor your car?",
                                   style: TextStyle(
-                                    fontSize: 28,
+                                    fontSize: 28.sp,
                                     fontWeight: FontWeight.w800,
-                                    height: 1.1,
+                                    height: 1.1.w,
                                     letterSpacing: -1,
                                     color: Colors.black87,
                                   ),
                                 ),
-                                const SizedBox(height: 8),
+                                SizedBox(height: 8.w),
                                 Text(
                                   "Hire professional drivers by the day.",
                                   style: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 14.sp,
                                     color: Colors.grey.shade600,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -649,14 +650,14 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                               ],
                             ),
                           ),
-                          const SizedBox(height: 24),
+                          SizedBox(height: 24.w),
 
                           // Pickup Location Search Bar
                           Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 16),
+                            margin: EdgeInsets.symmetric(horizontal: 16.w),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20.r),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.03),
@@ -669,12 +670,12 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.all(16),
+                                  padding: EdgeInsets.all(16.w),
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 0),
+                                    padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 0),
                                     decoration: BoxDecoration(
                                       color: Colors.grey.shade50,
-                                      borderRadius: BorderRadius.circular(12),
+                                      borderRadius: BorderRadius.circular(12.r),
                                       border: Border.all(
                                         color: _pickupError != null
                                             ? Colors.red.shade200
@@ -687,27 +688,27 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                                       controller: _pickupController,
                                       onChanged: _onSearchChanged,
                                       textAlignVertical: TextAlignVertical.center,
-                                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                                      style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
                                       decoration: InputDecoration(
                                         hintText: 'Pickup address',
-                                        hintStyle: const TextStyle(color: Colors.black38, fontSize: 14),
+                                        hintStyle: TextStyle(color: Colors.black38, fontSize: 14.sp),
                                         prefixIcon: Icon(
                                           Icons.location_on,
                                           size: 16,
                                           color: _pickupLat != null ? const Color(0xFF0F9D58) : Colors.black45,
                                         ),
                                         suffixIcon: _isGeocodingPickup
-                                            ? const Padding(
-                                                padding: EdgeInsets.all(14),
+                                            ? Padding(
+                                                padding: EdgeInsets.all(14.w),
                                                 child: SizedBox(
-                                                  width: 16,
-                                                  height: 16,
+                                                  width: 16.w,
+                                                  height: 16.w,
                                                   child: CircularProgressIndicator(strokeWidth: 2, color: Color(0xFF0F9D58)),
                                                 ),
                                               )
                                             : _pickupController.text.isNotEmpty
                                                 ? IconButton(
-                                                    icon: const Icon(Icons.close, size: 16, color: Colors.black45),
+                                                    icon: Icon(Icons.close, size: 16, color: Colors.black45),
                                                     onPressed: () {
                                                       setState(() {
                                                         _pickupController.clear();
@@ -720,7 +721,7 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                                                   )
                                                 : null,
                                         border: InputBorder.none,
-                                        contentPadding: const EdgeInsets.symmetric(vertical: 14),
+                                        contentPadding: EdgeInsets.symmetric(vertical: 14.w),
                                         isDense: true,
                                       ),
                                     ),
@@ -735,15 +736,15 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                                       shrinkWrap: true,
                                       physics: const NeverScrollableScrollPhysics(),
                                       itemCount: _suggestions.length,
-                                      separatorBuilder: (context, index) => Divider(height: 1, color: Colors.grey.shade100),
+                                      separatorBuilder: (context, index) => Divider(height: 1.w, color: Colors.grey.shade100),
                                       itemBuilder: (context, index) {
                                         final suggestion = _suggestions[index];
                                         return ListTile(
                                           visualDensity: VisualDensity.compact,
-                                          leading: const Icon(Icons.location_on_outlined, color: Colors.black54, size: 18),
+                                          leading: Icon(Icons.location_on_outlined, color: Colors.black54, size: 18),
                                           title: Text(
                                             suggestion["description"] ?? "",
-                                            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                                            style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500),
                                           ),
                                           onTap: () {
                                             _pickupController.text = suggestion["description"] ?? "";
@@ -759,33 +760,33 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                           ),
                           if (_pickupError != null)
                             Padding(
-                              padding: const EdgeInsets.only(top: 8, left: 20),
+                              padding: EdgeInsets.only(top: 8.w, left: 20.w),
                               child: Text(
                                 _pickupError!,
-                                style: TextStyle(color: Colors.red.shade600, fontSize: 12, fontWeight: FontWeight.w500),
+                                style: TextStyle(color: Colors.red.shade600, fontSize: 12.sp, fontWeight: FontWeight.w500),
                               ),
                             ),
-                          const SizedBox(height: 24),
+                          SizedBox(height: 24.w),
 
                           // Days Selection
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 20.w),
                             child: Text(
                               "Duration",
                               style: TextStyle(
                                 fontWeight: FontWeight.w700,
-                                fontSize: 15,
+                                fontSize: 15.sp,
                                 color: Colors.black87,
                               ),
                             ),
                           ),
-                          const SizedBox(height: 12),
+                          SizedBox(height: 12.w),
                           Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 16),
-                            padding: const EdgeInsets.all(16),
+                            margin: EdgeInsets.symmetric(horizontal: 16.w),
+                            padding: EdgeInsets.all(16.w),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20.r),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.02),
@@ -800,10 +801,10 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Text(
+                                    Text(
                                       'Number of Days',
                                       style: TextStyle(
-                                        fontSize: 14,
+                                        fontSize: 14.sp,
                                         fontWeight: FontWeight.w600,
                                         color: Colors.black87,
                                       ),
@@ -811,24 +812,24 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                                     Container(
                                       decoration: BoxDecoration(
                                         color: Colors.grey.shade50,
-                                        borderRadius: BorderRadius.circular(12),
+                                        borderRadius: BorderRadius.circular(12.r),
                                         border: Border.all(color: Colors.grey.shade200),
                                       ),
                                       child: Row(
                                         children: [
                                           IconButton(
                                             padding: EdgeInsets.zero,
-                                            constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
+                                            constraints: BoxConstraints(minWidth: 36, minHeight: 36),
                                             onPressed: selectedDays > 0 ? () => setState(() => selectedDays--) : null,
                                             icon: Icon(Icons.remove, size: 16, color: selectedDays > 0 ? Colors.black87 : Colors.black26),
                                           ),
                                           Text(
                                             '$selectedDays',
-                                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.black87),
+                                            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w700, color: Colors.black87),
                                           ),
                                           IconButton(
                                             padding: EdgeInsets.zero,
-                                            constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
+                                            constraints: BoxConstraints(minWidth: 36, minHeight: 36),
                                             onPressed: selectedDays < 30 ? () => setState(() => selectedDays++) : null,
                                             icon: Icon(Icons.add, size: 16, color: selectedDays < 30 ? Colors.black87 : Colors.black26),
                                           ),
@@ -837,7 +838,7 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: 16),
+                                SizedBox(height: 16.w),
                                 SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
                                   child: Row(
@@ -846,11 +847,11 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                                       return GestureDetector(
                                         onTap: () => setState(() => selectedDays = days),
                                         child: Container(
-                                          margin: const EdgeInsets.only(right: 8),
-                                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                          margin: EdgeInsets.only(right: 8.w),
+                                          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
                                           decoration: BoxDecoration(
                                             color: isSelected ? Colors.black87 : Colors.white,
-                                            borderRadius: BorderRadius.circular(12),
+                                            borderRadius: BorderRadius.circular(12.r),
                                             border: Border.all(
                                               color: isSelected ? Colors.black87 : Colors.grey.shade200,
                                             ),
@@ -858,7 +859,7 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                                           child: Text(
                                             '$days days',
                                             style: TextStyle(
-                                              fontSize: 13,
+                                              fontSize: 13.sp,
                                               fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
                                               color: isSelected ? Colors.white : Colors.black87,
                                             ),
@@ -871,34 +872,34 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                               ],
                             ),
                           ),
-                          const SizedBox(height: 24),
+                          SizedBox(height: 24.w),
 
                           // Important Pricing Notes
                           Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 16),
-                            padding: const EdgeInsets.all(16),
+                            margin: EdgeInsets.symmetric(horizontal: 16.w),
+                            padding: EdgeInsets.all(16.w),
                             decoration: BoxDecoration(
                               color: const Color(0xFFFFF9E6),
-                              borderRadius: BorderRadius.circular(16),
-                              border: Border.all(color: const Color(0xFFFFE082), width: 1),
+                              borderRadius: BorderRadius.circular(16.r),
+                              border: Border.all(color: const Color(0xFFFFE082), width: 1.w),
                             ),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Icon(Icons.info_outline, color: Color(0xFFF57C00), size: 20),
-                                const SizedBox(width: 12),
+                                Icon(Icons.info_outline, color: Color(0xFFF57C00), size: 20),
+                                SizedBox(width: 12.w),
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      const Text(
+                                      Text(
                                         'Pricing Rules',
-                                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Color(0xFFE65100)),
+                                        style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w700, color: Color(0xFFE65100)),
                                       ),
-                                      const SizedBox(height: 4),
+                                      SizedBox(height: 4.w),
                                       Text(
                                         '• 1 day = Fixed 8 hours at ₹720\n• Driver food allowance: ₹250/day',
-                                        style: TextStyle(fontSize: 12, color: const Color(0xFFE65100).withOpacity(0.8), height: 1.5, fontWeight: FontWeight.w500),
+                                        style: TextStyle(fontSize: 12.sp, color: const Color(0xFFE65100).withOpacity(0.8), height: 1.5.w, fontWeight: FontWeight.w500),
                                       ),
                                     ],
                                   ),
@@ -907,15 +908,15 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                             ),
                           ),
                           
-                          const SizedBox(height: 24),
+                          SizedBox(height: 24.w),
 
                           // Features
                           Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 16),
-                            padding: const EdgeInsets.all(20),
+                            margin: EdgeInsets.symmetric(horizontal: 16.w),
+                            padding: EdgeInsets.all(20.w),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20.r),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.02),
@@ -927,11 +928,11 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   'What\'s Included',
-                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: Colors.black87),
+                                  style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w700, color: Colors.black87),
                                 ),
-                                const SizedBox(height: 16),
+                                SizedBox(height: 16.w),
                                 _buildFeatureItem(Icons.verified_user_outlined, 'Professional & Verified Driver'),
                                 _buildFeatureItem(Icons.shield_outlined, 'Fully Insured Service'),
                                 _buildFeatureItem(Icons.headset_mic_outlined, '24/7 Customer Support'),
@@ -939,7 +940,7 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                               ],
                             ),
                           ),
-                          const SizedBox(height: 40),
+                          SizedBox(height: 40.w),
                         ],
                       ),
                     ),
@@ -954,9 +955,9 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                           child: Container(
                             padding: EdgeInsets.only(
-                              top: 20,
-                              left: 24,
-                              right: 24,
+                              top: 20.w,
+                              left: 24.w,
+                              right: 24.w,
                               bottom: MediaQuery.of(context).padding.bottom + 20,
                             ),
                             decoration: BoxDecoration(
@@ -976,27 +977,27 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text(
+                                    Text(
                                       "Total Estimate",
-                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Colors.black54),
+                                      style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500, color: Colors.black54),
                                     ),
                                     Text(
                                       '₹${totalPrice.toStringAsFixed(0)}',
-                                      style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: Colors.black87),
+                                      style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.w800, color: Colors.black87),
                                     ),
                                     Text(
                                       selectedDays == 1 ? '1 day (8 hours)' : '$selectedDays days (${selectedDays * 8} hrs)',
-                                      style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF0F9D58)),
+                                      style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600, color: Color(0xFF0F9D58)),
                                     ),
                                   ],
                                 ),
                                 GestureDetector(
                                   onTap: (selectedDays == 0 && selectedHours == 0) || isLoading ? null : _createHireDriverRequest,
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                                    padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 14.w),
                                     decoration: BoxDecoration(
                                       color: (selectedDays == 0 && selectedHours == 0) ? Colors.grey : const Color(0xFF0F9D58),
-                                      borderRadius: BorderRadius.circular(16),
+                                      borderRadius: BorderRadius.circular(16.r),
                                       boxShadow: [
                                         if (selectedDays > 0)
                                           BoxShadow(
@@ -1007,10 +1008,10 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                                       ],
                                     ),
                                     child: isLoading
-                                        ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
-                                        : const Text(
+                                        ? SizedBox(width: 18.w, height: 18.w, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
+                                        : Text(
                                             "Confirm",
-                                            style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w700),
+                                            style: TextStyle(color: Colors.white, fontSize: 15.sp, fontWeight: FontWeight.w700),
                                           ),
                                   ),
                                 ),
@@ -1028,22 +1029,22 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
 
   Widget _buildFeatureItem(IconData icon, String text) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
+      padding: EdgeInsets.only(bottom: 12.w),
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(6),
+            padding: EdgeInsets.all(6.w),
             decoration: BoxDecoration(
               color: Colors.green.shade50,
               shape: BoxShape.circle,
             ),
             child: Icon(icon, color: const Color(0xFF0F9D58), size: 16),
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12.w),
           Expanded(
             child: Text(
               text,
-              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Colors.black87),
+              style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500, color: Colors.black87),
             ),
           ),
         ],

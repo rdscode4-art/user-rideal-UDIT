@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:rideal/model/availablecarlistmodel.dart';
 import 'package:rideal/screens/transport/cardetails.dart';
@@ -17,13 +18,13 @@ class _AvailableCarCardState extends State<AvailableCarCard> {
   Widget build(BuildContext context) {
     return Card(
       color: Color(0xFFFFFAF0),
-      margin: EdgeInsets.only(bottom: 16),
+      margin: EdgeInsets.only(bottom: 16.w),
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: Colors.amber.shade300, width: 1.5),
-        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(color: Colors.amber.shade300, width: 1.5.w),
+        borderRadius: BorderRadius.circular(12.r),
       ),
       child: Padding(
-        padding: EdgeInsets.all(12),
+        padding: EdgeInsets.all(12.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -33,24 +34,24 @@ class _AvailableCarCardState extends State<AvailableCarCard> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(widget.car.name, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-                      SizedBox(height: 4),
+                      Text(widget.car.name, style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600)),
+                      SizedBox(height: 4.w),
                       Text("Automatic | 3 seats | Octane", style: TextStyle(color: Colors.grey)),
-                      SizedBox(height: 4),
+                      SizedBox(height: 4.w),
                       Row(
                         children: [
                           Icon(Icons.location_on, size: 16, color: Colors.grey),
-                          SizedBox(width: 4),
+                          SizedBox(width: 4.w),
                           Text("800m (5mins away)", style: TextStyle(color: Colors.black)),
                         ],
                       ),
                     ],
                   ),
                 ),
-                Image.asset(widget.car.image, width: 130),
+                Image.asset(widget.car.image, width: 130.w),
               ],
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 20.w),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -66,9 +67,9 @@ class _AvailableCarCardState extends State<AvailableCarCard> {
                     side: BorderSide(color: Colors.orange),
                     fixedSize: Size(180, 55),
                     backgroundColor: selectedOption == 'later' ? Colors.amber[300] : null,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
                   ),
-                  child: Text("Book Later", style: TextStyle(fontSize: 18)),
+                  child: Text("Book Later", style: TextStyle(fontSize: 18.sp)),
                 ),
                 OutlinedButton(
                   onPressed: () {
@@ -81,9 +82,9 @@ class _AvailableCarCardState extends State<AvailableCarCard> {
                     side: BorderSide(color: Colors.orange),
                     fixedSize: Size(180, 55),
                     backgroundColor: selectedOption == 'ride' ? Colors.amber[300] : null,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
                   ),
-                  child: Text("Ride Now", style: TextStyle(fontSize: 18)),
+                  child: Text("Ride Now", style: TextStyle(fontSize: 18.sp)),
                 ),
               ],
             ),

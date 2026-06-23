@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import '../service/Responsive.dart';
 
@@ -26,7 +27,7 @@ class _PhoneNumberVerificationScreenState extends State<PhoneNumberVerificationS
         key: _formKey,
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40.0),
+            padding: EdgeInsets.symmetric(horizontal: 40.0.w),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,22 +35,22 @@ class _PhoneNumberVerificationScreenState extends State<PhoneNumberVerificationS
                   SizedBox(height: Responsive.h(5)),
 
                   // SizedBox(height: Responsive.h(18)),
-                  const Image(
+                  Image(
                     image: AssetImage("assets/images/logorideal.png"),
                   ),
 
-                  const SizedBox(height: 5),
+                  SizedBox(height: 5.w),
                   // Phone number input
                   PhoneNumberField(
                     controller: phoneController,
                   ),
 
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24.w),
 
                   // Continue button
                   SizedBox(
                     width: double.infinity,
-                    height: 50,
+                    height: 50.w,
                     child: ElevatedButton(
                       onPressed: () async {
                         // if (_formKey.currentState!.validate()) {
@@ -71,17 +72,17 @@ class _PhoneNumberVerificationScreenState extends State<PhoneNumberVerificationS
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.amber,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(10.r),
                         ),
                       ),
-                      child: const Text(
+                      child: Text(
                         'Continue',
-                        style: TextStyle(fontSize: 16, color: Colors.white),
+                        style: TextStyle(fontSize: 16.sp, color: Colors.white),
                       ),
                     ),
                   ),
 
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24.w),
 
                   // WhatsApp updates checkbox
                   Row(
@@ -97,31 +98,31 @@ class _PhoneNumberVerificationScreenState extends State<PhoneNumberVerificationS
                           });
                         },
                       ),
-                      const Text("Get Order updates on Whatsapp"),
+                      Text("Get Order updates on Whatsapp"),
                     ],
                   ),
 
-                  const SizedBox(height: 40),
+                  SizedBox(height: 40.w),
 
                   // Terms & conditions
-                  const Text(
+                  Text(
                     "By verifying, you agree to our",
-                    style: TextStyle(fontSize: 12),
+                    style: TextStyle(fontSize: 12.sp),
                   ),
                   GestureDetector(
                     onTap: () {
                       // Open terms & privacy
                     },
-                    child: const Text(
+                    child: Text(
                       "Terms & Conditions and Privacy Policy",
                       style: TextStyle(
                         decoration: TextDecoration.underline,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.w),
                 ],
               ),
             ),
@@ -154,17 +155,17 @@ class PhoneNumberField extends StatelessWidget {
       enabled: isEnable,
       decoration: InputDecoration(
         hintText: hintText,
-        prefixIcon: const Padding(
-          padding: EdgeInsets.only(left: 12, right: 8),
+        prefixIcon: Padding(
+          padding: EdgeInsets.only(left: 12.w, right: 8.w),
           child: Text(
             '',
-            style: TextStyle(fontSize: 16, color: Colors.black),
+            style: TextStyle(fontSize: 16.sp, color: Colors.black),
           ),
         ),
-        prefixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
+        prefixIconConstraints: BoxConstraints(minWidth: 0, minHeight: 0),
         counterText: '',
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10.r),
         ),
       ),
       validator: (value) {

@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 
 class AddressScreen extends StatefulWidget {
@@ -37,10 +38,10 @@ class _AddressScreenState extends State<AddressScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Enter Address"),
+        title: Text("Enter Address"),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0.w),
         child: Form(
           key: _formKey,
           child: ListView(
@@ -51,16 +52,16 @@ class _AddressScreenState extends State<AddressScreen> {
               _buildField("City", Icon(Icons.location_city),cityController),
               _buildField("State", Icon(Icons.location_on),stateController),
               _buildField("Pin Code", Icon(Icons.pin),zipController, keyboard: TextInputType.number),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.w),
               ElevatedButton(
                 onPressed: _saveAddress,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green.shade700,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  padding: EdgeInsets.symmetric(vertical: 16.w),
                 ),
-                child: const Text(
+                child: Text(
                   "Save Address",
-                  style: TextStyle(fontSize: 16, color: Colors.white),
+                  style: TextStyle(fontSize: 16.sp, color: Colors.white),
                 ),
               ),
             ],
@@ -73,14 +74,14 @@ class _AddressScreenState extends State<AddressScreen> {
   Widget _buildField(String label,Icon icon, TextEditingController controller,
       {TextInputType keyboard = TextInputType.text}) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12.0),
+      padding: EdgeInsets.only(bottom: 12.0.w),
       child: TextFormField(
         controller: controller,
         keyboardType: keyboard,
         decoration: InputDecoration(
           prefixIcon: icon,
           labelText: label,
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.r)),
         ),
         validator: (value) {
           if (value == null || value.trim().isEmpty) {

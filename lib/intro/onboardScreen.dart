@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rideal/screens/signUp/SignInScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -14,17 +15,17 @@ class WelcomeScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          padding: EdgeInsets.symmetric(horizontal: 24.0.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               
-      const SizedBox(height: 20),
+      SizedBox(height: 20.w),
                   Image.asset(
                     "assets/images/logorideal.png",
                     height: size.height * 0.15,
                   ),
-                  // const SizedBox(height: 5),
+                  // SizedBox(height: 5.w),
               // Illustration Image
               Image.asset(
                 'assets/images/intro1green.png',
@@ -33,24 +34,24 @@ class WelcomeScreen extends StatelessWidget {
 
               // Text Section
               Column(
-                children: const [
+                children: [
                   FittedBox(
   fit: BoxFit.scaleDown,
   child: Text(
     'Drive Smart. Ride Safe. Go Green With RiDeal',
     style: TextStyle(
-      fontSize: 24,
+      fontSize: 24.sp,
       fontWeight: FontWeight.bold,
       color: Colors.black87,
     ),
   ),
 )
 ,
-                  SizedBox(height: 8),
+                  SizedBox(height: 8.w),
                   Text(
                     'Have a better sharing experience',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 14, color: Colors.black45),
+                    style: TextStyle(fontSize: 14.sp, color: Colors.black45),
                   ),
                 ],
               ),
@@ -63,9 +64,9 @@ class WelcomeScreen extends StatelessWidget {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green.shade700,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        padding: EdgeInsets.symmetric(vertical: 16.w),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(8.r),
                         ),
                       ),
                       onPressed: () {
@@ -76,36 +77,36 @@ class WelcomeScreen extends StatelessWidget {
                           ),
                         );
                       },
-                      child: const Text(
+                      child: Text(
                         'Create an account',
                         style: TextStyle(
                           color: Colors.black87,
                           fontWeight: FontWeight.bold,
-                          fontSize: 18
+                          fontSize: 18.sp
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12.w),
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
                       style: OutlinedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        padding: EdgeInsets.symmetric(vertical: 16.w),
                         side: BorderSide(color: Colors.green.shade700),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(8.r),
                         ),
                       ),
                       onPressed: () {
                         Navigator.push(context,MaterialPageRoute(builder: (context)=>SignInScreen()));
                       },
-                      child: const Text(
+                      child: Text(
                         'Log In',
                         style: TextStyle(
                           color: Colors.black87,
                           fontWeight: FontWeight.bold,
-                          fontSize: 18
+                          fontSize: 18.sp
                         ),
                       ),
                     ),
@@ -113,7 +114,7 @@ class WelcomeScreen extends StatelessWidget {
                 ],
               ),
 
-              const SizedBox(height: 24),
+              SizedBox(height: 24.w),
             ],
           ),
         ),

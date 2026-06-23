@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 
 class PrivacyPolicyScreen extends StatelessWidget {
@@ -67,14 +68,14 @@ class PrivacyPolicyScreen extends StatelessWidget {
           children: [
             // Custom Floating Header
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
+              padding: EdgeInsets.fromLTRB(16, 8, 16, 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
                     child: Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10.w),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,
@@ -86,34 +87,34 @@ class PrivacyPolicyScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: const Icon(Icons.arrow_back, color: Colors.black87, size: 20),
+                      child: Icon(Icons.arrow_back, color: Colors.black87, size: 20),
                     ),
                   ),
-                  const Text(
+                  Text(
                     "Privacy Policy",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
                   ),
-                  const SizedBox(width: 40), // spacer for balance
+                  SizedBox(width: 40.w), // spacer for balance
                 ],
               ),
             ),
 
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.only(bottom: 24),
+                padding: EdgeInsets.only(bottom: 24.w),
                 child: Column(
                   children: [
                     // Intro Info Card
                     Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      padding: const EdgeInsets.all(20),
+                      margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.w),
+                      padding: EdgeInsets.all(20.w),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(24),
+                        borderRadius: BorderRadius.circular(24.r),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.04),
@@ -126,10 +127,10 @@ class PrivacyPolicyScreen extends StatelessWidget {
                         children: [
                           // Logo with shadow
                           Container(
-                            padding: const EdgeInsets.all(14),
+                            padding: EdgeInsets.all(14.w),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20.r),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.green.withOpacity(0.08),
@@ -140,82 +141,82 @@ class PrivacyPolicyScreen extends StatelessWidget {
                             ),
                             child: Image.asset(
                               'assets/images/logorideal.png',
-                              height: 60,
-                              width: 100,
+                              height: 60.w,
+                              width: 100.w,
                               fit: BoxFit.contain,
                             ),
                           ),
-                          const SizedBox(height: 18),
+                          SizedBox(height: 18.w),
                           // Company name
                           Text(
                             'RiDeal Mobility Drive Pvt. Ltd.',
-                            style: const TextStyle(
-                              fontSize: 16,
+                            style: TextStyle(
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w800,
                               color: Color(0xFF0F9D58),
                               letterSpacing: -0.3,
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          SizedBox(height: 8.w),
                           // Effective date
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
+                            padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 5.w),
                             decoration: BoxDecoration(
                               color: Colors.grey.shade100,
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(12.r),
                             ),
                             child: Text(
                               'Effective Date: 23 December 2025',
                               style: TextStyle(
-                                fontSize: 11,
+                                fontSize: 11.sp,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.grey.shade600,
                               ),
                             ),
                           ),
-                          const SizedBox(height: 18),
+                          SizedBox(height: 18.w),
                           // Welcome text
-                          const Text(
+                          Text(
                             'Your Privacy Matters',
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 20.sp,
                               fontWeight: FontWeight.w800,
                               color: Colors.black87,
                               letterSpacing: -0.5,
                             ),
                           ),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 10.w),
                           Text(
                             'At RiDeal Mobility Drive Pvt. Ltd. ("RiDeal", "we", "our", "us"), we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, store, share, and protect your data when you use the RiDeal Customer App, RiDeal Driver App, or related services.',
                             style: TextStyle(
-                              fontSize: 13,
-                              height: 1.5,
+                              fontSize: 13.sp,
+                              height: 1.5.w,
                               color: Colors.grey.shade600,
                             ),
                             textAlign: TextAlign.center,
                           ),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 10.w),
                           Text(
                             'You have complete control over your data, including the right to access, correct, and delete your information at any time.',
                             style: TextStyle(
-                              fontSize: 13,
-                              height: 1.5,
+                              fontSize: 13.sp,
+                              height: 1.5.w,
                               color: Colors.grey.shade800,
                               fontWeight: FontWeight.w600,
                             ),
                             textAlign: TextAlign.center,
                           ),
-                          const SizedBox(height: 14),
+                          SizedBox(height: 14.w),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
                             decoration: BoxDecoration(
                               color: const Color(0xFF0F9D58).withOpacity(0.08),
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(16.r),
                             ),
-                            child: const Text(
+                            child: Text(
                               'By using RiDeal, you agree to the practices described in this Privacy Policy',
                               style: TextStyle(
-                                fontSize: 11,
+                                fontSize: 11.sp,
                                 fontWeight: FontWeight.w700,
                                 color: Color(0xFF0F9D58),
                               ),
@@ -228,14 +229,14 @@ class PrivacyPolicyScreen extends StatelessWidget {
 
                     // Policy sections
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
                       child: Column(
                         children: _policyItems.map((item) {
                           return Container(
-                            margin: const EdgeInsets.only(bottom: 16),
+                            margin: EdgeInsets.only(bottom: 16.w),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20.r),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.04),
@@ -245,26 +246,26 @@ class PrivacyPolicyScreen extends StatelessWidget {
                               ],
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(18),
+                              padding: EdgeInsets.all(18.w),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
                                     children: [
                                       Container(
-                                        width: 4,
-                                        height: 20,
+                                        width: 4.w,
+                                        height: 20.w,
                                         decoration: BoxDecoration(
                                           color: const Color(0xFF0F9D58),
-                                          borderRadius: BorderRadius.circular(2),
+                                          borderRadius: BorderRadius.circular(2.r),
                                         ),
                                       ),
-                                      const SizedBox(width: 10),
+                                      SizedBox(width: 10.w),
                                       Expanded(
                                         child: Text(
                                           item['title']!,
-                                          style: const TextStyle(
-                                            fontSize: 15,
+                                          style: TextStyle(
+                                            fontSize: 15.sp,
                                             fontWeight: FontWeight.w700,
                                             color: Colors.black87,
                                           ),
@@ -272,12 +273,12 @@ class PrivacyPolicyScreen extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 10),
+                                  SizedBox(height: 10.w),
                                   Text(
                                     item['content']!,
                                     style: TextStyle(
-                                      fontSize: 13,
-                                      height: 1.5,
+                                      fontSize: 13.sp,
+                                      height: 1.5.w,
                                       color: Colors.grey.shade600,
                                     ),
                                   ),
@@ -291,11 +292,11 @@ class PrivacyPolicyScreen extends StatelessWidget {
 
                     // Contact Information Section
                     Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      padding: const EdgeInsets.all(18),
+                      margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.w),
+                      padding: EdgeInsets.all(18.w),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(20.r),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.04),
@@ -310,62 +311,62 @@ class PrivacyPolicyScreen extends StatelessWidget {
                           Row(
                             children: [
                               Container(
-                                width: 4,
-                                height: 20,
+                                width: 4.w,
+                                height: 20.w,
                                 decoration: BoxDecoration(
                                   color: const Color(0xFF0F9D58),
-                                  borderRadius: BorderRadius.circular(2),
+                                  borderRadius: BorderRadius.circular(2.r),
                                 ),
                               ),
-                              const SizedBox(width: 10),
-                              const Text(
+                              SizedBox(width: 10.w),
+                              Text(
                                 '14. Contact Information',
                                 style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 15.sp,
                                   fontWeight: FontWeight.w700,
                                   color: Colors.black87,
                                 ),
                               ),
                             ],
                           ),
-                          const SizedBox(height: 14),
+                          SizedBox(height: 14.w),
                           Text(
                             'If you have any questions, concerns, or requests regarding this Privacy Policy or your personal data, please contact us:',
                             style: TextStyle(
-                              fontSize: 13,
-                              height: 1.5,
+                              fontSize: 13.sp,
+                              height: 1.5.w,
                               color: Colors.grey.shade600,
                             ),
                           ),
-                          const SizedBox(height: 14),
+                          SizedBox(height: 14.w),
                           _buildContactItem(Icons.business_outlined, 'Company Name', 'RiDeal Mobility Drive Pvt. Ltd.'),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 10.w),
                           _buildContactItem(Icons.location_on_outlined, 'Address', 'Ward No. 24, Kalikapur, Palabani Chhak\nMayurbhanj, Baripada, Odisha – 757001\nIndia'),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 10.w),
                           _buildContactItem(Icons.email_outlined, 'Email', 'info@ridealmobility.com'),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 10.w),
                           _buildContactItem(Icons.phone_outlined, 'Contact', '+91-9040545756'),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 10.w),
                           _buildContactItem(Icons.public_outlined, 'Country', 'India'),
-                          const SizedBox(height: 14),
+                          SizedBox(height: 14.w),
                           Container(
-                            padding: const EdgeInsets.all(12),
+                            padding: EdgeInsets.all(12.w),
                             decoration: BoxDecoration(
                               color: const Color(0xFF0F9D58).withOpacity(0.06),
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(16.r),
                               border: Border.all(color: const Color(0xFF0F9D58).withOpacity(0.2)),
                             ),
                             child: Row(
                               children: [
-                                const Icon(Icons.info_outline_rounded, color: Color(0xFF0F9D58), size: 18),
-                                const SizedBox(width: 10),
+                                Icon(Icons.info_outline_rounded, color: Color(0xFF0F9D58), size: 18),
+                                SizedBox(width: 10.w),
                                 Expanded(
                                   child: Text(
                                     'For data deletion or correction requests, use the "Delete Account" option in Settings or email us directly.',
                                     style: TextStyle(
-                                      fontSize: 12,
+                                      fontSize: 12.sp,
                                       color: Colors.green.shade800,
-                                      height: 1.4,
+                                      height: 1.4.w,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
@@ -379,15 +380,15 @@ class PrivacyPolicyScreen extends StatelessWidget {
 
                     // Footer with compliance badges
                     Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      padding: const EdgeInsets.all(20),
+                      margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.w),
+                      padding: EdgeInsets.all(20.w),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [const Color(0xFF0F9D58), Colors.green.shade400],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
-                        borderRadius: BorderRadius.circular(24),
+                        borderRadius: BorderRadius.circular(24.r),
                         boxShadow: [
                           BoxShadow(
                             color: const Color(0xFF0F9D58).withOpacity(0.2),
@@ -398,31 +399,31 @@ class PrivacyPolicyScreen extends StatelessWidget {
                       ),
                       child: Column(
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.verified_user_outlined,
                             color: Colors.white,
                             size: 36,
                           ),
-                          const SizedBox(height: 12),
-                          const Text(
+                          SizedBox(height: 12.w),
+                          Text(
                             'Your Privacy, Our Priority',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 18,
+                              fontSize: 18.sp,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(height: 8),
-                          const Text(
+                          SizedBox(height: 8.w),
+                          Text(
                             'We use industry-standard security measures and give you full control over your data. Your information is never sold or used for purposes beyond providing you with safe, reliable mobility services.',
                             style: TextStyle(
                               color: Colors.white70,
-                              fontSize: 13,
-                              height: 1.4,
+                              fontSize: 13.sp,
+                              height: 1.4.w,
                             ),
                             textAlign: TextAlign.center,
                           ),
-                          const SizedBox(height: 18),
+                          SizedBox(height: 18.w),
                           Wrap(
                             alignment: WrapAlignment.center,
                             spacing: 8,
@@ -456,19 +457,19 @@ class PrivacyPolicyScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Icon(icon, size: 18, color: const Color(0xFF0F9D58)),
-        const SizedBox(width: 8),
+        SizedBox(width: 8.w),
         Expanded(
           child: RichText(
             text: TextSpan(
               style: TextStyle(
-                fontSize: 13,
+                fontSize: 13.sp,
                 color: Colors.grey.shade700,
-                height: 1.4,
+                height: 1.4.w,
               ),
               children: [
                 TextSpan(
                   text: '$label: ',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.w700,
                     color: Colors.black87,
                   ),
@@ -484,20 +485,20 @@ class PrivacyPolicyScreen extends StatelessWidget {
 
   Widget _buildComplianceBadge(String text) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.w),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.15),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.r),
         border: Border.all(
           color: Colors.white.withOpacity(0.25),
-          width: 1,
+          width: 1.w,
         ),
       ),
       child: Text(
         text,
-        style: const TextStyle(
+        style: TextStyle(
           color: Colors.white,
-          fontSize: 10,
+          fontSize: 10.sp,
           fontWeight: FontWeight.w600,
         ),
       ),

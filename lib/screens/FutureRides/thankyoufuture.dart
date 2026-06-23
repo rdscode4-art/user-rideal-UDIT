@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:rideal/screens/dashboard/BottomNavigation.dart';
 
@@ -23,17 +24,17 @@ class _ThankYouFutureState extends State<ThankYouFuture> {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.only(top: 150),
+              padding: EdgeInsets.only(top: 150.w),
               child: Image.asset("assets/images/thankyou.png"),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 20.w),
             Container(
               child: Text(
                 "Thank you",
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 22),
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 22.sp),
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 10.w),
             Container(
               child: Text(
                 "Your booking has been placed sent to \n Md. Sharif Ahmed",

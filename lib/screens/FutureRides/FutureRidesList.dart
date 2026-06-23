@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:rideal/screens/FutureRides/BookFuture.dart';
 import 'package:rideal/widget/rideoptioncard.dart';
@@ -21,13 +22,13 @@ class _RideListState extends State<RideList> {
           children: [
             // Custom Floating Header Row
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+              padding: EdgeInsets.fromLTRB(16, 8, 16, 12),
               child: Row(
                 children: [
                   GestureDetector(
                     onTap: () => Navigator.of(context).pop(),
                     child: Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10.w),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,
@@ -39,14 +40,14 @@ class _RideListState extends State<RideList> {
                           ),
                         ],
                       ),
-                      child: const Icon(Icons.arrow_back, color: Colors.black87, size: 20),
+                      child: Icon(Icons.arrow_back, color: Colors.black87, size: 20),
                     ),
                   ),
-                  const SizedBox(width: 16),
-                  const Text(
+                  SizedBox(width: 16.w),
+                  Text(
                     "Available Rides",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
@@ -60,11 +61,11 @@ class _RideListState extends State<RideList> {
                   ? Center(
                       child: Text(
                         "No rides available",
-                        style: TextStyle(color: Colors.grey.shade600, fontSize: 16),
+                        style: TextStyle(color: Colors.grey.shade600, fontSize: 16.sp),
                       ),
                     )
                   : ListView.builder(
-                      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+                      padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 8.w),
                       itemCount: widget.rides.length,
                       itemBuilder: (context, index) {
                         final ride = widget.rides[index];
@@ -74,7 +75,7 @@ class _RideListState extends State<RideList> {
                           startTime: ride['time'] ?? '',
                           from: ride['fromLocation']?['address'] ?? 'Unknown location',
                           to: ride['toLocation']?['address'] ?? 'Unknown location',
-                          extraWidget: const SizedBox.shrink(),
+                          extraWidget: SizedBox.shrink(),
                         );
                       },
                     ),

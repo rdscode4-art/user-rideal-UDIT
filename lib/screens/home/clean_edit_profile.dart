@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -62,7 +63,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
       ),
       builder: (BuildContext context) {
         return SafeArea(
@@ -70,27 +71,27 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                width: 40,
-                height: 4,
-                margin: EdgeInsets.symmetric(vertical: 10),
+                width: 40.w,
+                height: 4.w,
+                margin: EdgeInsets.symmetric(vertical: 10.w),
                 decoration: BoxDecoration(
                   color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(2),
+                  borderRadius: BorderRadius.circular(2.r),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(16),
+                padding: EdgeInsets.all(16.w),
                 child: Text(
                   "Select Profile Image",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
                 ),
               ),
               ListTile(
                 leading: Container(
-                  padding: EdgeInsets.all(8),
+                  padding: EdgeInsets.all(8.w),
                   decoration: BoxDecoration(
                     color: Colors.green.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: Icon(Icons.camera_alt, color: Colors.green),
                 ),
@@ -103,10 +104,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
               ListTile(
                 leading: Container(
-                  padding: EdgeInsets.all(8),
+                  padding: EdgeInsets.all(8.w),
                   decoration: BoxDecoration(
                     color: Colors.blue.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: Icon(Icons.photo_library, color: Colors.blue),
                 ),
@@ -117,7 +118,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   _pickImageFromSource(ImageSource.gallery);
                 },
               ),
-              SizedBox(height: 16),
+              SizedBox(height: 16.w),
             ],
           ),
         );
@@ -298,7 +299,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             content: Row(
               children: [
                 CircularProgressIndicator(),
-                SizedBox(width: 16),
+                SizedBox(width: 16.w),
                 Text("Saving changes..."),
               ],
             ),
@@ -411,7 +412,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(16.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -429,12 +430,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     bottom: 0,
                     right: 0,
                     child: Container(
-                      width: 40,
-                      height: 40,
+                      width: 40.w,
+                      height: 40.w,
                       decoration: BoxDecoration(
                         color: Colors.green.shade600,
                         shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white, width: 3),
+                        border: Border.all(color: Colors.white, width: 3.w),
                       ),
                       child: IconButton(
                         icon: Icon(
@@ -469,19 +470,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
             ),
 
-            SizedBox(height: 16),
+            SizedBox(height: 16.w),
 
             // Image upload button
             if (selectedImageFile != null)
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 8.0),
+                padding: EdgeInsets.symmetric(vertical: 8.0.w),
                 child: ElevatedButton.icon(
                   onPressed: isUploadingImage ? null : _uploadProfileImage,
                   icon:
                       isUploadingImage
                           ? SizedBox(
-                            width: 16,
-                            height: 16,
+                            width: 16.w,
+                            height: 16.w,
                             child: CircularProgressIndicator(
                               strokeWidth: 2,
                               valueColor: AlwaysStoppedAnimation<Color>(
@@ -492,20 +493,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           : Icon(Icons.upload, size: 18),
                   label: Text(
                     isUploadingImage ? "Uploading..." : "Upload Image",
-                    style: TextStyle(fontSize: 14),
+                    style: TextStyle(fontSize: 14.sp),
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green.shade600,
                     foregroundColor: Colors.white,
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(8.r),
                     ),
                   ),
                 ),
               ),
 
-            SizedBox(height: 32),
+            SizedBox(height: 32.w),
 
             // Form Fields
             TextField(
@@ -514,19 +515,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 labelText: "Full Name",
                 prefixIcon: Icon(Icons.person),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                   borderSide: BorderSide(
                     color: Colors.green.shade600,
-                    width: 2,
+                    width: 2.w,
                   ),
                 ),
               ),
             ),
 
-            SizedBox(height: 16),
+            SizedBox(height: 16.w),
 
             TextField(
               controller: phoneController,
@@ -534,20 +535,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 labelText: "Phone Number",
                 prefixIcon: Icon(Icons.phone),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                   borderSide: BorderSide(
                     color: Colors.green.shade600,
-                    width: 2,
+                    width: 2.w,
                   ),
                 ),
               ),
               keyboardType: TextInputType.phone,
             ),
 
-            SizedBox(height: 32),
+            SizedBox(height: 32.w),
 
             // Save Button
             SizedBox(
@@ -557,15 +558,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green.shade600,
                   foregroundColor: Colors.white,
-                  padding: EdgeInsets.symmetric(vertical: 16),
+                  padding: EdgeInsets.symmetric(vertical: 16.w),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                   ),
                   elevation: 2,
                 ),
                 child: Text(
                   "Save Changes",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
                 ),
               ),
             ),

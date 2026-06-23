@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
@@ -250,8 +251,8 @@ class _MultiStopRoutePlannerState extends State<MultiStopRoutePlanner> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Location Service Disabled"),
-          content: const Text("Please enable location services to automatically set your pickup location."),
+          title: Text("Location Service Disabled"),
+          content: Text("Please enable location services to automatically set your pickup location."),
           actions: [
             TextButton(
               onPressed: () {
@@ -260,7 +261,7 @@ class _MultiStopRoutePlannerState extends State<MultiStopRoutePlanner> {
                   controllers[0].text = "Enter pickup location manually";
                 });
               },
-              child: const Text("Cancel"),
+              child: Text("Cancel"),
             ),
             TextButton(
               onPressed: () async {
@@ -269,7 +270,7 @@ class _MultiStopRoutePlannerState extends State<MultiStopRoutePlanner> {
                 // Retry after user returns from settings
                 _setCurrentLocationAsPickup();
               },
-              child: const Text("Open Settings"),
+              child: Text("Open Settings"),
             ),
           ],
         );
@@ -282,8 +283,8 @@ class _MultiStopRoutePlannerState extends State<MultiStopRoutePlanner> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Location Permission Required"),
-          content: const Text("Location permission is needed to automatically set your pickup location. You can grant permission or enter the location manually."),
+          title: Text("Location Permission Required"),
+          content: Text("Location permission is needed to automatically set your pickup location. You can grant permission or enter the location manually."),
           actions: [
             TextButton(
               onPressed: () {
@@ -292,14 +293,14 @@ class _MultiStopRoutePlannerState extends State<MultiStopRoutePlanner> {
                   controllers[0].text = "Enter pickup location manually";
                 });
               },
-              child: const Text("Enter Manually"),
+              child: Text("Enter Manually"),
             ),
             TextButton(
               onPressed: () async {
                 Navigator.of(context).pop();
                 await Geolocator.openAppSettings();
               },
-              child: const Text("Open Settings"),
+              child: Text("Open Settings"),
             ),
           ],
         );
@@ -508,10 +509,10 @@ class _MultiStopRoutePlannerState extends State<MultiStopRoutePlanner> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+          margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.w),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(20.r),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.03),
@@ -523,12 +524,12 @@ class _MultiStopRoutePlannerState extends State<MultiStopRoutePlanner> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(16.w),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 0),
+                  padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 0),
                   decoration: BoxDecoration(
                     color: Colors.grey.shade50,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                     border: Border.all(
                       color: hasValidLocation ? const Color(0xFF0F9D58).withOpacity(0.3) : Colors.grey.shade200,
                     ),
@@ -541,19 +542,19 @@ class _MultiStopRoutePlannerState extends State<MultiStopRoutePlanner> {
                           onChanged: (value) => _onSearchChanged(value, index),
                           enabled: !(_isLoadingLocation && isPickup),
                           textAlignVertical: TextAlignVertical.center,
-                          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                          style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
                           decoration: InputDecoration(
                             hintText: isPickup ? "Pickup location" : "Destination ${index}",
-                            hintStyle: const TextStyle(color: Colors.black38, fontSize: 14),
+                            hintStyle: TextStyle(color: Colors.black38, fontSize: 14.sp),
                             border: InputBorder.none,
-                            contentPadding: const EdgeInsets.symmetric(vertical: 14),
+                            contentPadding: EdgeInsets.symmetric(vertical: 14.w),
                             isDense: true,
                             prefixIcon: _isLoadingLocation && isPickup
-                                ? const Padding(
-                                    padding: EdgeInsets.all(14),
+                                ? Padding(
+                                    padding: EdgeInsets.all(14.w),
                                     child: SizedBox(
-                                      width: 16,
-                                      height: 16,
+                                      width: 16.w,
+                                      height: 16.w,
                                       child: CircularProgressIndicator(strokeWidth: 2, color: Color(0xFF0F9D58)),
                                     ),
                                   )
@@ -566,19 +567,19 @@ class _MultiStopRoutePlannerState extends State<MultiStopRoutePlanner> {
                         ),
                       ),
                       if (hasValidLocation)
-                        const Padding(
-                          padding: EdgeInsets.only(right: 12),
+                        Padding(
+                          padding: EdgeInsets.only(right: 12.w),
                           child: Icon(Icons.check_circle, color: Color(0xFF0F9D58), size: 16),
                         ),
                       if (isPickup && !_isLoadingLocation)
                         IconButton(
-                          icon: const Icon(Icons.my_location, color: Colors.blueAccent, size: 18),
+                          icon: Icon(Icons.my_location, color: Colors.blueAccent, size: 18),
                           onPressed: _setCurrentLocationAsPickup,
                           tooltip: "Use current location",
                         ),
                       if (!isPickup)
                         IconButton(
-                          icon: const Icon(Icons.close, color: Colors.black45, size: 18),
+                          icon: Icon(Icons.close, color: Colors.black45, size: 18),
                           onPressed: () => removeStop(index),
                           tooltip: "Remove stop",
                         ),
@@ -597,15 +598,15 @@ class _MultiStopRoutePlannerState extends State<MultiStopRoutePlanner> {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: predictions[index].length > 5 ? 5 : predictions[index].length,
-                    separatorBuilder: (context, idx) => Divider(height: 1, color: Colors.grey.shade100),
+                    separatorBuilder: (context, idx) => Divider(height: 1.w, color: Colors.grey.shade100),
                     itemBuilder: (context, idx) {
                       final prediction = predictions[index][idx];
                       return ListTile(
                         visualDensity: VisualDensity.compact,
-                        leading: const Icon(Icons.location_on_outlined, color: Colors.black54, size: 18),
+                        leading: Icon(Icons.location_on_outlined, color: Colors.black54, size: 18),
                         title: Text(
                           prediction["description"] ?? "",
-                          style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                          style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500),
                         ),
                         onTap: () => _selectPlace(prediction, index),
                       );
@@ -630,7 +631,7 @@ class _MultiStopRoutePlannerState extends State<MultiStopRoutePlanner> {
               children: [
                 // Custom Header
                 Padding(
-                  padding: const EdgeInsets.only(top: 8, left: 16, right: 16, bottom: 20),
+                  padding: EdgeInsets.only(top: 8.w, left: 16.w, right: 16.w, bottom: 20.w),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -639,7 +640,7 @@ class _MultiStopRoutePlannerState extends State<MultiStopRoutePlanner> {
                           GestureDetector(
                             onTap: () => Navigator.pop(context),
                             child: Container(
-                              padding: const EdgeInsets.all(8),
+                              padding: EdgeInsets.all(8.w),
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 shape: BoxShape.circle,
@@ -651,14 +652,14 @@ class _MultiStopRoutePlannerState extends State<MultiStopRoutePlanner> {
                                   ),
                                 ],
                               ),
-                              child: const Icon(Icons.arrow_back, color: Colors.black87, size: 18),
+                              child: Icon(Icons.arrow_back, color: Colors.black87, size: 18),
                             ),
                           ),
-                          const SizedBox(width: 12),
-                          const Text(
+                          SizedBox(width: 12.w),
+                          Text(
                             "Multi-Stop Route",
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 18.sp,
                               fontWeight: FontWeight.w700,
                               letterSpacing: -0.3,
                               color: Colors.black87,
@@ -667,10 +668,10 @@ class _MultiStopRoutePlannerState extends State<MultiStopRoutePlanner> {
                         ],
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.w),
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(20.r),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.04),
@@ -682,7 +683,7 @@ class _MultiStopRoutePlannerState extends State<MultiStopRoutePlanner> {
                         child: Text(
                           "${controllers.length}/4 Stops",
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w700,
                             color: Colors.grey.shade700,
                           ),
@@ -693,7 +694,7 @@ class _MultiStopRoutePlannerState extends State<MultiStopRoutePlanner> {
                 ),
                 Expanded(
                   child: ListView.builder(
-                    padding: const EdgeInsets.only(bottom: 120),
+                    padding: EdgeInsets.only(bottom: 120.w),
                     itemCount: controllers.length,
                     itemBuilder: (context, index) => _buildStopInput(index),
                   ),
@@ -711,9 +712,9 @@ class _MultiStopRoutePlannerState extends State<MultiStopRoutePlanner> {
                   filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                   child: Container(
                     padding: EdgeInsets.only(
-                      top: 16,
-                      left: 20,
-                      right: 20,
+                      top: 16.w,
+                      left: 20.w,
+                      right: 20.w,
                       bottom: MediaQuery.of(context).padding.bottom + 16,
                     ),
                     decoration: BoxDecoration(
@@ -734,17 +735,17 @@ class _MultiStopRoutePlannerState extends State<MultiStopRoutePlanner> {
                           GestureDetector(
                             onTap: addStop,
                             child: Padding(
-                              padding: const EdgeInsets.only(bottom: 12),
+                              padding: EdgeInsets.only(bottom: 12.w),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Icon(Icons.add_circle, color: Color(0xFF0F9D58), size: 20),
-                                  const SizedBox(width: 8),
+                                  Icon(Icons.add_circle, color: Color(0xFF0F9D58), size: 20),
+                                  SizedBox(width: 8.w),
                                   Text(
                                     "Add another stop (${controllers.length - 1}/3)",
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       color: Color(0xFF0F9D58),
-                                      fontSize: 14,
+                                      fontSize: 14.sp,
                                       fontWeight: FontWeight.w700,
                                     ),
                                   ),
@@ -756,10 +757,10 @@ class _MultiStopRoutePlannerState extends State<MultiStopRoutePlanner> {
                           onTap: _isLoading ? null : startRoute,
                           child: Container(
                             width: double.infinity,
-                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            padding: EdgeInsets.symmetric(vertical: 14.w),
                             decoration: BoxDecoration(
                               color: const Color(0xFF0F9D58),
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(16.r),
                               boxShadow: [
                                 BoxShadow(
                                   color: const Color(0xFF0F9D58).withOpacity(0.3),
@@ -769,23 +770,23 @@ class _MultiStopRoutePlannerState extends State<MultiStopRoutePlanner> {
                               ],
                             ),
                             child: _isLoading
-                                ? const Center(
+                                ? Center(
                                     child: SizedBox(
-                                      width: 20,
-                                      height: 20,
+                                      width: 20.w,
+                                      height: 20.w,
                                       child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
                                     ),
                                   )
-                                : const Row(
+                                : Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Icon(Icons.route, color: Colors.white, size: 18),
-                                      SizedBox(width: 8),
+                                      SizedBox(width: 8.w),
                                       Text(
                                         "Review Route",
                                         style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 15,
+                                          fontSize: 15.sp,
                                           fontWeight: FontWeight.w700,
                                         ),
                                       ),

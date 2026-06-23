@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rideal/authservices.dart';
 import 'package:rideal/screens/dashboard/BottomNavigation.dart';
 import 'package:flutter/material.dart';
@@ -44,10 +45,10 @@ class _RatingScreenState extends State<RatingScreen> {
     if (_rating == 0) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text("❌ Please select a rating"),
+          content: Text("❌ Please select a rating"),
           backgroundColor: Colors.red.shade600,
           behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
         ),
       );
       return;
@@ -57,10 +58,10 @@ class _RatingScreenState extends State<RatingScreen> {
     if (activeRideId.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text("❌ Ride ID not found"),
+          content: Text("❌ Ride ID not found"),
           backgroundColor: Colors.red.shade600,
           behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
         ),
       );
       return;
@@ -79,10 +80,10 @@ class _RatingScreenState extends State<RatingScreen> {
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text("💚 Rating submitted successfully!"),
+          content: Text("💚 Rating submitted successfully!"),
           backgroundColor: brandGreen,
           behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
         ),
       );
 
@@ -99,7 +100,7 @@ class _RatingScreenState extends State<RatingScreen> {
           content: Text("❌ Failed to submit rating: $e"),
           backgroundColor: Colors.red.shade600,
           behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
         ),
       );
     }
@@ -131,14 +132,14 @@ class _RatingScreenState extends State<RatingScreen> {
           children: [
             // Custom Floating Header
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
+              padding: EdgeInsets.fromLTRB(20, 12, 20, 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
                     child: Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10.w),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,
@@ -150,19 +151,19 @@ class _RatingScreenState extends State<RatingScreen> {
                           ),
                         ],
                       ),
-                      child: const Icon(Icons.arrow_back, color: Colors.black87, size: 20),
+                      child: Icon(Icons.arrow_back, color: Colors.black87, size: 20),
                     ),
                   ),
-                  const Text(
+                  Text(
                     "Rate Your Ride",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.w800,
                       color: Colors.black87,
                       letterSpacing: -0.5,
                     ),
                   ),
-                  const SizedBox(width: 40), // spacer for balance
+                  SizedBox(width: 40.w), // spacer for balance
                 ],
               ),
             ),
@@ -174,11 +175,11 @@ class _RatingScreenState extends State<RatingScreen> {
                   children: [
                     // Floating Card Container
                     Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      padding: const EdgeInsets.all(24),
+                      margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.w),
+                      padding: EdgeInsets.all(24.w),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(24),
+                        borderRadius: BorderRadius.circular(24.r),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.03),
@@ -192,7 +193,7 @@ class _RatingScreenState extends State<RatingScreen> {
                           // Dynamic sentiment icon with premium glow
                           AnimatedContainer(
                             duration: const Duration(milliseconds: 300),
-                            padding: const EdgeInsets.all(18),
+                            padding: EdgeInsets.all(18.w),
                             decoration: BoxDecoration(
                               color: _rating == 5
                                   ? Colors.green.shade50
@@ -221,28 +222,28 @@ class _RatingScreenState extends State<RatingScreen> {
                               size: 44,
                             ),
                           ),
-                          const SizedBox(height: 20),
+                          SizedBox(height: 20.w),
 
-                          const Text(
+                          Text(
                             "How was your ride?",
                             style: TextStyle(
-                              fontSize: 22,
+                              fontSize: 22.sp,
                               fontWeight: FontWeight.w800,
                               color: Colors.black87,
                               letterSpacing: -0.5,
                             ),
                           ),
-                          const SizedBox(height: 6),
+                          SizedBox(height: 6.w),
                           Text(
                             "Your feedback helps us improve",
                             style: TextStyle(
-                              fontSize: 13,
+                              fontSize: 13.sp,
                               color: Colors.grey.shade500,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
 
-                          const SizedBox(height: 28),
+                          SizedBox(height: 28.w),
 
                           // Stars Rating Selector
                           Row(
@@ -256,7 +257,7 @@ class _RatingScreenState extends State<RatingScreen> {
                                   });
                                 },
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                                  padding: EdgeInsets.symmetric(horizontal: 6.w),
                                   child: AnimatedScale(
                                     scale: isSelected ? 1.15 : 1.0,
                                     duration: const Duration(milliseconds: 150),
@@ -271,7 +272,7 @@ class _RatingScreenState extends State<RatingScreen> {
                             }),
                           ),
 
-                          const SizedBox(height: 12),
+                          SizedBox(height: 12.w),
 
                           // Dynamic rating label
                           AnimatedSwitcher(
@@ -280,7 +281,7 @@ class _RatingScreenState extends State<RatingScreen> {
                               getRatingText(_rating),
                               key: ValueKey<int>(_rating),
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 14.sp,
                                 fontWeight: FontWeight.w800,
                                 color: _rating > 0 ? Colors.amber.shade800 : Colors.grey.shade400,
                                 letterSpacing: 0.2,
@@ -288,7 +289,7 @@ class _RatingScreenState extends State<RatingScreen> {
                             ),
                           ),
 
-                          const SizedBox(height: 28),
+                          SizedBox(height: 28.w),
 
                           // Feedback input field with active highlight
                           Focus(
@@ -299,7 +300,7 @@ class _RatingScreenState extends State<RatingScreen> {
                                   duration: const Duration(milliseconds: 200),
                                   decoration: BoxDecoration(
                                     color: const Color(0xFFF8F9FA),
-                                    borderRadius: BorderRadius.circular(20),
+                                    borderRadius: BorderRadius.circular(20.r),
                                     border: Border.all(
                                       color: isFocused ? brandGreen : Colors.grey.shade100,
                                       width: isFocused ? 1.5 : 1,
@@ -308,8 +309,8 @@ class _RatingScreenState extends State<RatingScreen> {
                                   child: TextField(
                                     controller: _feedbackController,
                                     maxLines: 4,
-                                    style: const TextStyle(
-                                      fontSize: 14,
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
                                       fontWeight: FontWeight.w500,
                                       color: Colors.black87,
                                     ),
@@ -317,11 +318,11 @@ class _RatingScreenState extends State<RatingScreen> {
                                       hintText: "Write feedback (optional)...",
                                       hintStyle: TextStyle(
                                         color: Colors.grey.shade400,
-                                        fontSize: 13,
+                                        fontSize: 13.sp,
                                         fontWeight: FontWeight.w500,
                                       ),
                                       border: InputBorder.none,
-                                      contentPadding: const EdgeInsets.all(16),
+                                      contentPadding: EdgeInsets.all(16.w),
                                     ),
                                   ),
                                 );
@@ -332,37 +333,37 @@ class _RatingScreenState extends State<RatingScreen> {
                       ),
                     ),
 
-                    const SizedBox(height: 20),
+                    SizedBox(height: 20.w),
 
                     // Submit Button
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
                       child: SizedBox(
                         width: double.infinity,
-                        height: 56,
+                        height: 56.w,
                         child: ElevatedButton(
                           onPressed: _isLoading ? null : _submitRating,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: brandGreen,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(28),
+                              borderRadius: BorderRadius.circular(28.r),
                             ),
                             elevation: 0,
                           ),
                           child: _isLoading
-                              ? const SizedBox(
-                                  width: 22,
-                                  height: 22,
+                              ? SizedBox(
+                                  width: 22.w,
+                                  height: 22.w,
                                   child: CircularProgressIndicator(
                                     strokeWidth: 2.5,
                                     valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                                   ),
                                 )
-                              : const Text(
+                              : Text(
                                   "Submit Rating",
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 16.sp,
                                     fontWeight: FontWeight.bold,
                                     letterSpacing: 0.2,
                                   ),
@@ -371,7 +372,7 @@ class _RatingScreenState extends State<RatingScreen> {
                       ),
                     ),
 
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12.w),
 
                     // Skip button
                     TextButton(
@@ -384,12 +385,12 @@ class _RatingScreenState extends State<RatingScreen> {
                         "Skip for now",
                         style: TextStyle(
                           color: Colors.grey.shade500,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
                     ),
-                    const SizedBox(height: 30),
+                    SizedBox(height: 30.w),
                   ],
                 ),
               ),

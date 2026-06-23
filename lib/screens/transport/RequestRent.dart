@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:rideal/screens/transport/thankyou.dart';
 class RequestSentScreen extends StatefulWidget {
@@ -13,22 +14,22 @@ class _RequestSentScreenState extends State<RequestSentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Request for Rent',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 25),),
+        title: Text('Request for Rent',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 25.sp),),
       ),
       body: SingleChildScrollView(
-      child:  Padding(padding: EdgeInsets.all(16.0),
+      child:  Padding(padding: EdgeInsets.all(16.0.w),
       child: Column(
         children: [
-          SizedBox(height: 20,),
+          SizedBox(height: 20.w,),
             locationInfo(),
-            SizedBox(height: 18),
+            SizedBox(height: 18.w),
             carInfoCard(),
-            SizedBox(height: 16),
+            SizedBox(height: 16.w),
             datetimeFields(),
             promoCodeInput(),
-            SizedBox(height: 40),
+            SizedBox(height: 40.w),
             paymentMethodSelector(context),
-            SizedBox(height: 30),
+            SizedBox(height: 30.w),
             // Spacer(),
             confirmButton(context),  
         ],
@@ -41,14 +42,14 @@ class _RequestSentScreenState extends State<RequestSentScreen> {
 Widget locationInfo() {
     return Row(
       children: [
-        Container(child: Image.asset("assets/images/location.png",height: 120,width: 60,)),  
+        Container(child: Image.asset("assets/images/location.png",height: 120.w,width: 60.w,)),  
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Current Location", style: TextStyle(fontWeight:FontWeight.w600,color: Colors.grey.shade800,fontSize: 21)),
+            Text("Current Location", style: TextStyle(fontWeight:FontWeight.w600,color: Colors.grey.shade800,fontSize: 21.sp)),
             Text("Homitech Space, Santa Ana, USA - 1.3km",style: TextStyle(color: Colors.grey),),
-            SizedBox(height: 25),
-            Text("Office", style: TextStyle(fontWeight: FontWeight.w600,color: Colors.grey.shade800,fontSize: 21)),
+            SizedBox(height: 25.w),
+            Text("Office", style: TextStyle(fontWeight: FontWeight.w600,color: Colors.grey.shade800,fontSize: 21.sp)),
             Text("Homitech Space, Santa Ana, USA - 1.3km",style: TextStyle(color: Colors.grey),)
           ],
         ),
@@ -57,15 +58,15 @@ Widget locationInfo() {
   }
 Widget carInfoCard() {
   return Container(
-   height: 90,
+   height: 90.w,
     decoration: BoxDecoration(
       color: Color(0xFFFFFAF0),
-      borderRadius: BorderRadius.all(Radius.circular(5)),
+      borderRadius: BorderRadius.all(Radius.circular(5.r)),
       border: Border.all(color: Colors.orange)
       
     ),
     child: Padding(
-      padding: const EdgeInsets.all(12.0),
+      padding: EdgeInsets.all(12.0.w),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -77,23 +78,23 @@ Widget carInfoCard() {
                   "Mustang Shelby GT",
                   style: TextStyle(
                     color: Colors.grey.shade700,
-                    fontSize: 22,
+                    fontSize: 22.sp,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                SizedBox(height: 4),
+                SizedBox(height: 4.w),
                 Row(
                   children: [
                     Icon(Icons.star, color: Colors.amber, size: 20),
-                    SizedBox(width: 4),
-                    Text("4.5 (321)", style: TextStyle(color: Colors.grey,fontSize: 18)),
+                    SizedBox(width: 4.w),
+                    Text("4.5 (321)", style: TextStyle(color: Colors.grey,fontSize: 18.sp)),
                   ],
                 )
               ],
             ),
           ),
-          SizedBox(width: 10),
-          Image.asset("assets/images/mustang1.png", height: 85, width: 90),
+          SizedBox(width: 10.w),
+          Image.asset("assets/images/mustang1.png", height: 85.w, width: 90.w),
         ],
       ),
     ),
@@ -107,22 +108,22 @@ Widget carInfoCard() {
           child: TextFormField(
             decoration: InputDecoration(
               hintText: 'Date',
-              hintStyle: TextStyle(color: Colors.grey,fontSize: 20),
+              hintStyle: TextStyle(color: Colors.grey,fontSize: 20.sp),
               // prefixIcon: Icon(Icons.calendar_today),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8),borderSide: BorderSide(color: Colors.grey.shade200,width: 2)),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r),borderSide: BorderSide(color: Colors.grey.shade200,width: 2.w)),
               
               
             ),
           ),
         ),
-        SizedBox(width: 15),
+        SizedBox(width: 15.w),
         Expanded(
           child: TextFormField(
             decoration: InputDecoration(
               hintText: 'Time',
-              hintStyle: TextStyle(color: Colors.grey,fontSize: 20),
+              hintStyle: TextStyle(color: Colors.grey,fontSize: 20.sp),
               // prefixIcon: Icon(Icons.access_time),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8),borderSide: BorderSide(color: Colors.grey.shade200,width: 2)),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r),borderSide: BorderSide(color: Colors.grey.shade200,width: 2.w)),
             ),
           ),
         ),
@@ -131,12 +132,12 @@ Widget carInfoCard() {
   }
   Widget promoCodeInput() {
     return Padding(
-        padding: const EdgeInsets.only(top: 12),
+        padding: EdgeInsets.only(top: 12.w),
         child: TextFormField(
         decoration: InputDecoration(
-          hintStyle: TextStyle(color: Colors.grey,fontSize: 20),
+          hintStyle: TextStyle(color: Colors.grey,fontSize: 20.sp),
           hintText: 'Enter Promo Code',
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8),borderSide: BorderSide(color: Colors.grey.shade200,width: 2)),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r),borderSide: BorderSide(color: Colors.grey.shade200,width: 2.w)),
         ),
       ),
     );
@@ -151,22 +152,22 @@ Widget paymentMethodSelector(BuildContext context) {
             children: [
               Text("Select payment method",style: TextStyle(
                           color: Colors.grey.shade700,
-                          fontSize: 20,
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.w600,
                         ),),
                         // TextButton(
                         //   onPressed: (){
                         // Navigator.push(context, MaterialPageRoute(builder:(context)=>SelectPayment(paymentOptionWidget: paymentMethodSelector(context))));
-                        // }, child: Text("View All",style: TextStyle(color: Colors.amber,fontSize: 18,fontWeight: FontWeight.bold),))
+                        // }, child: Text("View All",style: TextStyle(color: Colors.amber,fontSize: 18.sp,fontWeight: FontWeight.bold),))
             ],
           ),
-          SizedBox(height: 25),
+          SizedBox(height: 25.w),
           // paymentOption("assets/images/visa.png","Credit Card", "**** 8970"),
-          // SizedBox(height: 15),
+          // SizedBox(height: 15.w),
           paymentOption("assets/images/mastercard.png","UPI", "Pay Online"),
-          SizedBox(height: 15),
+          SizedBox(height: 15.w),
           paymentOption("assets/images/wallet.png","My Wallet", "\$530.00"),
-          SizedBox(height: 15),
+          SizedBox(height: 15.w),
           paymentOption("assets/images/cash.png","Cash", "Pay at pickup"),
         ],
       ),
@@ -176,25 +177,25 @@ Widget paymentMethodSelector(BuildContext context) {
   Widget paymentOption(String imagepath,String title, String subtitle) {
     String selectedPayment = 'Visa';
     return Container(
-      height: 80,
+      height: 80.w,
       decoration: BoxDecoration(
       color: selectedPayment == title ?Colors.green.shade50:Colors.grey.shade200,
-      borderRadius: BorderRadius.all(Radius.circular(5)),
+      borderRadius: BorderRadius.all(Radius.circular(5.r)),
       border: Border.all(color: selectedPayment == title ? Colors.green.shade700 : Colors.grey.shade300),
       
     ),
     child: Padding(
-      padding: const EdgeInsets.only(left: 12.0,top: 10),
+      padding: EdgeInsets.only(left: 12.0.w,top: 10.w),
       child: Row(
           children: [
-            Image.asset(imagepath, height: 90, width: 70,fit: BoxFit.fill,),
-            SizedBox(width: 16),
+            Image.asset(imagepath, height: 90.w, width: 70.w,fit: BoxFit.fill,),
+            SizedBox(width: 16.w),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-                  SizedBox(height: 4),
+                  Text(title, style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600)),
+                  SizedBox(height: 4.w),
                   Text(subtitle, style: TextStyle(color: Colors.grey)),
                 ],
               ),
@@ -220,7 +221,7 @@ Widget confirmButton(BuildContext context) {
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.green[700],
         minimumSize: Size(double.infinity, 70),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r))
       ),
       onPressed: () {
       //   // Add booking logic here
@@ -229,6 +230,6 @@ Widget confirmButton(BuildContext context) {
         );
         Navigator.push(context, MaterialPageRoute(builder: (context)=>ThankYou()));
        },
-      child: Text("Confirm Booking", style: TextStyle(fontSize: 18,color: Colors.white)),
+      child: Text("Confirm Booking", style: TextStyle(fontSize: 18.sp,color: Colors.white)),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 // Save this file as: lib/screens/hiredriver/hiredrivertrackingscreen.dart
 import 'package:flutter/material.dart';
 import 'package:rideal/screens/dashboard/BottomNavigation.dart';
@@ -165,16 +166,16 @@ class _HireDriverTrackingScreenState extends State<HireDriverTrackingScreen> {
     final confirm = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Cancel Request'),
-        content: const Text('Are you sure you want to cancel this request?'),
+        title: Text('Cancel Request'),
+        content: Text('Are you sure you want to cancel this request?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('No'),
+            child: Text('No'),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Yes', style: TextStyle(color: Colors.red)),
+            child: Text('Yes', style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -236,28 +237,28 @@ class _HireDriverTrackingScreenState extends State<HireDriverTrackingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Request Status'),
+        title: Text('Request Status'),
         backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         actions: [
           IconButton(
-            icon: const Icon(Icons.refresh),
+            icon: Icon(Icons.refresh),
             onPressed: _fetchRequestStatus,
           ),
         ],
       ),
       body: isLoading && requestDetails == null
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(16.0.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Success Animation
                     Center(
                       child: Container(
-                        padding: const EdgeInsets.all(24),
+                        padding: EdgeInsets.all(24.w),
                         decoration: BoxDecoration(
                           color: Colors.green.shade50,
                           shape: BoxShape.circle,
@@ -269,51 +270,51 @@ class _HireDriverTrackingScreenState extends State<HireDriverTrackingScreen> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24.w),
 
                     // Request Created Message
                     Center(
                       child: Column(
                         children: [
-                          const Text(
+                          Text(
                             'Request Created Successfully!',
                             style: TextStyle(
-                              fontSize: 24,
+                              fontSize: 24.sp,
                               fontWeight: FontWeight.bold,
                             ),
                             textAlign: TextAlign.center,
                           ),
-                          const SizedBox(height: 8),
+                          SizedBox(height: 8.w),
                           Text(
                             'Request ID: ${widget.requestId}',
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               color: Colors.grey.shade600,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 32),
+                    SizedBox(height: 32.w),
 
                     // Current Status Card
                     // Container(
-                    //   padding: const EdgeInsets.all(20),
+                    //   padding: EdgeInsets.all(20.w),
                     //   decoration: BoxDecoration(
                     //     color: _getStatusColor(status).withOpacity(0.1),
-                    //     borderRadius: BorderRadius.circular(16),
+                    //     borderRadius: BorderRadius.circular(16.r),
                     //     border: Border.all(
                     //       color: _getStatusColor(status),
-                    //       width: 2,
+                    //       width: 2.w,
                     //     ),
                     //   ),
                     //   child: Row(
                     //     children: [
                     //       Container(
-                    //         padding: const EdgeInsets.all(12),
+                    //         padding: EdgeInsets.all(12.w),
                     //         decoration: BoxDecoration(
                     //           color: _getStatusColor(status),
-                    //           borderRadius: BorderRadius.circular(12),
+                    //           borderRadius: BorderRadius.circular(12.r),
                     //         ),
                     //         child: Icon(
                     //           _getStatusIcon(status),
@@ -321,7 +322,7 @@ class _HireDriverTrackingScreenState extends State<HireDriverTrackingScreen> {
                     //           size: 32,
                     //         ),
                     //       ),
-                    //       const SizedBox(width: 16),
+                    //       SizedBox(width: 16.w),
                     //       Expanded(
                     //         child: Column(
                     //           crossAxisAlignment: CrossAxisAlignment.start,
@@ -329,16 +330,16 @@ class _HireDriverTrackingScreenState extends State<HireDriverTrackingScreen> {
                     //             Text(
                     //               status.toUpperCase(),
                     //               style: TextStyle(
-                    //                 fontSize: 18,
+                    //                 fontSize: 18.sp,
                     //                 fontWeight: FontWeight.bold,
                     //                 color: _getStatusColor(status),
                     //               ),
                     //             ),
-                    //             const SizedBox(height: 4),
+                    //             SizedBox(height: 4.w),
                     //             Text(
                     //               _getStatusMessage(status),
                     //               style: TextStyle(
-                    //                 fontSize: 14,
+                    //                 fontSize: 14.sp,
                     //                 color: Colors.grey.shade700,
                     //               ),
                     //             ),
@@ -348,22 +349,22 @@ class _HireDriverTrackingScreenState extends State<HireDriverTrackingScreen> {
                     //     ],
                     //   ),
                     // ),
-                    // const SizedBox(height: 24),
+                    // SizedBox(height: 24.w),
 
                     // Booking Details
-                    const Text(
+                    Text(
                       'Booking Details',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12.w),
                     Container(
-                      padding: const EdgeInsets.all(16),
+                      padding: EdgeInsets.all(16.w),
                       decoration: BoxDecoration(
                         color: Colors.grey.shade100,
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(12.r),
                       ),
                       child: Column(
                         children: [
@@ -372,32 +373,32 @@ class _HireDriverTrackingScreenState extends State<HireDriverTrackingScreen> {
                             'Acceptance OTP',
                             widget.otp,
                           ),
-                          const Divider(height: 24),
+                          Divider(height: 24.w),
                           _buildDetailRow(
                             Icons.lock_open,
                             'Completion OTP',
                             requestDetails?['completionOtp']?.toString() ?? 'N/A',
                           ),
-                          const Divider(height: 24),
+                          Divider(height: 24.w),
                           _buildDetailRow(
                             Icons.access_time,
                             'Duration',
                             '${widget.hours} hours',
                           ),
-                          const Divider(height: 24),
+                          Divider(height: 24.w),
                           _buildDetailRow(
                             Icons.payment,
                             'Total Amount',
                             '₹${widget.totalPrice.toStringAsFixed(0)}',
                           ),
-                          const Divider(height: 24),
+                          Divider(height: 24.w),
                           _buildDetailRow(
                             Icons.confirmation_number,
                             'Request ID',
                             widget.requestId,
                           ),
                           if (requestDetails?['createdAt'] != null) ...[
-                            const Divider(height: 24),
+                            Divider(height: 24.w),
                             _buildDetailRow(
                               Icons.calendar_today,
                               'Created At',
@@ -407,23 +408,23 @@ class _HireDriverTrackingScreenState extends State<HireDriverTrackingScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24.w),
 
                     // Driver Details (if assigned)
                     if (requestDetails?['driver'] != null) ...[
-                      const Text(
+                      Text(
                         'Driver Details',
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 18.sp,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      SizedBox(height: 12.w),
                       Container(
-                        padding: const EdgeInsets.all(16),
+                        padding: EdgeInsets.all(16.w),
                         decoration: BoxDecoration(
                           color: Colors.blue.shade50,
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(12.r),
                           border: Border.all(color: Colors.blue.shade200),
                         ),
                         child: Column(
@@ -434,7 +435,7 @@ class _HireDriverTrackingScreenState extends State<HireDriverTrackingScreen> {
                               requestDetails!['driver']['name'] ?? 'N/A',
                             ),
                             if (requestDetails!['driver']['phone'] != null) ...[
-                              const Divider(height: 24),
+                              Divider(height: 24.w),
                               _buildDetailRow(
                                 Icons.phone,
                                 'Phone',
@@ -444,21 +445,21 @@ class _HireDriverTrackingScreenState extends State<HireDriverTrackingScreen> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 24),
+                      SizedBox(height: 24.w),
                     ],
 
                     // Action Buttons - Only show cancel if status is PENDING
                     if (status.toUpperCase() == 'PENDING') ...[
                       SizedBox(
                         width: double.infinity,
-                        height: 56,
+                        height: 56.w,
                         child: ElevatedButton.icon(
                           onPressed: _cancelRequest,
-                          icon: const Icon(Icons.cancel),
-                          label: const Text(
+                          icon: Icon(Icons.cancel),
+                          label: Text(
                             'Cancel Request',
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 18.sp,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -466,18 +467,18 @@ class _HireDriverTrackingScreenState extends State<HireDriverTrackingScreen> {
                             backgroundColor: Colors.red,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(12.r),
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16.w),
                     ],
                     
                     // Back to Home Button
                     SizedBox(
                       width: double.infinity,
-                      height: 56,
+                      height: 56.w,
                       child: OutlinedButton.icon(
                         onPressed: () {
                           Navigator.pushAndRemoveUntil(
@@ -486,24 +487,24 @@ class _HireDriverTrackingScreenState extends State<HireDriverTrackingScreen> {
                             (route) => false,
                           );
                         },
-                        icon: const Icon(Icons.home),
-                        label: const Text(
+                        icon: Icon(Icons.home),
+                        label: Text(
                           'Back to Home',
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 18.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: Colors.green,
-                          side: const BorderSide(color: Colors.green, width: 2),
+                          side: BorderSide(color: Colors.green, width: 2.w),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(12.r),
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16.w),
                   ],
                 ),
               ),
@@ -515,7 +516,7 @@ class _HireDriverTrackingScreenState extends State<HireDriverTrackingScreen> {
     return Row(
       children: [
         Icon(icon, color: Colors.green, size: 24),
-        const SizedBox(width: 12),
+        SizedBox(width: 12.w),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -523,15 +524,15 @@ class _HireDriverTrackingScreenState extends State<HireDriverTrackingScreen> {
               Text(
                 label,
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 12.sp,
                   color: Colors.grey.shade600,
                 ),
               ),
-              const SizedBox(height: 2),
+              SizedBox(height: 2.w),
               Text(
                 value,
-                style: const TextStyle(
-                  fontSize: 16,
+                style: TextStyle(
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
                 ),
               ),

@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rideal/screens/signUp/PersonalDetailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -90,15 +91,15 @@ class _SignInScreenState extends State<SignInScreen>
           Container(
             height: size.height * 0.42,
             width: double.infinity,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [brandGreen, Color(0xFF34A853)],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(40),
-                bottomRight: Radius.circular(40),
+                bottomLeft: Radius.circular(40.r),
+                bottomRight: Radius.circular(40.r),
               ),
             ),
           ),
@@ -106,14 +107,14 @@ class _SignInScreenState extends State<SignInScreen>
           SafeArea(
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
                 child: FadeTransition(
                   opacity: _fadeAnim,
                   child: SlideTransition(
                     position: _slideAnim,
                     child: Column(
                       children: [
-                        const SizedBox(height: 20),
+                        SizedBox(height: 20.w),
 
                         // Back button row
                         Align(
@@ -121,21 +122,21 @@ class _SignInScreenState extends State<SignInScreen>
                           child: GestureDetector(
                             onTap: () => Navigator.of(context).pop(),
                             child: Container(
-                              padding: const EdgeInsets.all(9),
+                              padding: EdgeInsets.all(9.w),
                               decoration: BoxDecoration(
                                 color: Colors.white.withOpacity(0.2),
                                 shape: BoxShape.circle,
                               ),
-                              child: const Icon(Icons.arrow_back, color: Colors.white, size: 20),
+                              child: Icon(Icons.arrow_back, color: Colors.white, size: 20),
                             ),
                           ),
                         ),
 
-                        const SizedBox(height: 24),
+                        SizedBox(height: 24.w),
 
                         // Logo
                         Container(
-                          padding: const EdgeInsets.all(16),
+                          padding: EdgeInsets.all(16.w),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             shape: BoxShape.circle,
@@ -149,39 +150,39 @@ class _SignInScreenState extends State<SignInScreen>
                           ),
                           child: Image.asset(
                             "assets/images/logorideal.png",
-                            height: 64,
-                            width: 64,
+                            height: 64.w,
+                            width: 64.w,
                           ),
                         ),
 
-                        const SizedBox(height: 20),
+                        SizedBox(height: 20.w),
 
                         // Hero text
-                        const Text(
+                        Text(
                           'Welcome Back!',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 28,
+                            fontSize: 28.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 6),
+                        SizedBox(height: 6.w),
                         Text(
                           'Sign in to continue your journey',
                           style: TextStyle(
                             color: Colors.white.withOpacity(0.85),
-                            fontSize: 14,
+                            fontSize: 14.sp,
                           ),
                         ),
 
-                        const SizedBox(height: 40),
+                        SizedBox(height: 40.w),
 
                         // Card form
                         Container(
-                          padding: const EdgeInsets.all(28),
+                          padding: EdgeInsets.all(28.w),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(28),
+                            borderRadius: BorderRadius.circular(28.r),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.06),
@@ -195,42 +196,42 @@ class _SignInScreenState extends State<SignInScreen>
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   'Mobile Number',
                                   style: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 14.sp,
                                     fontWeight: FontWeight.w700,
                                     color: Colors.black87,
                                   ),
                                 ),
-                                const SizedBox(height: 10),
+                                SizedBox(height: 10.w),
 
                                 // Phone input
                                 Container(
                                   decoration: BoxDecoration(
                                     color: const Color(0xFFF8F9FA),
-                                    borderRadius: BorderRadius.circular(14),
+                                    borderRadius: BorderRadius.circular(14.r),
                                     border: Border.all(color: Colors.grey.shade200),
                                   ),
                                   child: Row(
                                     children: [
                                       Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 14, vertical: 16),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 14.w, vertical: 16.w),
                                         decoration: BoxDecoration(
                                           border: Border(
                                             right: BorderSide(color: Colors.grey.shade200),
                                           ),
                                         ),
                                         child: Row(
-                                          children: const [
-                                            Text('🇮🇳', style: TextStyle(fontSize: 18)),
-                                            SizedBox(width: 6),
+                                          children: [
+                                            Text('🇮🇳', style: TextStyle(fontSize: 18.sp)),
+                                            SizedBox(width: 6.w),
                                             Text(
                                               '+91',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w700,
-                                                fontSize: 15,
+                                                fontSize: 15.sp,
                                                 color: Colors.black87,
                                               ),
                                             ),
@@ -247,11 +248,11 @@ class _SignInScreenState extends State<SignInScreen>
                                             FilteringTextInputFormatter.digitsOnly,
                                             LengthLimitingTextInputFormatter(10),
                                           ],
-                                          decoration: const InputDecoration(
+                                          decoration: InputDecoration(
                                             hintText: '10-digit number',
-                                            hintStyle: TextStyle(color: Colors.grey, fontSize: 14),
+                                            hintStyle: TextStyle(color: Colors.grey, fontSize: 14.sp),
                                             border: InputBorder.none,
-                                            contentPadding: EdgeInsets.symmetric(horizontal: 14),
+                                            contentPadding: EdgeInsets.symmetric(horizontal: 14.w),
                                             counterText: '',
                                           ),
                                         ),
@@ -260,40 +261,40 @@ class _SignInScreenState extends State<SignInScreen>
                                   ),
                                 ),
 
-                                const SizedBox(height: 24),
+                                SizedBox(height: 24.w),
 
                                 // Send OTP button
                                 SizedBox(
                                   width: double.infinity,
-                                  height: 54,
+                                  height: 54.w,
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: brandGreen,
                                       foregroundColor: Colors.white,
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(14),
+                                        borderRadius: BorderRadius.circular(14.r),
                                       ),
                                       elevation: 0,
                                     ),
                                     onPressed: isLoading ? null : sendOtp,
                                     child: isLoading
-                                        ? const SizedBox(
-                                            width: 22,
-                                            height: 22,
+                                        ? SizedBox(
+                                            width: 22.w,
+                                            height: 22.w,
                                             child: CircularProgressIndicator(
                                               strokeWidth: 2.5,
                                               valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                                             ),
                                           )
-                                        : const Row(
+                                        : Row(
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               Icon(Icons.send_rounded, size: 18),
-                                              SizedBox(width: 8),
+                                              SizedBox(width: 8.w),
                                               Text(
                                                 'Send OTP',
                                                 style: TextStyle(
-                                                  fontSize: 16,
+                                                  fontSize: 16.sp,
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
@@ -302,24 +303,24 @@ class _SignInScreenState extends State<SignInScreen>
                                   ),
                                 ),
 
-                                const SizedBox(height: 20),
+                                SizedBox(height: 20.w),
 
                                 // Divider with "or"
                                 Row(
                                   children: [
                                     Expanded(child: Divider(color: Colors.grey.shade200)),
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                                      padding: EdgeInsets.symmetric(horizontal: 12.w),
                                       child: Text(
                                         'or',
-                                        style: TextStyle(color: Colors.grey.shade400, fontSize: 13),
+                                        style: TextStyle(color: Colors.grey.shade400, fontSize: 13.sp),
                                       ),
                                     ),
                                     Expanded(child: Divider(color: Colors.grey.shade200)),
                                   ],
                                 ),
 
-                                const SizedBox(height: 16),
+                                SizedBox(height: 16.w),
 
                                 // Sign up link
                                 Center(
@@ -335,8 +336,8 @@ class _SignInScreenState extends State<SignInScreen>
                                     child: RichText(
                                       text: TextSpan(
                                         text: "Don't have an account? ",
-                                        style: TextStyle(color: Colors.grey.shade500, fontSize: 14),
-                                        children: const [
+                                        style: TextStyle(color: Colors.grey.shade500, fontSize: 14.sp),
+                                        children: [
                                           TextSpan(
                                             text: 'Sign Up',
                                             style: TextStyle(
@@ -354,21 +355,21 @@ class _SignInScreenState extends State<SignInScreen>
                           ),
                         ),
 
-                        const SizedBox(height: 32),
+                        SizedBox(height: 32.w),
 
                         // Security note
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(Icons.lock_outline_rounded, size: 14, color: Colors.grey.shade400),
-                            const SizedBox(width: 6),
+                            SizedBox(width: 6.w),
                             Text(
                               'Your data is encrypted and secured',
-                              style: TextStyle(fontSize: 12, color: Colors.grey.shade400),
+                              style: TextStyle(fontSize: 12.sp, color: Colors.grey.shade400),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 24),
+                        SizedBox(height: 24.w),
                       ],
                     ),
                   ),

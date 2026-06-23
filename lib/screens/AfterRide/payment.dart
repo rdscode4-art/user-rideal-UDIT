@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -188,14 +189,14 @@ class _PaymentScreenState extends State<PaymentScreen>
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28.r)),
         title: Row(
           children: [
             Icon(Icons.warning_amber_rounded, color: Colors.orange.shade600),
-            const SizedBox(width: 10),
-            const Text(
+            SizedBox(width: 10.w),
+            Text(
               'Low Balance',
-              style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18),
+              style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18.sp),
             ),
           ],
         ),
@@ -205,14 +206,14 @@ class _PaymentScreenState extends State<PaymentScreen>
           children: [
             Text(
               'Your wallet balance is insufficient for this payment.',
-              style: TextStyle(color: Colors.grey.shade600, fontSize: 14, height: 1.4),
+              style: TextStyle(color: Colors.grey.shade600, fontSize: 14.sp, height: 1.4.w),
             ),
-            const SizedBox(height: 18),
+            SizedBox(height: 18.w),
             Container(
-              padding: const EdgeInsets.all(14),
+              padding: EdgeInsets.all(14.w),
               decoration: BoxDecoration(
                 color: Colors.grey.shade50,
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(16.r),
                 border: Border.all(color: Colors.grey.shade100),
               ),
               child: Column(
@@ -220,16 +221,16 @@ class _PaymentScreenState extends State<PaymentScreen>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('Current Balance:', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13, color: Colors.black54)),
-                      Text('₹${_walletBalance.toStringAsFixed(2)}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Colors.red.shade600)),
+                      Text('Current Balance:', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13.sp, color: Colors.black54)),
+                      Text('₹${_walletBalance.toStringAsFixed(2)}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.sp, color: Colors.red.shade600)),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.w),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('Required Fare:', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13, color: Colors.black54)),
-                      Text('₹${_rideDetails!['estimatedFare'] ?? 'N/A'}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: brandGreen)),
+                      Text('Required Fare:', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13.sp, color: Colors.black54)),
+                      Text('₹${_rideDetails!['estimatedFare'] ?? 'N/A'}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13.sp, color: brandGreen)),
                     ],
                   ),
                 ],
@@ -255,11 +256,11 @@ class _PaymentScreenState extends State<PaymentScreen>
             style: ElevatedButton.styleFrom(
               backgroundColor: brandGreen,
               foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.w),
               elevation: 0,
             ),
-            child: const Text('Add Money', style: TextStyle(fontWeight: FontWeight.bold)),
+            child: Text('Add Money', style: TextStyle(fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -292,14 +293,14 @@ class _PaymentScreenState extends State<PaymentScreen>
           children: [
             // Custom Signature Header
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 12, 20, 16),
+              padding: EdgeInsets.fromLTRB(20, 12, 20, 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
                     onTap: () => Navigator.of(context).pop(),
                     child: Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10.w),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,
@@ -311,19 +312,19 @@ class _PaymentScreenState extends State<PaymentScreen>
                           ),
                         ],
                       ),
-                      child: const Icon(Icons.arrow_back, color: Colors.black87, size: 20),
+                      child: Icon(Icons.arrow_back, color: Colors.black87, size: 20),
                     ),
                   ),
-                  const Text(
+                  Text(
                     "Complete Payment",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.w800,
                       color: Colors.black87,
                       letterSpacing: -0.5,
                     ),
                   ),
-                  const SizedBox(width: 40),
+                  SizedBox(width: 40.w),
                 ],
               ),
             ),
@@ -348,10 +349,10 @@ class _PaymentScreenState extends State<PaymentScreen>
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            padding: const EdgeInsets.all(22),
+            padding: EdgeInsets.all(22.w),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(24.r),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.03),
@@ -365,11 +366,11 @@ class _PaymentScreenState extends State<PaymentScreen>
               valueColor: AlwaysStoppedAnimation<Color>(brandGreen),
             ),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24.w),
           Text(
             'Retrieving secure payment details...',
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 14.sp,
               color: Colors.grey.shade500,
               fontWeight: FontWeight.w600,
             ),
@@ -385,10 +386,10 @@ class _PaymentScreenState extends State<PaymentScreen>
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.all(20.w),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(24.r),
               boxShadow: [
                 BoxShadow(
                   color: Colors.red.withOpacity(0.04),
@@ -399,27 +400,27 @@ class _PaymentScreenState extends State<PaymentScreen>
             ),
             child: Icon(Icons.error_outline_rounded, size: 48, color: Colors.red.shade400),
           ),
-          const SizedBox(height: 24),
-          const Text(
+          SizedBox(height: 24.w),
+          Text(
             'Failed to retrieve ride details',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Colors.black87),
+            style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w800, color: Colors.black87),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.w),
           Text(
             'Please check your connection and try again.',
-            style: TextStyle(fontSize: 13, color: Colors.grey.shade500, fontWeight: FontWeight.w500),
+            style: TextStyle(fontSize: 13.sp, color: Colors.grey.shade500, fontWeight: FontWeight.w500),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24.w),
           ElevatedButton(
             onPressed: _loadRideDetails,
             style: ElevatedButton.styleFrom(
               backgroundColor: brandGreen,
               foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-              padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 12),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
+              padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 12.w),
               elevation: 0,
             ),
-            child: const Text('Retry', style: TextStyle(fontWeight: FontWeight.bold)),
+            child: Text('Retry', style: TextStyle(fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -436,18 +437,18 @@ class _PaymentScreenState extends State<PaymentScreen>
             Expanded(
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
-                padding: const EdgeInsets.only(bottom: 24),
+                padding: EdgeInsets.only(bottom: 24.w),
                 child: Column(
                   children: [
                     // Secure Payment Banner
                     _buildBannerCard(),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16.w),
                     // Ride Summary Receipt Card
                     _buildRideDetailsCard(),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16.w),
                     // Payment Selector Options Card
                     _buildPaymentMethodCard(),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16.w),
                     // SSL Security Indicator
                     _buildSecurityBadge(),
                   ],
@@ -464,15 +465,15 @@ class _PaymentScreenState extends State<PaymentScreen>
 
   Widget _buildBannerCard() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      height: 100,
+      margin: EdgeInsets.symmetric(horizontal: 20.w),
+      height: 100.w,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [brandGreen, Colors.green.shade700],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(24.r),
         boxShadow: [
           BoxShadow(
             color: brandGreen.withOpacity(0.15),
@@ -489,8 +490,8 @@ class _PaymentScreenState extends State<PaymentScreen>
             right: -25,
             top: -25,
             child: Container(
-              width: 120,
-              height: 120,
+              width: 120.w,
+              height: 120.w,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.white.withOpacity(0.06),
@@ -498,11 +499,11 @@ class _PaymentScreenState extends State<PaymentScreen>
             ),
           ),
           Positioned(
-            left: 70,
+            left: 70.w,
             bottom: -35,
             child: Container(
-              width: 90,
-              height: 90,
+              width: 90.w,
+              height: 90.w,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.white.withOpacity(0.04),
@@ -511,38 +512,38 @@ class _PaymentScreenState extends State<PaymentScreen>
           ),
           // Banner row content
           Padding(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.all(20.w),
             child: Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(10),
+                  padding: EdgeInsets.all(10.w),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(14.r),
                   ),
-                  child: const Icon(Icons.lock_outline_rounded, color: Colors.white, size: 24),
+                  child: Icon(Icons.lock_outline_rounded, color: Colors.white, size: 24),
                 ),
-                const SizedBox(width: 16),
+                SizedBox(width: 16.w),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
+                      Text(
                         'Secure Checkout',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 17,
+                          fontSize: 17.sp,
                           fontWeight: FontWeight.w800,
                           letterSpacing: -0.3,
                         ),
                       ),
-                      const SizedBox(height: 3),
+                      SizedBox(height: 3.w),
                       Text(
                         'Complete your ride payment safely',
                         style: TextStyle(
                           color: Colors.white.withOpacity(0.85),
-                          fontSize: 12,
+                          fontSize: 12.sp,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -559,11 +560,11 @@ class _PaymentScreenState extends State<PaymentScreen>
 
   Widget _buildRideDetailsCard() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      padding: const EdgeInsets.all(20),
+      margin: EdgeInsets.symmetric(horizontal: 20.w),
+      padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(24.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.03),
@@ -578,18 +579,18 @@ class _PaymentScreenState extends State<PaymentScreen>
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(8),
+                padding: EdgeInsets.all(8.w),
                 decoration: BoxDecoration(
                   color: brandGreen.withOpacity(0.08),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.receipt_long_rounded, color: brandGreen, size: 18),
+                child: Icon(Icons.receipt_long_rounded, color: brandGreen, size: 18),
               ),
-              const SizedBox(width: 12),
-              const Text(
+              SizedBox(width: 12.w),
+              Text(
                 'Ride Receipt Summary',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w800,
                   color: Colors.black87,
                   letterSpacing: -0.3,
@@ -597,13 +598,13 @@ class _PaymentScreenState extends State<PaymentScreen>
               ),
             ],
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.w),
           _buildDetailRow(
             icon: Icons.tag_rounded,
             label: 'Ride ID',
             value: '#${widget.rideId}',
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12.w),
           _buildDetailRow(
             icon: Icons.account_balance_wallet_outlined,
             label: 'Estimated Fare',
@@ -611,62 +612,62 @@ class _PaymentScreenState extends State<PaymentScreen>
             isAmount: true,
           ),
           if (_rideDetails!['promoCodeUsed'] != null) ...[
-            const SizedBox(height: 16),
+            SizedBox(height: 16.w),
             Container(
-              padding: const EdgeInsets.all(14),
+              padding: EdgeInsets.all(14.w),
               decoration: BoxDecoration(
                 color: brandGreen.withOpacity(0.04),
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(16.r),
                 border: Border.all(color: brandGreen.withOpacity(0.12)),
               ),
               child: Column(
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.local_offer_rounded, color: brandGreen, size: 14),
-                      const SizedBox(width: 8),
+                      Icon(Icons.local_offer_rounded, color: brandGreen, size: 14),
+                      SizedBox(width: 8.w),
                       Expanded(
                         child: Text(
                           'Promo: ${_rideDetails!['promoCodeUsed']['code']}',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontWeight: FontWeight.w800,
                             color: brandGreen,
-                            fontSize: 12,
+                            fontSize: 12.sp,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12.w),
                   _buildDetailRow(
                     icon: Icons.money_off_rounded,
                     label: 'Original Fare',
                     value: '₹${_rideDetails!['promoCodeUsed']['originalAmount'] ?? _rideDetails!['estimatedFare']}',
-                    valueStyle: TextStyle(decoration: TextDecoration.lineThrough, color: Colors.grey.shade400, fontSize: 13, fontWeight: FontWeight.bold),
+                    valueStyle: TextStyle(decoration: TextDecoration.lineThrough, color: Colors.grey.shade400, fontSize: 13.sp, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.w),
                   _buildDetailRow(
                     icon: Icons.discount_rounded,
                     label: 'Discount',
                     value: '- ₹${_rideDetails!['promoCodeUsed']['discountAmount'] ?? 0}',
-                    valueStyle: const TextStyle(color: brandGreen, fontWeight: FontWeight.w800, fontSize: 13),
+                    valueStyle: TextStyle(color: brandGreen, fontWeight: FontWeight.w800, fontSize: 13.sp),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8),
-                    child: Divider(height: 1),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.w),
+                    child: Divider(height: 1.w),
                   ),
                   _buildDetailRow(
                     icon: Icons.payments_rounded,
                     label: 'Final Amount',
                     value: '₹${_rideDetails!['estimatedFare']}',
                     isAmount: true,
-                    valueStyle: const TextStyle(color: brandGreen, fontWeight: FontWeight.bold, fontSize: 15),
+                    valueStyle: TextStyle(color: brandGreen, fontWeight: FontWeight.bold, fontSize: 15.sp),
                   ),
                 ],
               ),
             ),
           ],
-          const SizedBox(height: 12),
+          SizedBox(height: 12.w),
           _buildDetailRow(
             icon: Icons.info_outline_rounded,
             label: 'Ride Status',
@@ -682,11 +683,11 @@ class _PaymentScreenState extends State<PaymentScreen>
     final rideAmount = double.tryParse(_rideDetails!['estimatedFare'].toString()) ?? 0.0;
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      padding: const EdgeInsets.all(20),
+      margin: EdgeInsets.symmetric(horizontal: 20.w),
+      padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(24.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.03),
@@ -701,34 +702,34 @@ class _PaymentScreenState extends State<PaymentScreen>
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(8),
+                padding: EdgeInsets.all(8.w),
                 decoration: BoxDecoration(
                   color: brandGreen.withOpacity(0.08),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.payment_rounded, color: brandGreen, size: 18),
+                child: Icon(Icons.payment_rounded, color: brandGreen, size: 18),
               ),
-              const SizedBox(width: 12),
-              const Text(
+              SizedBox(width: 12.w),
+              Text(
                 'Payment Method',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.black87, letterSpacing: -0.3),
+                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w800, color: Colors.black87, letterSpacing: -0.3),
               ),
             ],
           ),
-          const SizedBox(height: 18),
+          SizedBox(height: 18.w),
 
           // Wallet Payment Option card
           GestureDetector(
             onTap: () => setState(() => _selectedPaymentMethod = 'wallet'),
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
-              padding: const EdgeInsets.all(14),
+              padding: EdgeInsets.all(14.w),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: _selectedPaymentMethod == 'wallet' ? brandGreen : Colors.grey.shade100,
                   width: _selectedPaymentMethod == 'wallet' ? 1.5 : 1,
                 ),
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(16.r),
                 color: _selectedPaymentMethod == 'wallet'
                     ? brandGreen.withOpacity(0.04)
                     : const Color(0xFFF8F9FA),
@@ -736,7 +737,7 @@ class _PaymentScreenState extends State<PaymentScreen>
               child: Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(8),
+                    padding: EdgeInsets.all(8.w),
                     decoration: BoxDecoration(
                       color: _selectedPaymentMethod == 'wallet'
                           ? brandGreen.withOpacity(0.1)
@@ -749,7 +750,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                       size: 18,
                     ),
                   ),
-                  const SizedBox(width: 14),
+                  SizedBox(width: 14.w),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -757,16 +758,16 @@ class _PaymentScreenState extends State<PaymentScreen>
                         Text(
                           "Pay with Wallet",
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w800,
                             color: _selectedPaymentMethod == 'wallet' ? Colors.black87 : Colors.black54,
                           ),
                         ),
-                        const SizedBox(height: 3),
+                        SizedBox(height: 3.w),
                         Text(
                           "Balance: ₹${_walletBalance.toStringAsFixed(2)}",
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.bold,
                             color: _walletBalance >= rideAmount
                                 ? brandGreen
@@ -778,17 +779,17 @@ class _PaymentScreenState extends State<PaymentScreen>
                   ),
                   if (_walletBalance < rideAmount)
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.w),
                       decoration: BoxDecoration(
                         color: Colors.red.shade50,
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(8.r),
                       ),
                       child: Text(
                         "Low",
-                        style: TextStyle(fontSize: 10, color: Colors.red.shade600, fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 10.sp, color: Colors.red.shade600, fontWeight: FontWeight.bold),
                       ),
                     ),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8.w),
                   Radio<String>(
                     value: 'wallet',
                     groupValue: _selectedPaymentMethod,
@@ -800,20 +801,20 @@ class _PaymentScreenState extends State<PaymentScreen>
             ),
           ),
 
-          const SizedBox(height: 10),
+          SizedBox(height: 10.w),
 
           // Razorpay/Online Payment Option card
           GestureDetector(
             onTap: () => setState(() => _selectedPaymentMethod = 'online'),
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
-              padding: const EdgeInsets.all(14),
+              padding: EdgeInsets.all(14.w),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: _selectedPaymentMethod == 'online' ? brandGreen : Colors.grey.shade100,
                   width: _selectedPaymentMethod == 'online' ? 1.5 : 1,
                 ),
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(16.r),
                 color: _selectedPaymentMethod == 'online'
                     ? brandGreen.withOpacity(0.04)
                     : const Color(0xFFF8F9FA),
@@ -821,7 +822,7 @@ class _PaymentScreenState extends State<PaymentScreen>
               child: Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(8),
+                    padding: EdgeInsets.all(8.w),
                     decoration: BoxDecoration(
                       color: _selectedPaymentMethod == 'online'
                           ? brandGreen.withOpacity(0.1)
@@ -834,12 +835,12 @@ class _PaymentScreenState extends State<PaymentScreen>
                       size: 18,
                     ),
                   ),
-                  const SizedBox(width: 14),
+                  SizedBox(width: 14.w),
                   Expanded(
                     child: Text(
                       "Pay Online (UPI, Card, NetBanking)",
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w800,
                         color: _selectedPaymentMethod == 'online' ? Colors.black87 : Colors.black54,
                       ),
@@ -858,7 +859,7 @@ class _PaymentScreenState extends State<PaymentScreen>
 
           // Add money container link if low balance
           if (_selectedPaymentMethod == 'wallet' && _walletBalance < rideAmount) ...[
-            const SizedBox(height: 14),
+            SizedBox(height: 14.w),
             GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -870,22 +871,22 @@ class _PaymentScreenState extends State<PaymentScreen>
               },
               child: Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 12),
+                padding: EdgeInsets.symmetric(vertical: 12.w),
                 decoration: BoxDecoration(
-                  border: Border.all(color: brandGreen, width: 1.5),
-                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: brandGreen, width: 1.5.w),
+                  borderRadius: BorderRadius.circular(16.r),
                 ),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.add_circle_outline_rounded, color: brandGreen, size: 18),
-                    SizedBox(width: 8),
+                    SizedBox(width: 8.w),
                     Text(
                       "Add Money to Wallet",
                       style: TextStyle(
                         color: brandGreen,
                         fontWeight: FontWeight.bold,
-                        fontSize: 14,
+                        fontSize: 14.sp,
                       ),
                     ),
                   ],
@@ -909,11 +910,11 @@ class _PaymentScreenState extends State<PaymentScreen>
     return Row(
       children: [
         Icon(icon, color: brandGreen.withOpacity(0.5), size: 16),
-        const SizedBox(width: 10),
+        SizedBox(width: 10.w),
         Expanded(
           child: Text(
             label,
-            style: TextStyle(fontSize: 13, color: Colors.grey.shade500, fontWeight: FontWeight.w600),
+            style: TextStyle(fontSize: 13.sp, color: Colors.grey.shade500, fontWeight: FontWeight.w600),
           ),
         ),
         Container(
@@ -927,7 +928,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                 : isStatus
                     ? Colors.blue.withOpacity(0.08)
                     : Colors.grey.shade100,
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(8.r),
           ),
           child: Text(
             value,
@@ -949,11 +950,11 @@ class _PaymentScreenState extends State<PaymentScreen>
 
   Widget _buildSecurityBadge() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      margin: EdgeInsets.symmetric(horizontal: 20.w),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.03),
@@ -964,12 +965,12 @@ class _PaymentScreenState extends State<PaymentScreen>
       ),
       child: Row(
         children: [
-          const Icon(Icons.verified_user_outlined, color: brandGreen, size: 18),
-          const SizedBox(width: 10),
+          Icon(Icons.verified_user_outlined, color: brandGreen, size: 18),
+          SizedBox(width: 10.w),
           Expanded(
             child: Text(
               '256-bit SSL encryption ensures your payment is secure',
-              style: TextStyle(fontSize: 12, color: Colors.grey.shade500, fontWeight: FontWeight.w500),
+              style: TextStyle(fontSize: 12.sp, color: Colors.grey.shade500, fontWeight: FontWeight.w500),
             ),
           ),
         ],
@@ -982,7 +983,7 @@ class _PaymentScreenState extends State<PaymentScreen>
     final isWalletInsufficient = _selectedPaymentMethod == 'wallet' && _walletBalance < rideAmount;
 
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 14, 20, 20),
+      padding: EdgeInsets.fromLTRB(20, 14, 20, 20),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -997,7 +998,7 @@ class _PaymentScreenState extends State<PaymentScreen>
         children: [
           SizedBox(
             width: double.infinity,
-            height: 56,
+            height: 56.w,
             child: ElevatedButton(
               onPressed: _isLoading || isWalletInsufficient ? null : _processPayment,
               style: ElevatedButton.styleFrom(
@@ -1005,7 +1006,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                 foregroundColor: Colors.white,
                 disabledBackgroundColor: Colors.grey.shade200,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(28),
+                  borderRadius: BorderRadius.circular(28.r),
                 ),
                 elevation: 0,
               ),
@@ -1013,15 +1014,15 @@ class _PaymentScreenState extends State<PaymentScreen>
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   if (_isLoading) ...[
-                    const SizedBox(
-                      width: 18,
-                      height: 18,
+                    SizedBox(
+                      width: 18.w,
+                      height: 18.w,
                       child: CircularProgressIndicator(
                         strokeWidth: 2,
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                       ),
                     ),
-                    const SizedBox(width: 10),
+                    SizedBox(width: 10.w),
                   ] else ...[
                     Icon(
                       _selectedPaymentMethod == 'wallet'
@@ -1029,7 +1030,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                           : Icons.lock_rounded,
                       size: 18,
                     ),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8.w),
                   ],
                   Text(
                     _isLoading
@@ -1039,8 +1040,8 @@ class _PaymentScreenState extends State<PaymentScreen>
                             : _selectedPaymentMethod == 'wallet'
                                 ? 'Pay ₹${_rideDetails!['estimatedFare'] ?? 'N/A'} with Wallet'
                                 : 'Pay ₹${_rideDetails!['estimatedFare'] ?? 'N/A'} Online',
-                    style: const TextStyle(
-                      fontSize: 16,
+                    style: TextStyle(
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 0.2,
                     ),
@@ -1049,10 +1050,10 @@ class _PaymentScreenState extends State<PaymentScreen>
               ),
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.w),
           Text(
             'By proceeding, you agree to our terms and conditions',
-            style: TextStyle(fontSize: 11, color: Colors.grey.shade400, fontWeight: FontWeight.w500),
+            style: TextStyle(fontSize: 11.sp, color: Colors.grey.shade400, fontWeight: FontWeight.w500),
             textAlign: TextAlign.center,
           ),
         ],

@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -113,7 +114,7 @@ class _EditprofilescreenState extends State<Editprofilescreen> {
     showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
       ),
       builder: (BuildContext context) {
         return SafeArea(
@@ -121,27 +122,27 @@ class _EditprofilescreenState extends State<Editprofilescreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                width: 40,
-                height: 4,
-                margin: EdgeInsets.symmetric(vertical: 10),
+                width: 40.w,
+                height: 4.w,
+                margin: EdgeInsets.symmetric(vertical: 10.w),
                 decoration: BoxDecoration(
                   color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(2),
+                  borderRadius: BorderRadius.circular(2.r),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(16),
+                padding: EdgeInsets.all(16.w),
                 child: Text(
                   "Select Profile Image",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
                 ),
               ),
               ListTile(
                 leading: Container(
-                  padding: EdgeInsets.all(8),
+                  padding: EdgeInsets.all(8.w),
                   decoration: BoxDecoration(
                     color: Colors.green.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: Icon(Icons.camera_alt, color: Colors.green),
                 ),
@@ -154,10 +155,10 @@ class _EditprofilescreenState extends State<Editprofilescreen> {
               ),
               ListTile(
                 leading: Container(
-                  padding: EdgeInsets.all(8),
+                  padding: EdgeInsets.all(8.w),
                   decoration: BoxDecoration(
                     color: Colors.blue.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: Icon(Icons.photo_library, color: Colors.blue),
                 ),
@@ -168,7 +169,7 @@ class _EditprofilescreenState extends State<Editprofilescreen> {
                   _pickImageFromSource(ImageSource.gallery);
                 },
               ),
-              SizedBox(height: 16),
+              SizedBox(height: 16.w),
             ],
           ),
         );
@@ -367,7 +368,7 @@ class _EditprofilescreenState extends State<Editprofilescreen> {
             content: Row(
               children: [
                 CircularProgressIndicator(),
-                SizedBox(width: 16),
+                SizedBox(width: 16.w),
                 Text("Saving changes..."),
               ],
             ),
@@ -486,7 +487,7 @@ class _EditprofilescreenState extends State<Editprofilescreen> {
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
-      return const Scaffold(
+      return Scaffold(
         backgroundColor: Color(0xFFF8F9FA),
         body: Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF0F9D58)))),
       );
@@ -499,14 +500,14 @@ class _EditprofilescreenState extends State<Editprofilescreen> {
           children: [
             // Floating Header
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
+              padding: EdgeInsets.fromLTRB(16, 8, 16, 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
                     child: Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10.w),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,
@@ -518,13 +519,13 @@ class _EditprofilescreenState extends State<Editprofilescreen> {
                           ),
                         ],
                       ),
-                      child: const Icon(Icons.arrow_back, color: Colors.black87, size: 20),
+                      child: Icon(Icons.arrow_back, color: Colors.black87, size: 20),
                     ),
                   ),
-                  const Text(
+                  Text(
                     "Edit Profile",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
@@ -532,12 +533,12 @@ class _EditprofilescreenState extends State<Editprofilescreen> {
                   GestureDetector(
                     onTap: _saveProfile,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
                       decoration: BoxDecoration(
                         color: const Color(0xFF0F9D58).withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(20.r),
                       ),
-                      child: const Text(
+                      child: Text(
                         "Save",
                         style: TextStyle(
                           color: Color(0xFF0F9D58),
@@ -552,7 +553,7 @@ class _EditprofilescreenState extends State<Editprofilescreen> {
 
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -588,8 +589,8 @@ class _EditprofilescreenState extends State<Editprofilescreen> {
                             child: GestureDetector(
                               onTap: isUploadingImage ? null : _pickImage,
                               child: Container(
-                                width: 44,
-                                height: 44,
+                                width: 44.w,
+                                height: 44.w,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   shape: BoxShape.circle,
@@ -602,12 +603,12 @@ class _EditprofilescreenState extends State<Editprofilescreen> {
                                   ],
                                 ),
                                 child: Container(
-                                  margin: const EdgeInsets.all(4),
-                                  decoration: const BoxDecoration(
+                                  margin: EdgeInsets.all(4.w),
+                                  decoration: BoxDecoration(
                                     color: Color(0xFF0F9D58),
                                     shape: BoxShape.circle,
                                   ),
-                                  child: const Icon(
+                                  child: Icon(
                                     Icons.camera_alt_rounded,
                                     color: Colors.white,
                                     size: 20,
@@ -620,11 +621,11 @@ class _EditprofilescreenState extends State<Editprofilescreen> {
                           if (isUploadingImage)
                             Positioned.fill(
                               child: Container(
-                                decoration: const BoxDecoration(
+                                decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: Colors.black54,
                                 ),
-                                child: const Center(
+                                child: Center(
                                   child: CircularProgressIndicator(
                                     valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                                     strokeWidth: 3,
@@ -636,47 +637,47 @@ class _EditprofilescreenState extends State<Editprofilescreen> {
                       ),
                     ),
 
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24.w),
 
                     // Image upload button
                     if (selectedImageFile != null)
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        padding: EdgeInsets.symmetric(vertical: 8.0.w),
                         child: ElevatedButton.icon(
                           onPressed: isUploadingImage ? null : _uploadProfileImage,
                           icon: isUploadingImage
-                              ? const SizedBox(
-                                  width: 16,
-                                  height: 16,
+                              ? SizedBox(
+                                  width: 16.w,
+                                  height: 16.w,
                                   child: CircularProgressIndicator(
                                     strokeWidth: 2,
                                     valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                                   ),
                                 )
-                              : const Icon(Icons.upload_rounded, size: 18),
+                              : Icon(Icons.upload_rounded, size: 18),
                           label: Text(
                             isUploadingImage ? "Uploading..." : "Upload Image",
-                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
                           ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF0F9D58),
                             foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.w),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20.r),
                             ),
                             elevation: 0,
                           ),
                         ),
                       ),
 
-                    const SizedBox(height: 40),
+                    SizedBox(height: 40.w),
 
                     // Form Fields (Pill Shaped)
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(24),
+                        borderRadius: BorderRadius.circular(24.r),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.03),
@@ -687,23 +688,23 @@ class _EditprofilescreenState extends State<Editprofilescreen> {
                       ),
                       child: TextField(
                         controller: nameController,
-                        style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.sp),
                         decoration: InputDecoration(
                           hintText: "Full Name",
-                          prefixIcon: const Icon(Icons.person_rounded, color: Colors.black45),
+                          prefixIcon: Icon(Icons.person_rounded, color: Colors.black45),
                           border: InputBorder.none,
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.w),
                         ),
                       ),
                     ),
 
-                    const SizedBox(height: 20),
+                    SizedBox(height: 20.w),
 
                     // Read-only Phone Number Field
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.grey.shade100, // Light grey to indicate read-only
-                        borderRadius: BorderRadius.circular(24),
+                        borderRadius: BorderRadius.circular(24.r),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.01),
@@ -715,45 +716,45 @@ class _EditprofilescreenState extends State<Editprofilescreen> {
                       child: TextField(
                         controller: phoneController,
                         enabled: false,
-                        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: Colors.grey.shade600),
+                        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.sp, color: Colors.grey.shade600),
                         decoration: InputDecoration(
                           hintText: "Phone Number",
                           prefixIcon: Icon(Icons.phone_rounded, color: Colors.grey.shade400),
                           suffixIcon: Icon(Icons.lock_outline_rounded, color: Colors.grey.shade400, size: 20),
                           border: InputBorder.none,
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.w),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12.w),
                     Text(
                       "Phone number cannot be changed for security reasons",
                       style: TextStyle(
                         color: Colors.orange.shade700,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
 
-                    const SizedBox(height: 48),
+                    SizedBox(height: 48.w),
 
                     // Save Button
                     SizedBox(
                       width: double.infinity,
-                      height: 56,
+                      height: 56.w,
                       child: ElevatedButton(
                         onPressed: _saveProfile,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF0F9D58),
                           foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
+                            borderRadius: BorderRadius.circular(16.r),
                           ),
                           elevation: 0,
                         ),
-                        child: const Text(
+                        child: Text(
                           "Save Changes",
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),

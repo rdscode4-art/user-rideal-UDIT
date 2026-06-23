@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rideal/screens/wallet/AddAmount.dart';
@@ -159,14 +160,14 @@ class _WalletState extends State<Wallet> {
           children: [
             // Floating Header
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
+              padding: EdgeInsets.fromLTRB(16, 8, 16, 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
                     child: Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10.w),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,
@@ -178,13 +179,13 @@ class _WalletState extends State<Wallet> {
                           ),
                         ],
                       ),
-                      child: const Icon(Icons.arrow_back, color: Colors.black87, size: 20),
+                      child: Icon(Icons.arrow_back, color: Colors.black87, size: 20),
                     ),
                   ),
-                  const Text(
+                  Text(
                     "Wallet",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
@@ -192,7 +193,7 @@ class _WalletState extends State<Wallet> {
                   GestureDetector(
                     onTap: _refreshWallet,
                     child: Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10.w),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,
@@ -204,7 +205,7 @@ class _WalletState extends State<Wallet> {
                           ),
                         ],
                       ),
-                      child: const Icon(Icons.refresh, color: Colors.black87, size: 20),
+                      child: Icon(Icons.refresh, color: Colors.black87, size: 20),
                     ),
                   ),
                 ],
@@ -213,7 +214,7 @@ class _WalletState extends State<Wallet> {
 
             // Top Section with Premium Balance Card and Actions
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Column(
                 children: [
                   // Digital Credit Card (Balance Card)
@@ -225,7 +226,7 @@ class _WalletState extends State<Wallet> {
                       "Available Balance",
                     ),
 
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12.w),
 
                   // Action Buttons (Add Money)
                   Row(
@@ -234,10 +235,10 @@ class _WalletState extends State<Wallet> {
                         child: GestureDetector(
                           onTap: _navigateToAddMoney,
                           child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            padding: EdgeInsets.symmetric(vertical: 10.w),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20.r),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.03),
@@ -250,18 +251,18 @@ class _WalletState extends State<Wallet> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.all(8),
+                                  padding: EdgeInsets.all(8.w),
                                   decoration: BoxDecoration(
                                     color: const Color(0xFF0F9D58).withOpacity(0.1),
                                     shape: BoxShape.circle,
                                   ),
-                                  child: const Icon(Icons.add, color: Color(0xFF0F9D58), size: 18),
+                                  child: Icon(Icons.add, color: Color(0xFF0F9D58), size: 18),
                                 ),
-                                const SizedBox(width: 8),
-                                const Text(
+                                SizedBox(width: 8.w),
+                                Text(
                                   "Add Money",
                                   style: TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 15.sp,
                                     fontWeight: FontWeight.w700,
                                     color: Colors.black87,
                                   ),
@@ -277,22 +278,22 @@ class _WalletState extends State<Wallet> {
                   // Show error message if any
                   if (errorMessage.isNotEmpty)
                     Padding(
-                      padding: const EdgeInsets.only(top: 16),
+                      padding: EdgeInsets.only(top: 16.w),
                       child: Container(
-                        padding: const EdgeInsets.all(12),
+                        padding: EdgeInsets.all(12.w),
                         decoration: BoxDecoration(
                           color: Colors.red.shade50,
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(12.r),
                           border: Border.all(color: Colors.red.shade100),
                         ),
                         child: Row(
                           children: [
                             Icon(Icons.error_outline, color: Colors.red.shade600, size: 20),
-                            const SizedBox(width: 12),
+                            SizedBox(width: 12.w),
                             Expanded(
                               child: Text(
                                 errorMessage,
-                                style: TextStyle(color: Colors.red.shade700, fontSize: 13, fontWeight: FontWeight.w500),
+                                style: TextStyle(color: Colors.red.shade700, fontSize: 13.sp, fontWeight: FontWeight.w500),
                               ),
                             ),
                           ],
@@ -303,18 +304,18 @@ class _WalletState extends State<Wallet> {
               ),
             ),
 
-            const SizedBox(height: 16),
+            SizedBox(height: 16.w),
 
             // Transactions Section Header
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     "Recent Transactions",
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 18.sp,
                       fontWeight: FontWeight.w800,
                       color: Colors.black87,
                     ),
@@ -322,17 +323,17 @@ class _WalletState extends State<Wallet> {
                   if (transactions.isNotEmpty)
                     Text(
                       "${transactions.length} total",
-                      style: TextStyle(fontSize: 13, color: Colors.grey.shade500, fontWeight: FontWeight.w600),
+                      style: TextStyle(fontSize: 13.sp, color: Colors.grey.shade500, fontWeight: FontWeight.w600),
                     ),
                 ],
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16.w),
 
             // Transactions List
             Expanded(
               child: isLoading
-                  ? const Center(
+                  ? Center(
                       child: CircularProgressIndicator(
                         valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF0F9D58)),
                       ),
@@ -340,9 +341,9 @@ class _WalletState extends State<Wallet> {
                   : transactions.isEmpty
                       ? _buildEmptyTransactions()
                       : ListView.separated(
-                          padding: const EdgeInsets.only(left: 16, right: 16, bottom: 20),
+                          padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 20.w),
                           itemCount: transactions.length,
-                          separatorBuilder: (context, index) => const SizedBox(height: 6),
+                          separatorBuilder: (context, index) => SizedBox(height: 6.w),
                           itemBuilder: (BuildContext context, int index) {
                             final transaction = transactions[index];
                             return _buildTransactionCard(transaction);
@@ -359,15 +360,15 @@ class _WalletState extends State<Wallet> {
   Widget _buildEmptyTransactions() {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(32),
+        padding: EdgeInsets.all(32.w),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.all(20.w),
               decoration: BoxDecoration(
                 color: Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(20.r),
               ),
               child: Icon(
                 Icons.receipt_long,
@@ -375,33 +376,33 @@ class _WalletState extends State<Wallet> {
                 color: Colors.grey.shade400,
               ),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 16.w),
             Text(
               "No Transactions Yet",
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.w600,
                 color: Colors.grey.shade600,
               ),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 8.w),
             Text(
               "Your transaction history will appear here\nonce you start using your wallet.",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 14.sp,
                 color: Colors.grey.shade500,
-                height: 1.4,
+                height: 1.4.w,
               ),
             ),
-            SizedBox(height: 24),
+            SizedBox(height: 24.w),
             ElevatedButton(
               onPressed: _navigateToAddMoney,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green.shade600,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
               ),
               child: Text("Add Money to Get Started"),
@@ -416,22 +417,22 @@ class _WalletState extends State<Wallet> {
   Widget _buildLoadingBalanceCard() {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(24.w),
       decoration: BoxDecoration(
         color: Colors.grey.shade200,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(24.r),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 40, height: 40,
+            width: 40.w, height: 40.w,
             decoration: BoxDecoration(color: Colors.grey.shade300, shape: BoxShape.circle),
           ),
-          const SizedBox(height: 20),
-          Container(width: 80, height: 14, color: Colors.grey.shade300),
-          const SizedBox(height: 8),
-          Container(width: 140, height: 32, color: Colors.grey.shade300),
+          SizedBox(height: 20.w),
+          Container(width: 80.w, height: 14.w, color: Colors.grey.shade300),
+          SizedBox(height: 8.w),
+          Container(width: 140.w, height: 32.w, color: Colors.grey.shade300),
         ],
       ),
     );
@@ -440,14 +441,14 @@ class _WalletState extends State<Wallet> {
   Widget _buildBalanceCard(String amount, String description) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [Colors.green.shade700, Colors.green.shade500],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(24.r),
         boxShadow: [
           BoxShadow(
             color: Colors.green.shade700.withOpacity(0.4),
@@ -463,7 +464,7 @@ class _WalletState extends State<Wallet> {
             right: -20,
             top: -20,
             child: Container(
-              width: 100, height: 100,
+              width: 100.w, height: 100.w,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.white.withOpacity(0.05),
@@ -471,10 +472,10 @@ class _WalletState extends State<Wallet> {
             ),
           ),
           Positioned(
-            right: 40,
+            right: 40.w,
             bottom: -40,
             child: Container(
-              width: 120, height: 120,
+              width: 120.w, height: 120.w,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.white.withOpacity(0.05),
@@ -489,31 +490,31 @@ class _WalletState extends State<Wallet> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10.w),
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.15),
-                      borderRadius: BorderRadius.circular(14),
+                      borderRadius: BorderRadius.circular(14.r),
                     ),
-                    child: const Icon(Icons.account_balance_wallet_rounded, color: Colors.white, size: 20),
+                    child: Icon(Icons.account_balance_wallet_rounded, color: Colors.white, size: 20),
                   ),
-                  const Text("RiDeal Pay", style: TextStyle(color: Colors.white70, fontWeight: FontWeight.w600, fontSize: 13, letterSpacing: 1)),
+                  Text("RiDeal Pay", style: TextStyle(color: Colors.white70, fontWeight: FontWeight.w600, fontSize: 13.sp, letterSpacing: 1)),
                 ],
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12.w),
               Text(
                 description,
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   color: Colors.white.withOpacity(0.8),
                   fontWeight: FontWeight.w500,
                   letterSpacing: 0.5,
                 ),
               ),
-              const SizedBox(height: 4),
+              SizedBox(height: 4.w),
               Text(
                 amount,
-                style: const TextStyle(
-                  fontSize: 36,
+                style: TextStyle(
+                  fontSize: 36.sp,
                   fontWeight: FontWeight.w800,
                   color: Colors.white,
                   letterSpacing: -1,
@@ -539,10 +540,10 @@ class _WalletState extends State<Wallet> {
     final String amountText = "${isCredit ? '+' : '-'}₹$amount";
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.03),
@@ -554,7 +555,7 @@ class _WalletState extends State<Wallet> {
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.all(8.w),
             decoration: BoxDecoration(
               color: isCredit ? const Color(0xFF0F9D58).withOpacity(0.1) : Colors.red.shade50,
               shape: BoxShape.circle,
@@ -565,35 +566,35 @@ class _WalletState extends State<Wallet> {
               size: 16,
             ),
           ),
-          const SizedBox(width: 10),
+          SizedBox(width: 10.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
-                    fontSize: 14,
+                  style: TextStyle(
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                   ),
                 ),
                 Text(
                   formattedDate,
-                  style: TextStyle(fontSize: 11, color: Colors.grey.shade500, fontWeight: FontWeight.w500),
+                  style: TextStyle(fontSize: 11.sp, color: Colors.grey.shade500, fontWeight: FontWeight.w500),
                 ),
                 if (method.isNotEmpty) ...[
-                  const SizedBox(height: 6),
+                  SizedBox(height: 6.w),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.w),
                     decoration: BoxDecoration(
                       color: Colors.grey.shade100,
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(8.r),
                     ),
                     child: Text(
                       method.toUpperCase(),
                       style: TextStyle(
-                        fontSize: 10,
+                        fontSize: 10.sp,
                         color: Colors.grey.shade700,
                         fontWeight: FontWeight.w700,
                         letterSpacing: 0.5,
@@ -607,7 +608,7 @@ class _WalletState extends State<Wallet> {
           Text(
             amountText,
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 14.sp,
               fontWeight: FontWeight.w800,
               color: amountColor,
             ),

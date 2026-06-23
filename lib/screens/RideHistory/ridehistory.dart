@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:rideal/authservices.dart';
 import 'package:rideal/screens/RideHistory/ridehistoryspecific.dart';
@@ -111,14 +112,14 @@ String formatDate(String dateTimeString) {
           children: [
             // Floating Header
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
+              padding: EdgeInsets.fromLTRB(16, 8, 16, 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
                     child: Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10.w),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,
@@ -130,18 +131,18 @@ String formatDate(String dateTimeString) {
                           ),
                         ],
                       ),
-                      child: const Icon(Icons.arrow_back, color: Colors.black87, size: 20),
+                      child: Icon(Icons.arrow_back, color: Colors.black87, size: 20),
                     ),
                   ),
-                  const Text(
+                  Text(
                     "Ride History",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
                   ),
-                  const SizedBox(width: 40), // Balance the row
+                  SizedBox(width: 40.w), // Balance the row
                 ],
               ),
             ),
@@ -151,17 +152,17 @@ String formatDate(String dateTimeString) {
                 future: Authservices.fetchRideHistory(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF0F9D58))));
+                    return Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF0F9D58))));
                   } else if (snapshot.hasError) {
-                    return Center(child: Text("Error: ${snapshot.error}", style: const TextStyle(color: Colors.grey)));
+                    return Center(child: Text("Error: ${snapshot.error}", style: TextStyle(color: Colors.grey)));
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                     return Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(Icons.history_rounded, size: 64, color: Colors.grey.shade300),
-                          const SizedBox(height: 16),
-                          Text("No rides found", style: TextStyle(color: Colors.grey.shade500, fontSize: 16, fontWeight: FontWeight.w600)),
+                          SizedBox(height: 16.w),
+                          Text("No rides found", style: TextStyle(color: Colors.grey.shade500, fontSize: 16.sp, fontWeight: FontWeight.w600)),
                         ],
                       ),
                     );
@@ -169,7 +170,7 @@ String formatDate(String dateTimeString) {
                     final rides = snapshot.data!;
 
                     return ListView.builder(
-                      padding: const EdgeInsets.only(bottom: 24),
+                      padding: EdgeInsets.only(bottom: 24.w),
                       itemCount: rides.length,
                       itemBuilder: (context, index) {
                         final ride = rides[index];
@@ -190,11 +191,11 @@ String formatDate(String dateTimeString) {
                                 to: "Loading...",
                                 isBus: false,
                                 subtitle: ride.status.isNotEmpty ? ride.status : "",
-                                extraWidget: const Column(
+                                extraWidget: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text("Loading route details...", 
-                                        style: TextStyle(fontSize: 12, color: Colors.grey, fontWeight: FontWeight.w500)),
+                                        style: TextStyle(fontSize: 12.sp, color: Colors.grey, fontWeight: FontWeight.w500)),
                                   ],
                                 ),
                               );
@@ -229,13 +230,13 @@ String formatDate(String dateTimeString) {
                                         label = "Stop $i";
                                       }
                                       return Padding(
-                                        padding: const EdgeInsets.only(top: 4.0),
+                                        padding: EdgeInsets.only(top: 4.0.w),
                                         child: Row(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                            Text("$label:", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey.shade600)),
-                                            const SizedBox(width: 4),
-                                            Expanded(child: Text(address, style: const TextStyle(fontSize: 12, color: Colors.black87))),
+                                            Text("$label:", style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold, color: Colors.grey.shade600)),
+                                            SizedBox(width: 4.w),
+                                            Expanded(child: Text(address, style: TextStyle(fontSize: 12.sp, color: Colors.black87))),
                                           ],
                                         ),
                                       );

@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 
 
@@ -36,10 +37,10 @@ class RideOptionCard extends StatelessWidget {
         );
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+        margin: EdgeInsets.symmetric(vertical: 10.w, horizontal: 16.w),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(24.r),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.04),
@@ -49,7 +50,7 @@ class RideOptionCard extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(20.0.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -58,15 +59,15 @@ class RideOptionCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.w),
                     decoration: BoxDecoration(
                       color: Colors.grey.shade100,
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(20.r),
                     ),
                     child: Text(
                       startTime,
-                      style: const TextStyle(
-                        fontSize: 13,
+                      style: TextStyle(
+                        fontSize: 13.sp,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
                       ),
@@ -74,15 +75,15 @@ class RideOptionCard extends StatelessWidget {
                   ),
                   if (subtitle.isNotEmpty)
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.w),
                       decoration: BoxDecoration(
                         color: _getStatusColor(subtitle).withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(20.r),
                       ),
                       child: Text(
                         subtitle.toUpperCase(),
                         style: TextStyle(
-                          fontSize: 11,
+                          fontSize: 11.sp,
                           fontWeight: FontWeight.w800,
                           color: _getStatusColor(subtitle),
                           letterSpacing: 0.5,
@@ -91,7 +92,7 @@ class RideOptionCard extends StatelessWidget {
                     ),
                 ],
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.w),
 
               // Route Timeline
               Row(
@@ -100,21 +101,21 @@ class RideOptionCard extends StatelessWidget {
                   Column(
                     children: [
                       Container(
-                        width: 12,
-                        height: 12,
-                        decoration: const BoxDecoration(
+                        width: 12.w,
+                        height: 12.w,
+                        decoration: BoxDecoration(
                           color: Color(0xFF0F9D58),
                           shape: BoxShape.circle,
                         ),
                       ),
                       Container(
-                        width: 2,
-                        height: 30,
+                        width: 2.w,
+                        height: 30.w,
                         color: Colors.grey.shade200,
                       ),
                       Container(
-                        width: 12,
-                        height: 12,
+                        width: 12.w,
+                        height: 12.w,
                         decoration: BoxDecoration(
                           color: Colors.black87,
                           shape: BoxShape.rectangle,
@@ -122,26 +123,26 @@ class RideOptionCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(width: 16),
+                  SizedBox(width: 16.w),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           from,
-                          style: const TextStyle(
-                            fontSize: 15,
+                          style: TextStyle(
+                            fontSize: 15.sp,
                             fontWeight: FontWeight.w600,
                             color: Colors.black87,
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        const SizedBox(height: 24),
+                        SizedBox(height: 24.w),
                         Text(
                           to,
-                          style: const TextStyle(
-                            fontSize: 15,
+                          style: TextStyle(
+                            fontSize: 15.sp,
                             fontWeight: FontWeight.w600,
                             color: Colors.black87,
                           ),
@@ -155,9 +156,9 @@ class RideOptionCard extends StatelessWidget {
               ),
 
               if (extraWidget != null) ...[
-                const SizedBox(height: 16),
+                SizedBox(height: 16.w),
                 Divider(color: Colors.grey.shade100, thickness: 1),
-                const SizedBox(height: 12),
+                SizedBox(height: 12.w),
                 extraWidget!,
               ]
             ],

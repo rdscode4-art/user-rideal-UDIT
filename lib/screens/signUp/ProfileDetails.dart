@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rideal/screens/dashboard/BottomNavigation.dart';
 import 'package:flutter/material.dart';
 
@@ -13,56 +14,56 @@ class ProfileScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Back and Title
               Row(
                 children: [
-                  const Icon(Icons.arrow_back_ios, size: 18),
-                  const SizedBox(width: 4),
+                  Icon(Icons.arrow_back_ios, size: 18),
+                  SizedBox(width: 4.w),
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
-                    child: const Text('Back', style: TextStyle(fontSize: 16)),
+                    child: Text('Back', style: TextStyle(fontSize: 16.sp)),
                   ),
                 ],
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24.w),
 
               // Title
-              const Center(
+              Center(
                 child: Text(
                   'Profile',
                   style: TextStyle(
-                    fontSize: 22,
+                    fontSize: 22.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24.w),
 
               // Profile image
               Center(
                 child: Stack(
                   alignment: Alignment.bottomRight,
                   children: [
-                    const CircleAvatar(
+                    CircleAvatar(
                       radius: 45,
                       backgroundColor: Colors.grey,
                       child: Icon(Icons.person, size: 50, color: Colors.white),
                     ),
                     Positioned(
-                      right: 4,
-                      bottom: 4,
+                      right: 4.w,
+                      bottom: 4.w,
                       child: Container(
                         decoration: BoxDecoration(
                           color: Colors.amber,
                           shape: BoxShape.circle,
-                          border: Border.all(color: Colors.white, width: 2),
+                          border: Border.all(color: Colors.white, width: 2.w),
                         ),
-                        padding: const EdgeInsets.all(6),
-                        child: const Icon(
+                        padding: EdgeInsets.all(6.w),
+                        child: Icon(
                           Icons.edit,
                           size: 16,
                           color: Colors.white,
@@ -72,22 +73,22 @@ class ProfileScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 32),
+              SizedBox(height: 32.w),
 
               // Full Name
-              const TextField(
+              TextField(
                 decoration: InputDecoration(
                   hintText: 'Full Name',
                   border: OutlineInputBorder(),
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.w),
 
               // Phone with flag
               Row(
                 children: [
                   Expanded(
-                    child: const TextField(
+                    child: TextField(
                       decoration: InputDecoration(
                         hintText: '+880 Your mobile number',
                         border: OutlineInputBorder(),
@@ -97,25 +98,25 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.w),
 
               // Email
-              // const TextField(
+              // TextField(
               //   decoration: InputDecoration(
               //     hintText: 'Email',
               //     border: OutlineInputBorder(),
               //   ),
               // ),
-              // const SizedBox(height: 16),
+              // SizedBox(height: 16.w),
 
               // Street
-              const TextField(
+              TextField(
                 decoration: InputDecoration(
                   hintText: 'Street',
                   border: OutlineInputBorder(),
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.w),
 
               // City dropdown
               DropdownButtonFormField<String>(
@@ -131,7 +132,7 @@ class ProfileScreen extends StatelessWidget {
                     .toList(),
                 onChanged: (value) {},
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.w),
 
               // District dropdown
               DropdownButtonFormField<String>(
@@ -147,7 +148,7 @@ class ProfileScreen extends StatelessWidget {
                     .toList(),
                 onChanged: (value) {},
               ),
-              const SizedBox(height: 32),
+              SizedBox(height: 32.w),
 
               // Buttons
               Row(
@@ -156,13 +157,13 @@ class ProfileScreen extends StatelessWidget {
                     child: OutlinedButton(
                       onPressed: () {},
                       style: OutlinedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        padding: EdgeInsets.symmetric(vertical: 16.w),
                         side: const BorderSide(color: Colors.grey),
                       ),
-                      child: const Text('Cancel'),
+                      child: Text('Cancel'),
                     ),
                   ),
-                  const SizedBox(width: 16),
+                  SizedBox(width: 16.w),
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
@@ -170,9 +171,9 @@ class ProfileScreen extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFFFC107),
-                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        padding: EdgeInsets.symmetric(vertical: 16.w),
                       ),
-                      child: const Text(
+                      child: Text(
                         'Save',
                         style: TextStyle(color: Colors.black87),
                       ),
@@ -180,7 +181,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.w),
             ],
           ),
         ),

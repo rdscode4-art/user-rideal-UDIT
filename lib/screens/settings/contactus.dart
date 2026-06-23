@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 
 class ContactUsScreen extends StatefulWidget {
@@ -61,13 +62,13 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
         keyboardType: keyboardType,
         maxLines: maxLines,
         validator: validator,
-        style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.sp),
         decoration: InputDecoration(
           hintText: hintText,
           prefixIcon: Icon(prefixIcon, color: Colors.black45),
           border: InputBorder.none,
           contentPadding: EdgeInsets.symmetric(
-            horizontal: 24,
+            horizontal: 24.w,
             vertical: maxLines > 1 ? 16 : 20,
           ),
         ),
@@ -84,14 +85,14 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
           children: [
             // Custom Floating Header
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
+              padding: EdgeInsets.fromLTRB(16, 8, 16, 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
                     child: Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10.w),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,
@@ -103,25 +104,25 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                           ),
                         ],
                       ),
-                      child: const Icon(Icons.arrow_back, color: Colors.black87, size: 20),
+                      child: Icon(Icons.arrow_back, color: Colors.black87, size: 20),
                     ),
                   ),
-                  const Text(
+                  Text(
                     "Contact Us",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
                   ),
-                  const SizedBox(width: 40), // spacer for balance
+                  SizedBox(width: 40.w), // spacer for balance
                 ],
               ),
             ),
 
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.w),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -130,10 +131,10 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       // Intro Info Card
                       Container(
                         width: double.infinity,
-                        padding: const EdgeInsets.all(20),
+                        padding: EdgeInsets.all(20.w),
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(20.r),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.04),
@@ -145,20 +146,20 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         child: Row(
                           children: [
                             Container(
-                              padding: const EdgeInsets.all(10),
+                              padding: EdgeInsets.all(10.w),
                               decoration: BoxDecoration(
                                 color: const Color(0xFF0F9D58).withOpacity(0.08),
                                 shape: BoxShape.circle,
                               ),
-                              child: const Icon(Icons.headset_mic_rounded, color: Color(0xFF0F9D58), size: 22),
+                              child: Icon(Icons.headset_mic_rounded, color: Color(0xFF0F9D58), size: 22),
                             ),
-                            const SizedBox(width: 14),
+                            SizedBox(width: 14.w),
                             Expanded(
                               child: Text(
                                 "We're here to help. Please fill out the form below and we'll get back to you shortly.",
                                 style: TextStyle(
-                                  fontSize: 14,
-                                  height: 1.5,
+                                  fontSize: 14.sp,
+                                  height: 1.5.w,
                                   color: Colors.grey.shade700,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -168,7 +169,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         ),
                       ),
 
-                      const SizedBox(height: 24),
+                      SizedBox(height: 24.w),
 
                       _buildTextField(
                         controller: _nameController,
@@ -177,7 +178,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         validator: (value) => value == null || value.trim().isEmpty ? "Enter your name" : null,
                       ),
 
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16.w),
 
                       _buildTextField(
                         controller: _emailController,
@@ -187,7 +188,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         validator: (value) => value != null && value.contains("@") ? null : "Enter a valid email",
                       ),
 
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16.w),
 
                       _buildTextField(
                         controller: _messageController,
@@ -197,24 +198,24 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         validator: (value) => value == null || value.trim().isEmpty ? "Enter your message" : null,
                       ),
 
-                      const SizedBox(height: 32),
+                      SizedBox(height: 32.w),
 
                       SizedBox(
                         width: double.infinity,
-                        height: 56,
+                        height: 56.w,
                         child: ElevatedButton(
                           onPressed: _submitForm,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF0F9D58),
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(16.r),
                             ),
                             elevation: 0,
                           ),
-                          child: const Text(
+                          child: Text(
                             "Send Message",
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),

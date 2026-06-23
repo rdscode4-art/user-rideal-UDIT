@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -150,7 +151,7 @@ class _ContactInfoSectionState extends State<ContactInfoSection>
         content: Text(message),
         backgroundColor: Colors.red[600],
         behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
       ),
     );
   }
@@ -158,7 +159,7 @@ class _ContactInfoSectionState extends State<ContactInfoSection>
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: EdgeInsets.all(12.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -173,7 +174,7 @@ class _ContactInfoSectionState extends State<ContactInfoSection>
                   child: Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(6),
+                        padding: EdgeInsets.all(6.w),
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [Colors.blue[100]!, Colors.purple[100]!],
@@ -186,7 +187,7 @@ class _ContactInfoSectionState extends State<ContactInfoSection>
                           size: 16,
                         ),
                       ),
-                      const SizedBox(width: 10),
+                      SizedBox(width: 10.w),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -194,7 +195,7 @@ class _ContactInfoSectionState extends State<ContactInfoSection>
                             Text(
                               'Contact RiDeal',
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 14.sp,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.grey[800],
                               ),
@@ -202,7 +203,7 @@ class _ContactInfoSectionState extends State<ContactInfoSection>
                             Text(
                               'Tap to call or email',
                               style: TextStyle(
-                                  fontSize: 11,
+                                  fontSize: 11.sp,
                                   color: Colors.grey[600],
                                 ),
                             ),
@@ -216,7 +217,7 @@ class _ContactInfoSectionState extends State<ContactInfoSection>
             },
           ),
 
-          const SizedBox(height: 12),
+          SizedBox(height: 12.w),
 
           // Animated Action Buttons
           AnimatedBuilder(
@@ -240,7 +241,7 @@ class _ContactInfoSectionState extends State<ContactInfoSection>
                         },
                       ),
                     ),
-                    SizedBox(width: 12),
+                    SizedBox(width: 12.w),
                     // Email Button
                     Expanded(
                       child: _buildActionButton(
@@ -270,7 +271,7 @@ class _ContactInfoSectionState extends State<ContactInfoSection>
                 _showPhoneNumbers
                     ? Column(
                       children: [
-                        SizedBox(height: 14),
+                        SizedBox(height: 14.w),
                         ..._phoneNumbers.asMap().entries.map((entry) {
                           return _buildAnimatedContactItem(
                             entry.value,
@@ -292,7 +293,7 @@ class _ContactInfoSectionState extends State<ContactInfoSection>
                 _showEmails
                     ? Column(
                       children: [
-                        SizedBox(height: 14),
+                        SizedBox(height: 14.w),
                         ..._emails.asMap().entries.map((entry) {
                           return _buildAnimatedContactItem(
                             entry.value,
@@ -319,9 +320,9 @@ class _ContactInfoSectionState extends State<ContactInfoSection>
       color: Colors.transparent,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10.r),
         child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+          padding: EdgeInsets.symmetric(vertical: 8.w, horizontal: 10.w),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
@@ -331,8 +332,8 @@ class _ContactInfoSectionState extends State<ContactInfoSection>
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: color.withValues(alpha: 0.3), width: 1.5),
+            borderRadius: BorderRadius.circular(10.r),
+            border: Border.all(color: color.withValues(alpha: 0.3), width: 1.5.w),
             boxShadow: [
               BoxShadow(
                 color: color.withValues(alpha: 0.05),
@@ -345,13 +346,13 @@ class _ContactInfoSectionState extends State<ContactInfoSection>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(icon, color: color, size: 18),
-              SizedBox(width: 6),
+              SizedBox(width: 6.w),
               Text(
                 label,
                 style: TextStyle(
                   color: color,
                   fontWeight: FontWeight.w600,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                 ),
               ),
             ],
@@ -379,17 +380,17 @@ class _ContactInfoSectionState extends State<ContactInfoSection>
           child: Opacity(
             opacity: clampedOpacity,
             child: Container(
-              margin: EdgeInsets.only(bottom: 10),
+              margin: EdgeInsets.only(bottom: 10.w),
               child: Material(
                 color: Colors.transparent,
                 child: InkWell(
                   onTap: onTap,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(8.r),
                   child: Container(
-                    padding: EdgeInsets.all(12),
+                    padding: EdgeInsets.all(12.w),
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(8.r),
                       border: Border.all(
                         color:
                             item.icon == Icons.phone
@@ -407,7 +408,7 @@ class _ContactInfoSectionState extends State<ContactInfoSection>
                     child: Row(
                       children: [
                         Container(
-                          padding: EdgeInsets.all(6),
+                          padding: EdgeInsets.all(6.w),
                           decoration: BoxDecoration(
                             color:
                                 item.icon == Icons.phone
@@ -424,7 +425,7 @@ class _ContactInfoSectionState extends State<ContactInfoSection>
                             size: 18,
                           ),
                         ),
-                        SizedBox(width: 12),
+                        SizedBox(width: 12.w),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -432,16 +433,16 @@ class _ContactInfoSectionState extends State<ContactInfoSection>
                               Text(
                                 item.label,
                                 style: TextStyle(
-                                  fontSize: 14,
+                                  fontSize: 14.sp,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.grey[800],
                                 ),
                               ),
-                              SizedBox(height: 3),
+                              SizedBox(height: 3.w),
                               Text(
                                 item.value,
                                 style: TextStyle(
-                                  fontSize: 12,
+                                  fontSize: 12.sp,
                                   color:
                                       item.icon == Icons.phone
                                           ? Colors.green[700]
@@ -450,11 +451,11 @@ class _ContactInfoSectionState extends State<ContactInfoSection>
                                 ),
                               ),
                               if (item.description != null) ...[
-                                SizedBox(height: 2),
+                                SizedBox(height: 2.w),
                                 Text(
                                   item.description!,
                                   style: TextStyle(
-                                    fontSize: 11,
+                                    fontSize: 11.sp,
                                     color: Colors.grey[600],
                                   ),
                                 ),

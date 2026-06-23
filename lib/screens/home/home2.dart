@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:rideal/authservices.dart';
@@ -55,9 +56,9 @@ class ResponsiveHelper {
         context,
         mobile: 16,
         tablet: 32,
-        desktop: 48,
+        desktop: 48.w,
       ),
-      vertical: 8,
+      vertical: 8.w,
     );
   }
 }
@@ -238,7 +239,7 @@ class _Home2State extends State<Home2> {
     final isDesktop = ResponsiveHelper.isDesktop(context);
 
     if (_loading) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+      return Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     if (token == null || token!.isEmpty) {
@@ -251,7 +252,7 @@ class _Home2State extends State<Home2> {
                 context,
                 mobile: 18,
                 tablet: 22,
-                desktop: 24,
+                desktop: 24.w,
               ),
               fontWeight: FontWeight.bold,
             ),
@@ -281,7 +282,7 @@ class _Home2State extends State<Home2> {
           // Desktop sidebar navigation
           if (isDesktop)
             Container(
-              width: 280,
+              width: 280.w,
               color: Colors.green.shade50,
               child: CustomDrawer(
                 logoutUser: () async {
@@ -334,7 +335,7 @@ class _Home2State extends State<Home2> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildHeader(context, isMobile, isTablet, isDesktop),
-              const SizedBox(height: 24),
+              SizedBox(height: 24.w),
               // Action Cards (replacing service chips)
               _buildActionCards(context),
               SizedBox(
@@ -342,7 +343,7 @@ class _Home2State extends State<Home2> {
                   context,
                   mobile: 15,
                   tablet: 20,
-                  desktop: 25,
+                  desktop: 25.w,
                 ),
               ),
               // Recent Searches Section
@@ -361,12 +362,12 @@ class _Home2State extends State<Home2> {
                   context,
                   mobile: 20,
                   tablet: 25,
-                  desktop: 30,
+                  desktop: 30.w,
                 ),
               ),
               // Additional Features
               _buildAdditionalFeatures(context, isMobile, isTablet, isDesktop),
-              const SizedBox(height: 180),
+              SizedBox(height: 180.w),
             ],
           ),
         ),
@@ -383,9 +384,9 @@ class _Home2State extends State<Home2> {
     return Padding(
       padding: EdgeInsets.only(
         top: MediaQuery.of(context).padding.top + 16, // Reverted based on user feedback
-        left: 20,
-        right: 20,
-        bottom: 8,
+        left: 20.w,
+        right: 20.w,
+        bottom: 8.w,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -395,14 +396,14 @@ class _Home2State extends State<Home2> {
             children: [
               Image.asset(
                 "assets/images/logorideal.png",
-                height: 75, // Massive logo
+                height: 75.w, // Massive logo
                 fit: BoxFit.contain,
               ),
               if (isMobile)
                 GestureDetector(
                   onTap: () => _scaffoldKey.currentState?.openDrawer(),
                   child: Container(
-                    padding: const EdgeInsets.all(8), // Scaled down
+                    padding: EdgeInsets.all(8.w), // Scaled down
                     decoration: BoxDecoration(
                       color: Colors.white,
                       shape: BoxShape.circle,
@@ -414,30 +415,30 @@ class _Home2State extends State<Home2> {
                         ),
                       ],
                     ),
-                    child: const Icon(Icons.menu, color: Colors.black87, size: 20), // Changed to menu icon
+                    child: Icon(Icons.menu, color: Colors.black87, size: 20), // Changed to menu icon
                   ),
                 ),
             ],
           ),
-          const SizedBox(height: 0), // Removed spacing to compensate for 52px logo, keeping "Good morning" in place
+          SizedBox(height: 0), // Removed spacing to compensate for 52px logo, keeping "Good morning" in place
           Text(
             _getTimeBasedGreeting(),
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.black54,
-              fontSize: 14, // Scaled down
+              fontSize: 14.sp, // Scaled down
               fontWeight: FontWeight.w500,
             ),
           ),
-          const Text(
+          Text(
             "Where to next?",
             style: TextStyle(
               color: Colors.black87,
-              fontSize: 22, // Scaled down from 34
+              fontSize: 22.sp, // Scaled down from 34
               fontWeight: FontWeight.w800,
               letterSpacing: -0.5,
             ),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.w),
           GestureDetector(
             onTap: () async {
               await Navigator.push(
@@ -447,11 +448,11 @@ class _Home2State extends State<Home2> {
               loadRecentSearches();
             },
             child: Container(
-              height: 50, // Scaled down from 64
-              padding: const EdgeInsets.only(left: 16, right: 6),
+              height: 50.w, // Scaled down from 64
+              padding: EdgeInsets.only(left: 16.w, right: 6.w),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(25),
+                borderRadius: BorderRadius.circular(25.r),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.04),
@@ -462,26 +463,26 @@ class _Home2State extends State<Home2> {
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.search, color: Colors.black54, size: 20),
-                  const SizedBox(width: 12),
-                  const Expanded(
+                  Icon(Icons.search, color: Colors.black54, size: 20),
+                  SizedBox(width: 12.w),
+                  Expanded(
                     child: Text(
                       "Enter destination...",
                       style: TextStyle(
                         color: Colors.black38,
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
                   Container(
-                    height: 38, // Scaled down
-                    width: 38,
-                    decoration: const BoxDecoration(
+                    height: 38.w, // Scaled down
+                    width: 38.w,
+                    decoration: BoxDecoration(
                       color: Color(0xFF0F9D58),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.arrow_forward, color: Colors.white, size: 18),
+                    child: Icon(Icons.arrow_forward, color: Colors.white, size: 18),
                   ),
                 ],
               ),
@@ -513,7 +514,7 @@ class _Home2State extends State<Home2> {
 
     // Ultra-compact, premium "squircle" chips
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: services.map((service) {
@@ -524,12 +525,12 @@ class _Home2State extends State<Home2> {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => route()));
               },
               child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 6),
-                padding: const EdgeInsets.symmetric(vertical: 12),
+                margin: EdgeInsets.symmetric(horizontal: 6.w),
+                padding: EdgeInsets.symmetric(vertical: 12.w),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: Colors.grey.shade100, width: 1),
+                  borderRadius: BorderRadius.circular(16.r),
+                  border: Border.all(color: Colors.grey.shade100, width: 1.w),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.02),
@@ -541,7 +542,7 @@ class _Home2State extends State<Home2> {
                 child: Column(
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(8),
+                      padding: EdgeInsets.all(8.w),
                       decoration: BoxDecoration(
                         color: const Color(0xFF0F9D58).withOpacity(0.08),
                         shape: BoxShape.circle,
@@ -552,12 +553,12 @@ class _Home2State extends State<Home2> {
                         size: 22,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8.w),
                     Text(
                       service['title'] as String,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.w600,
-                        fontSize: 11,
+                        fontSize: 11.sp,
                         color: Colors.black87,
                       ),
                       textAlign: TextAlign.center,
@@ -593,25 +594,25 @@ class _Home2State extends State<Home2> {
                     context,
                     mobile: 18,
                     tablet: 20,
-                    desktop: 22,
+                    desktop: 22.w,
                   ),
                 ),
               ),
             ],
           ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8.w),
         isSearchesLoading
             ? (isDesktop ? _buildRecentSearchesGridSkeleton(context) : _buildRecentSearchesListSkeleton(context))
             : recentSearches.isEmpty
                 ? SizedBox(
-                    height: 120,
+                    height: 120.w,
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(Icons.history_toggle_off, color: Colors.grey.shade400, size: 40),
-                          const SizedBox(height: 12),
+                          SizedBox(height: 12.w),
                           Text(
                             "No recent searches yet",
                             style: TextStyle(
@@ -620,7 +621,7 @@ class _Home2State extends State<Home2> {
                                 context,
                                 mobile: 14,
                                 tablet: 15,
-                                desktop: 16,
+                                desktop: 16.w,
                               ),
                               fontWeight: FontWeight.w500,
                             ),
@@ -645,10 +646,10 @@ class _Home2State extends State<Home2> {
       itemBuilder: (context, index) {
         final search = recentSearches[index];
         return Container(
-          margin: const EdgeInsets.only(bottom: 12),
+          margin: EdgeInsets.only(bottom: 12.w),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(12.r),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.02),
@@ -659,9 +660,9 @@ class _Home2State extends State<Home2> {
             border: Border.all(color: Colors.grey.shade100),
           ),
           child: ListTile(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
             leading: Container(
-              padding: const EdgeInsets.all(8),
+              padding: EdgeInsets.all(8.w),
               decoration: BoxDecoration(color: Colors.green.shade50, shape: BoxShape.circle),
               child: Icon(Icons.history, color: Colors.green.shade600, size: 20),
             ),
@@ -670,27 +671,27 @@ class _Home2State extends State<Home2> {
               children: [
                 Row(
                   children: [
-                    const Icon(Icons.circle, size: 8, color: Colors.green),
-                    const SizedBox(width: 8),
+                    Icon(Icons.circle, size: 8, color: Colors.green),
+                    SizedBox(width: 8.w),
                     Expanded(
                       child: Text(
                         search['pickup'] ?? '',
-                        style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 13),
+                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13.sp),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 6),
+                SizedBox(height: 6.w),
                 Row(
                   children: [
-                    const Icon(Icons.location_on, size: 10, color: Colors.red),
-                    const SizedBox(width: 6),
+                    Icon(Icons.location_on, size: 10, color: Colors.red),
+                    SizedBox(width: 6.w),
                     Expanded(
                       child: Text(
                         search['dropoff'] ?? '',
-                        style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
+                        style: TextStyle(color: Colors.grey.shade600, fontSize: 12.sp),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -699,7 +700,7 @@ class _Home2State extends State<Home2> {
                 ),
               ],
             ),
-            trailing: const Icon(Icons.chevron_right, color: Colors.grey, size: 18),
+            trailing: Icon(Icons.chevron_right, color: Colors.grey, size: 18),
             onTap: () async {
               await Navigator.push(
                 context,
@@ -748,16 +749,16 @@ class _Home2State extends State<Home2> {
             loadRecentSearches();
           },
           child: Container(
-            padding: const EdgeInsets.all(12),
+            padding: EdgeInsets.all(12.w),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.r),
               border: Border.all(color: Colors.grey.shade300),
             ),
             child: Row(
               children: [
                 Icon(Icons.history, color: Colors.grey, size: 20),
-                const SizedBox(width: 8),
+                SizedBox(width: 8.w),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -770,26 +771,26 @@ class _Home2State extends State<Home2> {
                             size: 12,
                             color: Colors.green,
                           ),
-                          const SizedBox(width: 4),
+                          SizedBox(width: 4.w),
                           Expanded(
                             child: Text(
                               search['pickup'] ?? '',
-                              style: const TextStyle(fontSize: 13),
+                              style: TextStyle(fontSize: 13.sp),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 4),
+                      SizedBox(height: 4.w),
                       Row(
                         children: [
                           Icon(Icons.location_on, size: 12, color: Colors.red),
-                          const SizedBox(width: 4),
+                          SizedBox(width: 4.w),
                           Expanded(
                             child: Text(
                               search['dropoff'] ?? '',
-                              style: const TextStyle(fontSize: 13),
+                              style: TextStyle(fontSize: 13.sp),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -817,7 +818,7 @@ class _Home2State extends State<Home2> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: Text(
             "Explore Rides",
             style: TextStyle(
@@ -826,16 +827,16 @@ class _Home2State extends State<Home2> {
                 context,
                 mobile: 18, // Scaled down from 22
                 tablet: 20,
-                desktop: 22,
+                desktop: 22.w,
               ),
               color: Colors.black87,
             ),
           ),
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12.w),
         isDesktop
             ? Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: _buildRideTypesGrid(context),
               )
             : _buildRideTypesList(context),
@@ -845,18 +846,18 @@ class _Home2State extends State<Home2> {
 
   Widget _buildRideTypesList(BuildContext context) {
     return SizedBox(
-      height: 120, // Adjusted height for landscape cards
+      height: 120.w, // Adjusted height for landscape cards
       child: isLoading
           ? _buildRideTypesListSkeleton(context)
           : ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
               scrollDirection: Axis.horizontal,
               itemCount: rideTypes.length,
               itemBuilder: (context, index) {
                 final ride = rideTypes[index];
                 final imagePath = getImageForRideType(ride.type, ride);
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                  padding: EdgeInsets.symmetric(horizontal: 6.0.w),
                   child: HomeTransportCard(imagePath, ride.type),
                 );
               },
@@ -895,9 +896,9 @@ class _Home2State extends State<Home2> {
         loadRecentSearches();
       },
       child: Container(
-        width: 160, // Wider for landscape banner images
+        width: 160.w, // Wider for landscape banner images
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.05),
@@ -907,7 +908,7 @@ class _Home2State extends State<Home2> {
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
           child: Stack(
             fit: StackFit.expand,
             children: [
@@ -941,33 +942,33 @@ class _Home2State extends State<Home2> {
               ),
               // Text Content Overlay
               Positioned(
-                bottom: 12,
-                left: 12,
-                right: 12,
+                bottom: 12.w,
+                left: 12.w,
+                right: 12.w,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       type,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         color: Colors.white,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 2),
-                    const Row(
+                    SizedBox(height: 2.w),
+                    Row(
                       children: [
                         Text(
                           "Book now",
                           style: TextStyle(
-                            fontSize: 10,
+                            fontSize: 10.sp,
                             color: Colors.white70,
                           ),
                         ),
-                        SizedBox(width: 4),
+                        SizedBox(width: 4.w),
                         Icon(Icons.arrow_forward_ios, size: 8, color: Colors.white70),
                       ],
                     ),
@@ -1005,15 +1006,15 @@ class _Home2State extends State<Home2> {
           baseColor: Colors.grey[300]!,
           highlightColor: Colors.grey[100]!,
           child: ListTile(
-            leading: const Icon(Icons.history, color: Colors.white),
+            leading: Icon(Icons.history, color: Colors.white),
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(height: 15, width: double.infinity, color: Colors.white),
-                const SizedBox(height: 8),
-                Container(height: 15, width: double.infinity, color: Colors.white),
-                const SizedBox(height: 8),
-                const Divider(color: Colors.white),
+                Container(height: 15.w, width: double.infinity, color: Colors.white),
+                SizedBox(height: 8.w),
+                Container(height: 15.w, width: double.infinity, color: Colors.white),
+                SizedBox(height: 8.w),
+                Divider(color: Colors.white),
               ],
             ),
           ),
@@ -1037,10 +1038,10 @@ class _Home2State extends State<Home2> {
           baseColor: Colors.grey[300]!,
           highlightColor: Colors.grey[100]!,
           child: Container(
-            padding: const EdgeInsets.all(12),
+            padding: EdgeInsets.all(12.w),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.r),
             ),
           ),
         );
@@ -1054,29 +1055,29 @@ class _Home2State extends State<Home2> {
         context,
         mobile: 130,
         tablet: 150,
-        desktop: 170,
+        desktop: 170.w,
       ),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: 4,
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: EdgeInsets.symmetric(horizontal: 8.0.w),
             child: Shimmer.fromColors(
               baseColor: Colors.grey[300]!,
               highlightColor: Colors.grey[100]!,
               child: Column(
                 children: [
                   Container(
-                    height: ResponsiveHelper.getResponsiveValue(context, mobile: 80, tablet: 100, desktop: 120),
-                    width: ResponsiveHelper.getResponsiveValue(context, mobile: 70, tablet: 90, desktop: 110),
+                    height: ResponsiveHelper.getResponsiveValue(context, mobile: 80, tablet: 100, desktop: 120.w),
+                    width: ResponsiveHelper.getResponsiveValue(context, mobile: 70, tablet: 90, desktop: 110.w),
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10.r),
                     ),
                   ),
-                  const SizedBox(height: 5),
-                  Container(height: 15, width: 50, color: Colors.white),
+                  SizedBox(height: 5.w),
+                  Container(height: 15.w, width: 50.w, color: Colors.white),
                 ],
               ),
             ),
@@ -1104,15 +1105,15 @@ class _Home2State extends State<Home2> {
           child: Column(
             children: [
               Container(
-                height: ResponsiveHelper.getResponsiveValue(context, mobile: 80, tablet: 100, desktop: 120),
-                width: ResponsiveHelper.getResponsiveValue(context, mobile: 70, tablet: 90, desktop: 110),
+                height: ResponsiveHelper.getResponsiveValue(context, mobile: 80, tablet: 100, desktop: 120.w),
+                width: ResponsiveHelper.getResponsiveValue(context, mobile: 70, tablet: 90, desktop: 110.w),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(10.r),
                 ),
               ),
-              const SizedBox(height: 5),
-              Container(height: 15, width: 50, color: Colors.white),
+              SizedBox(height: 5.w),
+              Container(height: 15.w, width: 50.w, color: Colors.white),
             ],
           ),
         );
@@ -1472,24 +1473,24 @@ class _OngoingRideWidgetState extends State<OngoingRideWidget> with RouteAware {
       context,
       mobile: 12,
       tablet: 24,
-      desktop: 48,
+      desktop: 48.w,
     );
 
     if (_isLoading) {
       return Container(
         margin: EdgeInsets.symmetric(
           horizontal: horizontalPadding,
-          vertical: 12,
+          vertical: 12.w,
         ),
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
           color: Colors.grey.shade200,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
         ),
-        child: const Center(
+        child: Center(
           child: SizedBox(
-            height: 20,
-            width: 20,
+            height: 20.w,
+            width: 20.w,
             child: CircularProgressIndicator(strokeWidth: 2),
           ),
         ),
@@ -1497,7 +1498,7 @@ class _OngoingRideWidgetState extends State<OngoingRideWidget> with RouteAware {
     }
 
     if (_ongoingRides.isEmpty) {
-      return const SizedBox.shrink();
+      return SizedBox.shrink();
     }
 
     if (_ongoingRides.length == 1) {
@@ -1511,19 +1512,19 @@ class _OngoingRideWidgetState extends State<OngoingRideWidget> with RouteAware {
         child: Container(
           margin: EdgeInsets.symmetric(
             horizontal: horizontalPadding,
-            vertical: 12,
+            vertical: 12.w,
           ),
           padding: EdgeInsets.all(
             ResponsiveHelper.getResponsiveValue(
               context,
               mobile: 16,
               tablet: 20,
-              desktop: 24,
+              desktop: 24.w,
             ),
           ),
           decoration: BoxDecoration(
             color: statusColor,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(16.r),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.15),
@@ -1540,13 +1541,13 @@ class _OngoingRideWidgetState extends State<OngoingRideWidget> with RouteAware {
                       context,
                       mobile: 32,
                       tablet: 36,
-                      desktop: 40,
+                      desktop: 40.w,
                     ),
                     height: ResponsiveHelper.getResponsiveValue(
                       context,
                       mobile: 32,
                       tablet: 36,
-                      desktop: 40,
+                      desktop: 40.w,
                     ),
                     child: const CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
@@ -1560,10 +1561,10 @@ class _OngoingRideWidgetState extends State<OngoingRideWidget> with RouteAware {
                       context,
                       mobile: 32,
                       tablet: 36,
-                      desktop: 40,
+                      desktop: 40.w,
                     ),
                   ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12.w),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1576,12 +1577,12 @@ class _OngoingRideWidgetState extends State<OngoingRideWidget> with RouteAware {
                           context,
                           mobile: 16,
                           tablet: 18,
-                          desktop: 20,
+                          desktop: 20.w,
                         ),
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    const SizedBox(height: 2),
+                    SizedBox(height: 2.w),
                     Text(
                       _getStatusSubtitle(status),
                       style: TextStyle(
@@ -1590,14 +1591,14 @@ class _OngoingRideWidgetState extends State<OngoingRideWidget> with RouteAware {
                           context,
                           mobile: 14,
                           tablet: 15,
-                          desktop: 16,
+                          desktop: 16.w,
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-              const Icon(Icons.arrow_forward_ios, color: Colors.white),
+              Icon(Icons.arrow_forward_ios, color: Colors.white),
             ],
           ),
         ),
@@ -1605,23 +1606,23 @@ class _OngoingRideWidgetState extends State<OngoingRideWidget> with RouteAware {
     }
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 12),
+      margin: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 12.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
             decoration: BoxDecoration(
               color: Colors.blue.shade100,
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16.r),
+                topRight: Radius.circular(16.r),
               ),
             ),
             child: Row(
               children: [
                 Icon(Icons.multiple_stop, color: Colors.blue.shade700),
-                const SizedBox(width: 8),
+                SizedBox(width: 8.w),
                 Text(
                   "Multiple Rides (${_ongoingRides.length})",
                   style: TextStyle(
@@ -1630,7 +1631,7 @@ class _OngoingRideWidgetState extends State<OngoingRideWidget> with RouteAware {
                       context,
                       mobile: 16,
                       tablet: 17,
-                      desktop: 18,
+                      desktop: 18.w,
                     ),
                     fontWeight: FontWeight.w600,
                   ),
@@ -1641,9 +1642,9 @@ class _OngoingRideWidgetState extends State<OngoingRideWidget> with RouteAware {
           Container(
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(16),
-                bottomRight: Radius.circular(16),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(16.r),
+                bottomRight: Radius.circular(16.r),
               ),
               boxShadow: [
                 BoxShadow(
@@ -1659,7 +1660,7 @@ class _OngoingRideWidgetState extends State<OngoingRideWidget> with RouteAware {
               itemCount: _ongoingRides.length,
               separatorBuilder:
                   (context, index) =>
-                      Divider(height: 1, color: Colors.grey.shade200),
+                      Divider(height: 1.w, color: Colors.grey.shade200),
               itemBuilder: (context, index) {
                 final ride = _ongoingRides[index];
                 final rideId = ride['rideId'];
@@ -1674,22 +1675,22 @@ class _OngoingRideWidgetState extends State<OngoingRideWidget> with RouteAware {
                         context,
                         mobile: 16,
                         tablet: 18,
-                        desktop: 20,
+                        desktop: 20.w,
                       ),
                     ),
                     child: Row(
                       children: [
                         Container(
-                          padding: const EdgeInsets.all(8),
+                          padding: EdgeInsets.all(8.w),
                           decoration: BoxDecoration(
                             color: statusColor.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(8.r),
                           ),
                           child:
                               status == 'pending'
                                   ? SizedBox(
-                                    width: 24,
-                                    height: 24,
+                                    width: 24.w,
+                                    height: 24.w,
                                     child: CircularProgressIndicator(
                                       valueColor: AlwaysStoppedAnimation<Color>(
                                         statusColor,
@@ -1703,7 +1704,7 @@ class _OngoingRideWidgetState extends State<OngoingRideWidget> with RouteAware {
                                     size: 24,
                                   ),
                         ),
-                        const SizedBox(width: 12),
+                        SizedBox(width: 12.w),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -1718,25 +1719,25 @@ class _OngoingRideWidgetState extends State<OngoingRideWidget> with RouteAware {
                                             context,
                                             mobile: 16,
                                             tablet: 17,
-                                            desktop: 18,
+                                            desktop: 18.w,
                                           ),
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                                  const SizedBox(width: 8),
+                                  SizedBox(width: 8.w),
                                   Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 8,
-                                      vertical: 2,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 8.w,
+                                      vertical: 2.w,
                                     ),
                                     decoration: BoxDecoration(
                                       color: statusColor,
-                                      borderRadius: BorderRadius.circular(12),
+                                      borderRadius: BorderRadius.circular(12.r),
                                     ),
                                     child: Text(
                                       status.toUpperCase(),
-                                      style: const TextStyle(
-                                        fontSize: 10,
+                                      style: TextStyle(
+                                        fontSize: 10.sp,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -1744,7 +1745,7 @@ class _OngoingRideWidgetState extends State<OngoingRideWidget> with RouteAware {
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 4),
+                              SizedBox(height: 4.w),
                               Text(
                                 "ID: $rideId",
                                 style: TextStyle(
@@ -1752,7 +1753,7 @@ class _OngoingRideWidgetState extends State<OngoingRideWidget> with RouteAware {
                                     context,
                                     mobile: 12,
                                     tablet: 13,
-                                    desktop: 14,
+                                    desktop: 14.w,
                                   ),
                                   color: Colors.grey.shade600,
                                 ),
@@ -1764,7 +1765,7 @@ class _OngoingRideWidgetState extends State<OngoingRideWidget> with RouteAware {
                                     context,
                                     mobile: 14,
                                     tablet: 15,
-                                    desktop: 16,
+                                    desktop: 16.w,
                                   ),
                                   color: Colors.grey.shade500,
                                 ),

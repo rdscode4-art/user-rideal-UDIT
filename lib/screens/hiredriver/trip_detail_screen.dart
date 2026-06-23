@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 // Save this file as: lib/screens/hiredriver/trip_detail_screen.dart
 
 import 'package:flutter/material.dart';
@@ -184,16 +185,16 @@ class _TripDetailScreenState extends State<TripDetailScreen> {
     final confirm = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Cancel Request'),
-        content: const Text('Are you sure you want to cancel this request?'),
+        title: Text('Cancel Request'),
+        content: Text('Are you sure you want to cancel this request?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('No'),
+            child: Text('No'),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Yes', style: TextStyle(color: Colors.red)),
+            child: Text('Yes', style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -253,42 +254,42 @@ class _TripDetailScreenState extends State<TripDetailScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Trip Details'),
+        title: Text('Trip Details'),
         backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         actions: [
           IconButton(
-            icon: const Icon(Icons.refresh),
+            icon: Icon(Icons.refresh),
             onPressed: _fetchRideStatus,
           ),
         ],
       ),
       body: isLoading && rideDetails == null
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(16.0.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Status Card
                     Container(
-                      padding: const EdgeInsets.all(20),
+                      padding: EdgeInsets.all(20.w),
                       decoration: BoxDecoration(
                         color: _getStatusColor(status).withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius: BorderRadius.circular(16.r),
                         border: Border.all(
                           color: _getStatusColor(status),
-                          width: 2,
+                          width: 2.w,
                         ),
                       ),
                       child: Row(
                         children: [
                           Container(
-                            padding: const EdgeInsets.all(12),
+                            padding: EdgeInsets.all(12.w),
                             decoration: BoxDecoration(
                               color: _getStatusColor(status),
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(12.r),
                             ),
                             child: Icon(
                               _getStatusIcon(status),
@@ -296,7 +297,7 @@ class _TripDetailScreenState extends State<TripDetailScreen> {
                               size: 32,
                             ),
                           ),
-                          const SizedBox(width: 16),
+                          SizedBox(width: 16.w),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -304,16 +305,16 @@ class _TripDetailScreenState extends State<TripDetailScreen> {
                                 Text(
                                   status.toUpperCase(),
                                   style: TextStyle(
-                                    fontSize: 18,
+                                    fontSize: 18.sp,
                                     fontWeight: FontWeight.bold,
                                     color: _getStatusColor(status),
                                   ),
                                 ),
-                                const SizedBox(height: 4),
+                                SizedBox(height: 4.w),
                                 Text(
                                   _getStatusMessage(status),
                                   style: TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 14.sp,
                                     color: Colors.grey.shade700,
                                   ),
                                 ),
@@ -323,22 +324,22 @@ class _TripDetailScreenState extends State<TripDetailScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24.w),
 
                     // Ride Details
-                    const Text(
+                    Text(
                       'Ride Details',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12.w),
                     Container(
-                      padding: const EdgeInsets.all(16),
+                      padding: EdgeInsets.all(16.w),
                       decoration: BoxDecoration(
                         color: Colors.grey.shade100,
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(12.r),
                       ),
                       child: Column(
                         children: [
@@ -347,32 +348,32 @@ class _TripDetailScreenState extends State<TripDetailScreen> {
                             'Ride ID',
                             widget.rideId,
                           ),
-                          const Divider(height: 24),
+                          Divider(height: 24.w),
                           _buildDetailRow(
                             Icons.lock,
                             'Acceptance OTP',
                             otp,
                           ),
-                          const Divider(height: 24),
+                          Divider(height: 24.w),
                           _buildDetailRow(
                             Icons.lock_open,
                             'Completion OTP',
                             completionOtp,
                           ),
-                          const Divider(height: 24),
+                          Divider(height: 24.w),
                           _buildDetailRow(
                             Icons.access_time,
                             'Duration',
                             duration,
                           ),
-                          const Divider(height: 24),
+                          Divider(height: 24.w),
                           _buildDetailRow(
                             Icons.payment,
                             'Total Amount',
                             '₹$price',
                           ),
                           if (createdAt.isNotEmpty) ...[
-                            const Divider(height: 24),
+                            Divider(height: 24.w),
                             _buildDetailRow(
                               Icons.calendar_today,
                               'Created At',
@@ -380,7 +381,7 @@ class _TripDetailScreenState extends State<TripDetailScreen> {
                             ),
                           ],
                           if (completedAt.isNotEmpty) ...[
-                            const Divider(height: 24),
+                            Divider(height: 24.w),
                             _buildDetailRow(
                               Icons.check_circle,
                               'Completed At',
@@ -390,22 +391,22 @@ class _TripDetailScreenState extends State<TripDetailScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24.w),
 
                     // Driver Details
-                    const Text(
+                    Text(
                       'Driver Details',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12.w),
                     Container(
-                      padding: const EdgeInsets.all(16),
+                      padding: EdgeInsets.all(16.w),
                       decoration: BoxDecoration(
                         color: Colors.blue.shade50,
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(12.r),
                         border: Border.all(color: Colors.blue.shade200),
                       ),
                       child: Column(
@@ -415,7 +416,7 @@ class _TripDetailScreenState extends State<TripDetailScreen> {
                             'Name',
                             driverName,
                           ),
-                          const Divider(height: 24),
+                          Divider(height: 24.w),
                           _buildDetailRow(
                             Icons.phone,
                             'Phone',
@@ -424,20 +425,20 @@ class _TripDetailScreenState extends State<TripDetailScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24.w),
 
                     // Action Buttons - Only show cancel if status is PENDING
                     if (status.toUpperCase() == 'PENDING') ...[
                       SizedBox(
                         width: double.infinity,
-                        height: 56,
+                        height: 56.w,
                         child: ElevatedButton.icon(
                           onPressed: _cancelRequest,
-                          icon: const Icon(Icons.cancel),
-                          label: const Text(
+                          icon: Icon(Icons.cancel),
+                          label: Text(
                             'Cancel Request',
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 18.sp,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -445,38 +446,38 @@ class _TripDetailScreenState extends State<TripDetailScreen> {
                             backgroundColor: Colors.red,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(12.r),
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16.w),
                     ],
 
                     // Back Button
                     SizedBox(
                       width: double.infinity,
-                      height: 56,
+                      height: 56.w,
                       child: OutlinedButton.icon(
                         onPressed: () => Navigator.pop(context),
-                        icon: const Icon(Icons.arrow_back),
-                        label: const Text(
+                        icon: Icon(Icons.arrow_back),
+                        label: Text(
                           'Back to History',
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 18.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: Colors.green,
-                          side: const BorderSide(color: Colors.green, width: 2),
+                          side: BorderSide(color: Colors.green, width: 2.w),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(12.r),
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16.w),
                   ],
                 ),
               ),
@@ -488,7 +489,7 @@ class _TripDetailScreenState extends State<TripDetailScreen> {
     return Row(
       children: [
         Icon(icon, color: Colors.green, size: 24),
-        const SizedBox(width: 12),
+        SizedBox(width: 12.w),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -496,15 +497,15 @@ class _TripDetailScreenState extends State<TripDetailScreen> {
               Text(
                 label,
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 12.sp,
                   color: Colors.grey.shade600,
                 ),
               ),
-              const SizedBox(height: 2),
+              SizedBox(height: 2.w),
               Text(
                 value,
-                style: const TextStyle(
-                  fontSize: 16,
+                style: TextStyle(
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
                 ),
               ),

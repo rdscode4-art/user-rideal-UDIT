@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:rideal/intro/socialmedia.dart';
@@ -171,15 +172,15 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
           builder: (context, setDialogState) {
             return AlertDialog(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(20.r),
               ),
               title: Row(
                 children: [
                   Icon(Icons.warning_amber_rounded, color: Colors.red.shade600),
-                  const SizedBox(width: 12),
-                  const Text(
+                  SizedBox(width: 12.w),
+                  Text(
                     "Delete Account",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -192,24 +193,24 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                       "We're sad to see you go. This action cannot be undone.",
                       style: TextStyle(
                         color: Colors.grey.shade700,
-                        fontSize: 14,
+                        fontSize: 14.sp,
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: 20.w),
                     Text(
                       "Please tell us why:",
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         color: Colors.grey.shade800,
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12.w),
                     ...reasons.map((reason) {
                       return RadioListTile<String>(
                         title: Text(
                           reason,
-                          style: const TextStyle(fontSize: 14),
+                          style: TextStyle(fontSize: 14.sp),
                         ),
                         value: reason,
                         groupValue: selectedReason,
@@ -229,16 +230,16 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                       );
                     }),
                     if (selectedReason == "Other") ...[
-                      const SizedBox(height: 12),
+                      SizedBox(height: 12.w),
                       TextField(
                         controller: reasonController,
                         maxLines: 3,
                         decoration: InputDecoration(
                           hintText: "Please specify your reason...",
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(12.r),
                           ),
-                          contentPadding: const EdgeInsets.all(12),
+                          contentPadding: EdgeInsets.all(12.w),
                         ),
                       ),
                     ],
@@ -266,10 +267,10 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                     backgroundColor: Colors.red.shade600,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12.r),
                     ),
                   ),
-                  child: const Text("Delete Account"),
+                  child: Text("Delete Account"),
                 ),
               ],
             );
@@ -285,19 +286,19 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
       builder: (BuildContext context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(20.r),
           ),
-          title: const Text(
+          title: Text(
             "Final Confirmation",
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          content: const Text(
+          content: Text(
             "Are you absolutely sure? This will permanently delete your account and all associated data.",
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text("Cancel"),
+              child: Text("Cancel"),
             ),
             ElevatedButton(
               onPressed: () {
@@ -308,10 +309,10 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 backgroundColor: Colors.red.shade600,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
               ),
-              child: const Text("Yes, Delete"),
+              child: Text("Yes, Delete"),
             ),
           ],
         );
@@ -327,14 +328,14 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
       builder: (BuildContext context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(20.r),
           ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               CircularProgressIndicator(color: Colors.green.shade600),
-              const SizedBox(height: 16),
-              const Text("Processing request..."),
+              SizedBox(height: 16.w),
+              Text("Processing request..."),
             ],
           ),
         );
@@ -386,7 +387,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
       builder: (BuildContext context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(20.r),
           ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -396,16 +397,16 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 color: Colors.green.shade600,
                 size: 64,
               ),
-              const SizedBox(height: 16),
-              const Text(
+              SizedBox(height: 16.w),
+              Text(
                 "Account Deletion Requested",
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8.w),
               Text(
                 "Your account deletion request has been submitted successfully.",
                 style: TextStyle(color: Colors.grey.shade600),
@@ -422,10 +423,10 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 backgroundColor: Colors.green.shade600,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
               ),
-              child: const Text("OK"),
+              child: Text("OK"),
             ),
           ],
         );
@@ -444,16 +445,16 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
       builder: (BuildContext context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(20.r),
           ),
           title: Row(
             children: [
               Icon(Icons.info_outline, color: Colors.orange.shade600),
-              const SizedBox(width: 12),
-              const Expanded(
+              SizedBox(width: 12.w),
+              Expanded(
                 child: Text(
                   "Pending Request",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
                 ),
               ),
             ],
@@ -466,15 +467,15 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 "You already have a pending account deletion request.",
                 style: TextStyle(
                   color: Colors.grey.shade700,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.w),
               Container(
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(12.w),
                 decoration: BoxDecoration(
                   color: Colors.orange.shade50,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                   border: Border.all(color: Colors.orange.shade200),
                 ),
                 child: Column(
@@ -487,27 +488,27 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                           size: 16,
                           color: Colors.orange.shade700,
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8.w),
                         Text(
                           "Status:",
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             color: Colors.grey.shade700,
-                            fontSize: 13,
+                            fontSize: 13.sp,
                           ),
                         ),
-                        const SizedBox(width: 4),
+                        SizedBox(width: 4.w),
                         Text(
                           status.toUpperCase(),
                           style: TextStyle(
                             color: Colors.orange.shade700,
                             fontWeight: FontWeight.bold,
-                            fontSize: 13,
+                            fontSize: 13.sp,
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8.w),
                     Row(
                       children: [
                         Icon(
@@ -515,29 +516,29 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                           size: 16,
                           color: Colors.grey.shade600,
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8.w),
                         Text(
                           "Reason:",
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             color: Colors.grey.shade700,
-                            fontSize: 13,
+                            fontSize: 13.sp,
                           ),
                         ),
-                        const SizedBox(width: 4),
+                        SizedBox(width: 4.w),
                         Expanded(
                           child: Text(
                             reason,
                             style: TextStyle(
                               color: Colors.grey.shade600,
-                              fontSize: 13,
+                              fontSize: 13.sp,
                             ),
                           ),
                         ),
                       ],
                     ),
                     if (requestedAt.isNotEmpty) ...[
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8.w),
                       Row(
                         children: [
                           Icon(
@@ -545,22 +546,22 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                             size: 16,
                             color: Colors.grey.shade600,
                           ),
-                          const SizedBox(width: 8),
+                          SizedBox(width: 8.w),
                           Text(
                             "Requested:",
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               color: Colors.grey.shade700,
-                              fontSize: 13,
+                              fontSize: 13.sp,
                             ),
                           ),
-                          const SizedBox(width: 4),
+                          SizedBox(width: 4.w),
                           Expanded(
                             child: Text(
                               _formatDate(requestedAt),
                               style: TextStyle(
                                 color: Colors.grey.shade600,
-                                fontSize: 13,
+                                fontSize: 13.sp,
                               ),
                             ),
                           ),
@@ -570,12 +571,12 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                   ],
                 ),
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12.w),
               Text(
                 "Your request is being processed. We'll contact you soon.",
                 style: TextStyle(
                   color: Colors.grey.shade600,
-                  fontSize: 12,
+                  fontSize: 12.sp,
                   fontStyle: FontStyle.italic,
                 ),
               ),
@@ -588,10 +589,10 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 backgroundColor: Colors.green.shade600,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
               ),
-              child: const Text("OK"),
+              child: Text("OK"),
             ),
           ],
         );
@@ -624,19 +625,19 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
 
     if (rating == null || rating == 0.0) {
       return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
         decoration: BoxDecoration(
           color: Colors.amber.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20.r),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.star_border_rounded, color: Colors.amber.shade700, size: 18),
-            const SizedBox(width: 6),
+            SizedBox(width: 6.w),
             Text(
               "No ratings yet",
-              style: TextStyle(color: Colors.amber.shade800, fontWeight: FontWeight.bold, fontSize: 13),
+              style: TextStyle(color: Colors.amber.shade800, fontWeight: FontWeight.bold, fontSize: 13.sp),
             ),
           ],
         ),
@@ -644,22 +645,22 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
     }
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
       decoration: BoxDecoration(
         color: Colors.amber.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.r),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.star_rounded, color: Colors.amber, size: 20),
-          const SizedBox(width: 6),
+          Icon(Icons.star_rounded, color: Colors.amber, size: 20),
+          SizedBox(width: 6.w),
           Text(
             rating.toStringAsFixed(1),
             style: TextStyle(
               color: Colors.amber.shade800,
               fontWeight: FontWeight.w800,
-              fontSize: 14,
+              fontSize: 14.sp,
             ),
           ),
         ],
@@ -698,17 +699,17 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
 
   Widget _buildProfileHeader() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
+      padding: EdgeInsets.fromLTRB(20, 8, 20, 0),
       child: Column(
         children: [
           // Top bar row
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
+              Text(
                 "Profile",
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 20.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.black87,
                 ),
@@ -716,14 +717,14 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
             ],
           ),
 
-          const SizedBox(height: 20),
+          SizedBox(height: 20.w),
 
           // Profile card with banner
           Container(
             width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(28),
+              borderRadius: BorderRadius.circular(28.r),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.06),
@@ -741,16 +742,16 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                   children: [
                     // Green banner
                     Container(
-                      height: 100,
+                      height: 100.w,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [const Color(0xFF0F9D58), Colors.green.shade400],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(28),
-                          topRight: Radius.circular(28),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(28.r),
+                          topRight: Radius.circular(28.r),
                         ),
                       ),
                       child: Stack(
@@ -758,7 +759,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                           Positioned(
                             right: -10, top: -20,
                             child: Container(
-                              width: 120, height: 120,
+                              width: 120.w, height: 120.w,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Colors.white.withOpacity(0.07),
@@ -766,9 +767,9 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                             ),
                           ),
                           Positioned(
-                            left: 20, bottom: -20,
+                            left: 20.w, bottom: -20,
                             child: Container(
-                              width: 80, height: 80,
+                              width: 80.w, height: 80.w,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Colors.white.withOpacity(0.05),
@@ -782,12 +783,12 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                     Positioned(
                       bottom: -40,
                       child: Container(
-                        width: 80,
-                        height: 80,
+                        width: 80.w,
+                        height: 80.w,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.white,
-                          border: Border.all(color: Colors.white, width: 4),
+                          border: Border.all(color: Colors.white, width: 4.w),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.12),
@@ -805,13 +806,13 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 ),
 
                 // Space for the overflowing avatar
-                const SizedBox(height: 52),
+                SizedBox(height: 52.w),
 
                 // Name
                 Text(
                   rider?.name ?? "Unknown User",
-                  style: const TextStyle(
-                    fontSize: 20,
+                  style: TextStyle(
+                    fontSize: 20.sp,
                     fontWeight: FontWeight.w800,
                     color: Colors.black87,
                     letterSpacing: -0.3,
@@ -819,38 +820,38 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 ),
 
                 if (rider?.phone.isNotEmpty == true) ...[
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4.w),
                   Text(
                     rider!.phone,
                     style: TextStyle(
-                      fontSize: 13,
+                      fontSize: 13.sp,
                       color: Colors.grey.shade500,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                 ],
 
-                const SizedBox(height: 12),
+                SizedBox(height: 12.w),
                 _buildRatingDisplay(),
-                const SizedBox(height: 14),
+                SizedBox(height: 14.w),
 
                 // Rider ID chip
                 if (riderId.isNotEmpty)
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.w),
                     decoration: BoxDecoration(
                       color: const Color(0xFF0F9D58).withOpacity(0.08),
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(20.r),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.badge_outlined, size: 14, color: Color(0xFF0F9D58)),
-                        const SizedBox(width: 6),
+                        Icon(Icons.badge_outlined, size: 14, color: Color(0xFF0F9D58)),
+                        SizedBox(width: 6.w),
                         Text(
                           "ID: $riderId",
-                          style: const TextStyle(
-                            fontSize: 12,
+                          style: TextStyle(
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w700,
                             color: Color(0xFF0F9D58),
                             letterSpacing: 0.5,
@@ -859,7 +860,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                       ],
                     ),
                   ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20.w),
               ],
             ),
           ),
@@ -872,11 +873,11 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
 
   Widget _buildInfoCard(String title, String value, IconData icon, {Color? iconColor}) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 4.w),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.04),
@@ -888,14 +889,14 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(10),
+            padding: EdgeInsets.all(10.w),
             decoration: BoxDecoration(
               color: (iconColor ?? const Color(0xFF0F9D58)).withOpacity(0.08),
               shape: BoxShape.circle,
             ),
             child: Icon(icon, color: iconColor ?? const Color(0xFF0F9D58), size: 20),
           ),
-          const SizedBox(width: 14),
+          SizedBox(width: 14.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -903,17 +904,17 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                 Text(
                   title,
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 12.sp,
                     color: Colors.grey.shade500,
                     fontWeight: FontWeight.w600,
                     letterSpacing: 0.3,
                   ),
                 ),
-                const SizedBox(height: 2),
+                SizedBox(height: 2.w),
                 Text(
                   value.isEmpty ? "Not provided" : value,
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 15.sp,
                     fontWeight: FontWeight.w700,
                     color: value.isEmpty ? Colors.red.shade300 : Colors.black87,
                   ),
@@ -928,11 +929,11 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
 
   Widget _buildSectionTitle(String title) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 18, 20, 8),
+      padding: EdgeInsets.fromLTRB(20, 18, 20, 8),
       child: Text(
         title,
-        style: const TextStyle(
-          fontSize: 17,
+        style: TextStyle(
+          fontSize: 17.sp,
           fontWeight: FontWeight.w800,
           color: Colors.black87,
           letterSpacing: -0.3,
@@ -943,25 +944,25 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
 
   Widget _buildDeleteAccountButton() {
     return Container(
-      margin: const EdgeInsets.fromLTRB(20, 4, 20, 4),
+      margin: EdgeInsets.fromLTRB(20, 4, 20, 4),
       width: double.infinity,
       child: GestureDetector(
         onTap: _showDeleteAccountDialog,
         child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 10),
+          padding: EdgeInsets.symmetric(vertical: 10.w),
           decoration: BoxDecoration(
             color: Colors.red.shade50,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(12.r),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(Icons.delete_forever_rounded, color: Colors.red.shade400, size: 16),
-              const SizedBox(width: 6),
+              SizedBox(width: 6.w),
               Text(
                 "Delete Account",
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: 13.sp,
                   fontWeight: FontWeight.w700,
                   color: Colors.red.shade400,
                 ),
@@ -981,19 +982,19 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
           isLoading
               ? Container(
                   color: Colors.grey.shade50,
-                  child: const Center(
+                  child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CircularProgressIndicator(
                           valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF0F9D58)),
                         ),
-                        SizedBox(height: 16),
+                        SizedBox(height: 16.w),
                         Text(
                           "Loading Profile...",
                           style: TextStyle(
                             color: Colors.black54,
-                            fontSize: 15,
+                            fontSize: 15.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -1011,15 +1012,15 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                       size: 64,
                       color: Colors.red.shade400,
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16.w),
                     Text(
                       "Failed to load profile",
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         color: Colors.grey.shade600,
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16.w),
                     ElevatedButton(
                       onPressed: () {
                         setState(() {
@@ -1030,15 +1031,15 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green.shade600,
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 24,
-                          vertical: 12,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 24.w,
+                          vertical: 12.w,
                         ),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(12.r),
                         ),
                       ),
-                      child: const Text("Retry"),
+                      child: Text("Retry"),
                     ),
                   ],
                 ),
@@ -1046,9 +1047,9 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
               : FadeTransition(
                 opacity: _fadeAnimation,
                 child: ListView(
-                  padding: const EdgeInsets.only(bottom: 32),
+                  padding: EdgeInsets.only(bottom: 32.w),
                   children: [
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8.w),
                     SafeArea(bottom: false, child: _buildProfileHeader()),
                     _buildSectionTitle("Personal Information"),
                     _buildInfoCard("Name", rider?.name ?? "", Icons.person_outline_rounded,
@@ -1061,11 +1062,11 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                         iconColor: Colors.red.shade400),
                     _buildSectionTitle("Connect With Us"),
                     Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                      margin: EdgeInsets.symmetric(horizontal: 20.w),
+                      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.w),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(20.r),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.04),
@@ -1076,12 +1077,12 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                       ),
                       child: SocialLinks(),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12.w),
                     Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      margin: EdgeInsets.symmetric(horizontal: 20.w),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(20.r),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.04),
@@ -1094,7 +1095,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                     ),
                     _buildSectionTitle("Account"),
                     _buildDeleteAccountButton(),
-                    const SizedBox(height: 180),
+                    SizedBox(height: 180.w),
                   ],
 
                 ),

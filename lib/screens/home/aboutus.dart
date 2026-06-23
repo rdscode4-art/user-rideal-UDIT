@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
@@ -17,19 +18,19 @@ At Rideal, we believe every journey matters. We are committed to supporting init
         elevation: 2,
         shadowColor: Colors.black.withOpacity(0.1),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black87),
+          icon: Icon(Icons.arrow_back, color: Colors.black87),
           onPressed: () => Navigator.pop(context),
         ),
         title: Row(
           children: [
             // Rideal Logo in App Bar
             
-            const SizedBox(width: 12),
-            const Text(
+            SizedBox(width: 12.w),
+            Text(
               "About Us",
               style: TextStyle(
                 color: Colors.black87,
-                fontSize: 18,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -43,16 +44,16 @@ At Rideal, we believe every journey matters. We are committed to supporting init
             Container(
               width: double.infinity,
               color: Colors.white,
-              padding: const EdgeInsets.all(24),
+              padding: EdgeInsets.all(24.w),
               child: Column(
                 children: [
                   // Large Rideal Logo
                   Container(
-                    width: 100,
-                    height: 100,
+                    width: 100.w,
+                    height: 100.w,
                     decoration: BoxDecoration(
                       
-                      borderRadius: BorderRadius.circular(25),
+                      borderRadius: BorderRadius.circular(25.r),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.green.withOpacity(0.4),
@@ -63,22 +64,22 @@ At Rideal, we believe every journey matters. We are committed to supporting init
                     ),
                     child: Image.asset("assets/images/logorideal.png")
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.w),
                   
                   // Company Tagline
                   Text(
                     "Your Journey, Our Priority",
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 18.sp,
                       fontWeight: FontWeight.w600,
                       color: Colors.grey.shade800,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.w),
                   Text(
                     "Making India's roads safer, one ride at a time",
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       color: Colors.grey.shade600,
                     ),
                     textAlign: TextAlign.center,
@@ -87,32 +88,32 @@ At Rideal, we believe every journey matters. We are committed to supporting init
               ),
             ),
 
-            const SizedBox(height: 8),
+            SizedBox(height: 8.w),
 
             // About Content Section
             Container(
               width: double.infinity,
               color: Colors.white,
-              padding: const EdgeInsets.all(24),
+              padding: EdgeInsets.all(24.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "About Rideal",
                     style: TextStyle(
-                      fontSize: 22,
+                      fontSize: 22.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.w),
                   
                   Text(
                     aboutustext,
-                    style: const TextStyle(
-                      fontSize: 15,
+                    style: TextStyle(
+                      fontSize: 15.sp,
                       color: Colors.black87,
-                      height: 1.6,
+                      height: 1.6.w,
                       letterSpacing: 0.2,
                     ),
                   ),
@@ -120,25 +121,25 @@ At Rideal, we believe every journey matters. We are committed to supporting init
               ),
             ),
 
-            const SizedBox(height: 8),
+            SizedBox(height: 8.w),
 
             // Values Section
             Container(
               width: double.infinity,
               color: Colors.white,
-              padding: const EdgeInsets.all(24),
+              padding: EdgeInsets.all(24.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "Our Core Values",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.w),
                   
                   _buildValueCard(
                     Icons.security,
@@ -146,7 +147,7 @@ At Rideal, we believe every journey matters. We are committed to supporting init
                     "Every ride is secured with safety protocols and trusted drivers",
                     Colors.red,
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.w),
                   
                   _buildValueCard(
                     Icons.handshake,
@@ -154,7 +155,7 @@ At Rideal, we believe every journey matters. We are committed to supporting init
                     "Consistent and dependable service you can count on",
                     Colors.blue,
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.w),
                   
                   _buildValueCard(
                     Icons.eco,
@@ -166,17 +167,17 @@ At Rideal, we believe every journey matters. We are committed to supporting init
               ),
             ),
 
-            const SizedBox(height: 8),
+            SizedBox(height: 8.w),
 
             // Patriotic Section
             Container(
               width: double.infinity,
               color: Colors.white,
-              padding: const EdgeInsets.all(24),
+              padding: EdgeInsets.all(24.w),
               child: Column(
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(20),
+                    padding: EdgeInsets.all(20.w),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
@@ -187,15 +188,15 @@ At Rideal, we believe every journey matters. We are committed to supporting init
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(16.r),
                       border: Border.all(color: Colors.orange.shade200),
                     ),
                     child: Column(
                       children: [
                         AutoSizeText(
                           "🇮🇳वंदे मातरम🇮🇳",
-                          style: const TextStyle(
-                            fontSize: 40,
+                          style: TextStyle(
+                            fontSize: 40.sp,
                             fontWeight: FontWeight.bold,
                           ),
                           maxLines: 1,
@@ -203,11 +204,11 @@ At Rideal, we believe every journey matters. We are committed to supporting init
                           overflow: TextOverflow.visible,
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12.w),
                         Text(
                           "Proud to serve Bharat",
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.w600,
                             color: Colors.grey.shade700,
                           ),
@@ -219,7 +220,7 @@ At Rideal, we believe every journey matters. We are committed to supporting init
               ),
             ),
 
-            const SizedBox(height: 20),
+            SizedBox(height: 20.w),
           ],
         ),
       ),
@@ -228,23 +229,23 @@ At Rideal, we believe every journey matters. We are committed to supporting init
 
   Widget _buildValueCard(IconData icon, String title, String description, Color color) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: color.withOpacity(0.05),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.r),
         border: Border.all(color: color.withOpacity(0.2)),
       ),
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(12),
+            padding: EdgeInsets.all(12.w),
             decoration: BoxDecoration(
               color: color.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(10.r),
             ),
             child: Icon(icon, color: color, size: 24),
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: 16.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -252,16 +253,16 @@ At Rideal, we believe every journey matters. We are committed to supporting init
                 Text(
                   title,
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4.w),
                 Text(
                   description,
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     color: Colors.grey.shade700,
                   ),
                 ),

@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
@@ -59,7 +60,7 @@ Future<void> _cancelRide() async {
     builder: (BuildContext context) {
       return AlertDialog(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
         ),
         title: Row(
           children: [
@@ -68,19 +69,19 @@ Future<void> _cancelRide() async {
               color: Colors.red.shade600,
               size: 24,
             ),
-            const SizedBox(width: 12),
-            const Text(
+            SizedBox(width: 12.w),
+            Text(
               'Cancel Ride?',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ],
         ),
-        content: const Text(
+        content: Text(
           'Are you sure you want to cancel this ride? This action cannot be undone.',
-          style: TextStyle(fontSize: 16),
+          style: TextStyle(fontSize: 16.sp),
         ),
         actions: [
           TextButton(
@@ -99,10 +100,10 @@ Future<void> _cancelRide() async {
               backgroundColor: Colors.red.shade600,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(8.r),
               ),
             ),
-            child: const Text(
+            child: Text(
               'Cancel Ride',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
@@ -118,24 +119,24 @@ Future<void> _cancelRide() async {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Row(
+            content: Row(
               children: [
                 SizedBox(
-                  width: 16,
-                  height: 16,
+                  width: 16.w,
+                  height: 16.w,
                   child: CircularProgressIndicator(
                     strokeWidth: 2,
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(width: 12),
+                SizedBox(width: 12.w),
                 Text('Cancelling ride...'),
               ],
             ),
             backgroundColor: Colors.orange.shade600,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(8.r),
             ),
             duration: const Duration(seconds: 30),
           ),
@@ -165,17 +166,17 @@ Future<void> _cancelRide() async {
             // Show success message
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: const Row(
+                content: Row(
                   children: [
                     Icon(Icons.check_circle, color: Colors.white),
-                    SizedBox(width: 12),
+                    SizedBox(width: 12.w),
                     Text('Ride cancelled successfully'),
                   ],
                 ),
                 backgroundColor: Colors.green.shade600,
                 behavior: SnackBarBehavior.floating,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(8.r),
                 ),
               ),
             );
@@ -197,10 +198,10 @@ Future<void> _cancelRide() async {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Row(
+            content: Row(
               children: [
                 Icon(Icons.error, color: Colors.white),
-                SizedBox(width: 12),
+                SizedBox(width: 12.w),
                 Expanded(
                   child: Text('Failed to cancel ride. Please try again.'),
                 ),
@@ -209,7 +210,7 @@ Future<void> _cancelRide() async {
             backgroundColor: Colors.red.shade600,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(8.r),
             ),
             duration: const Duration(seconds: 4),
           ),
@@ -330,23 +331,23 @@ Future<void> _handleRideCompletion(String completedRideId) async {
         content: Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(6),
+              padding: EdgeInsets.all(6.w),
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(12.r),
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.check_circle,
                 color: Colors.white,
                 size: 20,
               ),
             ),
-            const SizedBox(width: 12),
-            const Text(
+            SizedBox(width: 12.w),
+            Text(
               '🎉 Ride Completed Successfully!',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 16,
+                fontSize: 16.sp,
               ),
             ),
           ],
@@ -354,7 +355,7 @@ Future<void> _handleRideCompletion(String completedRideId) async {
         backgroundColor: Colors.green.shade600,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.r),
         ),
         duration: const Duration(seconds: 2),
       ),
@@ -406,17 +407,17 @@ Future<void> _handleRideCompletion(String completedRideId) async {
       
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Row(
+          content: Row(
             children: [
               Icon(Icons.cancel, color: Colors.white),
-              SizedBox(width: 12),
+              SizedBox(width: 12.w),
               Text('Ride was cancelled'),
             ],
           ),
           backgroundColor: Colors.orange.shade600,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(12.r),
           ),
         ),
       );
@@ -808,7 +809,7 @@ Future<void> _handleRideCompletion(String completedRideId) async {
         polylineId: const PolylineId("route"),
         points: _polylineCoordinates,
         color: Colors.blue,
-        width: 4,
+        width: 4.w.toInt(),
       ),
     );
   }
@@ -1088,7 +1089,7 @@ Future<void> _forceStatusCheck() async {
                     ],
                   ),
                 ),
-                child: const Center(
+                child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -1096,11 +1097,11 @@ Future<void> _forceStatusCheck() async {
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
                         strokeWidth: 3,
                       ),
-                      SizedBox(height: 24),
+                      SizedBox(height: 24.w),
                       Text(
                         'Loading your ride details...',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           color: Colors.grey,
                           fontWeight: FontWeight.w500,
                         ),
@@ -1133,12 +1134,12 @@ Future<void> _forceStatusCheck() async {
                   // Top Info Card
                   Positioned(
                     top: MediaQuery.of(context).padding.top + 16,
-                    left: 16,
-                    right: 16,
+                    left: 16.w,
+                    right: 16.w,
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(20.r),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.1),
@@ -1148,17 +1149,17 @@ Future<void> _forceStatusCheck() async {
                         ],
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(20),
+                        padding: EdgeInsets.all(20.w),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.all(8),
+                                  padding: EdgeInsets.all(8.w),
                                   decoration: BoxDecoration(
                                     color: Colors.green.shade50,
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(10.r),
                                   ),
                                   child: Icon(
                                     Icons.directions_car,
@@ -1166,16 +1167,16 @@ Future<void> _forceStatusCheck() async {
                                     size: 20,
                                   ),
                                 ),
-                                const SizedBox(width: 12),
+                                SizedBox(width: 12.w),
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Text(
+                                      Text(
                                         "Your Ride is Active",
                                         style: TextStyle(
-                                          fontSize: 18,
+                                          fontSize: 18.sp,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black87,
                                         ),
@@ -1183,7 +1184,7 @@ Future<void> _forceStatusCheck() async {
                                       Text(
                                         "Stay safe and enjoy your journey",
                                         style: TextStyle(
-                                          fontSize: 13,
+                                          fontSize: 13.sp,
                                           color: Colors.grey.shade600,
                                           fontWeight: FontWeight.w400,
                                         ),
@@ -1194,17 +1195,17 @@ Future<void> _forceStatusCheck() async {
                               ],
                             ),
 
-                            const SizedBox(height: 16),
+                            SizedBox(height: 16.w),
 
                             // Progress indicator
                             Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 8,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 12.w,
+                                vertical: 8.w,
                               ),
                               decoration: BoxDecoration(
                                 color: Colors.blue.shade50,
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(12.r),
                               ),
                               child: Row(
                                 children: [
@@ -1213,12 +1214,12 @@ Future<void> _forceStatusCheck() async {
                                     color: Colors.blue.shade600,
                                     size: 16,
                                   ),
-                                  const SizedBox(width: 8),
+                                  SizedBox(width: 8.w),
                                   Expanded(
                                     child: Text(
                                       _getCurrentDestinationText(),
                                       style: TextStyle(
-                                        fontSize: 14,
+                                        fontSize: 14.sp,
                                         color: Colors.blue.shade700,
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -1228,7 +1229,7 @@ Future<void> _forceStatusCheck() async {
                               ),
                             ),
 
-                            const SizedBox(height: 8),
+                            SizedBox(height: 8.w),
 
                             // Sub info
                             Row(
@@ -1238,11 +1239,11 @@ Future<void> _forceStatusCheck() async {
                                   color: Colors.grey.shade500,
                                   size: 14,
                                 ),
-                                const SizedBox(width: 6),
+                                SizedBox(width: 6.w),
                                 Text(
                                   _getRideProgressText(),
                                   style: TextStyle(
-                                    fontSize: 12,
+                                    fontSize: 12.sp,
                                     color: Colors.grey.shade600,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -1263,8 +1264,8 @@ Future<void> _forceStatusCheck() async {
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(25),
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(25.r),
                         ),
                         boxShadow: [
                           BoxShadow(
@@ -1276,34 +1277,34 @@ Future<void> _forceStatusCheck() async {
                       ),
                       child: SafeArea(
                         child: Padding(
-                          padding: const EdgeInsets.only(
+                          padding: EdgeInsets.only(
                             top: 0,
-                            left: 20,
-                            right: 20,
-                            bottom: 10,
+                            left: 20.w,
+                            right: 20.w,
+                            bottom: 10.w,
                           ),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               // Handle bar
                               Container(
-                                width: 40,
-                                height: 4,
+                                width: 40.w,
+                                height: 4.w,
                                 decoration: BoxDecoration(
                                   color: Colors.grey.shade300,
-                                  borderRadius: BorderRadius.circular(2),
+                                  borderRadius: BorderRadius.circular(2.r),
                                 ),
                               ),
 
-                              const SizedBox(height: 20),
+                              SizedBox(height: 20.w),
                               // Replace the existing paid status section with this enhanced version
 
 SizedBox(
-  height: 56,
+  height: 56.w,
   width: double.infinity,
   child: _isPaid
       ? Container(
-          height: 56,
+          height: 56.w,
           width: double.infinity,
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -1314,7 +1315,7 @@ SizedBox(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
             ),
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(20.r),
             boxShadow: [
               BoxShadow(
                 color: Colors.green.withOpacity(0.3),
@@ -1330,7 +1331,7 @@ SizedBox(
                 child: AnimatedContainer(
                   duration: const Duration(seconds: 2),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(20.r),
                     gradient: LinearGradient(
                       colors: [
                         Colors.white.withOpacity(0.0),
@@ -1350,35 +1351,35 @@ SizedBox(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(6),
+                      padding: EdgeInsets.all(6.w),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(12.r),
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.check_circle,
                         color: Colors.white,
                         size: 20,
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12.w),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           "Payment Completed",
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                            fontSize: 16.sp,
                           ),
                         ),
                         Text(
                           "Ride payment confirmed",
                           style: TextStyle(
                             color: Colors.white.withOpacity(0.9),
-                            fontSize: 12,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -1391,7 +1392,7 @@ SizedBox(
           ),
         )
       : Container(
-          height: 56,
+          height: 56.w,
           width: double.infinity,
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -1402,7 +1403,7 @@ SizedBox(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
             ),
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(20.r),
             boxShadow: [
               BoxShadow(
                 color: Colors.green.withOpacity(0.3),
@@ -1414,7 +1415,7 @@ SizedBox(
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(20.r),
               onTap: () async {
                 final prefs = await SharedPreferences.getInstance();
                 String? rideId = prefs.getString('rideId');
@@ -1440,19 +1441,19 @@ Navigator.push(
           content: Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(6),
+                padding: EdgeInsets.all(6.w),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.check_circle,
                   color: Colors.white,
                   size: 20,
                 ),
               ),
-              const SizedBox(width: 12),
-              const Column(
+              SizedBox(width: 12.w),
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -1460,12 +1461,12 @@ Navigator.push(
                     '✅ Payment Successful!',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: 16.sp,
                     ),
                   ),
                   Text(
                     'Ride is ongoing...',
-                    style: TextStyle(fontSize: 12),
+                    style: TextStyle(fontSize: 12.sp),
                   ),
                 ],
               ),
@@ -1474,7 +1475,7 @@ Navigator.push(
           backgroundColor: Colors.green.shade600,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(12.r),
           ),
           duration: const Duration(seconds: 3),
         ),
@@ -1488,41 +1489,41 @@ Navigator.push(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(6),
+                      padding: EdgeInsets.all(6.w),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(12.r),
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.payment,
                         color: Colors.white,
                         size: 20,
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12.w),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           "Pay Now",
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                            fontSize: 16.sp,
                           ),
                         ),
                         Text(
                           "Tap to complete payment",
                           style: TextStyle(
                             color: Colors.white.withOpacity(0.9),
-                            fontSize: 12,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8.w),
                     Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.white.withOpacity(0.8),
@@ -1535,7 +1536,7 @@ Navigator.push(
           ),
         ),
 ),
-                              const SizedBox(height: 20),
+                              SizedBox(height: 20.w),
                               // Action buttons
                               Row(
                                 mainAxisAlignment:
@@ -1544,14 +1545,14 @@ Navigator.push(
                                   // SOS Button
                                   Expanded(
                                     child: SizedBox(
-                                      height: 56,
+                                      height: 56.w,
                                       child: ElevatedButton.icon(
                                         onPressed: _sendSOS,
-                                        icon: const Icon(Icons.sos, size: 22),
-                                        label: const Text(
+                                        icon: Icon(Icons.sos, size: 22),
+                                        label: Text(
                                           'SOS',
                                           style: TextStyle(
-                                            fontSize: 16,
+                                            fontSize: 16.sp,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
@@ -1572,12 +1573,12 @@ Navigator.push(
                                     ),
                                   ),
 
-                                  const SizedBox(width: 12),
+                                  SizedBox(width: 12.w),
 
                                   // Report Button
                                   Expanded(
                                     child: SizedBox(
-                                      height: 56,
+                                      height: 56.w,
                                       child: ElevatedButton.icon(
                                         onPressed: () async {
                                           final prefs =
@@ -1602,14 +1603,14 @@ Navigator.push(
                                             );
                                           }
                                         },
-                                        icon: const Icon(
+                                        icon: Icon(
                                           Icons.report_problem,
                                           size: 22,
                                         ),
-                                        label: const Text(
+                                        label: Text(
                                           'Report',
                                           style: TextStyle(
-                                            fontSize: 16,
+                                            fontSize: 16.sp,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
@@ -1632,7 +1633,7 @@ Navigator.push(
                                 ],
                               ),
 
-                              const SizedBox(height: 16),
+                              SizedBox(height: 16.w),
 
                               // Secondary actions
                               Row(
@@ -1640,14 +1641,14 @@ Navigator.push(
     // Cancel Ride Button
     Expanded(
       child: SizedBox(
-        height: 56,
+        height: 56.w,
         child: ElevatedButton.icon(
           onPressed: _cancelRide,
-          icon: const Icon(Icons.cancel_outlined, size: 22),
-          label: const Text(
+          icon: Icon(Icons.cancel_outlined, size: 22),
+          label: Text(
             'Cancel Ride',
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 16.sp,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -1657,7 +1658,7 @@ Navigator.push(
             elevation: 3,
             shadowColor: Colors.red.withOpacity(0.3),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(16.r),
             ),
           ),
         ),
@@ -1666,7 +1667,7 @@ Navigator.push(
   ],
 ),
 
-const SizedBox(height: 12),
+SizedBox(height: 12.w),
 
 // Other secondary actions in a row
 Row(
@@ -1718,8 +1719,8 @@ Row(
 
                   // Floating recenter button
                   Positioned(
-                    right: 16,
-                    bottom: 200,
+                    right: 16.w,
+                    bottom: 200.w,
                     child: FloatingActionButton(
                       mini: true,
                       backgroundColor: Colors.white,
@@ -1732,7 +1733,7 @@ Row(
                           );
                         }
                       },
-                      child: const Icon(Icons.gps_fixed),
+                      child: Icon(Icons.gps_fixed),
                     ),
                   ),
                 ],
@@ -1748,22 +1749,22 @@ Row(
   }) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(12.r),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.w),
         decoration: BoxDecoration(
           color: Colors.grey.shade50,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.r),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(icon, color: Colors.grey.shade700, size: 20),
-            const SizedBox(height: 4),
+            SizedBox(height: 4.w),
             Text(
               label,
               style: TextStyle(
-                fontSize: 12,
+                fontSize: 12.sp,
                 color: Colors.grey.shade700,
                 fontWeight: FontWeight.w500,
               ),
@@ -1782,12 +1783,12 @@ Row(
       backgroundColor: Colors.transparent,
       builder:
           (context) => Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(20),
+              padding: EdgeInsets.all(20.w),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1795,17 +1796,17 @@ Row(
                   Row(
                     children: [
                       Icon(Icons.info, color: Colors.blue.shade600),
-                      SizedBox(width: 12),
+                      SizedBox(width: 12.w),
                       Text(
                         'Trip Information',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 20.w),
                   _buildInfoRow(
                     'Trip Type',
                     _rideType == "multiple_stops" ? "Multiple Stops" : "Direct",
@@ -1817,7 +1818,7 @@ Row(
                   _buildInfoRow('Progress', _getRideProgressText()),
                   if (_stops.isNotEmpty)
                     _buildInfoRow('Total Stops', '${_stops.length} stops'),
-                  SizedBox(height: 20),
+                  SizedBox(height: 20.w),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -1825,9 +1826,9 @@ Row(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green.shade600,
                         foregroundColor: Colors.white,
-                        padding: EdgeInsets.symmetric(vertical: 12),
+                        padding: EdgeInsets.symmetric(vertical: 12.w),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(12.r),
                         ),
                       ),
                       child: Text('Close'),
@@ -1842,12 +1843,12 @@ Row(
 
   Widget _buildInfoRow(String label, String value) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: EdgeInsets.symmetric(vertical: 8.w),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: 120,
+            width: 120.w,
             child: Text(
               label,
               style: TextStyle(
@@ -1859,7 +1860,7 @@ Row(
           Expanded(
             child: Text(
               value,
-              style: const TextStyle(fontWeight: FontWeight.w600),
+              style: TextStyle(fontWeight: FontWeight.w600),
             ),
           ),
         ],

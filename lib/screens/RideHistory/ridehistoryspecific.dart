@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rideal/screens/RideHistory/ridehistory.dart';
 import 'package:rideal/screens/transport/confirmpickup.dart';
 import 'package:flutter/material.dart';
@@ -417,12 +418,12 @@ Future<bool> _hasActiveRide() async {
     builder: (BuildContext dialogContext) {
       return AlertDialog(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
         ),
         title: Row(
           children: [
             Icon(Icons.directions_car, color: Colors.blue),
-            SizedBox(width: 8),
+            SizedBox(width: 8.w),
             Text('Select Ride Type'),
           ],
         ),
@@ -430,13 +431,13 @@ Future<bool> _hasActiveRide() async {
           mainAxisSize: MainAxisSize.min,
           children: rideTypes.map((rideType) {
             return Card(
-              margin: EdgeInsets.symmetric(vertical: 4),
+              margin: EdgeInsets.symmetric(vertical: 4.w),
               child: ListTile(
                 leading: Container(
-                  padding: EdgeInsets.all(8),
+                  padding: EdgeInsets.all(8.w),
                   decoration: BoxDecoration(
                     color: rideType['color'].withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: Icon(
                     rideType['icon'],
@@ -448,14 +449,14 @@ Future<bool> _hasActiveRide() async {
                   rideType['name'],
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                    fontSize: 16.sp,
                   ),
                 ),
                 subtitle: Text(
                   rideType['description'],
                   style: TextStyle(
                     color: Colors.grey[600],
-                    fontSize: 12,
+                    fontSize: 12.sp,
                   ),
                 ),
                 trailing: Icon(Icons.arrow_forward_ios, size: 16),
@@ -668,12 +669,12 @@ double _calculateFare(double distanceKm, String rideType) {
     Authservices.debugRideStructure(widget.rideId);
     
     return Scaffold(
-      appBar: AppBar(title: const Text("Ride Details"), centerTitle: true),
+      appBar: AppBar(title: Text("Ride Details"), centerTitle: true),
       body: FutureBuilder<Ride?>(
         future: Authservices.getRideDetail(widget.rideId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(child: CircularProgressIndicator());
           }
           
           if (snapshot.hasError) {
@@ -682,15 +683,15 @@ double _calculateFare(double distanceKm, String rideType) {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.error, size: 64, color: Colors.red),
-                  const SizedBox(height: 16),
-                  const Text("Error loading ride details"),
-                  const SizedBox(height: 8),
-                  Text("${snapshot.error}", style: const TextStyle(color: Colors.grey)),
-                  const SizedBox(height: 16),
+                  Icon(Icons.error, size: 64, color: Colors.red),
+                  SizedBox(height: 16.w),
+                  Text("Error loading ride details"),
+                  SizedBox(height: 8.w),
+                  Text("${snapshot.error}", style: TextStyle(color: Colors.grey)),
+                  SizedBox(height: 16.w),
                   ElevatedButton(
                     onPressed: () => _safeSetState(() {}),
-                    child: const Text("Retry"),
+                    child: Text("Retry"),
                   ),
                 ],
               ),
@@ -698,12 +699,12 @@ double _calculateFare(double distanceKm, String rideType) {
           }
           
           if (!snapshot.hasData) {
-            return const Center(
+            return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.search_off, size: 64, color: Colors.grey),
-                  SizedBox(height: 16),
+                  SizedBox(height: 16.w),
                   Text("Ride not found"),
                 ],
               ),
@@ -721,11 +722,11 @@ double _calculateFare(double distanceKm, String rideType) {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.location_off, size: 64, color: Colors.orange),
-                  const SizedBox(height: 16),
-                  const Text("No location data available"),
-                  const SizedBox(height: 8),
-                  Text("Ride ID: ${ride.id}", style: const TextStyle(color: Colors.grey)),
+                  Icon(Icons.location_off, size: 64, color: Colors.orange),
+                  SizedBox(height: 16.w),
+                  Text("No location data available"),
+                  SizedBox(height: 8.w),
+                  Text("Ride ID: ${ride.id}", style: TextStyle(color: Colors.grey)),
                 ],
               ),
             );
@@ -743,12 +744,12 @@ double _calculateFare(double distanceKm, String rideType) {
             builder: (context, AsyncSnapshot<List<String>> addrSnapshot) {
                
               if (addrSnapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
+                return Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CircularProgressIndicator(),
-                      SizedBox(height: 16),
+                      SizedBox(height: 16.w),
                       Text("Loading location details..."),
                     ],
                   ),
@@ -761,11 +762,11 @@ double _calculateFare(double distanceKm, String rideType) {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.location_disabled, size: 64, color: Colors.red),
-                      const SizedBox(height: 16),
-                      const Text("Failed to load addresses"),
-                      const SizedBox(height: 8),
-                      Text("${addrSnapshot.error}", style: const TextStyle(color: Colors.grey)),
+                      Icon(Icons.location_disabled, size: 64, color: Colors.red),
+                      SizedBox(height: 16.w),
+                      Text("Failed to load addresses"),
+                      SizedBox(height: 8.w),
+                      Text("${addrSnapshot.error}", style: TextStyle(color: Colors.grey)),
                     ],
                   ),
                 );
@@ -788,7 +789,7 @@ Widget _buildContent(Ride ride, bool isMultiStop, String fromAddress, String toA
   return LayoutBuilder(
     builder: (context, constraints) {
       return SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16.w),
         child: ConstrainedBox(
           constraints: BoxConstraints(
             minHeight: constraints.maxHeight - 32,
@@ -800,7 +801,7 @@ Widget _buildContent(Ride ride, bool isMultiStop, String fromAddress, String toA
               Card(
                 color: _getStatusColor(ride.status),
                 child: Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16.w),
                   child: Row(
                     children: [
                       Icon(
@@ -808,7 +809,7 @@ Widget _buildContent(Ride ride, bool isMultiStop, String fromAddress, String toA
                         color: Colors.white,
                         size: 32,
                       ),
-                      const SizedBox(width: 12),
+                      SizedBox(width: 12.w),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -817,14 +818,14 @@ Widget _buildContent(Ride ride, bool isMultiStop, String fromAddress, String toA
                               "Ride Status",
                               style: TextStyle(
                                 color: Colors.white70,
-                                fontSize: 14,
+                                fontSize: 14.sp,
                               ),
                             ),
                             Text(
                               ride.status.toUpperCase(),
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 20,
+                                fontSize: 20.sp,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -835,30 +836,30 @@ Widget _buildContent(Ride ride, bool isMultiStop, String fromAddress, String toA
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.w),
 
               // Driver Details Card (if driver assigned)
               if (ride.driver != null) ...[
                 Card(
                   child: Padding(
-                    padding: const EdgeInsets.all(16),
+                    padding: EdgeInsets.all(16.w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           children: [
                             Icon(Icons.person, color: Colors.blue),
-                            const SizedBox(width: 8),
+                            SizedBox(width: 8.w),
                             Text(
                               "Driver Information",
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 18.sp,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12.w),
                         _buildDetailRow("Driver Name", ride.driver!.name),
                         _buildDetailRow("Driver Phone", ride.driver!.phone),
                         if (ride.vehicleNumber != null && ride.vehicleNumber!.isNotEmpty)
@@ -867,50 +868,50 @@ Widget _buildContent(Ride ride, bool isMultiStop, String fromAddress, String toA
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.w),
               ],
 
               // Trip Info Card
               Card(
                 child: Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16.w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
                           Icon(Icons.info_outline, color: Colors.orange),
-                          const SizedBox(width: 8),
+                          SizedBox(width: 8.w),
                           Text(
                             "Trip Information",
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 18.sp,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const Spacer(),
+                          Spacer(),
                           if (isMultiStop)
                             Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                                vertical: 4,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 8.w,
+                                vertical: 4.w,
                               ),
                               decoration: BoxDecoration(
                                 color: Colors.blue.shade100,
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(12.r),
                               ),
                               child: Text(
                                 "Multi-Stop",
                                 style: TextStyle(
                                   color: Colors.blue.shade700,
-                                  fontSize: 12,
+                                  fontSize: 12.sp,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),
                         ],
                       ),
-                      const SizedBox(height: 12),
+                      SizedBox(height: 12.w),
                       _buildDetailRow("Date", formatDate(ride.createdAt)),
                       _buildDetailRow("Time", formatTime(ride.createdAt)),
                       _buildDetailRow("Booked", getRelativeTime(ride.createdAt)),
@@ -923,29 +924,29 @@ Widget _buildContent(Ride ride, bool isMultiStop, String fromAddress, String toA
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.w),
 
               // Route Info Card
               Card(
                 child: Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16.w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
                           Icon(Icons.route, color: Colors.green),
-                          const SizedBox(width: 8),
+                          SizedBox(width: 8.w),
                           Text(
                             "Route Information",
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 18.sp,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 12),
+                      SizedBox(height: 12.w),
                       
                       _buildLocationRow(
                         Icons.location_on,
@@ -956,11 +957,11 @@ Widget _buildContent(Ride ride, bool isMultiStop, String fromAddress, String toA
                       ),
                       
                       if (isMultiStop) ...[
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16.w),
                         _buildIntermediateStops(ride),
                       ],
                       
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16.w),
                       _buildLocationRow(
                         Icons.location_on,
                         Colors.red,
@@ -972,30 +973,30 @@ Widget _buildContent(Ride ride, bool isMultiStop, String fromAddress, String toA
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.w),
 
               // Additional Details Card
               if (ride.feedback.isNotEmpty || ride.rebookedFrom != null) ...[
                 Card(
                   child: Padding(
-                    padding: const EdgeInsets.all(16),
+                    padding: EdgeInsets.all(16.w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           children: [
                             Icon(Icons.notes, color: Colors.purple),
-                            const SizedBox(width: 8),
+                            SizedBox(width: 8.w),
                             Text(
                               "Additional Details",
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 18.sp,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12.w),
                         if (ride.feedback.isNotEmpty)
                           _buildDetailRow("Feedback", ride.feedback),
                         if (ride.rebookedFrom != null)
@@ -1004,7 +1005,7 @@ Widget _buildContent(Ride ride, bool isMultiStop, String fromAddress, String toA
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.w),
               ],
               
               // Rebook Button
@@ -1057,13 +1058,13 @@ IconData _getStatusIcon(String status) {
 // Helper method for rating display
 Widget _buildRatingRow(String label, int rating) {
   return Padding(
-    padding: EdgeInsets.symmetric(vertical: 4),
+    padding: EdgeInsets.symmetric(vertical: 4.w),
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          width: 100,
-          child: Text("$label:", style: const TextStyle(color: Colors.grey)),
+          width: 100.w,
+          child: Text("$label:", style: TextStyle(color: Colors.grey)),
         ),
         Expanded(
           child: Row(
@@ -1085,19 +1086,19 @@ Widget _buildRatingRow(String label, int rating) {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Icon(icon, color: color, size: 24),
-        const SizedBox(width: 8),
+        SizedBox(width: 8.w),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: const TextStyle(fontWeight: FontWeight.w500)),
-              const SizedBox(height: 4),
+              Text(title, style: TextStyle(fontWeight: FontWeight.w500)),
+              SizedBox(height: 4.w),
               Text(address, style: TextStyle(color: Colors.grey[600])),
               if (stop.lat != 0 && stop.lng != 0) ...[
-                const SizedBox(height: 2),
+                SizedBox(height: 2.w),
                 Text(
                   "(${stop.lat.toStringAsFixed(4)}, ${stop.lng.toStringAsFixed(4)})",
-                  style: const TextStyle(fontSize: 12, color: Colors.grey),
+                  style: TextStyle(fontSize: 12.sp, color: Colors.grey),
                 ),
               ],
             ],
@@ -1114,16 +1115,16 @@ Widget _buildRatingRow(String label, int rating) {
       future: Future.wait(intermediateStops.map((s) => getAddress(s))),
       builder: (context, stopsSnapshot) {
         if (stopsSnapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
+          return Center(
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(8.0.w),
               child: CircularProgressIndicator(),
             ),
           );
         }
         
         if (!stopsSnapshot.hasData) {
-          return const SizedBox.shrink();
+          return SizedBox.shrink();
         }
         
         final intermediateAddresses = stopsSnapshot.data!;
@@ -1133,7 +1134,7 @@ Widget _buildRatingRow(String label, int rating) {
             final stop = intermediateStops[i];
             final stopAddress = intermediateAddresses[i];
             return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
+              padding: EdgeInsets.symmetric(vertical: 8.w),
               child: _buildLocationRow(
                 Icons.stop_circle,
                 Colors.orange,
@@ -1160,12 +1161,12 @@ Widget _buildRatingRow(String label, int rating) {
   Widget _buildRebookButton(Ride ride, String fromAddress, String toAddress, bool isMultiStop) {
     return SizedBox(
       width: double.infinity,
-      height: 50,
+      height: 50.w,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.green.shade700,
           foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
         ),
         onPressed: _isRebooking 
           ? null 
@@ -1175,23 +1176,23 @@ Widget _buildRatingRow(String label, int rating) {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  width: 20,
-                  height: 20,
+                  width: 20.w,
+                  height: 20.w,
                   child: CircularProgressIndicator(
                     strokeWidth: 2,
                     valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                   ),
                 ),
-                SizedBox(width: 8),
+                SizedBox(width: 8.w),
                 Text(
                   isMultiStop ? "Rebooking Multi-Stop..." : "Rebooking...",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
                 ),
               ],
             )
           : Text(
               isMultiStop ? "Rebook Multi-Stop Ride" : "Rebook Ride",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
             ),
       ),
     );
@@ -1199,16 +1200,16 @@ Widget _buildRatingRow(String label, int rating) {
 
   Widget _buildDetailRow(String label, String value) {
     return Padding(
-      padding:  EdgeInsets.symmetric(vertical: 4),
+      padding:  EdgeInsets.symmetric(vertical: 4.w),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: 100,
-            child: Text("$label:", style: const TextStyle(color: Colors.grey)),
+            width: 100.w,
+            child: Text("$label:", style: TextStyle(color: Colors.grey)),
           ),
           Expanded(
-            child: Text(value, style: const TextStyle(fontWeight: FontWeight.w500)),
+            child: Text(value, style: TextStyle(fontWeight: FontWeight.w500)),
           ),
         ],
       ),

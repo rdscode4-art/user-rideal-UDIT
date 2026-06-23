@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 // Save this file as: lib/screens/hiredriver/trip_history_screen.dart
 
 import 'package:flutter/material.dart';
@@ -133,12 +134,12 @@ class _TripHistoryScreenState extends State<TripHistoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Trip History'),
+        title: Text('Trip History'),
         backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         actions: [
           IconButton(
-            icon: const Icon(Icons.refresh),
+            icon: Icon(Icons.refresh),
             onPressed: () {
               setState(() {
                 isLoading = true;
@@ -149,19 +150,19 @@ class _TripHistoryScreenState extends State<TripHistoryScreen> {
         ],
       ),
       body: isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator())
           : errorMessage != null
               ? Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.error_outline, size: 64, color: Colors.red.shade300),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16.w),
                       Text(
                         errorMessage!,
-                        style: const TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 16.sp),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16.w),
                       ElevatedButton(
                         onPressed: () {
                           setState(() {
@@ -170,27 +171,27 @@ class _TripHistoryScreenState extends State<TripHistoryScreen> {
                           });
                           _fetchTripHistory();
                         },
-                        child: const Text('Retry'),
+                        child: Text('Retry'),
                       ),
                     ],
                   ),
                 )
               : trips.isEmpty
-                  ? const Center(
+                  ? Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(Icons.history, size: 64, color: Colors.grey),
-                          SizedBox(height: 16),
+                          SizedBox(height: 16.w),
                           Text(
                             'No trip history available',
-                            style: TextStyle(fontSize: 16, color: Colors.grey),
+                            style: TextStyle(fontSize: 16.sp, color: Colors.grey),
                           ),
                         ],
                       ),
                     )
                   : ListView.builder(
-                      padding: const EdgeInsets.all(16),
+                      padding: EdgeInsets.all(16.w),
                       itemCount: trips.length,
                       itemBuilder: (context, index) {
                         final trip = trips[index];
@@ -209,9 +210,9 @@ class _TripHistoryScreenState extends State<TripHistoryScreen> {
                             final status = snapshot.data ?? 'LOADING...';
                             
                             return Card(
-                              margin: const EdgeInsets.only(bottom: 12),
+                              margin: EdgeInsets.only(bottom: 12.w),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(12.r),
                               ),
                               elevation: 3,
                               child: InkWell(
@@ -233,9 +234,9 @@ class _TripHistoryScreenState extends State<TripHistoryScreen> {
                                     _fetchTripHistory();
                                   });
                                 },
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(12.r),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(16),
+                                  padding: EdgeInsets.all(16.w),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
@@ -250,12 +251,12 @@ class _TripHistoryScreenState extends State<TripHistoryScreen> {
                                                   color: Colors.green,
                                                   size: 20,
                                                 ),
-                                                const SizedBox(width: 8),
+                                                SizedBox(width: 8.w),
                                                 Flexible(
                                                   child: Text(
                                                     'Ride ID: ${trip['rideId']}',
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
+                                                    style: TextStyle(
+                                                      fontSize: 14.sp,
                                                       fontWeight: FontWeight.w500,
                                                     ),
                                                     overflow: TextOverflow.ellipsis,
@@ -264,15 +265,15 @@ class _TripHistoryScreenState extends State<TripHistoryScreen> {
                                               ],
                                             ),
                                           ),
-                                          const SizedBox(width: 8),
+                                          SizedBox(width: 8.w),
                                           Container(
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 8,
-                                              vertical: 4,
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 8.w,
+                                              vertical: 4.w,
                                             ),
                                             decoration: BoxDecoration(
                                               color: _getStatusColor(status).withOpacity(0.1),
-                                              borderRadius: BorderRadius.circular(8),
+                                              borderRadius: BorderRadius.circular(8.r),
                                               border: Border.all(
                                                 color: _getStatusColor(status),
                                               ),
@@ -282,13 +283,13 @@ class _TripHistoryScreenState extends State<TripHistoryScreen> {
                                               style: TextStyle(
                                                 color: _getStatusColor(status),
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 12,
+                                                fontSize: 12.sp,
                                               ),
                                             ),
                                           ),
                                         ],
                                       ),
-                                      const SizedBox(height: 12),
+                                      SizedBox(height: 12.w),
                                       Row(
                                         children: [
                                           Icon(
@@ -296,7 +297,7 @@ class _TripHistoryScreenState extends State<TripHistoryScreen> {
                                             size: 16,
                                             color: Colors.grey.shade600,
                                           ),
-                                          const SizedBox(width: 8),
+                                          SizedBox(width: 8.w),
                                           Text(
                                             'Driver: $driverName',
                                             style: TextStyle(
@@ -305,7 +306,7 @@ class _TripHistoryScreenState extends State<TripHistoryScreen> {
                                           ),
                                         ],
                                       ),
-                                      const SizedBox(height: 6),
+                                      SizedBox(height: 6.w),
                                       Row(
                                         children: [
                                           Icon(
@@ -313,7 +314,7 @@ class _TripHistoryScreenState extends State<TripHistoryScreen> {
                                             size: 16,
                                             color: Colors.grey.shade600,
                                           ),
-                                          const SizedBox(width: 8),
+                                          SizedBox(width: 8.w),
                                           Text(
                                             'Phone: $driverPhone',
                                             style: TextStyle(
@@ -322,7 +323,7 @@ class _TripHistoryScreenState extends State<TripHistoryScreen> {
                                           ),
                                         ],
                                       ),
-                                      const SizedBox(height: 6),
+                                      SizedBox(height: 6.w),
                                       Row(
                                         children: [
                                           Icon(
@@ -330,7 +331,7 @@ class _TripHistoryScreenState extends State<TripHistoryScreen> {
                                             size: 16,
                                             color: Colors.grey.shade600,
                                           ),
-                                          const SizedBox(width: 8),
+                                          SizedBox(width: 8.w),
                                           Text(
                                             'Duration: ${trip['duration']}',
                                             style: TextStyle(
@@ -339,7 +340,7 @@ class _TripHistoryScreenState extends State<TripHistoryScreen> {
                                           ),
                                         ],
                                       ),
-                                      const SizedBox(height: 6),
+                                      SizedBox(height: 6.w),
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
@@ -350,12 +351,12 @@ class _TripHistoryScreenState extends State<TripHistoryScreen> {
                                                 size: 16,
                                                 color: Colors.green,
                                               ),
-                                              const SizedBox(width: 8),
+                                              SizedBox(width: 8.w),
                                               Text(
                                                 '₹${trip['price']}',
-                                                style: const TextStyle(
+                                                style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 16,
+                                                  fontSize: 16.sp,
                                                   color: Colors.green,
                                                 ),
                                               ),
@@ -365,25 +366,25 @@ class _TripHistoryScreenState extends State<TripHistoryScreen> {
                                             Text(
                                               _formatDate(createdAt),
                                               style: TextStyle(
-                                                fontSize: 12,
+                                                fontSize: 12.sp,
                                                 color: Colors.grey.shade600,
                                               ),
                                             ),
                                         ],
                                       ),
-                                      const SizedBox(height: 8),
+                                      SizedBox(height: 8.w),
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
                                           Text(
                                             'Tap for details',
                                             style: TextStyle(
-                                              fontSize: 12,
+                                              fontSize: 12.sp,
                                               color: Colors.green.shade700,
                                               fontStyle: FontStyle.italic,
                                             ),
                                           ),
-                                          const SizedBox(width: 4),
+                                          SizedBox(width: 4.w),
                                           Icon(
                                             Icons.arrow_forward_ios,
                                             size: 12,

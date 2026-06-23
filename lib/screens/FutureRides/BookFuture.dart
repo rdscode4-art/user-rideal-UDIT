@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:rideal/authservices.dart';
@@ -85,14 +86,14 @@ class _BookfutureState extends State<Bookfuture>
             children: [
               // Floating Header
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+                padding: EdgeInsets.fromLTRB(16, 8, 16, 12),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
                       onTap: () => Navigator.of(context).pop(),
                       child: Container(
-                        padding: const EdgeInsets.all(10),
+                        padding: EdgeInsets.all(10.w),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           shape: BoxShape.circle,
@@ -104,19 +105,19 @@ class _BookfutureState extends State<Bookfuture>
                             ),
                           ],
                         ),
-                        child: const Icon(Icons.arrow_back,
+                        child: Icon(Icons.arrow_back,
                             color: Colors.black87, size: 20),
                       ),
                     ),
-                    const Text(
+                    Text(
                       'Book Ride',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 20.sp,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
                       ),
                     ),
-                    const SizedBox(width: 40),
+                    SizedBox(width: 40.w),
                   ],
                 ),
               ),
@@ -125,43 +126,43 @@ class _BookfutureState extends State<Bookfuture>
                 child: SlideTransition(
                   position: _slideAnim,
                   child: SingleChildScrollView(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                    padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
                     child: Column(
                       children: [
                         // Date + Route Card
                         _buildRouteCard(date, startTime, from, to),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16.w),
 
                         // Availability Card
                         _buildAvailabilityCard(
                             availableSeats, maxPassengers, bookedSeats),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16.w),
 
                         // Seat Selector
                         if (availableSeats > 0)
                           _buildSeatSelectorCard(availableSeats),
 
-                        if (availableSeats > 0) const SizedBox(height: 16),
+                        if (availableSeats > 0) SizedBox(height: 16.w),
 
                         // Pricing Card
                         _buildPricingCard(
                             price, priceNum, totalPrice, availableSeats),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16.w),
 
                         // Driver & Vehicle Card
                         _buildDriverCard(
                             drivername, vehicleName, vehicle, driverPhone),
-                        const SizedBox(height: 24),
+                        SizedBox(height: 24.w),
 
                         // Book Button
                         _buildBookButton(
                             ride, availableSeats, totalPrice),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8.w),
 
                         Text(
                           'By booking, you agree to the ride sharing terms',
                           style: TextStyle(
-                              fontSize: 11, color: Colors.grey.shade400),
+                              fontSize: 11.sp, color: Colors.grey.shade400),
                           textAlign: TextAlign.center,
                         ),
                       ],
@@ -179,10 +180,10 @@ class _BookfutureState extends State<Bookfuture>
   Widget _buildRouteCard(
       String date, String startTime, String from, String to) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.04),
@@ -196,30 +197,30 @@ class _BookfutureState extends State<Bookfuture>
         children: [
           // Date chip
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.w),
             decoration: BoxDecoration(
               color: brandGreen.withOpacity(0.08),
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(20.r),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.calendar_today_rounded,
+                Icon(Icons.calendar_today_rounded,
                     color: brandGreen, size: 13),
-                const SizedBox(width: 6),
+                SizedBox(width: 6.w),
                 Text(
                   date,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: brandGreen,
                     fontWeight: FontWeight.w700,
-                    fontSize: 13,
+                    fontSize: 13.sp,
                   ),
                 ),
               ],
             ),
           ),
 
-          const SizedBox(height: 18),
+          SizedBox(height: 18.w),
 
           // Route timeline
           Row(
@@ -227,18 +228,18 @@ class _BookfutureState extends State<Bookfuture>
             children: [
               // Time column
               SizedBox(
-                width: 52,
+                width: 52.w,
                 child: Column(
                   children: [
                     Text(
                       startTime,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         color: Colors.black87,
                       ),
                     ),
-                    const SizedBox(height: 28),
+                    SizedBox(height: 28.w),
                     Text(
                       '~',
                       style: TextStyle(color: Colors.grey.shade400),
@@ -252,15 +253,15 @@ class _BookfutureState extends State<Bookfuture>
                 children: [
                   _dot(brandGreen),
                   Container(
-                    width: 2,
-                    height: 42,
+                    width: 2.w,
+                    height: 42.w,
                     color: Colors.grey.shade200,
                   ),
                   _dot(Colors.red.shade400),
                 ],
               ),
 
-              const SizedBox(width: 12),
+              SizedBox(width: 12.w),
 
               // Locations
               Expanded(
@@ -269,17 +270,17 @@ class _BookfutureState extends State<Bookfuture>
                   children: [
                     Text(
                       from,
-                      style: const TextStyle(
-                        fontSize: 14,
+                      style: TextStyle(
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w600,
                         color: Colors.black87,
                       ),
                     ),
-                    const SizedBox(height: 28),
+                    SizedBox(height: 28.w),
                     Text(
                       to,
-                      style: const TextStyle(
-                        fontSize: 14,
+                      style: TextStyle(
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w600,
                         color: Colors.black87,
                       ),
@@ -298,12 +299,12 @@ class _BookfutureState extends State<Bookfuture>
       int available, int max, int booked) {
     final isAvailable = available > 0;
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: isAvailable
             ? brandGreen.withOpacity(0.06)
             : Colors.red.shade50,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         border: Border.all(
           color: isAvailable
               ? brandGreen.withOpacity(0.3)
@@ -319,7 +320,7 @@ class _BookfutureState extends State<Bookfuture>
             color: isAvailable ? brandGreen : Colors.red.shade400,
             size: 22,
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -330,17 +331,17 @@ class _BookfutureState extends State<Bookfuture>
                       : 'No seats available',
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     color: isAvailable
                         ? brandGreen
                         : Colors.red.shade600,
                   ),
                 ),
-                const SizedBox(height: 2),
+                SizedBox(height: 2.w),
                 Text(
                   '$booked of $max seats booked',
                   style: TextStyle(
-                      fontSize: 12, color: Colors.grey.shade500),
+                      fontSize: 12.sp, color: Colors.grey.shade500),
                 ),
               ],
             ),
@@ -350,9 +351,9 @@ class _BookfutureState extends State<Bookfuture>
             children: List.generate(max, (i) {
               final filled = i < booked;
               return Container(
-                margin: const EdgeInsets.only(left: 3),
-                width: 10,
-                height: 10,
+                margin: EdgeInsets.only(left: 3.w),
+                width: 10.w,
+                height: 10.w,
                 decoration: BoxDecoration(
                   color: filled
                       ? Colors.grey.shade300
@@ -369,10 +370,10 @@ class _BookfutureState extends State<Bookfuture>
 
   Widget _buildSeatSelectorCard(int availableSeats) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.04),
@@ -387,26 +388,26 @@ class _BookfutureState extends State<Bookfuture>
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(8),
+                padding: EdgeInsets.all(8.w),
                 decoration: BoxDecoration(
                   color: brandGreen.withOpacity(0.08),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.chair_alt_rounded,
+                child: Icon(Icons.chair_alt_rounded,
                     color: brandGreen, size: 18),
               ),
-              const SizedBox(width: 10),
-              const Text(
+              SizedBox(width: 10.w),
+              Text(
                 'Select Seats',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w800,
                   color: Colors.black87,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 14),
+          SizedBox(height: 14.w),
           Row(
             children: List.generate(
               availableSeats > 4 ? 4 : availableSeats,
@@ -417,14 +418,14 @@ class _BookfutureState extends State<Bookfuture>
                   onTap: () => setState(() => selectedSeats = n),
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 180),
-                    margin: const EdgeInsets.only(right: 10),
-                    width: 50,
-                    height: 50,
+                    margin: EdgeInsets.only(right: 10.w),
+                    width: 50.w,
+                    height: 50.w,
                     decoration: BoxDecoration(
                       color: selected
                           ? brandGreen
                           : const Color(0xFFF8F9FA),
-                      borderRadius: BorderRadius.circular(14),
+                      borderRadius: BorderRadius.circular(14.r),
                       border: Border.all(
                         color: selected
                             ? brandGreen
@@ -445,7 +446,7 @@ class _BookfutureState extends State<Bookfuture>
                         '$n',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           color: selected
                               ? Colors.white
                               : Colors.black54,
@@ -465,10 +466,10 @@ class _BookfutureState extends State<Bookfuture>
   Widget _buildPricingCard(
       String price, int priceNum, int totalPrice, int availableSeats) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.04),
@@ -485,19 +486,19 @@ class _BookfutureState extends State<Bookfuture>
               Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(8),
+                    padding: EdgeInsets.all(8.w),
                     decoration: BoxDecoration(
                       color: brandGreen.withOpacity(0.08),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.payments_rounded,
+                    child: Icon(Icons.payments_rounded,
                         color: brandGreen, size: 18),
                   ),
-                  const SizedBox(width: 10),
-                  const Text(
+                  SizedBox(width: 10.w),
+                  Text(
                     'Pricing',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.w800,
                       color: Colors.black87,
                     ),
@@ -506,13 +507,13 @@ class _BookfutureState extends State<Bookfuture>
               ),
             ],
           ),
-          const SizedBox(height: 14),
+          SizedBox(height: 14.w),
           _priceRow('Per Seat', '₹$price', isLabel: false),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.w),
           _priceRow('Seats Selected', '$selectedSeats', isLabel: false),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            child: Divider(height: 1),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 10.w),
+            child: Divider(height: 1.w),
           ),
           _priceRow(
             'Total',
@@ -539,12 +540,12 @@ class _BookfutureState extends State<Bookfuture>
         ),
         Container(
           padding: isLabel
-              ? const EdgeInsets.symmetric(horizontal: 12, vertical: 6)
+              ? EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.w)
               : EdgeInsets.zero,
           decoration: isLabel
               ? BoxDecoration(
                   color: brandGreen.withOpacity(0.08),
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(10.r),
                 )
               : null,
           child: Text(
@@ -563,10 +564,10 @@ class _BookfutureState extends State<Bookfuture>
   Widget _buildDriverCard(
       String drivername, String vehicleName, Map vehicle, String phone) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.04),
@@ -581,73 +582,73 @@ class _BookfutureState extends State<Bookfuture>
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(8),
+                padding: EdgeInsets.all(8.w),
                 decoration: BoxDecoration(
                   color: brandGreen.withOpacity(0.08),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.person_pin_circle_rounded,
+                child: Icon(Icons.person_pin_circle_rounded,
                     color: brandGreen, size: 18),
               ),
-              const SizedBox(width: 10),
-              const Text(
+              SizedBox(width: 10.w),
+              Text(
                 'Driver & Vehicle',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w800,
                   color: Colors.black87,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 14),
+          SizedBox(height: 14.w),
           // Driver row
           Row(
             children: [
               Container(
-                width: 44,
-                height: 44,
+                width: 44.w,
+                height: 44.w,
                 decoration: BoxDecoration(
                   color: brandGreen.withOpacity(0.1),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.person_rounded,
+                child: Icon(Icons.person_rounded,
                     color: brandGreen, size: 22),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12.w),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       drivername,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.w700,
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         color: Colors.black87,
                       ),
                     ),
-                    const SizedBox(height: 2),
+                    SizedBox(height: 2.w),
                     Text('Driver',
                         style: TextStyle(
-                            fontSize: 12, color: Colors.grey.shade500)),
+                            fontSize: 12.sp, color: Colors.grey.shade500)),
                   ],
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 14),
-          const Divider(height: 1),
-          const SizedBox(height: 14),
+          SizedBox(height: 14.w),
+          Divider(height: 1.w),
+          SizedBox(height: 14.w),
           // Vehicle info
           Row(
             children: [
               _vehicleChip(Icons.directions_car_rounded, vehicleName),
-              const SizedBox(width: 8),
+              SizedBox(width: 8.w),
               _vehicleChip(
                   Icons.confirmation_number_rounded,
                   vehicle['numberPlate']?.toString() ?? ''),
-              const SizedBox(width: 8),
+              SizedBox(width: 8.w),
               _vehicleChip(
                   Icons.color_lens_rounded,
                   vehicle['color']?.toString() ?? ''),
@@ -662,22 +663,22 @@ class _BookfutureState extends State<Bookfuture>
     return Flexible(
       child: Container(
         padding:
-            const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.w),
         decoration: BoxDecoration(
           color: const Color(0xFFF8F9FA),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10.r),
           border: Border.all(color: Colors.grey.shade200),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(icon, size: 13, color: Colors.grey.shade500),
-            const SizedBox(width: 5),
+            SizedBox(width: 5.w),
             Flexible(
               child: Text(
                 label,
-                style: const TextStyle(
-                    fontSize: 12, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    fontSize: 12.sp, fontWeight: FontWeight.w600),
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -691,7 +692,7 @@ class _BookfutureState extends State<Bookfuture>
       Map<String, dynamic> ride, int availableSeats, int totalPrice) {
     return SizedBox(
       width: double.infinity,
-      height: 56,
+      height: 56.w,
       child: ElevatedButton(
         onPressed: availableSeats > 0
             ? () async {
@@ -700,19 +701,19 @@ class _BookfutureState extends State<Bookfuture>
                   barrierDismissible: false,
                   builder: (context) => Center(
                     child: Container(
-                      padding: const EdgeInsets.all(24),
+                      padding: EdgeInsets.all(24.w),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(20.r),
                       ),
-                      child: const Column(
+                      child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           CircularProgressIndicator(
                             valueColor: AlwaysStoppedAnimation<Color>(
                                 brandGreen),
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 16.w),
                           Text('Booking your ride...',
                               style: TextStyle(fontWeight: FontWeight.w600)),
                         ],
@@ -733,11 +734,11 @@ class _BookfutureState extends State<Bookfuture>
                   if (result != null && result['error'] == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: const Text("✅ Ride booked successfully!"),
+                        content: Text("✅ Ride booked successfully!"),
                         backgroundColor: brandGreen,
                         behavior: SnackBarBehavior.floating,
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12)),
+                            borderRadius: BorderRadius.circular(12.r)),
                       ),
                     );
                     Navigator.push(
@@ -761,7 +762,7 @@ class _BookfutureState extends State<Bookfuture>
                         backgroundColor: Colors.red.shade400,
                         behavior: SnackBarBehavior.floating,
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12)),
+                            borderRadius: BorderRadius.circular(12.r)),
                       ),
                     );
                   }
@@ -773,7 +774,7 @@ class _BookfutureState extends State<Bookfuture>
                       backgroundColor: Colors.red.shade400,
                       behavior: SnackBarBehavior.floating,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12)),
+                          borderRadius: BorderRadius.circular(12.r)),
                     ),
                   );
                 }
@@ -784,21 +785,21 @@ class _BookfutureState extends State<Bookfuture>
           foregroundColor: Colors.white,
           disabledBackgroundColor: Colors.grey.shade200,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(16.r),
           ),
           elevation: 0,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.check_circle_rounded, size: 20),
-            const SizedBox(width: 8),
+            Icon(Icons.check_circle_rounded, size: 20),
+            SizedBox(width: 8.w),
             Text(
               availableSeats > 0
                   ? 'Request to Book · ₹$totalPrice'
                   : 'No Seats Available',
-              style: const TextStyle(
-                  fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 16.sp, fontWeight: FontWeight.bold),
             ),
           ],
         ),
@@ -808,8 +809,8 @@ class _BookfutureState extends State<Bookfuture>
 
   Widget _dot(Color color) {
     return Container(
-      width: 10,
-      height: 10,
+      width: 10.w,
+      height: 10.w,
       decoration: BoxDecoration(color: color, shape: BoxShape.circle),
     );
   }

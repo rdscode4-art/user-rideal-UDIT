@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:convert';
 import 'package:rideal/authservices.dart';
 import 'package:rideal/emergencycontacts.dart';
@@ -126,11 +127,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
       backgroundColor: Colors.transparent,
       elevation: 0,
       child: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-            topRight: Radius.circular(32),
-            bottomRight: Radius.circular(32),
+            topRight: Radius.circular(32.r),
+            bottomRight: Radius.circular(32.r),
           ),
         ),
         child: SafeArea(
@@ -139,14 +140,14 @@ class _CustomDrawerState extends State<CustomDrawer> {
             children: [
               // Back button & logo row
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                padding: EdgeInsets.symmetric(horizontal: 16.0.w, vertical: 8.0.w),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
                       onTap: () => Navigator.of(context).pop(),
                       child: Container(
-                        padding: const EdgeInsets.all(8),
+                        padding: EdgeInsets.all(8.w),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           shape: BoxShape.circle,
@@ -159,18 +160,18 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           ],
                           border: Border.all(color: Colors.grey.shade100),
                         ),
-                        child: const Icon(Icons.arrow_back, color: Colors.black87, size: 20),
+                        child: Icon(Icons.arrow_back, color: Colors.black87, size: 20),
                       ),
                     ),
                     Image.asset(
                       "assets/images/logorideal.png",
-                      height: 36,
+                      height: 36.w,
                       fit: BoxFit.contain,
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8.w),
 
               // Profile Section Card
               GestureDetector(
@@ -182,14 +183,14 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   );
                 },
                 child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  padding: const EdgeInsets.all(16),
+                  margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.w),
+                  padding: EdgeInsets.all(16.w),
                   decoration: BoxDecoration(
                     color: const Color(0xFF0F9D58).withOpacity(0.04),
-                    borderRadius: BorderRadius.circular(24),
+                    borderRadius: BorderRadius.circular(24.r),
                     border: Border.all(
                       color: const Color(0xFF0F9D58).withOpacity(0.08),
-                      width: 1.5,
+                      width: 1.5.w,
                     ),
                   ),
                   child: Row(
@@ -213,32 +214,32 @@ class _CustomDrawerState extends State<CustomDrawer> {
                             backgroundColor: Colors.grey.shade100,
                             backgroundImage: _getProfileImage(),
                             child: _getProfileImage() == null
-                                ? const Icon(Icons.person, color: Colors.grey, size: 28)
+                                ? Icon(Icons.person, color: Colors.grey, size: 28)
                                 : null,
                           ),
                         ),
                       ),
-                      const SizedBox(width: 16),
+                      SizedBox(width: 16.w),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               rider?.name ?? "Guest User",
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.black87,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                                fontSize: 16.sp,
                               ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
-                            const SizedBox(height: 4),
+                            SizedBox(height: 4.w),
                             Text(
                               rider?.phone != null && rider!.phone.isNotEmpty ? "+91 ${rider!.phone}" : "View Profile",
                               style: TextStyle(
                                 color: Colors.grey.shade600,
-                                fontSize: 12,
+                                fontSize: 12.sp,
                                 fontWeight: FontWeight.w500,
                               ),
                               maxLines: 1,
@@ -252,13 +253,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   ),
                 ),
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12.w),
 
               // Menu Items List
               Expanded(
                 child: ListView(
                   physics: const BouncingScrollPhysics(),
-                  padding: const EdgeInsets.only(bottom: 24),
+                  padding: EdgeInsets.only(bottom: 24.w),
                   children: [
                     _buildDrawerItem(Icons.person_outline_rounded, "Edit Profile", context, const Editprofilescreen()),
                     _buildDrawerItem(Icons.chat_bubble_outline_rounded, "Help And Support", context, SupportChatScreen()),
@@ -287,14 +288,14 @@ class _CustomDrawerState extends State<CustomDrawer> {
     final textColor = isLogout ? Colors.red.shade700 : Colors.black87;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.w),
       child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 2.w),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
         ),
         leading: Container(
-          padding: const EdgeInsets.all(8),
+          padding: EdgeInsets.all(8.w),
           decoration: BoxDecoration(
             color: bgColor,
             shape: BoxShape.circle,
@@ -304,7 +305,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
         title: Text(
           title,
           style: TextStyle(
-            fontSize: 15,
+            fontSize: 15.sp,
             fontWeight: FontWeight.w600,
             color: textColor,
           ),

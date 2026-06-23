@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -48,7 +49,7 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
         ),
         actions: [
           IconButton(
-      icon: const Icon(Icons.bug_report),
+      icon: Icon(Icons.bug_report),
       onPressed: _debugRideStorage,
       tooltip: "Debug Storage",
     ),
@@ -73,14 +74,14 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
           children: [
             // Custom Floating Header
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+              padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
                     onTap: () => Navigator.of(context).pop(),
                     child: Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10.w),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,
@@ -92,13 +93,13 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
                           ),
                         ],
                       ),
-                      child: const Icon(Icons.arrow_back, color: Colors.black87, size: 20),
+                      child: Icon(Icons.arrow_back, color: Colors.black87, size: 20),
                     ),
                   ),
-                  const Text(
+                  Text(
                     "Booked Rides",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
@@ -108,7 +109,7 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
                       GestureDetector(
                         onTap: _refreshRides,
                         child: Container(
-                          padding: const EdgeInsets.all(10),
+                          padding: EdgeInsets.all(10.w),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             shape: BoxShape.circle,
@@ -120,10 +121,10 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
                               ),
                             ],
                           ),
-                          child: const Icon(Icons.refresh_rounded, color: Colors.black87, size: 20),
+                          child: Icon(Icons.refresh_rounded, color: Colors.black87, size: 20),
                         ),
                       ),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8.w),
                       Container(
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -137,7 +138,7 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
                           ],
                         ),
                         child: PopupMenuButton<String>(
-                          icon: const Icon(Icons.more_vert_rounded, color: Colors.black87, size: 20),
+                          icon: Icon(Icons.more_vert_rounded, color: Colors.black87, size: 20),
                           padding: EdgeInsets.zero,
                           onSelected: (value) {
                             switch (value) {
@@ -150,22 +151,22 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
                             }
                           },
                           itemBuilder: (context) => [
-                            const PopupMenuItem(
+                            PopupMenuItem(
                               value: 'sync',
                               child: Row(
                                 children: [
                                   Icon(Icons.sync, size: 20),
-                                  SizedBox(width: 8),
+                                  SizedBox(width: 8.w),
                                   Text('Sync with Server'),
                                 ],
                               ),
                             ),
-                            const PopupMenuItem(
+                            PopupMenuItem(
                               value: 'clear_all',
                               child: Row(
                                 children: [
                                   Icon(Icons.clear_all, size: 20, color: Colors.red),
-                                  SizedBox(width: 8),
+                                  SizedBox(width: 8.w),
                                   Text('Clear All Rides', style: TextStyle(color: Colors.red)),
                                 ],
                               ),
@@ -183,20 +184,20 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
             if (_isLoading)
               Container(
                 width: double.infinity,
-                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.w),
                 decoration: BoxDecoration(
                   color: Colors.blue.shade50,
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(16.r),
                 ),
                 child: Row(
                   children: [
-                    const SizedBox(
-                      width: 16,
-                      height: 16,
+                    SizedBox(
+                      width: 16.w,
+                      height: 16.w,
                       child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.blue)),
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: 12.w),
                     Text(
                       "Validating rides with server...",
                       style: TextStyle(color: Colors.blue.shade800, fontWeight: FontWeight.w600),
@@ -211,14 +212,14 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
                 future: Authservices.getBookedRides(), // This now validates with server
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(
+                    return Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF0F9D58))),
-                          SizedBox(height: 16),
+                          SizedBox(height: 16.w),
                           Text("Loading and validating rides...", style: TextStyle(fontWeight: FontWeight.w500)),
-                          SizedBox(height: 8),
+                          SizedBox(height: 8.w),
                           Text(
                             "This may take a moment",
                             style: TextStyle(color: Colors.grey),
@@ -233,10 +234,10 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Icon(Icons.error_outline_rounded, size: 64, color: Colors.red),
-                          const SizedBox(height: 16),
-                          Text("Error: ${snapshot.error}", style: const TextStyle(fontWeight: FontWeight.w500)),
-                          const SizedBox(height: 16),
+                          Icon(Icons.error_outline_rounded, size: 64, color: Colors.red),
+                          SizedBox(height: 16.w),
+                          Text("Error: ${snapshot.error}", style: TextStyle(fontWeight: FontWeight.w500)),
+                          SizedBox(height: 16.w),
                           ElevatedButton(
                             onPressed: _refreshRides,
                             style: ElevatedButton.styleFrom(
@@ -244,10 +245,10 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
                               foregroundColor: Colors.white,
                               elevation: 0,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(20.r),
                               ),
                             ),
-                            child: const Text("Retry"),
+                            child: Text("Retry"),
                           ),
                         ],
                       ),
@@ -265,40 +266,40 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
                             size: 80,
                             color: Colors.grey.shade400,
                           ),
-                          const SizedBox(height: 24),
+                          SizedBox(height: 24.w),
                           Text(
                             "No booked rides yet",
                             style: TextStyle(
-                              fontSize: 22,
+                              fontSize: 22.sp,
                               fontWeight: FontWeight.bold,
                               color: Colors.grey.shade700,
                             ),
                           ),
-                          const SizedBox(height: 12),
+                          SizedBox(height: 12.w),
                           Text(
                             "Book a ride to see it appear here!",
                             style: TextStyle(
-                              fontSize: 15,
+                              fontSize: 15.sp,
                               color: Colors.grey.shade500,
                             ),
                           ),
-                          const SizedBox(height: 32),
+                          SizedBox(height: 32.w),
                           ElevatedButton.icon(
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
-                            icon: const Icon(Icons.add, color: Colors.white),
-                            label: const Text("Book a Ride", style: TextStyle(fontWeight: FontWeight.bold)),
+                            icon: Icon(Icons.add, color: Colors.white),
+                            label: Text("Book a Ride", style: TextStyle(fontWeight: FontWeight.bold)),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF0F9D58),
                               foregroundColor: Colors.white,
                               elevation: 0,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 24,
-                                vertical: 14,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 24.w,
+                                vertical: 14.w,
                               ),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(24),
+                                borderRadius: BorderRadius.circular(24.r),
                               ),
                             ),
                           ),
@@ -385,10 +386,10 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
     return GestureDetector(
       onTap: () => _showRideDetails(context, ride),
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        margin: EdgeInsets.symmetric(vertical: 8.w, horizontal: 16.w),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(24.r),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.04),
@@ -398,11 +399,11 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
           ],
           border: Border.all(
             color: _getStatusColor(status).withOpacity(0.15),
-            width: 1.5,
+            width: 1.5.w,
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(20.0.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -411,19 +412,19 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.w),
                     decoration: BoxDecoration(
                       color: Colors.grey.shade100,
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(20.r),
                     ),
                     child: Row(
                       children: [
                         Icon(Icons.calendar_today_rounded, size: 12, color: Colors.grey.shade600),
-                        const SizedBox(width: 6),
+                        SizedBox(width: 6.w),
                         Text(
                           "$formattedDate  •  $time",
-                          style: const TextStyle(
-                            fontSize: 12,
+                          style: TextStyle(
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.black87,
                           ),
@@ -432,15 +433,15 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.w),
                     decoration: BoxDecoration(
                       color: _getStatusColor(status).withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(20.r),
                     ),
                     child: Text(
                       status.toUpperCase(),
                       style: TextStyle(
-                        fontSize: 11,
+                        fontSize: 11.sp,
                         fontWeight: FontWeight.w800,
                         color: _getStatusColor(status),
                         letterSpacing: 0.5,
@@ -449,7 +450,7 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.w),
 
               // Route Timeline (Vertical)
               Row(
@@ -458,48 +459,48 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
                   Column(
                     children: [
                       Container(
-                        width: 12,
-                        height: 12,
-                        decoration: const BoxDecoration(
+                        width: 12.w,
+                        height: 12.w,
+                        decoration: BoxDecoration(
                           color: Color(0xFF0F9D58),
                           shape: BoxShape.circle,
                         ),
                       ),
                       Container(
-                        width: 2,
-                        height: 30,
+                        width: 2.w,
+                        height: 30.w,
                         color: Colors.grey.shade200,
                       ),
                       Container(
-                        width: 12,
-                        height: 12,
-                        decoration: const BoxDecoration(
+                        width: 12.w,
+                        height: 12.w,
+                        decoration: BoxDecoration(
                           color: Colors.black87,
                           shape: BoxShape.rectangle,
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(width: 16),
+                  SizedBox(width: 16.w),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           fromAddress,
-                          style: const TextStyle(
-                            fontSize: 15,
+                          style: TextStyle(
+                            fontSize: 15.sp,
                             fontWeight: FontWeight.w600,
                             color: Colors.black87,
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        const SizedBox(height: 24),
+                        SizedBox(height: 24.w),
                         Text(
                           toAddress,
-                          style: const TextStyle(
-                            fontSize: 15,
+                          style: TextStyle(
+                            fontSize: 15.sp,
                             fontWeight: FontWeight.w600,
                             color: Colors.black87,
                           ),
@@ -512,9 +513,9 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
                 ],
               ),
 
-              const SizedBox(height: 16),
+              SizedBox(height: 16.w),
               Divider(color: Colors.grey.shade100, thickness: 1),
-              const SizedBox(height: 12),
+              SizedBox(height: 12.w),
 
               // Card Bottom Section (Seats, Price, Actions)
               Row(
@@ -523,24 +524,24 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
                   Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(6),
+                        padding: EdgeInsets.all(6.w),
                         decoration: BoxDecoration(
                           color: const Color(0xFF0F9D58).withOpacity(0.1),
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.airline_seat_recline_normal_rounded,
                           size: 16,
                           color: Color(0xFF0F9D58),
                         ),
                       ),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8.w),
                       Text(
                         "$bookedSeats seat${bookedSeats != 1 ? 's' : ''}",
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                         ),
                       ),
                     ],
@@ -552,10 +553,10 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
                         children: [
                           Text(
                             "Total: ₹$totalAmount",
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Color(0xFF0F9D58),
-                              fontSize: 16,
+                              fontSize: 16.sp,
                             ),
                           ),
                           if (bookedSeats > 1)
@@ -563,13 +564,13 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
                               "₹$price × $bookedSeats",
                               style: TextStyle(
                                 color: Colors.grey.shade500,
-                                fontSize: 11,
+                                fontSize: 11.sp,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
                         ],
                       ),
-                      const SizedBox(width: 12),
+                      SizedBox(width: 12.w),
                       Container(
                         decoration: BoxDecoration(
                           color: Colors.grey.shade50,
@@ -593,22 +594,22 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
                             }
                           },
                           itemBuilder: (context) => [
-                            const PopupMenuItem(
+                            PopupMenuItem(
                               value: 'refresh',
                               child: Row(
                                 children: [
                                   Icon(Icons.refresh_rounded, size: 18),
-                                  SizedBox(width: 8),
+                                  SizedBox(width: 8.w),
                                   Text('Refresh Status'),
                                 ],
                               ),
                             ),
-                            const PopupMenuItem(
+                            PopupMenuItem(
                               value: 'delete',
                               child: Row(
                                 children: [
                                   Icon(Icons.delete_outline_rounded, size: 18, color: Colors.red),
-                                  SizedBox(width: 8),
+                                  SizedBox(width: 8.w),
                                   Text('Remove', style: TextStyle(color: Colors.red)),
                                 ],
                               ),
@@ -659,8 +660,8 @@ Future<void> _saveUpdatedRide(Map<String, dynamic> updatedRide) async {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
     ),
     backgroundColor: const Color(0xFFF8F9FA),
     builder: (context) {
@@ -702,40 +703,40 @@ Future<void> _saveUpdatedRide(Map<String, dynamic> updatedRide) async {
         expand: false,
         builder: (context, scrollController) {
           return Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: Color(0xFFF8F9FA),
-              borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
             ),
             child: SingleChildScrollView(
               controller: scrollController,
               child: Padding(
-                padding: const EdgeInsets.all(24),
+                padding: EdgeInsets.all(24.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Handle bar
                     Center(
                       child: Container(
-                        width: 40,
-                        height: 5,
+                        width: 40.w,
+                        height: 5.w,
                         decoration: BoxDecoration(
                           color: Colors.grey.shade300,
-                          borderRadius: BorderRadius.circular(2.5),
+                          borderRadius: BorderRadius.circular(2.5.r),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24.w),
                     
                     // Title
-                    const Text(
+                    Text(
                       "Ride Details",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 22,
+                        fontSize: 22.sp,
                         color: Colors.black87,
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24.w),
                     
                     _buildDetailContentWithoutValidation(ride, firstPassenger),
                   ],
@@ -776,7 +777,7 @@ Widget _buildDetailContentWithoutValidation(
         ride['toLocation']?['address']?.toString() ?? 'Unknown',
       ),
       
-      const Divider(height: 32),
+      Divider(height: 32.w),
       
       // Booking information
       _buildDetailRow(
@@ -799,7 +800,7 @@ Widget _buildDetailContentWithoutValidation(
         ),
       ],
       
-      const Divider(height: 32),
+      Divider(height: 32.w),
       
       // Contact information (show placeholder)
      _buildDetailRow(
@@ -811,16 +812,16 @@ Widget _buildDetailContentWithoutValidation(
       
       // Vehicle info if available
       if (ride['vehicle'] != null) ...[
-        const SizedBox(height: 16),
-        const Text(
+        SizedBox(height: 16.w),
+        Text(
           "Vehicle Details",
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 16,
+            fontSize: 16.sp,
             color: Color(0xFF0F9D58),
           ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8.w),
         _buildDetailRow(
           Icons.directions_car_rounded,
           "Vehicle",
@@ -834,7 +835,7 @@ Widget _buildDetailContentWithoutValidation(
           ),
       ],
       
-      const SizedBox(height: 32),
+      SizedBox(height: 32.w),
       
       // Action buttons
       Column(
@@ -844,53 +845,53 @@ Widget _buildDetailContentWithoutValidation(
             width: double.infinity,
             child: ElevatedButton.icon(
               onPressed: () => _checkRideStatus(context, ride),
-              icon: const Icon(Icons.refresh_rounded, color: Colors.white, size: 18),
-              label: const Text("Check Current Status", style: TextStyle(fontWeight: FontWeight.bold)),
+              icon: Icon(Icons.refresh_rounded, color: Colors.white, size: 18),
+              label: Text("Check Current Status", style: TextStyle(fontWeight: FontWeight.bold)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF0F9D58),
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 14),
+                padding: EdgeInsets.symmetric(vertical: 14.w),
                 elevation: 0,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(24),
+                  borderRadius: BorderRadius.circular(24.r),
                 ),
               ),
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12.w),
           Row(
             children: [
               Expanded(
                 child: OutlinedButton.icon(
                   onPressed: () => Navigator.pop(context),
-                  icon: const Icon(Icons.close_rounded, size: 18),
-                  label: const Text("Close", style: TextStyle(fontWeight: FontWeight.bold)),
+                  icon: Icon(Icons.close_rounded, size: 18),
+                  label: Text("Close", style: TextStyle(fontWeight: FontWeight.bold)),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: Colors.black87,
-                    side: BorderSide(color: Colors.grey.shade300, width: 1.5),
-                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    side: BorderSide(color: Colors.grey.shade300, width: 1.5.w),
+                    padding: EdgeInsets.symmetric(vertical: 14.w),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
+                      borderRadius: BorderRadius.circular(24.r),
                     ),
                   ),
                 ),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12.w),
               Expanded(
                 child: ElevatedButton.icon(
                   onPressed: () {
                     Navigator.pop(context);
                     _refreshRides();
                   },
-                  icon: const Icon(Icons.refresh_rounded, color: Color(0xFF0F9D58), size: 18),
-                  label: const Text("Refresh List", style: TextStyle(fontWeight: FontWeight.bold)),
+                  icon: Icon(Icons.refresh_rounded, color: Color(0xFF0F9D58), size: 18),
+                  label: Text("Refresh List", style: TextStyle(fontWeight: FontWeight.bold)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF0F9D58).withOpacity(0.1),
                     foregroundColor: const Color(0xFF0F9D58),
                     elevation: 0,
-                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    padding: EdgeInsets.symmetric(vertical: 14.w),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
+                      borderRadius: BorderRadius.circular(24.r),
                     ),
                   ),
                 ),
@@ -923,12 +924,12 @@ void _checkRideStatus(BuildContext context, Map<String, dynamic> ride) {
   showDialog(
     context: context,
     barrierDismissible: false,
-    builder: (context) => const AlertDialog(
+    builder: (context) => AlertDialog(
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           CircularProgressIndicator(),
-          SizedBox(height: 16),
+          SizedBox(height: 16.w),
           Text("Getting booking information..."),
         ],
       ),
@@ -958,8 +959,8 @@ void _checkRideStatus(BuildContext context, Map<String, dynamic> ride) {
             title: Row(
               children: [
                 Icon(Icons.check_circle, color: Colors.green),
-                const SizedBox(width: 8),
-                const Text("Status Check"),
+                SizedBox(width: 8.w),
+                Text("Status Check"),
               ],
             ),
             content: Text(message),
@@ -971,7 +972,7 @@ void _checkRideStatus(BuildContext context, Map<String, dynamic> ride) {
                   setState(() {}); // Refresh the main list
                   _showRideDetails(context, ride); // Show updated bottom sheet
                 },
-                child: const Text("OK"),
+                child: Text("OK"),
               ),
             ],
           ),
@@ -1012,15 +1013,15 @@ void _showStatusDialog(BuildContext context, String message, String type) {
       title: Row(
         children: [
           Icon(icon, color: color),
-          const SizedBox(width: 8),
-          const Text("Status Check"),
+          SizedBox(width: 8.w),
+          Text("Status Check"),
         ],
       ),
       content: Text(message),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text("OK"),
+          child: Text("OK"),
         ),
       ],
     ),
@@ -1033,10 +1034,10 @@ void _showStatusDialog(BuildContext context, String message, String type) {
     Map<String, dynamic>? firstPassenger,
   ) {
     if (statusSnapshot.connectionState == ConnectionState.waiting) {
-      return const Column(
+      return Column(
         children: [
           CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF0F9D58))),
-          SizedBox(height: 16),
+          SizedBox(height: 16.w),
           Text("Loading ride status..."),
         ],
       );
@@ -1069,7 +1070,7 @@ void _showStatusDialog(BuildContext context, String message, String type) {
           "To",
           ride['toLocation']?['address']?.toString() ?? 'Unknown',
         ),       
-        const Divider(height: 32),     
+        Divider(height: 32.w),     
         // Booking information
         _buildDetailRow(
           Icons.info_outline_rounded,
@@ -1091,7 +1092,7 @@ void _showStatusDialog(BuildContext context, String message, String type) {
           ),
         ],
         
-        const Divider(height: 32),
+        Divider(height: 32.w),
         
         // Contact information
         _buildDetailRow(
@@ -1103,16 +1104,16 @@ void _showStatusDialog(BuildContext context, String message, String type) {
         
         // Vehicle info if available
         if (ride['vehicle'] != null) ...[
-          const SizedBox(height: 16),
-          const Text(
+          SizedBox(height: 16.w),
+          Text(
             "Vehicle Details",
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 16,
+              fontSize: 16.sp,
               color: Color(0xFF0F9D58),
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.w),
           _buildDetailRow(
             Icons.directions_car_rounded,
             "Vehicle",
@@ -1126,7 +1127,7 @@ void _showStatusDialog(BuildContext context, String message, String type) {
             ),
         ],
         
-        const SizedBox(height: 32),
+        SizedBox(height: 32.w),
         
         // authAction buttons
         Row(
@@ -1137,31 +1138,31 @@ void _showStatusDialog(BuildContext context, String message, String type) {
                   Navigator.pop(context);
                   _refreshSingleRide(ride);
                 },
-                icon: const Icon(Icons.refresh_rounded, size: 18),
-                label: const Text("Refresh", style: TextStyle(fontWeight: FontWeight.bold)),
+                icon: Icon(Icons.refresh_rounded, size: 18),
+                label: Text("Refresh", style: TextStyle(fontWeight: FontWeight.bold)),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: Colors.black87,
-                  side: BorderSide(color: Colors.grey.shade300, width: 1.5),
-                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  side: BorderSide(color: Colors.grey.shade300, width: 1.5.w),
+                  padding: EdgeInsets.symmetric(vertical: 14.w),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(24),
+                    borderRadius: BorderRadius.circular(24.r),
                   ),
                 ),
               ),
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: 12.w),
             Expanded(
               child: ElevatedButton.icon(
                 onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.close_rounded, size: 18),
-                label: const Text("Close", style: TextStyle(fontWeight: FontWeight.bold)),
+                icon: Icon(Icons.close_rounded, size: 18),
+                label: Text("Close", style: TextStyle(fontWeight: FontWeight.bold)),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF0F9D58),
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  padding: EdgeInsets.symmetric(vertical: 14.w),
                   elevation: 0,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(24),
+                    borderRadius: BorderRadius.circular(24.r),
                   ),
                 ),
               ),
@@ -1180,19 +1181,19 @@ void _showStatusDialog(BuildContext context, String message, String type) {
     bool isSelectable = false,
   }) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
+      padding: EdgeInsets.only(bottom: 16.w),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            padding: const EdgeInsets.all(10),
+            padding: EdgeInsets.all(10.w),
             decoration: BoxDecoration(
               color: Colors.grey.shade100,
               shape: BoxShape.circle,
             ),
             child: Icon(icon, size: 20, color: Colors.black54),
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: 16.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1201,15 +1202,15 @@ void _showStatusDialog(BuildContext context, String message, String type) {
                   label,
                   style: TextStyle(
                     color: Colors.grey.shade500,
-                    fontSize: 12,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                const SizedBox(height: 2),
+                SizedBox(height: 2.w),
                 SelectableText(
                   value,
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 15.sp,
                     fontWeight: FontWeight.bold,
                     color: valueColor ?? Colors.black87,
                   ),
@@ -1224,26 +1225,26 @@ void _showStatusDialog(BuildContext context, String message, String type) {
 
   Widget _buildErrorBottomSheet(String title, String message) {
     return Padding(
-      padding: const EdgeInsets.all(24.0),
+      padding: EdgeInsets.all(24.0.w),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.error_outline, size: 48, color: Colors.red),
-          const SizedBox(height: 16),
+          Icon(Icons.error_outline, size: 48, color: Colors.red),
+          SizedBox(height: 16.w),
           Text(
             title,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.w),
           Text(
             message,
-            style: const TextStyle(fontSize: 16),
+            style: TextStyle(fontSize: 16.sp),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.w),
           ElevatedButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text("Close"),
+            child: Text("Close"),
           ),
         ],
       ),
@@ -1292,12 +1293,12 @@ void _showStatusDialog(BuildContext context, String message, String type) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Remove Ride"),
-        content: const Text("Are you sure you want to remove this ride from your history?"),
+        title: Text("Remove Ride"),
+        content: Text("Are you sure you want to remove this ride from your history?"),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text("Cancel"),
+            child: Text("Cancel"),
           ),
           TextButton(
             onPressed: () async {
@@ -1314,7 +1315,7 @@ void _showStatusDialog(BuildContext context, String message, String type) {
               }
             },
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text("Remove"),
+            child: Text("Remove"),
           ),
         ],
       ),
@@ -1325,14 +1326,14 @@ void _showStatusDialog(BuildContext context, String message, String type) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Clear All Rides"),
-        content: const Text(
+        title: Text("Clear All Rides"),
+        content: Text(
           "Are you sure you want to remove all booked rides from your history? This action cannot be undone.",
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text("Cancel"),
+            child: Text("Cancel"),
           ),
           TextButton(
             onPressed: () async {
@@ -1346,7 +1347,7 @@ void _showStatusDialog(BuildContext context, String message, String type) {
               }
             },
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text("Clear All"),
+            child: Text("Clear All"),
           ),
         ],
       ),

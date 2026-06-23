@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rideal/screens/signUp/otpverification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -130,7 +131,7 @@ class _PersonalDetailScreenState extends State<PersonalDetailScreen> {
       backgroundColor: const Color(0xFFF8F9FA),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.w),
           child: Form(
             key: _formKey,
             child: Column(
@@ -142,7 +143,7 @@ class _PersonalDetailScreenState extends State<PersonalDetailScreen> {
                   child: GestureDetector(
                     onTap: () => Navigator.of(context).pop(),
                     child: Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10.w),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,
@@ -154,16 +155,16 @@ class _PersonalDetailScreenState extends State<PersonalDetailScreen> {
                           ),
                         ],
                       ),
-                      child: const Icon(Icons.arrow_back, color: Colors.black87, size: 20),
+                      child: Icon(Icons.arrow_back, color: Colors.black87, size: 20),
                     ),
                   ),
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24.w),
                 
                 // Logo in white circle with shadow
                 Center(
                   child: Container(
-                    padding: const EdgeInsets.all(16),
+                    padding: EdgeInsets.all(16.w),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       shape: BoxShape.circle,
@@ -183,23 +184,23 @@ class _PersonalDetailScreenState extends State<PersonalDetailScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 32),
+                SizedBox(height: 32.w),
                 
-                const Text(
+                Text(
                   'Sign up',
                   style: TextStyle(
-                    fontSize: 28,
+                    fontSize: 28.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                   ),
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24.w),
 
                 // Name Field (Pill Shaped Container)
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(24),
+                    borderRadius: BorderRadius.circular(24.r),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.03),
@@ -210,12 +211,12 @@ class _PersonalDetailScreenState extends State<PersonalDetailScreen> {
                   ),
                   child: TextFormField(
                     controller: _nameController,
-                    style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-                    decoration: const InputDecoration(
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.sp),
+                    decoration: InputDecoration(
                       hintText: 'Full Name',
                       prefixIcon: Icon(Icons.person_outline_rounded, color: Colors.black45),
                       border: InputBorder.none,
-                      contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.w),
                     ),
                     validator: _validateName,
                     textCapitalization: TextCapitalization.words,
@@ -224,13 +225,13 @@ class _PersonalDetailScreenState extends State<PersonalDetailScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.w),
 
                 // Phone Field (Pill Shaped Container)
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(24),
+                    borderRadius: BorderRadius.circular(24.r),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.03),
@@ -242,14 +243,14 @@ class _PersonalDetailScreenState extends State<PersonalDetailScreen> {
                   child: TextFormField(
                     controller: _phoneController,
                     keyboardType: TextInputType.phone,
-                    style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-                    decoration: const InputDecoration(
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.sp),
+                    decoration: InputDecoration(
                       hintText: 'Mobile Number',
                       prefixIcon: Icon(Icons.phone_outlined, color: Colors.black45),
                       prefixText: '+91 ',
-                      prefixStyle: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: Colors.black87),
+                      prefixStyle: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.sp, color: Colors.black87),
                       border: InputBorder.none,
-                      contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.w),
                       counterText: '',
                     ),
                     validator: _validatePhoneNumber,
@@ -260,13 +261,13 @@ class _PersonalDetailScreenState extends State<PersonalDetailScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.w),
 
                 // Address Field (Pill Shaped Container)
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(24),
+                    borderRadius: BorderRadius.circular(24.r),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.03),
@@ -277,24 +278,24 @@ class _PersonalDetailScreenState extends State<PersonalDetailScreen> {
                   ),
                   child: TextFormField(
                     controller: _addressController,
-                    style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-                    decoration: const InputDecoration(
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.sp),
+                    decoration: InputDecoration(
                       hintText: 'Address',
                       prefixIcon: Icon(Icons.location_on_outlined, color: Colors.black45),
                       border: InputBorder.none,
-                      contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.w),
                     ),
                     validator: _validateAddress,
                     maxLines: 2,
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.w),
 
                 // Gender Field (Pill Shaped Container)
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(24),
+                    borderRadius: BorderRadius.circular(24.r),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.03),
@@ -304,16 +305,16 @@ class _PersonalDetailScreenState extends State<PersonalDetailScreen> {
                     ],
                   ),
                   child: DropdownButtonFormField<String>(
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       hintText: 'Gender',
                       border: InputBorder.none,
                       prefixIcon: Icon(Icons.people_outline_rounded, color: Colors.black45),
-                      contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.w),
                     ),
                     value: _selectedGender,
                     items: ['Male', 'Female', 'Other']
                         .map((gender) =>
-                            DropdownMenuItem(value: gender, child: Text(gender, style: const TextStyle(fontWeight: FontWeight.w600))))
+                            DropdownMenuItem(value: gender, child: Text(gender, style: TextStyle(fontWeight: FontWeight.w600))))
                         .toList(),
                     onChanged: (value) {
                       setState(() => _selectedGender = value);
@@ -326,7 +327,7 @@ class _PersonalDetailScreenState extends State<PersonalDetailScreen> {
                     },
                   ),
                 ),
-                const SizedBox(height: 32),
+                SizedBox(height: 32.w),
 
                 // Sign Up Button
                 SizedBox(
@@ -335,50 +336,50 @@ class _PersonalDetailScreenState extends State<PersonalDetailScreen> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF0F9D58),
                       foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      padding: EdgeInsets.symmetric(vertical: 16.w),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24),
+                        borderRadius: BorderRadius.circular(24.r),
                       ),
                       elevation: 0,
                     ),
                     onPressed: _isLoading ? null : _signUp,
                     child: _isLoading
-                        ? const SizedBox(
-                            width: 24,
-                            height: 24,
+                        ? SizedBox(
+                            width: 24.w,
+                            height: 24.w,
                             child: CircularProgressIndicator(
                               color: Colors.white,
                               strokeWidth: 2.5,
                             ),
                           )
-                        : const Text(
+                        : Text(
                             'Sign Up',
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                   ),
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24.w),
 
                 Row(
-                  children: const [
+                  children: [
                     Expanded(child: Divider(color: Colors.black12)),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12),
+                      padding: EdgeInsets.symmetric(horizontal: 12.w),
                       child: Text('or', style: TextStyle(color: Colors.black45)),
                     ),
                     Expanded(child: Divider(color: Colors.black12)),
                   ],
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24.w),
 
                 // Already have account
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Already have an account? ', style: TextStyle(color: Colors.black54)),
+                    Text('Already have an account? ', style: TextStyle(color: Colors.black54)),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -388,7 +389,7 @@ class _PersonalDetailScreenState extends State<PersonalDetailScreen> {
                           ),
                         );
                       },
-                      child: const Text(
+                      child: Text(
                         'Sign in',
                         style: TextStyle(
                           color: Color(0xFF0F9D58),
@@ -398,7 +399,7 @@ class _PersonalDetailScreenState extends State<PersonalDetailScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20.w),
               ],
             ),
           ),

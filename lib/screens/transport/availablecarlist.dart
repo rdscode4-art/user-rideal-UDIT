@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import '/model/availablecarlistmodel.dart';
 import 'package:rideal/widget/availablecarlistcard.dart';
@@ -24,20 +25,20 @@ void initState() {
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: EdgeInsets.all(20.0.w),
             child: Column(
                mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 SizedBox(height: 35),
+                 SizedBox(height: 35.w),
                 Container(
-                  child:Text("Available cars for ride",textAlign:TextAlign.left,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
+                  child:Text("Available cars for ride",textAlign:TextAlign.left,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25.sp),),
                 ),
-                SizedBox(height: 15,),
+                SizedBox(height: 15.w,),
                 Container(
-                  child: Text("18 cars found",style: TextStyle(color: Colors.grey,fontSize: 18),textAlign:TextAlign.left),
+                  child: Text("18 cars found",style: TextStyle(color: Colors.grey,fontSize: 18.sp),textAlign:TextAlign.left),
                 ),
-                SizedBox(height: 12),
+                SizedBox(height: 12.w),
                 Expanded(child: ListView.builder(
                   itemCount: availableCars?.length ?? 0,
 itemBuilder: (BuildContext context, int index) {

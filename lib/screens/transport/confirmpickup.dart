@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
@@ -193,7 +194,7 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
     builder: (BuildContext context) {
       return AlertDialog(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
         ),
         title: Row(
           children: [
@@ -202,19 +203,19 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
               color: Colors.red.shade600,
               size: 24,
             ),
-            const SizedBox(width: 12),
-            const Text(
+            SizedBox(width: 12.w),
+            Text(
               'Cancel Ride?',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ],
         ),
-        content: const Text(
+        content: Text(
           'Are you sure you want to cancel this ride? This action cannot be undone.',
-          style: TextStyle(fontSize: 16),
+          style: TextStyle(fontSize: 16.sp),
         ),
         actions: [
           TextButton(
@@ -233,10 +234,10 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
               backgroundColor: Colors.red.shade600,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(8.r),
               ),
             ),
-            child: const Text(
+            child: Text(
               'Cancel Ride',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
@@ -269,17 +270,17 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
           
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: const Row(
+              content: Row(
                 children: [
                   Icon(Icons.check_circle, color: Colors.white),
-                  SizedBox(width: 12),
+                  SizedBox(width: 12.w),
                   Text('Ride cancelled successfully'),
                 ],
               ),
               backgroundColor: Colors.green.shade600,
               behavior: SnackBarBehavior.floating,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(8.r),
               ),
             ),
           );
@@ -295,17 +296,17 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
       
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Row(
+          content: Row(
             children: [
               Icon(Icons.error, color: Colors.white),
-              SizedBox(width: 12),
+              SizedBox(width: 12.w),
               Text('Failed to cancel ride. Please try again.'),
             ],
           ),
           backgroundColor: Colors.red.shade600,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(8.r),
           ),
         ),
       );
@@ -411,11 +412,11 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
     required Color color,
   }) {
     return Container(
-      padding: const EdgeInsets.all(12),
-      margin: const EdgeInsets.only(bottom: 8),
+      padding: EdgeInsets.all(12.w),
+      margin: EdgeInsets.only(bottom: 8.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -427,14 +428,14 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.all(8.w),
             decoration: BoxDecoration(
               color: color.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(8.r),
             ),
             child: Icon(icon, color: color, size: 20),
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -442,16 +443,16 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
                 Text(
                   title,
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.w600,
                     color: Colors.grey.shade600,
                   ),
                 ),
-                const SizedBox(height: 2),
+                SizedBox(height: 2.w),
                 Text(
                   location,
-                  style: const TextStyle(
-                    fontSize: 14,
+                  style: TextStyle(
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
                     color: Colors.black87,
                   ),
@@ -495,11 +496,11 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
         return Transform.scale(
           scale: _isBooking && rideStatus == 'pending' ? _pulseAnimation.value : 1.0,
           child: Container(
-            padding: const EdgeInsets.all(12),
+            padding: EdgeInsets.all(12.w),
             decoration: BoxDecoration(
               color: statusColor.withOpacity(0.1),
               shape: BoxShape.circle,
-              border: Border.all(color: statusColor.withOpacity(0.3), width: 2),
+              border: Border.all(color: statusColor.withOpacity(0.3), width: 2.w),
             ),
             child: Icon(
               statusIcon,
@@ -530,7 +531,7 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
                       ],
                     ),
                   ),
-                  child: const Center(
+                  child: Center(
                     child: CircularProgressIndicator(),
                   ),
                 )
@@ -581,7 +582,7 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
             left: 0,
             right: 0,
             child: Container(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(16.w),
               child: Row(
                 children: [
                   Container(
@@ -598,15 +599,15 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
                     ),
                     child: IconButton(
                       onPressed: () => Navigator.pop(context),
-                      icon: const Icon(Icons.arrow_back, color: Colors.black87),
+                      icon: Icon(Icons.arrow_back, color: Colors.black87),
                     ),
                   ),
-                  const Spacer(),
+                  Spacer(),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(20.r),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.1),
@@ -620,7 +621,7 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).primaryColor,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                       ),
                     ),
                   ),
@@ -632,8 +633,8 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
           // Location info cards
           Positioned(
             top: MediaQuery.of(context).padding.top + 80,
-            left: 16,
-            right: 16,
+            left: 16.w,
+            right: 16.w,
             child: Column(
               children: [
                 _buildLocationCard(
@@ -654,8 +655,8 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
 
           // My location button
           Positioned(
-            right: 16,
-            bottom: 200,
+            right: 16.w,
+            bottom: 200.w,
             child: FloatingActionButton(
               mini: true,
               backgroundColor: Colors.white,
@@ -674,11 +675,11 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
   child: SlideTransition(
     position: _slideAnimation,
     child: Container(
-      margin: const EdgeInsets.all(16),
-      padding: const EdgeInsets.all(20),
+      margin: EdgeInsets.all(16.w),
+      padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(24.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.15),
@@ -695,7 +696,7 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _buildStatusIndicator(),
-              const SizedBox(width: 16),
+              SizedBox(width: 16.w),
               Expanded(
                 child: FadeTransition(
                   opacity: _fadeAnimation,
@@ -704,19 +705,19 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
                     children: [
                       Text(
                         _statusMessage,
-                        style: const TextStyle(
-                          fontSize: 18,
+                        style: TextStyle(
+                          fontSize: 18.sp,
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
                         ),
                       ),
-                      const SizedBox(height: 4),
+                      SizedBox(height: 4.w),
                       Text(
                         _isBooking 
                             ? "We're finding the best driver for you"
                             : "Your ride is confirmed",
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           color: Colors.grey.shade600,
                         ),
                       ),
@@ -728,7 +729,7 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
           ),
           
           if (_isBooking) ...[
-            const SizedBox(height: 20),
+            SizedBox(height: 20.w),
             // Progress indicator
             LinearProgressIndicator(
               backgroundColor: Colors.grey.shade200,
@@ -736,7 +737,7 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
                 Theme.of(context).primaryColor,
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20.w),
             // Action buttons row
             Row(
               children: [
@@ -744,7 +745,7 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
                 Expanded(
                   flex: 2,
                   child: SizedBox(
-                    height: 48,
+                    height: 48.w,
                     child: OutlinedButton.icon(
                       onPressed: _cancelRide,
                       icon: Icon(
@@ -755,7 +756,7 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
                       label: Text(
                         'Cancel Ride',
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
                           color: Colors.red.shade600,
                         ),
@@ -763,25 +764,25 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
                       style: OutlinedButton.styleFrom(
                         side: BorderSide(
                           color: Colors.red.shade300,
-                          width: 1.5,
+                          width: 1.5.w,
                         ),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(12.r),
                         ),
                         backgroundColor: Colors.red.shade50,
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: 12.w),
                 // Waiting indicator
                 Expanded(
                   flex: 3,
                   child: Container(
-                    height: 48,
+                    height: 48.w,
                     decoration: BoxDecoration(
                       color: Theme.of(context).primaryColor.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12.r),
                       border: Border.all(
                         color: Theme.of(context).primaryColor.withOpacity(0.3),
                       ),
@@ -790,8 +791,8 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                          width: 16,
-                          height: 16,
+                          width: 16.w,
+                          height: 16.w,
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
                             valueColor: AlwaysStoppedAnimation<Color>(
@@ -799,11 +800,11 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8.w),
                         Text(
                           'Finding Driver...',
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w600,
                             color: Theme.of(context).primaryColor,
                           ),
@@ -814,13 +815,13 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12.w),
             // Additional info
             Container(
-              padding: const EdgeInsets.all(12),
+              padding: EdgeInsets.all(12.w),
               decoration: BoxDecoration(
                 color: Colors.blue.shade50,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(8.r),
               ),
               child: Row(
                 children: [
@@ -829,12 +830,12 @@ class _ConfirmState extends State<Confirm> with TickerProviderStateMixin {
                     size: 16,
                     color: Colors.blue.shade600,
                   ),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8.w),
                   Expanded(
                     child: Text(
                       'This usually takes 1-3 minutes. You can cancel anytime.',
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         color: Colors.blue.shade700,
                         fontWeight: FontWeight.w500,
                       ),

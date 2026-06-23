@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 
 class RefundPolicyPage extends StatefulWidget {
@@ -15,7 +16,7 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        title: const Text('Refund Policy',style: TextStyle(color: Colors.white),),
+        title: Text('Refund Policy',style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.green[700],
         elevation: 0,
       ),
@@ -25,7 +26,7 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
             // Header Section
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(24),
+              padding: EdgeInsets.all(24.w),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
@@ -35,37 +36,37 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
               ),
               child: Column(
                 children: [
-                  Image.asset("assets/images/logo.png",height: 120,),
-                  const SizedBox(height: 16),
-                  const Text(
+                  Image.asset("assets/images/logo.png",height: 120.w,),
+                  SizedBox(height: 16.w),
+                  Text(
                     'RiDeal Mobility Drive Private Limited',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
+                  SizedBox(height: 8.w),
+                  Text(
                     'Refund & Cancellation Policy',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       color: Colors.white70,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.w),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(20.r),
                     ),
-                    child: const Text(
+                    child: Text(
                       'Effective Date: November 2025',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                       ),
                     ),
                   ),
@@ -75,28 +76,28 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
 
             // Content
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(16.w),
               child: Column(
                 children: [
                   // Introduction Card
                   Card(
                     elevation: 2,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12.r),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(20),
+                      padding: EdgeInsets.all(20.w),
                       child: Row(
                         children: [
                           Icon(Icons.info_outline, color: Colors.blue[700], size: 28),
-                          const SizedBox(width: 16),
+                          SizedBox(width: 16.w),
                           Expanded(
                             child: Text(
                               'We strive to provide transparent and fair refund policies for all our customers.',
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 14.sp,
                                 color: Colors.grey[700],
-                                height: 1.5,
+                                height: 1.5.w,
                               ),
                             ),
                           ),
@@ -105,7 +106,7 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
                     ),
                   ),
 
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.w),
 
                   // Expandable Sections
                   _buildExpandableSection(
@@ -124,7 +125,7 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
                             'No-show: No refund if driver arrives at pickup location and passenger is unavailable',
                           ],
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12.w),
                         _buildSubsection(
                           'Driver-Initiated Cancellations:',
                           [
@@ -152,7 +153,7 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
                             'No expiry on wallet balance',
                           ],
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12.w),
                         _buildSubsection(
                           'Card/UPI Refunds:',
                           [
@@ -182,7 +183,7 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
                             'Valid claims receive full refund of excess amount',
                           ],
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12.w),
                         _buildSubsection(
                           'Technical Failures:',
                           [
@@ -235,7 +236,7 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
                             'Auto-renewal can be cancelled anytime before next billing cycle',
                           ],
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12.w),
                         _buildSubsection(
                           'Premium Subscriptions:',
                           [
@@ -322,35 +323,35 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
                         _buildStepItem(3, 'Tap on "Report an Issue" or "Request Refund"'),
                         _buildStepItem(4, 'Choose the appropriate reason'),
                         _buildStepItem(5, 'Submit with details and supporting evidence if any'),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16.w),
                         Container(
-                          padding: const EdgeInsets.all(12),
+                          padding: EdgeInsets.all(12.w),
                           decoration: BoxDecoration(
                             color: Colors.blue[50],
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(8.r),
                             border: Border.all(color: Colors.blue[200]!),
                           ),
                           child: Row(
                             children: [
                               Icon(Icons.email, color: Colors.blue[700], size: 20),
-                              const SizedBox(width: 12),
+                              SizedBox(width: 12.w),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text(
+                                    Text(
                                       'Or email us at:',
                                       style: TextStyle(
-                                        fontSize: 12,
+                                        fontSize: 12.sp,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    const SizedBox(height: 4),
+                                    SizedBox(height: 4.w),
                                     Text(
                                       'support@ridealmobility.com',
                                       style: TextStyle(
                                         color: Colors.blue[700],
-                                        fontSize: 13,
+                                        fontSize: 13.sp,
                                       ),
                                     ),
                                   ],
@@ -363,29 +364,29 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
                     ),
                   ),
 
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24.w),
 
                   // Important Notice Card
                   Card(
                     elevation: 2,
                     color: Colors.amber[50],
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12.r),
                       side: BorderSide(color: Colors.amber[200]!),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(20),
+                      padding: EdgeInsets.all(20.w),
                       child: Column(
                         children: [
                           Row(
                             children: [
                               Icon(Icons.warning_amber, color: Colors.amber[800], size: 28),
-                              const SizedBox(width: 12),
+                              SizedBox(width: 12.w),
                               Expanded(
                                 child: Text(
                                   'Important Notice',
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 16.sp,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.amber[900],
                                   ),
@@ -393,13 +394,13 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 12),
+                          SizedBox(height: 12.w),
                           Text(
                             'RiDeal Mobility Drive Private Limited reserves the right to modify this refund policy at any time. Changes will be communicated through the app and email. Continued use of our services after policy changes constitutes acceptance of the modified terms.',
                             style: TextStyle(
-                              fontSize: 13,
+                              fontSize: 13.sp,
                               color: Colors.grey[800],
-                              height: 1.5,
+                              height: 1.5.w,
                             ),
                           ),
                         ],
@@ -407,39 +408,39 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
                     ),
                   ),
 
-                  const SizedBox(height: 25),
+                  SizedBox(height: 25.w),
 
                   // Contact Card
                   // Card(
                   //   elevation: 3,
                   //   shape: RoundedRectangleBorder(
-                  //     borderRadius: BorderRadius.circular(12),
+                  //     borderRadius: BorderRadius.circular(12.r),
                   //   ),
                   //   child: Padding(
-                  //     padding: const EdgeInsets.all(20),
+                  //     padding: EdgeInsets.all(20.w),
                   //     child: Column(
                   //       children: [
                   //         Text(
                   //           'Need Help?',
                   //           style: TextStyle(
-                  //             fontSize: 18,
+                  //             fontSize: 18.sp,
                   //             fontWeight: FontWeight.bold,
                   //             color: Colors.blue[700],
                   //           ),
                   //         ),
-                  //         const SizedBox(height: 16),
+                  //         SizedBox(height: 16.w),
                   //         _buildContactItem(
                   //           Icons.phone,
                   //           'Customer Support',
                   //           '1800-XXX-XXXX',
                   //         ),
-                  //         const Divider(height: 24),
+                  //         Divider(height: 24.w),
                   //         _buildContactItem(
                   //           Icons.email,
                   //           'Email Support',
                   //           'support@ridealmobility.com',
                   //         ),
-                  //         const Divider(height: 24),
+                  //         Divider(height: 24.w),
                   //         _buildContactItem(
                   //           Icons.access_time,
                   //           'Support Hours',
@@ -450,7 +451,7 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
                   //   ),
                   // ),
 
-                  const SizedBox(height: 32),
+                  SizedBox(height: 32.w),
                 ],
               ),
             ),
@@ -471,9 +472,9 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
 
     return Card(
       elevation: 2,
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: EdgeInsets.only(bottom: 12.w),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.r),
       ),
       child: Column(
         children: [
@@ -483,25 +484,25 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
                 _expandedSection = isExpanded ? null : index;
               });
             },
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(12.r),
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(16.w),
               child: Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10.w),
                     decoration: BoxDecoration(
                       color: iconColor.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(8.r),
                     ),
                     child: Icon(icon, color: iconColor, size: 24),
                   ),
-                  const SizedBox(width: 16),
+                  SizedBox(width: 16.w),
                   Expanded(
                     child: Text(
                       title,
-                      style: const TextStyle(
-                        fontSize: 15,
+                      style: TextStyle(
+                        fontSize: 15.sp,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -517,7 +518,7 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
           if (isExpanded)
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+              padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
               child: content,
             ),
         ],
@@ -531,13 +532,13 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
       children: [
         Text(
           title,
-          style: const TextStyle(
-            fontSize: 14,
+          style: TextStyle(
+            fontSize: 14.sp,
             fontWeight: FontWeight.w600,
             color: Colors.black87,
           ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8.w),
         ...points.map((point) => _buildBulletPoint(point)),
       ],
     );
@@ -545,27 +546,27 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
 
   Widget _buildBulletPoint(String text) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 6, left: 8),
+      padding: EdgeInsets.only(bottom: 6.w, left: 8.w),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: const EdgeInsets.only(top: 6),
-            width: 6,
-            height: 6,
+            margin: EdgeInsets.only(top: 6.w),
+            width: 6.w,
+            height: 6.w,
             decoration: BoxDecoration(
               color: Colors.blue[700],
               shape: BoxShape.circle,
             ),
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12.w),
           Expanded(
             child: Text(
               text,
               style: TextStyle(
-                fontSize: 13,
+                fontSize: 13.sp,
                 color: Colors.grey[700],
-                height: 1.5,
+                height: 1.5.w,
               ),
             ),
           ),
@@ -576,34 +577,34 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
 
   Widget _buildTimelineItem(String method, String time, Color color) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
+      padding: EdgeInsets.only(bottom: 12.w),
       child: Row(
         children: [
           Container(
-            width: 4,
-            height: 40,
+            width: 4.w,
+            height: 40.w,
             decoration: BoxDecoration(
               color: color,
-              borderRadius: BorderRadius.circular(2),
+              borderRadius: BorderRadius.circular(2.r),
             ),
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: 16.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   method,
-                  style: const TextStyle(
-                    fontSize: 14,
+                  style: TextStyle(
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4.w),
                 Text(
                   time,
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 12.sp,
                     color: Colors.grey[600],
                   ),
                 ),
@@ -617,13 +618,13 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
 
   Widget _buildStepItem(int number, String text) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
+      padding: EdgeInsets.only(bottom: 12.w),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 28,
-            height: 28,
+            width: 28.w,
+            height: 28.w,
             decoration: BoxDecoration(
               color: Colors.blue[700],
               shape: BoxShape.circle,
@@ -631,24 +632,24 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
             child: Center(
               child: Text(
                 number.toString(),
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12.w),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(top: 4),
+              padding: EdgeInsets.only(top: 4.w),
               child: Text(
                 text,
                 style: TextStyle(
-                  fontSize: 13,
+                  fontSize: 13.sp,
                   color: Colors.grey[700],
-                  height: 1.5,
+                  height: 1.5.w,
                 ),
               ),
             ),
@@ -662,7 +663,7 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
     return Row(
       children: [
         Icon(icon, color: Colors.blue[700], size: 24),
-        const SizedBox(width: 16),
+        SizedBox(width: 16.w),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -670,15 +671,15 @@ class _RefundPolicyPageState extends State<RefundPolicyPage> {
               Text(
                 label,
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 12.sp,
                   color: Colors.grey[600],
                 ),
               ),
-              const SizedBox(height: 4),
+              SizedBox(height: 4.w),
               Text(
                 value,
-                style: const TextStyle(
-                  fontSize: 14,
+                style: TextStyle(
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
                 ),
               ),

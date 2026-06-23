@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 
 class TermsAndConditionsScreen extends StatefulWidget {
@@ -44,21 +45,21 @@ Rideal reserves the right to modify or update these Terms at any time. Continued
         shadowColor: Colors.black.withOpacity(0.1),
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back, color: Colors.black87),
+          icon: Icon(Icons.arrow_back, color: Colors.black87),
         ),
         title: Row(
           children: [
             // Rideal Logo
             
          
-            const SizedBox(width: 12),
+            SizedBox(width: 12.w),
             // Title
-            const Expanded(
+            Expanded(
               child: Text(
                 "Terms & Conditions",
                 style: TextStyle(
                   color: Colors.black87,
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -67,23 +68,23 @@ Rideal reserves the right to modify or update these Terms at any time. Continued
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(0),
+        padding: EdgeInsets.all(0),
         child: Column(
           children: [
             // Header Section
             Container(
               width: double.infinity,
               color: Colors.white,
-              padding: const EdgeInsets.all(20),
+              padding: EdgeInsets.all(20.w),
               child: Column(
                 children: [
                   // Large Logo
                   Container(
-                    width: 80,
-                    height: 80,
+                    width: 80.w,
+                    height: 80.w,
                     decoration: BoxDecoration(
                       
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(20.r),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.green.withOpacity(0.3),
@@ -94,20 +95,20 @@ Rideal reserves the right to modify or update these Terms at any time. Continued
                     ),
                     child: Image.asset("assets/images/logorideal.png")
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.w),
                   Text(
                     "Terms & Conditions",
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 24.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.w),
                   Text(
                     "Please read these terms carefully before using our service",
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       color: Colors.grey.shade600,
                     ),
                     textAlign: TextAlign.center,
@@ -116,33 +117,33 @@ Rideal reserves the right to modify or update these Terms at any time. Continued
               ),
             ),
             
-            const SizedBox(height: 8),
+            SizedBox(height: 8.w),
             
             // Content Section
             Container(
               width: double.infinity,
               color: Colors.white,
-              padding: const EdgeInsets.all(20),
+              padding: EdgeInsets.all(20.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Last Updated Info
                   Container(
-                    padding: const EdgeInsets.all(12),
+                    padding: EdgeInsets.all(12.w),
                     decoration: BoxDecoration(
                       color: Colors.blue.shade50,
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(8.r),
                       border: Border.all(color: Colors.blue.shade200),
                     ),
                     child: Row(
                       children: [
                         Icon(Icons.info_outline, color: Colors.blue.shade600, size: 20),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8.w),
                         Text(
                           "Last updated: ${DateTime.now().toString().substring(0, 10)}",
                           style: TextStyle(
                             color: Colors.blue.shade700,
-                            fontSize: 12,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -150,27 +151,27 @@ Rideal reserves the right to modify or update these Terms at any time. Continued
                     ),
                   ),
                   
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24.w),
                   
                   // Terms Content
                   Text(
                     texttermsandconditions,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      height: 1.6,
+                    style: TextStyle(
+                      fontSize: 15.sp,
+                      height: 1.6.w,
                       color: Colors.black87,
                       letterSpacing: 0.2,
                     ),
                   ),
                   
-                  const SizedBox(height: 32),
+                  SizedBox(height: 32.w),
                   
                   // // Contact Info
                   // Container(
-                  //   padding: const EdgeInsets.all(16),
+                  //   padding: EdgeInsets.all(16.w),
                   //   decoration: BoxDecoration(
                   //     color: Colors.green.shade50,
-                  //     borderRadius: BorderRadius.circular(12),
+                  //     borderRadius: BorderRadius.circular(12.r),
                   //     border: Border.all(color: Colors.green.shade200),
                   //   ),
                   //   child: Column(
@@ -179,34 +180,34 @@ Rideal reserves the right to modify or update these Terms at any time. Continued
                   //       Row(
                   //         children: [
                   //           Icon(Icons.contact_support, color: Colors.green.shade600),
-                  //           const SizedBox(width: 8),
+                  //           SizedBox(width: 8.w),
                   //           Text(
                   //             "Need Help?",
                   //             style: TextStyle(
-                  //               fontSize: 16,
+                  //               fontSize: 16.sp,
                   //               fontWeight: FontWeight.bold,
                   //               color: Colors.green.shade700,
                   //             ),
                   //           ),
                   //         ],
                   //       ),
-                  //       const SizedBox(height: 8),
+                  //       SizedBox(height: 8.w),
                   //       Text(
                   //         "If you have any questions about these Terms and Conditions, please contact our support team.",
                   //         style: TextStyle(
-                  //           fontSize: 14,
+                  //           fontSize: 14.sp,
                   //           color: Colors.grey.shade700,
                   //         ),
                   //       ),
-                  //       const SizedBox(height: 12),
+                  //       SizedBox(height: 12.w),
                   //       Row(
                   //         children: [
                   //           Icon(Icons.email, size: 16, color: Colors.green.shade600),
-                  //           const SizedBox(width: 8),
+                  //           SizedBox(width: 8.w),
                   //           Text(
                   //             "support@rideal.com",
                   //             style: TextStyle(
-                  //               fontSize: 14,
+                  //               fontSize: 14.sp,
                   //               color: Colors.green.shade700,
                   //               fontWeight: FontWeight.w500,
                   //             ),
@@ -220,7 +221,7 @@ Rideal reserves the right to modify or update these Terms at any time. Continued
               ),
             ),
             
-            const SizedBox(height: 20),
+            SizedBox(height: 20.w),
           ],
         ),
       ),

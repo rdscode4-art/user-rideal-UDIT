@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:rideal/authservices.dart';
@@ -302,13 +303,13 @@ class _SearchScreenState extends State<SearchScreen> {
             children: [
               // Custom Modern Header
               Padding(
-                padding: const EdgeInsets.only(top: 8, left: 16, right: 16, bottom: 16),
+                padding: EdgeInsets.only(top: 8.w, left: 16.w, right: 16.w, bottom: 16.w),
                 child: Row(
                   children: [
                     GestureDetector(
                       onTap: () => Navigator.pop(context),
                       child: Container(
-                        padding: const EdgeInsets.all(8), // Scaled down
+                        padding: EdgeInsets.all(8.w), // Scaled down
                         decoration: BoxDecoration(
                           color: Colors.white,
                           shape: BoxShape.circle,
@@ -320,14 +321,14 @@ class _SearchScreenState extends State<SearchScreen> {
                             ),
                           ],
                         ),
-                        child: const Icon(Icons.arrow_back, color: Colors.black87, size: 18), // Smaller icon
+                        child: Icon(Icons.arrow_back, color: Colors.black87, size: 18), // Smaller icon
                       ),
                     ),
-                    const SizedBox(width: 12),
-                    const Text(
+                    SizedBox(width: 12.w),
+                    Text(
                       "Route Planner",
                       style: TextStyle(
-                        fontSize: 18, // Scaled down
+                        fontSize: 18.sp, // Scaled down
                         fontWeight: FontWeight.w700,
                         letterSpacing: -0.3,
                         color: Colors.black87,
@@ -339,11 +340,11 @@ class _SearchScreenState extends State<SearchScreen> {
 
               // Floating Inputs Card
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 16), // Tighter margin
-                padding: const EdgeInsets.all(16), // Scaled down
+                margin: EdgeInsets.symmetric(horizontal: 16.w), // Tighter margin
+                padding: EdgeInsets.all(16.w), // Scaled down
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(20), // Scaled down
+                  borderRadius: BorderRadius.circular(20.r), // Scaled down
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.03),
@@ -356,26 +357,26 @@ class _SearchScreenState extends State<SearchScreen> {
                   children: [
                     // Pickup Input
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 0),
+                      padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 0),
                       decoration: BoxDecoration(
                         color: Colors.grey.shade50,
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(12.r),
                         border: Border.all(color: Colors.grey.shade200),
                       ),
                       child: TextField(
                         controller: _pickupController,
                         onChanged: _onPickupChanged,
                         textAlignVertical: TextAlignVertical.center,
-                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                        style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
                         decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.circle, color: Color(0xFF0F9D58), size: 12),
+                          prefixIcon: Icon(Icons.circle, color: Color(0xFF0F9D58), size: 12),
                           hintText: 'Pickup Location',
-                          hintStyle: const TextStyle(color: Colors.black38, fontSize: 14),
+                          hintStyle: TextStyle(color: Colors.black38, fontSize: 14.sp),
                           border: InputBorder.none,
-                          contentPadding: const EdgeInsets.symmetric(vertical: 14),
+                          contentPadding: EdgeInsets.symmetric(vertical: 14.w),
                           isDense: true,
                           suffixIcon: _pickupController.text.isNotEmpty ? IconButton(
-                            icon: const Icon(Icons.close, size: 16, color: Colors.black45),
+                            icon: Icon(Icons.close, size: 16, color: Colors.black45),
                             onPressed: () {
                               _pickupController.clear();
                               setState(() => _pickupSuggestions = []);
@@ -386,25 +387,25 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                     if (_pickupSuggestions.isNotEmpty)
                       Container(
-                        margin: const EdgeInsets.only(top: 8),
+                        margin: EdgeInsets.only(top: 8.w),
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(12.r),
                           border: Border.all(color: Colors.grey.shade100),
                         ),
                         child: ListView.separated(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: _pickupSuggestions.length,
-                          separatorBuilder: (context, index) => Divider(height: 1, color: Colors.grey.shade100),
+                          separatorBuilder: (context, index) => Divider(height: 1.w, color: Colors.grey.shade100),
                           itemBuilder: (context, index) {
                             final suggestion = _pickupSuggestions[index];
                             return ListTile(
                               visualDensity: VisualDensity.compact,
-                              leading: const Icon(Icons.location_on_outlined, color: Colors.black54, size: 18),
+                              leading: Icon(Icons.location_on_outlined, color: Colors.black54, size: 18),
                               title: Text(
                                 suggestion["description"]!,
-                                style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                                style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500),
                               ),
                               onTap: () {
                                 _pickupController.text = suggestion["description"]!;
@@ -415,30 +416,30 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                       ),
                     
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12.w),
 
                     // Drop Input
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 0),
+                      padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 0),
                       decoration: BoxDecoration(
                         color: Colors.grey.shade50,
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(12.r),
                         border: Border.all(color: Colors.grey.shade200),
                       ),
                       child: TextField(
                         controller: _dropController,
                         onChanged: _onDropChanged,
                         textAlignVertical: TextAlignVertical.center,
-                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                        style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
                         decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.location_on, color: Colors.redAccent, size: 16),
+                          prefixIcon: Icon(Icons.location_on, color: Colors.redAccent, size: 16),
                           hintText: 'Where to?',
-                          hintStyle: const TextStyle(color: Colors.black38, fontSize: 14),
+                          hintStyle: TextStyle(color: Colors.black38, fontSize: 14.sp),
                           border: InputBorder.none,
-                          contentPadding: const EdgeInsets.symmetric(vertical: 14),
+                          contentPadding: EdgeInsets.symmetric(vertical: 14.w),
                           isDense: true,
                           suffixIcon: _dropController.text.isNotEmpty ? IconButton(
-                            icon: const Icon(Icons.close, size: 16, color: Colors.black45),
+                            icon: Icon(Icons.close, size: 16, color: Colors.black45),
                             onPressed: () {
                               _dropController.clear();
                               setState(() => _dropSuggestions = []);
@@ -452,25 +453,25 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                     if (_dropSuggestions.isNotEmpty)
                       Container(
-                        margin: const EdgeInsets.only(top: 8),
+                        margin: EdgeInsets.only(top: 8.w),
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(12.r),
                           border: Border.all(color: Colors.grey.shade100),
                         ),
                         child: ListView.separated(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: _dropSuggestions.length,
-                          separatorBuilder: (context, index) => Divider(height: 1, color: Colors.grey.shade100),
+                          separatorBuilder: (context, index) => Divider(height: 1.w, color: Colors.grey.shade100),
                           itemBuilder: (context, index) {
                             final suggestion = _dropSuggestions[index];
                             return ListTile(
                               visualDensity: VisualDensity.compact,
-                              leading: const Icon(Icons.location_on_outlined, color: Colors.black54, size: 18),
+                              leading: Icon(Icons.location_on_outlined, color: Colors.black54, size: 18),
                               title: Text(
                                 suggestion["description"]!,
-                                style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                                style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500),
                               ),
                               onTap: () {
                                 _dropController.text = suggestion["description"]!;
@@ -484,20 +485,20 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
 
-              const SizedBox(height: 20),
+              SizedBox(height: 20.w),
 
               // Search Action Button
               if (_dropController.text.trim().isNotEmpty)
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: GestureDetector(
                     onTap: () => _navigateToBook(),
                     child: Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      padding: EdgeInsets.symmetric(vertical: 14.w),
                       decoration: BoxDecoration(
                         color: const Color(0xFF0F9D58),
-                        borderRadius: BorderRadius.circular(16), // Smaller radius
+                        borderRadius: BorderRadius.circular(16.r), // Smaller radius
                         boxShadow: [
                           BoxShadow(
                             color: const Color(0xFF0F9D58).withOpacity(0.3),
@@ -506,16 +507,16 @@ class _SearchScreenState extends State<SearchScreen> {
                           ),
                         ],
                       ),
-                      child: const Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(Icons.search, color: Colors.white, size: 18),
-                          SizedBox(width: 6),
+                          SizedBox(width: 6.w),
                           Text(
                             "Find Rides",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               fontWeight: FontWeight.w700,
                             ),
                           ),
@@ -525,49 +526,49 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 ),
 
-              const SizedBox(height: 24),
+              SizedBox(height: 24.w),
 
               // Recent Rides Section
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: Text(
                   "Recent Destinations",
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
-                    fontSize: 15,
+                    fontSize: 15.sp,
                     color: Colors.black87,
                   ),
                 ),
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12.w),
               
               isHistoryLoading
-                  ? const Center(child: Padding(padding: EdgeInsets.all(20), child: CircularProgressIndicator()))
+                  ? Center(child: Padding(padding: EdgeInsets.all(20.w), child: CircularProgressIndicator()))
                   : rideHistory.isEmpty
                       ? Center(
                           child: Padding(
-                            padding: const EdgeInsets.all(32.0),
+                            padding: EdgeInsets.all(32.0.w),
                             child: Column(
                               children: [
                                 Icon(Icons.history_toggle_off, color: Colors.grey.shade300, size: 40),
-                                const SizedBox(height: 8),
-                                Text("No recent rides", style: TextStyle(color: Colors.grey.shade400, fontSize: 13, fontWeight: FontWeight.w500)),
+                                SizedBox(height: 8.w),
+                                Text("No recent rides", style: TextStyle(color: Colors.grey.shade400, fontSize: 13.sp, fontWeight: FontWeight.w500)),
                               ],
                             ),
                           ),
                         )
                       : ListView.builder(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          padding: EdgeInsets.symmetric(horizontal: 16.w),
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: rideHistory.length,
                           itemBuilder: (context, index) {
                             final ride = rideHistory[index];
                             return Container(
-                              margin: const EdgeInsets.only(bottom: 8),
+                              margin: EdgeInsets.only(bottom: 8.w),
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(12.r),
                                 border: Border.all(color: Colors.grey.shade100),
                                 boxShadow: [
                                   BoxShadow(
@@ -579,22 +580,22 @@ class _SearchScreenState extends State<SearchScreen> {
                               ),
                               child: ListTile(
                                 visualDensity: VisualDensity.compact,
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                                contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.w),
                                 leading: Container(
-                                  padding: const EdgeInsets.all(8),
+                                  padding: EdgeInsets.all(8.w),
                                   decoration: BoxDecoration(
                                     color: Colors.grey.shade50,
                                     shape: BoxShape.circle,
                                   ),
-                                  child: const Icon(Icons.history, color: Colors.black54, size: 16),
+                                  child: Icon(Icons.history, color: Colors.black54, size: 16),
                                 ),
                                 title: Text(
                                   ride.dropoffStop.address,
-                                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: Colors.black87),
+                                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13.sp, color: Colors.black87),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
-                                trailing: const Icon(Icons.arrow_forward_ios, size: 10, color: Colors.black26),
+                                trailing: Icon(Icons.arrow_forward_ios, size: 10, color: Colors.black26),
                                 onTap: () => _navigateToBook(
                                   selectedPlaceTitle: ride.dropoffStop.address,
                                 ),
@@ -602,7 +603,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             );
                           },
                         ),
-              const SizedBox(height: 40),
+              SizedBox(height: 40.w),
             ],
           ),
         ),

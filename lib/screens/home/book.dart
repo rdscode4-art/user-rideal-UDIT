@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:rideal/authservices.dart';
@@ -688,8 +689,10 @@ class _BookState extends State<Book> {
               ? const Center(child: CircularProgressIndicator())
               : Column(
                 children: [
-                  SizedBox(
-                    height: 250,
+                  Offstage(
+                    offstage: MediaQuery.of(context).viewInsets.bottom != 0,
+                    child: SizedBox(
+                      height: 250,
                     child: RepaintBoundary(
                       child: GoogleMap(
                         onMapCreated: _onMapCreated,
@@ -702,6 +705,7 @@ class _BookState extends State<Book> {
                         polylines: _polylines,
                       ),
                     ),
+                  ),
                   ),
                   if (_isRideBooked && _rideStatus.isNotEmpty)
                     Container(
@@ -776,6 +780,7 @@ class _BookState extends State<Book> {
                         vertical: 8,
                       ),
                       child: PromoCodeWidget(
+                        key: ValueKey(selectedIndex),
                         rideType: rideTypes[selectedIndex].originalKey,
                         estimatedAmount: calculateFare(
                           rideTypes[selectedIndex],
@@ -808,9 +813,13 @@ class _BookState extends State<Book> {
                           displayFare,
                           selectedIndex == index,
                           () {
-                            setState(() {
-                              selectedIndex = index;
-                            });
+                            if (selectedIndex != index) {
+                              setState(() {
+                                selectedIndex = index;
+                                _appliedPromo = null;
+                                _appliedPromoCode = null;
+                              });
+                            }
                           },
                           originalFare:
                               _appliedPromo != null && selectedIndex == index
@@ -982,8 +991,8 @@ Widget TransportContainer(
   return GestureDetector(
     onTap: onTap,
     child: Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      padding: const EdgeInsets.all(12),
+      margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.w),
+      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.w),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: isSelected ? Colors.green.shade50 : Colors.white,
@@ -995,8 +1004,8 @@ Widget TransportContainer(
       child: Row(
         children: [
           SizedBox(
-            height: 50,
-            width: 50,
+            height: 40.w,
+            width: 40.w,
             child:
                 isNetworkImage
                     ? Image.network(
@@ -1021,21 +1030,21 @@ Widget TransportContainer(
                     )
                     : Image.asset(image, fit: BoxFit.contain),
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   type,
-                  style: const TextStyle(
-                    fontSize: 16,
+                  style: TextStyle(
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 4),
-                Text(time, style: const TextStyle(color: Colors.grey)),
-                Text("Drop: $drop", style: const TextStyle(color: Colors.grey)),
+                SizedBox(height: 2.w),
+                Text(time, style: TextStyle(color: Colors.grey, fontSize: 11.sp)),
+                Text("Drop: $drop", style: TextStyle(color: Colors.grey, fontSize: 11.sp)),
               ],
             ),
           ),
@@ -1045,26 +1054,26 @@ Widget TransportContainer(
               if (originalFare != null) ...[
                 Text(
                   "₹${originalFare.toStringAsFixed(0)}",
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12,
                     color: Colors.grey,
                     decoration: TextDecoration.lineThrough,
                   ),
                 ),
-                const SizedBox(height: 2),
+                SizedBox(height: 2),
               ],
               Text(
                 "₹${price.toStringAsFixed(0)}",
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
                   color: originalFare != null ? Colors.green : Colors.black,
                 ),
               ),
               if (originalFare != null) ...[
-                const SizedBox(height: 2),
+                SizedBox(height: 2),
                 Container(
-                  padding: const EdgeInsets.symmetric(
+                  padding: EdgeInsets.symmetric(
                     horizontal: 6,
                     vertical: 2,
                   ),
@@ -1074,7 +1083,7 @@ Widget TransportContainer(
                   ),
                   child: Text(
                     '${((originalFare - price) / originalFare * 100).toStringAsFixed(0)}% OFF',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 10,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,

@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:rideal/screens/transport/RequestRent.dart';
 class RequestRent_II extends StatefulWidget {
@@ -16,21 +17,21 @@ class _RequestRent_IIState extends State<RequestRent_II> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Request for Rent',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 25),),
+        title: Text('Request for Rent',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 25.sp),),
       ),
       body: SingleChildScrollView(
-        child:  Padding(padding: EdgeInsets.all(16.0),
+        child:  Padding(padding: EdgeInsets.all(16.0.w),
         child:Column(
           children: [
-            SizedBox(height: 20,),
+            SizedBox(height: 20.w,),
             locationInfo(),
-            SizedBox(height: 18),
+            SizedBox(height: 18.w),
             carInfoCard(),
-            SizedBox(height: 20,),
+            SizedBox(height: 20.w,),
             chargeInfo(),
-            SizedBox(height: 40),
+            SizedBox(height: 40.w),
             paymentMethodSelector(context),
-            SizedBox(height: 30),
+            SizedBox(height: 30.w),
             confirmButton(context), 
 
           ],
@@ -46,8 +47,8 @@ return Container(
   child: Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text("Charge", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.grey.shade700),textAlign: TextAlign.left,),
-        SizedBox(height: 12),
+      Text("Charge", style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold, color: Colors.grey.shade700),textAlign: TextAlign.left,),
+        SizedBox(height: 12.w),
         _chargeRow("Mustang/per hours", "\$200"),
         _chargeRow("Vat (5%)", "\$20"),
         _chargeRow("Promo Code", "-\$5"),
@@ -57,7 +58,7 @@ return Container(
 }
 Widget _chargeRow(String label, String amount, {bool isTotal = false}) {
   return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 4),
+    padding: EdgeInsets.symmetric(vertical: 4.w),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

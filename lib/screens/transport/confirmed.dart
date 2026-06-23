@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
@@ -59,7 +60,7 @@ Future<void> _cancelRide() async {
     builder: (BuildContext context) {
       return AlertDialog(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
         ),
         title: Row(
           children: [
@@ -68,11 +69,11 @@ Future<void> _cancelRide() async {
               color: Colors.orange.shade600,
               size: 28,
             ),
-            const SizedBox(width: 12),
-            const Text(
+            SizedBox(width: 12.w),
+            Text(
               'Cancel Ride?',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -82,36 +83,36 @@ Future<void> _cancelRide() async {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Are you sure you want to cancel this ride?',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8.w),
             Text(
               'Your driver is already on the way. Cancelling now may result in cancellation charges.',
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 14.sp,
                 color: Colors.grey.shade600,
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12.w),
             Container(
-              padding: const EdgeInsets.all(12),
+              padding: EdgeInsets.all(12.w),
               decoration: BoxDecoration(
                 color: Colors.orange.shade50,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(8.r),
                 border: Border.all(color: Colors.orange.shade200),
               ),
               child: Row(
                 children: [
                   Icon(Icons.info_outline, 
                        color: Colors.orange.shade600, size: 16),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8.w),
                   Expanded(
                     child: Text(
                       'This action cannot be undone',
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
                         color: Colors.orange.shade700,
                       ),
@@ -130,7 +131,7 @@ Future<void> _cancelRide() async {
               style: TextStyle(
                 color: Colors.green.shade600,
                 fontWeight: FontWeight.w600,
-                fontSize: 16,
+                fontSize: 16.sp,
               ),
             ),
           ),
@@ -140,15 +141,15 @@ Future<void> _cancelRide() async {
               backgroundColor: Colors.red.shade600,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(8.r),
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.w),
             ),
-            child: const Text(
+            child: Text(
               'Cancel Ride',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 16,
+                fontSize: 16.sp,
               ),
             ),
           ),
@@ -163,15 +164,15 @@ Future<void> _cancelRide() async {
       showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => const Center(
+        builder: (context) => Center(
           child: Card(
             child: Padding(
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.all(20.w),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   CircularProgressIndicator(),
-                  SizedBox(height: 16),
+                  SizedBox(height: 16.w),
                   Text('Cancelling ride...'),
                 ],
               ),
@@ -204,14 +205,14 @@ Future<void> _cancelRide() async {
               content: Row(
                 children: [
                   Icon(Icons.check_circle, color: Colors.white),
-                  SizedBox(width: 12),
+                  SizedBox(width: 12.w),
                   Expanded(child: Text('Ride cancelled successfully')),
                 ],
               ),
               backgroundColor: Colors.green.shade600,
               behavior: SnackBarBehavior.floating,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(8.r),
               ),
               duration: Duration(seconds: 3),
             ),
@@ -237,14 +238,14 @@ Future<void> _cancelRide() async {
           content: Row(
             children: [
               Icon(Icons.error, color: Colors.white),
-              SizedBox(width: 12),
+              SizedBox(width: 12.w),
               Expanded(child: Text('Failed to cancel ride. Please try again.')),
             ],
           ),
           backgroundColor: Colors.red.shade600,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(8.r),
           ),
           duration: Duration(seconds: 4),
         ),
@@ -339,7 +340,7 @@ Future<void> _cancelRide() async {
               polylineId: const PolylineId("driver_to_user"),
               points: _polylineCoordinates,
               color: Theme.of(context).primaryColor,
-              width: 4,
+              width: 4.w.toInt(),
               patterns: [PatternItem.dash(20), PatternItem.gap(10)],
             ),
           );
@@ -598,8 +599,8 @@ void _startHighFrequencyTracking() {
 // Enhanced ETA display with more detailed information
 Widget _buildEnhancedETACard() {
   return Container(
-    margin: const EdgeInsets.all(16),
-    padding: const EdgeInsets.all(20),
+    margin: EdgeInsets.all(16.w),
+    padding: EdgeInsets.all(20.w),
     decoration: BoxDecoration(
       gradient: LinearGradient(
         colors: [
@@ -609,10 +610,10 @@ Widget _buildEnhancedETACard() {
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       ),
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(20.r),
       border: Border.all(
         color: Theme.of(context).primaryColor.withOpacity(0.2),
-        width: 1,
+        width: 1.w,
       ),
     ),
     child: Column(
@@ -625,12 +626,12 @@ Widget _buildEnhancedETACard() {
                 return Transform.scale(
                   scale: _pulseAnimation.value,
                   child: Container(
-                    padding: const EdgeInsets.all(12),
+                    padding: EdgeInsets.all(12.w),
                     decoration: BoxDecoration(
                       color: Theme.of(context).primaryColor,
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.access_time,
                       color: Colors.white,
                       size: 24,
@@ -639,7 +640,7 @@ Widget _buildEnhancedETACard() {
                 );
               },
             ),
-            const SizedBox(width: 16),
+            SizedBox(width: 16.w),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -647,16 +648,16 @@ Widget _buildEnhancedETACard() {
                   Text(
                     "Driver arriving in",
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       color: Colors.grey.shade600,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 4.w),
                   Text(
                     _estimatedArrival,
-                    style: const TextStyle(
-                      fontSize: 24,
+                    style: TextStyle(
+                      fontSize: 24.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
@@ -668,12 +669,12 @@ Widget _buildEnhancedETACard() {
         ),
         
         if (_distanceToDriver != null) ...[
-          const SizedBox(height: 16),
+          SizedBox(height: 16.w),
           Container(
-            padding: const EdgeInsets.all(12),
+            padding: EdgeInsets.all(12.w),
             decoration: BoxDecoration(
               color: Colors.white.withOpacity(0.7),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.r),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -685,11 +686,11 @@ Widget _buildEnhancedETACard() {
                       size: 16,
                       color: Colors.grey.shade600,
                     ),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8.w),
                     Text(
                       "${_distanceToDriver!.toStringAsFixed(1)} km away",
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w500,
                         color: Colors.grey.shade700,
                       ),
@@ -699,10 +700,10 @@ Widget _buildEnhancedETACard() {
                 
                 // Traffic indicator
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.w),
                   decoration: BoxDecoration(
                     color: _getTrafficColor(),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -712,11 +713,11 @@ Widget _buildEnhancedETACard() {
                         size: 12,
                         color: Colors.white,
                       ),
-                      const SizedBox(width: 4),
+                      SizedBox(width: 4.w),
                       Text(
                         _getTrafficText(),
-                        style: const TextStyle(
-                          fontSize: 10,
+                        style: TextStyle(
+                          fontSize: 10.sp,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
@@ -1002,8 +1003,8 @@ String _getTrafficText() {
 
   Widget _buildETACard() {
     return Container(
-      margin: const EdgeInsets.all(16),
-      padding: const EdgeInsets.all(20),
+      margin: EdgeInsets.all(16.w),
+      padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -1013,10 +1014,10 @@ String _getTrafficText() {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.r),
         border: Border.all(
           color: Theme.of(context).primaryColor.withOpacity(0.2),
-          width: 1,
+          width: 1.w,
         ),
       ),
       child: Row(
@@ -1027,12 +1028,12 @@ String _getTrafficText() {
               return Transform.scale(
                 scale: _pulseAnimation.value,
                 child: Container(
-                  padding: const EdgeInsets.all(12),
+                  padding: EdgeInsets.all(12.w),
                   decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.access_time,
                     color: Colors.white,
                     size: 24,
@@ -1041,7 +1042,7 @@ String _getTrafficText() {
               );
             },
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: 16.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1049,16 +1050,16 @@ String _getTrafficText() {
                 Text(
                   "Driver arriving in",
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     color: Colors.grey.shade600,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(height: 4),
+                SizedBox(height: 4.w),
                 Text(
                   _estimatedArrival,
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 24.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                   ),
@@ -1067,7 +1068,7 @@ String _getTrafficText() {
                   Text(
                     "${_distanceToDriver!.toStringAsFixed(1)} km away",
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 12.sp,
                       color: Colors.grey.shade600,
                     ),
                   ),
@@ -1081,11 +1082,11 @@ String _getTrafficText() {
 
   Widget _buildDriverCard() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16),
-      padding: const EdgeInsets.all(20),
+      margin: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -1100,8 +1101,8 @@ String _getTrafficText() {
             children: [
               // Driver Image/Vehicle
               Container(
-                width: 80,
-                height: 80,
+                width: 80.w,
+                height: 80.w,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   gradient: LinearGradient(
@@ -1116,7 +1117,7 @@ String _getTrafficText() {
                   ),
                 ),
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: 16.w),
               // Driver Details
               Expanded(
                 child: Column(
@@ -1124,51 +1125,51 @@ String _getTrafficText() {
                   children: [
                     Text(
                       _driverDetails?["name"]?.toString() ?? 'Driver Name',
-                      style: const TextStyle(
-                        fontSize: 18,
+                      style: TextStyle(
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4.w),
                     Text(
                       _driverDetails?["vehicleNumber"]?.toString() ?? 'Vehicle Number',
-                      style: const TextStyle(
-                        fontSize: 16,
+                      style: TextStyle(
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.w600,
                         color: Colors.black54,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4.w),
                     Text(
                       _driverDetails?["vehicleName"]?.toString() ?? 'Vehicle Name',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         color: Colors.grey.shade600,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8.w),
                     // Rating
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.w),
                       decoration: BoxDecoration(
                         color: Colors.amber.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(12.r),
                         border: Border.all(color: Colors.amber.withOpacity(0.3)),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(Icons.star, size: 16, color: Colors.amber),
-                          const SizedBox(width: 4),
+                          Icon(Icons.star, size: 16, color: Colors.amber),
+                          SizedBox(width: 4.w),
                           Text(
                             _driverDetails?["rating"] != null
                                 ? (double.tryParse(_driverDetails!["rating"].toString())
                                         ?.toStringAsFixed(1) ??
                                     'No Rating')
                                 : 'No Rating',
-                            style: const TextStyle(
-                              fontSize: 12,
+                            style: TextStyle(
+                              fontSize: 12.sp,
                               fontWeight: FontWeight.w600,
                               color: Colors.amber,
                             ),
@@ -1200,18 +1201,18 @@ String _getTrafficText() {
                     }
                     makePhoneCall(driverPhone);
                   },
-                  icon: const Icon(Icons.call, color: Colors.white, size: 24),
+                  icon: Icon(Icons.call, color: Colors.white, size: 24),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.w),
           // OTP Section
           Container(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16.w),
             decoration: BoxDecoration(
               color: Colors.blue.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(16.r),
               border: Border.all(color: Colors.blue.withOpacity(0.2)),
             ),
             child: Row(
@@ -1223,31 +1224,31 @@ String _getTrafficText() {
                     Text(
                       "Your OTP",
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         color: Colors.grey.shade600,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    const SizedBox(height: 4),
-                    const Text(
+                    SizedBox(height: 4.w),
+                    Text(
                       "Share with your driver",
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         color: Colors.grey,
                       ),
                     ),
                   ],
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
                   decoration: BoxDecoration(
                     color: Colors.blue,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Text(
                     otp ?? "N/A",
-                    style: const TextStyle(
-                      fontSize: 20,
+                    style: TextStyle(
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       letterSpacing: 2,
@@ -1277,20 +1278,20 @@ String _getTrafficText() {
             elevation: 0,
             leading: IconButton(
               onPressed: () => Navigator.pop(context),
-              icon: const Icon(Icons.arrow_back, color: Colors.black87),
+              icon: Icon(Icons.arrow_back, color: Colors.black87),
             ),
-            title: const Text(
+            title: Text(
               "Driver on the way",
               style: TextStyle(
                 color: Colors.black87,
                 fontWeight: FontWeight.w600,
-                fontSize: 18,
+                fontSize: 18.sp,
               ),
             ),
             // actions: [
             //   // Cancel button in app bar
             //   Container(
-            //     margin: const EdgeInsets.only(right: 16, top: 8, bottom: 8),
+            //     margin: EdgeInsets.only(right: 16.w, top: 8.w, bottom: 8.w),
             //     child: OutlinedButton.icon(
             //       onPressed: _cancelRide,
             //       icon: Icon(
@@ -1301,7 +1302,7 @@ String _getTrafficText() {
             //       label: Text(
             //         'Cancel',
             //         style: TextStyle(
-            //           fontSize: 12,
+            //           fontSize: 12.sp,
             //           fontWeight: FontWeight.w600,
             //           color: Colors.red.shade600,
             //         ),
@@ -1309,12 +1310,12 @@ String _getTrafficText() {
             //       style: OutlinedButton.styleFrom(
             //         side: BorderSide(
             //           color: Colors.red.shade400,
-            //           width: 1,
+            //           width: 1.w,
             //         ),
             //         shape: RoundedRectangleBorder(
-            //           borderRadius: BorderRadius.circular(20),
+            //           borderRadius: BorderRadius.circular(20.r),
             //         ),
-            //         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+            //         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.w),
             //         minimumSize: Size.zero,
             //         backgroundColor: Colors.red.shade50,
             //       ),
@@ -1324,7 +1325,7 @@ String _getTrafficText() {
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(1),
               child: Container(
-                height: 1,
+                height: 1.w,
                 color: Colors.grey.shade200,
               ),
             ),
@@ -1334,9 +1335,9 @@ String _getTrafficText() {
           SliverToBoxAdapter(
             child: Container(
               height: MediaQuery.of(context).size.height * 0.5,
-              margin: const EdgeInsets.all(16),
+              margin: EdgeInsets.all(16.w),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(20.r),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
@@ -1346,7 +1347,7 @@ String _getTrafficText() {
                 ],
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(20.r),
                 child: _currentPosition == null
                     ? Container(
                         decoration: BoxDecoration(
@@ -1359,7 +1360,7 @@ String _getTrafficText() {
                             end: Alignment.bottomCenter,
                           ),
                         ),
-                        child: const Center(
+                        child: Center(
                           child: CircularProgressIndicator(),
                         ),
                       )
@@ -1399,22 +1400,22 @@ String _getTrafficText() {
           // Pickup Instructions
           SliverToBoxAdapter(
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              padding: const EdgeInsets.all(16),
+              margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
+              padding: EdgeInsets.all(16.w),
               decoration: BoxDecoration(
                 color: Colors.blue.shade50,
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(16.r),
                 border: Border.all(color: Colors.blue.shade100),
               ),
               child: Row(
                 children: [
                   Icon(Icons.info_outline, color: Colors.blue.shade600),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12.w),
                   Expanded(
                     child: Text(
                       "Please meet your driver at the pickup point",
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w500,
                         color: Colors.blue.shade700,
                       ),
@@ -1431,21 +1432,21 @@ String _getTrafficText() {
               position: _slideAnimation,
               child: _isLoadingDetails
                   ? Container(
-                      margin: const EdgeInsets.all(16),
-                      height: 200,
+                      margin: EdgeInsets.all(16.w),
+                      height: 200.w,
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(20.r),
                       ),
-                      child: const Center(child: CircularProgressIndicator()),
+                      child: Center(child: CircularProgressIndicator()),
                     )
                   : _buildDriverCard(),
             ),
           ),
 
           // Bottom spacing
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 32),
+          SliverToBoxAdapter(
+            child: SizedBox(height: 32.w),
           ),
         ],
       ),

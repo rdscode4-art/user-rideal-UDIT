@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:rideal/screens/transport/selectavailablecar.dart';
 import '/model/selecttransportcard.dart';
@@ -24,7 +25,7 @@ class _SelectTransportState extends State<SelectTransport> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(appbartitle, style: TextStyle(fontSize: 22,fontWeight: FontWeight.w400,)),
+        title: Text(appbartitle, style: TextStyle(fontSize: 22.sp,fontWeight: FontWeight.w400,)),
       ),
       body: Center(
         child: SafeArea(
@@ -32,15 +33,15 @@ class _SelectTransportState extends State<SelectTransport> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: EdgeInsets.only(bottom: 30),
-                margin: EdgeInsets.only(top: 20),
+                padding: EdgeInsets.only(bottom: 30.w),
+                margin: EdgeInsets.only(top: 20.w),
                 child: Text(bodyTitle,
-                style: TextStyle(fontWeight: FontWeight.bold,fontSize: 26),
+                style: TextStyle(fontWeight: FontWeight.bold,fontSize: 26.sp),
                 ),
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: Container(
                     child: GridView.builder(
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -63,7 +64,7 @@ class _SelectTransportState extends State<SelectTransport> {
                       child: Container(
                         decoration: BoxDecoration(
                           color:  isSelected ? Colors.amber[200] : Color(0xFFFFFAF0),// light yellow background
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(10.r),
                           border: Border.all(
                             color: isSelected ? Colors.orange : Colors.amber,
                             width: isSelected ? 1.5 : 1.5,

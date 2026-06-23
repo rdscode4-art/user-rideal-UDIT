@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:rideal/authservices.dart';
@@ -110,13 +111,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
           children: [
             // Custom Floating Header
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+              padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
               child: Row(
                 children: [
                   GestureDetector(
                     onTap: () => Navigator.of(context).pop(),
                     child: Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10.w),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,
@@ -128,14 +129,14 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                           ),
                         ],
                       ),
-                      child: const Icon(Icons.arrow_back, color: Colors.black87, size: 20),
+                      child: Icon(Icons.arrow_back, color: Colors.black87, size: 20),
                     ),
                   ),
-                  const SizedBox(width: 16),
-                  const Text(
+                  SizedBox(width: 16.w),
+                  Text(
                     "Verify OTP",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
@@ -146,15 +147,15 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.w),
                 child: Column(
                   children: [
                     // Floating card container for OTP form
                     Container(
-                      padding: const EdgeInsets.all(24),
+                      padding: EdgeInsets.all(24.w),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(24),
+                        borderRadius: BorderRadius.circular(24.r),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.04),
@@ -166,37 +167,37 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             "Enter verification code",
                             style: TextStyle(
-                              fontSize: 22,
+                              fontSize: 22.sp,
                               fontWeight: FontWeight.bold,
                               color: Colors.black87,
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          SizedBox(height: 8.w),
                           Text(
                             "We've sent a 6-digit code to ${widget.phoneNumber}",
-                            style: const TextStyle(fontSize: 14, color: Colors.black54),
+                            style: TextStyle(fontSize: 14.sp, color: Colors.black54),
                           ),
-                          const SizedBox(height: 32),
+                          SizedBox(height: 32.w),
 
                           OtpFields(controllers: otpControllers),
-                          const SizedBox(height: 24),
+                          SizedBox(height: 24.w),
 
                           // Timer or Resend button row
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
+                              Text(
                                 "Didn't receive the code?",
-                                style: TextStyle(fontSize: 14, color: Colors.black54),
+                                style: TextStyle(fontSize: 14.sp, color: Colors.black54),
                               ),
                               if (secondsRemaining > 0)
                                 Text(
                                   "00:${secondsRemaining.toString().padLeft(2, '0')}",
-                                  style: const TextStyle(
-                                    fontSize: 14,
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.black87,
                                   ),
@@ -209,7 +210,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                                     minimumSize: Size.zero,
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                   ),
-                                  child: const Text(
+                                  child: Text(
                                     "Resend OTP",
                                     style: TextStyle(
                                       color: Color(0xFF0F9D58),
@@ -220,7 +221,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                             ],
                           ),
 
-                          const SizedBox(height: 32),
+                          SizedBox(height: 32.w),
                           
                           // Verify button
                           SizedBox(
@@ -230,25 +231,25 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFF0F9D58),
                                 foregroundColor: Colors.white,
-                                padding: const EdgeInsets.symmetric(vertical: 16),
+                                padding: EdgeInsets.symmetric(vertical: 16.w),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(24),
+                                  borderRadius: BorderRadius.circular(24.r),
                                 ),
                                 elevation: 0,
                               ),
                               child: isLoading
-                                  ? const SizedBox(
-                                      width: 24,
-                                      height: 24,
+                                  ? SizedBox(
+                                      width: 24.w,
+                                      height: 24.w,
                                       child: CircularProgressIndicator(
                                         color: Colors.white,
                                         strokeWidth: 2.5,
                                       ),
                                     )
-                                  : const Text(
+                                  : Text(
                                       "Verify & Proceed",
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 16.sp,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -257,23 +258,23 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 40),
+                    SizedBox(height: 40.w),
 
                     // Terms footer
                     Center(
                       child: Column(
                         children: [
-                          const Text(
+                          Text(
                             "By continuing, you agree to our",
-                            style: TextStyle(fontSize: 12, color: Colors.black38),
+                            style: TextStyle(fontSize: 12.sp, color: Colors.black38),
                           ),
-                          const SizedBox(height: 4),
+                          SizedBox(height: 4.w),
                           GestureDetector(
                             onTap: () {},
-                            child: const Text(
+                            child: Text(
                               "Terms & Conditions and Privacy Policy",
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 12.sp,
                                 color: Colors.black54,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -282,7 +283,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    SizedBox(height: 24.w),
                   ],
                 ),
               ),

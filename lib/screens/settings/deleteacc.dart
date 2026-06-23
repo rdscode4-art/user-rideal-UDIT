@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 
 class DeleteAccountScreen extends StatelessWidget {
@@ -7,12 +8,12 @@ class DeleteAccountScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text("Confirm Deletion"),
-        content: const Text("Are you sure you want to delete your account? This action cannot be undone."),
+        title: Text("Confirm Deletion"),
+        content: Text("Are you sure you want to delete your account? This action cannot be undone."),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text("Cancel"),
+            child: Text("Cancel"),
           ),
           ElevatedButton(
             onPressed: () {
@@ -23,7 +24,7 @@ class DeleteAccountScreen extends StatelessWidget {
               // Add account deletion logic here
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-            child: const Text("Delete"),
+            child: Text("Delete"),
           ),
         ],
       ),
@@ -34,36 +35,36 @@ class DeleteAccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Delete Account"),
+        title: Text("Delete Account"),
         leading: const BackButton(),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0.5,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(24),
+        padding: EdgeInsets.all(24.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Icon(Icons.delete_forever, size: 80, color: Colors.red),
-            const SizedBox(height: 24),
-            const Text(
+            Icon(Icons.delete_forever, size: 80, color: Colors.red),
+            SizedBox(height: 24.w),
+            Text(
               "We're sorry to see you go.",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 12),
-            const Text(
+            SizedBox(height: 12.w),
+            Text(
               "By deleting your account, all your data, ride history, and saved information will be permanently removed.",
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 16.sp),
             ),
-            const Spacer(),
+            Spacer(),
             ElevatedButton(
               onPressed: () => _showConfirmationDialog(context),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
                 minimumSize: const Size.fromHeight(50),
               ),
-              child: const Text("Delete My Account",style: TextStyle(color: Colors.white),),
+              child: Text("Delete My Account",style: TextStyle(color: Colors.white),),
             ),
           ],
         ),

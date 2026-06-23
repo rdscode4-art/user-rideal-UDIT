@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -317,7 +318,7 @@ double calculateFare(RideType ride, double distanceInKm) {
               polylineId: PolylineId("segment_$i"),
               points: coords,
               color: Colors.blue,
-              width: 4,
+              width: 4.w.toInt(),
               patterns: i == 0 ? [] : [PatternItem.dash(10), PatternItem.gap(5)],
             ),
           );
@@ -554,8 +555,8 @@ print("✅ Ride booked: $response");
   Widget build(BuildContext context) {
     if (widget.stops.isEmpty) {
       return Scaffold(
-        appBar: AppBar(title: const Text("Error")),
-        body: const Center(child: Text("No stops provided")),
+        appBar: AppBar(title: Text("Error")),
+        body: Center(child: Text("No stops provided")),
       );
     }
 
@@ -565,8 +566,8 @@ print("✅ Ride booked: $response");
 
     if (firstLat == null || firstLng == null) {
       return Scaffold(
-        appBar: AppBar(title: const Text("Error")),
-        body: const Center(child: Text("Invalid coordinates for first stop")),
+        appBar: AppBar(title: Text("Error")),
+        body: Center(child: Text("Invalid coordinates for first stop")),
       );
     }
 
@@ -578,7 +579,7 @@ print("✅ Ride booked: $response");
         elevation: 1,
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: 16),
+            padding: EdgeInsets.only(right: 16.w),
             child: Center(
               child: Text(
                 "${widget.stops.length} stops",
@@ -597,7 +598,7 @@ print("✅ Ride booked: $response");
             // Map Section
             Container(
               height: MediaQuery.of(context).size.height * 0.4,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black12,
@@ -629,8 +630,8 @@ print("✅ Ride booked: $response");
             // Route Summary
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(16),
-              decoration: const BoxDecoration(
+              padding: EdgeInsets.all(16.w),
+              decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: [
                   BoxShadow(
@@ -646,33 +647,33 @@ print("✅ Ride booked: $response");
                   Row(
                     children: [
                       Icon(Icons.route, color: Colors.blue.shade600),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8.w),
                       Text(
                         "Route Summary",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 18.sp,
                           fontWeight: FontWeight.w600,
                           color: Colors.grey.shade800,
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.w),
                   Row(
                     children: [
                       Text(
                         "${distanceInKm.toStringAsFixed(1)} km",
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.w500,
                           color: Colors.blue.shade700,
                         ),
                       ),
-                      const SizedBox(width: 16),
+                      SizedBox(width: 16.w),
                       Text(
                         "${widget.stops.length} stops",
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           color: Colors.grey.shade600,
                         ),
                       ),
@@ -685,18 +686,18 @@ print("✅ Ride booked: $response");
             // Ride Types List
             Expanded(
               child: isLoading || distanceInKm == 0.0
-                  ? const Center(
+                  ? Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CircularProgressIndicator(),
-                          SizedBox(height: 16),
+                          SizedBox(height: 16.w),
                           Text("Loading ride options..."),
                         ],
                       ),
                     )
                   : ListView.builder(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      padding: EdgeInsets.symmetric(vertical: 8.w),
                       itemCount: rideTypes.length,
                       itemBuilder: (BuildContext context, int index) {
                         final ride = rideTypes[index];
@@ -725,8 +726,8 @@ print("✅ Ride booked: $response");
 
             // Book Button
             Container(
-              padding: const EdgeInsets.all(16),
-              decoration: const BoxDecoration(
+              padding: EdgeInsets.all(16.w),
+              decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: [
                   BoxShadow(
@@ -738,21 +739,21 @@ print("✅ Ride booked: $response");
               ),
               child: SizedBox(
                 width: double.infinity,
-                height: 56,
+                height: 56.w,
                 child: ElevatedButton(
                   onPressed: (selectedIndex == -1 || isBooking) ? null : _bookMultiStopRide,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green.shade700,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12.r),
                     ),
                     elevation: 2,
                   ),
                   child: isBooking
-                      ? const SizedBox(
-                          width: 24,
-                          height: 24,
+                      ? SizedBox(
+                          width: 24.w,
+                          height: 24.w,
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
                             valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
@@ -761,14 +762,14 @@ print("✅ Ride booked: $response");
                       : Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Icon(Icons.book_online, size: 24),
-                            const SizedBox(width: 8),
+                            Icon(Icons.book_online, size: 24),
+                            SizedBox(width: 8.w),
                             Text(
                               selectedIndex == -1
                                   ? "Select a ride type"
                                   : "Book ${rideTypes[selectedIndex].type}",
-                              style: const TextStyle(
-                                fontSize: 18,
+                              style: TextStyle(
+                                fontSize: 18.sp,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -797,10 +798,10 @@ Widget TransportContainer(
   return GestureDetector(
     onTap: onTap,
     child: Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.w),
       decoration: BoxDecoration(
         color: isSelected ? Colors.green.shade50 : Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.r),
         border: Border.all(
           color: isSelected ? Colors.green.shade700 : Colors.grey.shade300,
           width: isSelected ? 2 : 1,
@@ -821,24 +822,24 @@ Widget TransportContainer(
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16.w),
         child: Row(
           children: [
             // Vehicle Image - Updated to support both network and asset images
             Container(
-              width: 60,
-              height: 60,
+              width: 60.w,
+              height: 60.w,
               decoration: BoxDecoration(
                 color: Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(8.r),
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(8.r),
                 child: imageTransportContainer.startsWith('http')
                     ? Image.network(
                         imageTransportContainer,
-                        width: 60,
-                        height: 60,
+                        width: 60.w,
+                        height: 60.w,
                         fit: BoxFit.contain,
                         loadingBuilder: (context, child, loadingProgress) {
                           if (loadingProgress == null) return child;
@@ -854,11 +855,11 @@ Widget TransportContainer(
                         },
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
-                            width: 60,
-                            height: 60,
+                            width: 60.w,
+                            height: 60.w,
                             decoration: BoxDecoration(
                               color: Colors.grey.shade200,
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(8.r),
                             ),
                             child: Icon(
                               Icons.directions_car,
@@ -870,16 +871,16 @@ Widget TransportContainer(
                       )
                     : Image.asset(
                         imageTransportContainer,
-                        width: 60,
-                        height: 60,
+                        width: 60.w,
+                        height: 60.w,
                         fit: BoxFit.contain,
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
-                            width: 60,
-                            height: 60,
+                            width: 60.w,
+                            height: 60.w,
                             decoration: BoxDecoration(
                               color: Colors.grey.shade200,
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(8.r),
                             ),
                             child: Icon(
                               Icons.directions_car,
@@ -892,7 +893,7 @@ Widget TransportContainer(
               ),
             ),
             
-            const SizedBox(width: 16),
+            SizedBox(width: 16.w),
             
             // Vehicle Info
             Expanded(
@@ -901,25 +902,25 @@ Widget TransportContainer(
                 children: [
                   Text(
                     nameTransportContainer,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: 15.sp,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: 2.w),
                   Text(
                     timeTransportContainer,
                     style: TextStyle(
                       color: Colors.grey.shade600,
-                      fontSize: 13,
+                      fontSize: 13.sp,
                     ),
                   ),
-                  const SizedBox(height: 2),
+                  SizedBox(height: 2.w),
                   Text(
                     "Drop at $dropTimeTransportContainer",
                     style: TextStyle(
                       color: Colors.grey.shade600,
-                      fontSize: 12,
+                      fontSize: 12.sp,
                     ),
                   ),
                 ],
@@ -935,29 +936,29 @@ Widget TransportContainer(
                   style: TextStyle(
                     color: isSelected ? Colors.green.shade700 : Colors.black87,
                     fontWeight: FontWeight.bold,
-                    fontSize: 18,
+                    fontSize: 18.sp,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 2.w),
                 Text(
                   distanceTransportContainer,
                   style: TextStyle(
                     color: Colors.grey.shade600,
-                    fontSize: 12,
+                    fontSize: 12.sp,
                   ),
                 ),
               ],
             ),
             
             if (isSelected) ...[
-              const SizedBox(width: 8),
+              SizedBox(width: 8.w),
               Container(
-                padding: const EdgeInsets.all(4),
+                padding: EdgeInsets.all(4.w),
                 decoration: BoxDecoration(
                   color: Colors.green.shade700,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.check,
                   color: Colors.white,
                   size: 16,

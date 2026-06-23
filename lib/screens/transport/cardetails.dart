@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:rideal/screens/transport/RequestRent.dart';
 import 'package:rideal/screens/transport/requestrent_II.dart';
@@ -5,7 +6,7 @@ import '/model/availablecarlistmodel.dart';
 import 'package:rideal/model/cardetailsmodel.dart';
 
 class Cardetails extends StatefulWidget {
-  const Cardetails({super.key,required this.car});
+  Cardetails({super.key,required this.car});
   final Availablecarlistmodel car;
    
   @override
@@ -90,60 +91,60 @@ String selectedOption = 'ride';
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.all(20.w),
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(height: 10),
+            SizedBox(height: 10.w),
             
             // Car Name
             Text(
         car.name,
-        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
             ),
         
-            const SizedBox(height: 8),
+            SizedBox(height: 8.w),
         
             // Rating Row
             Row(
         children: [
-          const Icon(Icons.star, color: Colors.amber),
+          Icon(Icons.star, color: Colors.amber),
           Text(
             "${car.rating} (${car.reviews} reviews)",
-            style: const TextStyle(color: Colors.grey, fontSize: 15),
+            style: TextStyle(color: Colors.grey, fontSize: 15.sp),
           ),
         ],
             ),
         
-            const SizedBox(height: 10),
+            SizedBox(height: 10.w),
         
             // Car Image with navigation
             SizedBox(
-        height: 260,
+        height: 260.w,
         width: double.infinity,
         child: Stack(
           alignment: Alignment.center,
           children: [
             Positioned(
-              left: 16,
+              left: 16.w,
               child: IconButton(
-                icon: const Icon(Icons.arrow_back_ios, size: 30),
+                icon: Icon(Icons.arrow_back_ios, size: 30),
                 onPressed: goBack,
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
+              padding: EdgeInsets.symmetric(horizontal: 40.w),
               child: Image.asset(
                 car.imagePath,
                 fit: BoxFit.contain,
-                height: 250,
+                height: 250.w,
               ),
             ),
             Positioned(
-              right: 16,
+              right: 16.w,
               child: IconButton(
-                icon: const Icon(Icons.arrow_forward_ios, size: 30),
+                icon: Icon(Icons.arrow_forward_ios, size: 30),
                 onPressed: goNext,
               ),
             ),
@@ -151,19 +152,19 @@ String selectedOption = 'ride';
         ),
             ),
         
-            const SizedBox(height: 10),
+            SizedBox(height: 10.w),
         
             // Specifications Header
-            const Text(
+            Text(
         "Specifications",
-        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500, color: Colors.black54),
+        style: TextStyle(fontSize: 25.sp, fontWeight: FontWeight.w500, color: Colors.black54),
             ),
         
-            const SizedBox(height: 5),
+            SizedBox(height: 5.w),
         
             // Specifications List
             SizedBox(
-        height: 130,
+        height: 130.w,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: car.specifications.length,
@@ -174,24 +175,24 @@ String selectedOption = 'ride';
         ),
             ),
         
-            const SizedBox(height: 10),
+            SizedBox(height: 10.w),
         
             // Features Header
-            const Text(
+            Text(
         "Features",
-        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500, color: Colors.black54),
+        style: TextStyle(fontSize: 25.sp, fontWeight: FontWeight.w500, color: Colors.black54),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10.w),
         Column(
   children: car.features.map((feature) => CarFeaturesCard(feature)).toList(),
 ),
-SizedBox(height: 16),
+SizedBox(height: 16.w),
 Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
-                  height: 55,
-                  width: 180,
+                  height: 55.w,
+                  width: 180.w,
                   child: OutlinedButton(
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>RequestSentScreen()),);
@@ -202,14 +203,14 @@ Row(
                       side: BorderSide(color: Colors.orange),
                       // fixedSize: Size(180, 55),
                       backgroundColor: selectedOption == 'later' ? Colors.amber[300] : null,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
                     ),
-                    child: Text("Book Later", style: TextStyle(fontSize: 18)),
+                    child: Text("Book Later", style: TextStyle(fontSize: 18.sp)),
                   ),
                 ),
                 SizedBox(
-                  height: 55,
-                  width: 180,
+                  height: 55.w,
+                  width: 180.w,
                   child: OutlinedButton(
                     onPressed: () { 
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>RequestRent_II(
@@ -225,9 +226,9 @@ Row(
                       foregroundColor: selectedOption == 'ride' ? Color(0xFFFFFAF0) : Colors.orange,
                       side: BorderSide(color: Colors.orange),
                       backgroundColor: selectedOption == 'ride' ? Colors.amber[300] : null,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
                     ),
-                    child: Text("Ride Now", style: TextStyle(fontSize: 18)),
+                    child: Text("Ride Now", style: TextStyle(fontSize: 18.sp)),
                   ),
                 ),
               ],
@@ -243,21 +244,21 @@ Row(
   }
   Widget CarSpecificationCard(SpecificationsCardDetails spec){
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: EdgeInsets.all(10.0.w),
       child: Container(
-        width: 120,
+        width: 120.w,
         decoration: BoxDecoration(
           color: Color(0xFFFFFAF0),
-          border: Border.all(color: Colors.amber,),borderRadius: BorderRadius.circular(10)
+          border: Border.all(color: Colors.amber,),borderRadius: BorderRadius.circular(10.r)
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
 
           Container(child: spec.icon,),
-          SizedBox(height: 5,),
-          Container(child: Text(spec.heading,style: TextStyle(color: Colors.grey.shade700,fontSize: 16))),
-          Container(child: Text(spec.subHeading,style: TextStyle(color: Colors.grey,fontSize: 15),),)
+          SizedBox(height: 5.w,),
+          Container(child: Text(spec.heading,style: TextStyle(color: Colors.grey.shade700,fontSize: 16.sp))),
+          Container(child: Text(spec.subHeading,style: TextStyle(color: Colors.grey,fontSize: 15.sp),),)
             
           ],
         ),
@@ -266,24 +267,24 @@ Row(
   }
   Widget CarFeaturesCard(FeaturesCarDetails features){
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
+      padding: EdgeInsets.only(bottom: 10.w),
       child: Container(
         width: double.infinity,
-        height: 48,
+        height: 48.w,
         decoration: BoxDecoration(
         color:  Color(0xFFFFFAF0),
-        border: Border.all(color: Colors.amber,),borderRadius: BorderRadius.circular(10)
+        border: Border.all(color: Colors.amber,),borderRadius: BorderRadius.circular(10.r)
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: EdgeInsets.only(left: 10),
-                child: Text(features.Feature,style: TextStyle(fontSize: 16,color: Colors.grey.shade700),),
+                padding: EdgeInsets.only(left: 10.w),
+                child: Text(features.Feature,style: TextStyle(fontSize: 16.sp,color: Colors.grey.shade700),),
               ),
               Container(
-                padding: EdgeInsets.only(right: 10),
-                child: Text(features.Description,style: TextStyle(fontSize: 16,color: Colors.grey.shade600),),
+                padding: EdgeInsets.only(right: 10.w),
+                child: Text(features.Description,style: TextStyle(fontSize: 16.sp,color: Colors.grey.shade600),),
               ),
             ],
           ),
