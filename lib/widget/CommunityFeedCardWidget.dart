@@ -40,11 +40,11 @@ class RiDealCard extends StatelessWidget {
                 imageUrl!,
                 fit: BoxFit.cover,
                 width: double.infinity,
-                height: 140,
+                height: 120,
                 loadingBuilder: (context, child, loadingProgress) {
                   if (loadingProgress == null) return child;
                   return Container(
-                    height: 140,
+                    height: 120,
                     width: double.infinity,
                     color: Colors.grey.shade100,
                     child: Center(
@@ -92,7 +92,7 @@ class RiDealCard extends StatelessWidget {
 
           // Content
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 12, 16, 14),
+            padding: const EdgeInsets.fromLTRB(14, 10, 14, 12),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -131,10 +131,10 @@ class RiDealCard extends StatelessWidget {
                 Text(
                   title,
                   style: const TextStyle(
-                    fontSize: 14,
+                    fontSize: 13,
                     fontWeight: FontWeight.w600,
                     color: Colors.black87,
-                    height: 1.5,
+                    height: 1.4,
                   ),
                 ),
 

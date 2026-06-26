@@ -11,6 +11,7 @@ import 'package:rideal/screens/home/Drawar.dart';
 import 'package:rideal/screens/transport/confirmed.dart';
 import 'package:rideal/screens/transport/confirmpickup.dart';
 import 'package:rideal/screens/transport/goods_transport_screen.dart';
+import 'package:rideal/screens/rental/rental_screen.dart';
 import 'SearchScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rideal/model/ridetypemodel.dart';
@@ -506,9 +507,9 @@ class _Home2State extends State<Home2> {
         'route': () => MultiStopRoutePlanner(),
       },
       {
-        'title': 'Transport',
-        'icon': Icons.local_shipping_outlined,
-        'route': () => const GoodsTransportScreen(),
+        'title': 'Rentals',
+        'icon': Icons.car_rental,
+        'route': () => const RentalScreen(),
       },
     ];
 

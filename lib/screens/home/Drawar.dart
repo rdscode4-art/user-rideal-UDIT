@@ -13,6 +13,7 @@ import 'package:rideal/screens/RideHistory/ridehistory.dart';
 import 'package:rideal/screens/home/aboutus.dart';
 import 'package:rideal/screens/home/termsconditions.dart';
 import 'package:rideal/screens/wallet/wallet.dart';
+import 'package:rideal/screens/rental/rental_bookings_screen.dart';
 
 class CustomDrawer extends StatefulWidget {
   final Future<bool> Function()? logoutUser;
@@ -264,6 +265,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     _buildDrawerItem(Icons.person_outline_rounded, "Edit Profile", context, const Editprofilescreen()),
                     _buildDrawerItem(Icons.chat_bubble_outline_rounded, "Help And Support", context, SupportChatScreen()),
                     _buildDrawerItem(Icons.history_rounded, "History", context, const History()),
+                    _buildDrawerItem(Icons.car_rental_outlined, "Rental Bookings", context, const RentalBookingsScreen()),
                     _buildDrawerItem(Icons.account_balance_wallet_outlined, "Wallet", context, const Wallet()),
                     _buildDrawerItem(Icons.report_problem_outlined, "Refund Policy", context, RefundPolicyPage()),
                     _buildDrawerItem(Icons.description_outlined, "Terms And Conditions", context, const TermsAndConditionsScreen()),

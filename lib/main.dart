@@ -127,17 +127,16 @@ class _RideShareAppState extends State<RideShareApp> {
           barrierDismissible: false,
           upgrader: Upgrader(
             durationUntilAlertAgain: const Duration(seconds: 1),
-            debugLogging: true, // Console mein logs show karne ke liye
-            // debugDisplayAlways: true, // Testing ke liye isse uncomment kar sakte hain
+            debugLogging: true,
           ),
-          child: child,
+          child: child ?? const SizedBox.shrink(),
         );
       },
       home: const SplashScreen(),
       navigatorObservers: [routeObserver],
     );
-      },
-    );
+   },
+  );
   }
 }
 

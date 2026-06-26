@@ -294,9 +294,11 @@ Future<void> _cancelRide() async {
 
   Future<void> _initializeEverything() async {
     try {
-      await _getUserLocation();
-      await _fetchDriverData();
-      await _loadOtp();
+      await Future.wait([
+        _getUserLocation(),
+        _fetchDriverData(),
+        _loadOtp(),
+      ]);
       
       // Draw initial polyline after getting both positions
       if (_currentPosition != null && _driverPosition != null) {
@@ -1003,8 +1005,8 @@ String _getTrafficText() {
 
   Widget _buildETACard() {
     return Container(
-      margin: EdgeInsets.all(16.w),
-      padding: EdgeInsets.all(20.w),
+      margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -1083,7 +1085,7 @@ String _getTrafficText() {
   Widget _buildDriverCard() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.w),
-      padding: EdgeInsets.all(20.w),
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20.r),
@@ -1097,12 +1099,74 @@ String _getTrafficText() {
       ),
       child: Column(
         children: [
+          // ETA and Pickup Header
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Driver arriving in",
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      color: Colors.grey.shade600,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  SizedBox(height: 2.w),
+                  Text(
+                    _estimatedArrival,
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ],
+              ),
+              if (_distanceToDriver != null)
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.w),
+                  decoration: BoxDecoration(
+                    color: Colors.green.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: Text(
+                    "${_distanceToDriver!.toStringAsFixed(1)} km away",
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.green.shade700,
+                    ),
+                  ),
+                ),
+            ],
+          ),
+          SizedBox(height: 8.w),
+          Row(
+            children: [
+              Icon(Icons.info_outline, color: Colors.blue.shade600, size: 16),
+              SizedBox(width: 8.w),
+              Expanded(
+                child: Text(
+                  "Please meet your driver at the pickup point",
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.blue.shade700,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Divider(height: 12.w, color: Colors.grey.shade200),
           Row(
             children: [
               // Driver Image/Vehicle
               Container(
-                width: 80.w,
-                height: 80.w,
+                width: 50.w,
+                height: 50.w,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   gradient: LinearGradient(
@@ -1126,7 +1190,7 @@ String _getTrafficText() {
                     Text(
                       _driverDetails?["name"]?.toString() ?? 'Driver Name',
                       style: TextStyle(
-                        fontSize: 18.sp,
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
                       ),
@@ -1135,7 +1199,7 @@ String _getTrafficText() {
                     Text(
                       _driverDetails?["vehicleNumber"]?.toString() ?? 'Vehicle Number',
                       style: TextStyle(
-                        fontSize: 16.sp,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w600,
                         color: Colors.black54,
                       ),
@@ -1144,7 +1208,7 @@ String _getTrafficText() {
                     Text(
                       _driverDetails?["vehicleName"]?.toString() ?? 'Vehicle Name',
                       style: TextStyle(
-                        fontSize: 14.sp,
+                        fontSize: 12.sp,
                         color: Colors.grey.shade600,
                       ),
                     ),
@@ -1206,10 +1270,10 @@ String _getTrafficText() {
               ),
             ],
           ),
-          SizedBox(height: 20.w),
+          SizedBox(height: 12.w),
           // OTP Section
           Container(
-            padding: EdgeInsets.all(16.w),
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.w),
             decoration: BoxDecoration(
               color: Colors.blue.withOpacity(0.1),
               borderRadius: BorderRadius.circular(16.r),
@@ -1224,7 +1288,7 @@ String _getTrafficText() {
                     Text(
                       "Your OTP",
                       style: TextStyle(
-                        fontSize: 14.sp,
+                        fontSize: 12.sp,
                         color: Colors.grey.shade600,
                         fontWeight: FontWeight.w500,
                       ),
@@ -1233,22 +1297,22 @@ String _getTrafficText() {
                     Text(
                       "Share with your driver",
                       style: TextStyle(
-                        fontSize: 12.sp,
+                        fontSize: 10.sp,
                         color: Colors.grey,
                       ),
                     ),
                   ],
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
+                  padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.w),
                   decoration: BoxDecoration(
                     color: Colors.blue,
-                    borderRadius: BorderRadius.circular(12.r),
+                    borderRadius: BorderRadius.circular(10.r),
                   ),
                   child: Text(
                     otp ?? "N/A",
                     style: TextStyle(
-                      fontSize: 20.sp,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       letterSpacing: 2,
@@ -1267,7 +1331,8 @@ String _getTrafficText() {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
-      body: CustomScrollView(
+      body: SafeArea(
+        child: CustomScrollView(
         slivers: [
           // Custom App Bar
           SliverAppBar(
@@ -1334,7 +1399,7 @@ String _getTrafficText() {
           // Map Section
           SliverToBoxAdapter(
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.5,
+              height: MediaQuery.of(context).size.height * 0.50,
               margin: EdgeInsets.all(16.w),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.r),
@@ -1389,43 +1454,6 @@ String _getTrafficText() {
             ),
           ),
 
-          // ETA Card
-          SliverToBoxAdapter(
-            child: FadeTransition(
-              opacity: _fadeAnimation,
-              child: _buildETACard(),
-            ),
-          ),
-
-          // Pickup Instructions
-          SliverToBoxAdapter(
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
-              padding: EdgeInsets.all(16.w),
-              decoration: BoxDecoration(
-                color: Colors.blue.shade50,
-                borderRadius: BorderRadius.circular(16.r),
-                border: Border.all(color: Colors.blue.shade100),
-              ),
-              child: Row(
-                children: [
-                  Icon(Icons.info_outline, color: Colors.blue.shade600),
-                  SizedBox(width: 12.w),
-                  Expanded(
-                    child: Text(
-                      "Please meet your driver at the pickup point",
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.blue.shade700,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-
           // Driver Details Card
           SliverToBoxAdapter(
             child: SlideTransition(
@@ -1449,6 +1477,7 @@ String _getTrafficText() {
             child: SizedBox(height: 32.w),
           ),
         ],
+      ),
       ),
     );
   }

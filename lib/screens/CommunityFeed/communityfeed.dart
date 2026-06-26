@@ -94,7 +94,7 @@ class _RiDealFeedScreenState extends State<RiDealFeedScreen>
           children: [
             // Floating Header
             Padding(
-              padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+              padding: EdgeInsets.fromLTRB(16, 4, 16, 4),
               child: Row(
                 children: [
                   Container(
@@ -105,15 +105,15 @@ class _RiDealFeedScreenState extends State<RiDealFeedScreen>
                     ),
                     child: Image.asset(
                       "assets/images/logorideal.png",
-                      height: 32.w,
-                      width: 32.w,
+                      height: 24.w,
+                      width: 24.w,
                     ),
                   ),
                   SizedBox(width: 10.w),
                   Text(
                     'Community Feed',
                     style: TextStyle(
-                      fontSize: 20.sp,
+                      fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
@@ -134,7 +134,7 @@ class _RiDealFeedScreenState extends State<RiDealFeedScreen>
                           ),
                         ],
                       ),
-                      child: Icon(Icons.refresh_rounded, color: Colors.black54, size: 20),
+                      child: Icon(Icons.refresh_rounded, color: Colors.black54, size: 18),
                     ),
                   ),
                 ],
