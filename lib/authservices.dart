@@ -1775,6 +1775,7 @@ static Future<Map<String, dynamic>?> deleteAccountRequest(String reason) async {
         return {
           'bookingStatus': data['bookingStatus'] ?? 'unknown',
           'driverContact': data['driverContact'] ?? 'Not available',
+          'otp': data['otp'],
           'success': true,
         };
       } else if (response.statusCode == 404) {
@@ -1848,27 +1849,10 @@ static Future<Map<String, dynamic>?> deleteAccountRequest(String reason) async {
         print("  - Booking ID: $bookingId");
         print("  - Rider ID: ${bookingData['riderId']}");
 
-        // Store the booking with the correct ride ID from server response
-        final Map<String, dynamic> bookedRide = Map<String, dynamic>.from(
-          rideData,
-        );
-        bookedRide['_id'] = actualRideId; // Use the correct ride ID from server
-        bookedRide['passengersBooked'] = [
-          {
-            'numOfSeats': bookingData['numOfSeats'],
-            'riderId': bookingData['riderId'],
-            'status': bookingData['status'] ?? 'pending',
-            '_id': bookingId, // Store the actual booking ID
-            'needsBookingIdUpdate':
-                false, // No need to update since we have the correct ID
-          },
-        ];
-
-        bookedRide['bookedAt'] = DateTime.now().toIso8601String();
-
-        await saveBookedRide(bookedRide);
+        // Local storage for future rides is now disabled. 
+        // Rides are fetched directly from the backend via my-bookings API.
         print(
-          "✅ Ride booked and saved with correct IDs: ride=$actualRideId, booking=$bookingId",
+          "✅ Ride booked successfully with actual IDs: ride=$actualRideId, booking=$bookingId",
         );
 
         return res;
@@ -2047,241 +2031,85 @@ static Future<Map<String, dynamic>?> deleteAccountRequest(String reason) async {
   // Updated method to check status with automatic booking ID resolution
   static Future<Map<String, dynamic>> getStatusWithAutoResolve(
     String rideId,
-    String riderId,
+    String bookingId,
   ) async {
-    try {
-      print("🔍 Starting status check with auto-resolve:");
-      print("  - Initial Ride ID: $rideId");
-      print("  - Rider ID: $riderId");
-
-      // First, try with stored booking ID if available
-      final prefs = await SharedPreferences.getInstance();
-      final ridesJson = prefs.getStringList("booked_rides") ?? [];
-
-      String? storedBookingId;
-      for (String rideJsonStr in ridesJson) {
-        try {
-          final storedRide = jsonDecode(rideJsonStr);
-          if (storedRide['_id'] == rideId) {
-            final passengers = storedRide['passengersBooked'] as List?;
-            if (passengers != null && passengers.isNotEmpty) {
-              storedBookingId = passengers[0]['_id']?.toString();
-              break;
-            }
-          }
-        } catch (e) {
-          continue;
-        }
-      }
-
-      if (storedBookingId != null) {
-        print("🔍 Found stored booking ID: $storedBookingId");
-        final result = await getBookingStatus(rideId, storedBookingId);
-
-        // If successful, return immediately
-        if (result['success'] == true) {
-          print("✅ Status check successful with stored IDs");
-          return result;
-        }
-
-        // If 404 error, try to resolve correct IDs
-        if (result['needsIdResolution'] == true) {
-          print("🔄 Status check failed, attempting ID resolution...");
-        }
-      }
-
-      // Try to get correct IDs from server
-      final correctIds = await getCorrectBookingIds(riderId);
-
-      if (correctIds != null) {
-        final correctRideId = correctIds['rideId']!;
-        final correctBookingId = correctIds['bookingId']!;
-
-        print("🔄 Retrying with correct IDs:");
-        print("  - Correct Ride ID: $correctRideId");
-        print("  - Correct Booking ID: $correctBookingId");
-
-        // Update stored data with correct IDs
-        await _updateStoredRideIds(rideId, correctRideId, correctBookingId);
-
-        return await getBookingStatus(correctRideId, correctBookingId);
-      } else {
-        print("❌ Could not resolve correct IDs");
-        return {
-          'error': 'Could not find booking information on server',
-          'bookingStatus': 'not_found',
-          'driverContact': 'Not available',
-        };
-      }
-    } catch (e) {
-      print("❌ Error in getStatusWithAutoResolve: $e");
-      return {
-        'error': e.toString(),
-        'bookingStatus': 'error',
-        'driverContact': 'Not available',
-      };
-    }
+    print("🔍 Calling getBookingStatus directly with rideId: $rideId, bookingId: $bookingId");
+    return await getBookingStatus(rideId, bookingId);
   }
 
-  static Future<void> _updateStoredRideIds(
-    String oldRideId,
-    String correctRideId,
-    String correctBookingId,
-  ) async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      final ridesJson = prefs.getStringList("booked_rides") ?? [];
 
-      List<String> updatedRides = [];
-
-      for (String rideJsonStr in ridesJson) {
-        try {
-          final ride = jsonDecode(rideJsonStr);
-          if (ride['_id'] == oldRideId) {
-            // Update with correct IDs
-            ride['_id'] = correctRideId;
-            final passengers = ride['passengersBooked'] as List?;
-            if (passengers != null && passengers.isNotEmpty) {
-              passengers[0]['_id'] = correctBookingId;
-              passengers[0]['needsBookingIdUpdate'] = false;
-            }
-            print("✅ Updated stored ride with correct IDs");
-          }
-          updatedRides.add(jsonEncode(ride));
-        } catch (e) {
-          updatedRides.add(rideJsonStr);
-        }
-      }
-
-      await prefs.setStringList("booked_rides", updatedRides);
-    } catch (e) {
-      print("❌ Error updating stored ride IDs: $e");
-    }
-  }
-
-  //--------------------GET BOOKED RIDES WITHOUT VALIDATION (FIXED)
+  //--------------------GET BOOKED RIDES (API MIGRATED)
   static Future<List<Map<String, dynamic>>> getBookedRides() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final ridesJson = prefs.getStringList("booked_rides") ?? [];
-
-      if (ridesJson.isEmpty) {
-        print("No saved rides found");
+      final token = prefs.getString("auth_token");
+      
+      if (token == null) {
+        print("No token found for fetching booked rides");
         return [];
       }
 
-      List<Map<String, dynamic>> rides = [];
-      print(
-        "Found ${ridesJson.length} saved rides - loading all without validation",
-      );
+      final url = Uri.parse("$baseUrl/api/future-rides/user/my-bookings");
+      print("Fetching booked rides from API: $url");
+      
+      final response = await http.get(url, headers: {
+        "Authorization": "Bearer $token"
+      }).timeout(Duration(seconds: 10));
 
-      for (String rideJsonStr in ridesJson) {
-        try {
-          final ride = jsonDecode(rideJsonStr);
-          if (ride is Map<String, dynamic>) {
-            final rideId = ride['_id']?.toString() ?? '';
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final List<dynamic> bookings = data['bookings'] ?? [];
+        
+        List<Map<String, dynamic>> mappedRides = bookings.map((b) {
+          final bookingObj = b['booking'] ?? {};
+          final driverObj = b['driver'] ?? {};
+          return {
+            '_id': b['rideId'],
+            'fromLocation': b['fromLocation'] ?? {'address': 'Unknown location'},
+            'toLocation': b['toLocation'] ?? {'address': 'Unknown location'},
+            'date': b['date'] ?? '',
+            'time': b['time'] ?? 'Not set',
+            'pricePerPassenger': b['pricePerPassenger'] ?? 0,
+            'passengersBooked': [
+              {
+                '_id': bookingObj['bookingId'],
+                'bookingId': bookingObj['bookingId'],
+                'riderId': bookingObj['bookingId'],
+                'numOfSeats': bookingObj['numOfSeats'],
+                'status': bookingObj['status'] ?? 'pending',
+                'otp': bookingObj['otp'],
+              }
+            ],
+            'serverStatus': bookingObj['status'] ?? 'pending',
+            'serverDriverContact': driverObj['phone'] ?? 'Not available'
+          };
+        }).toList();
 
-            // Ensure critical fields exist with defaults
-            ride['fromLocation'] =
-                ride['fromLocation'] ?? {'address': 'Unknown location'};
-            ride['toLocation'] =
-                ride['toLocation'] ?? {'address': 'Unknown location'};
-            ride['date'] = ride['date'] ?? '';
-            ride['time'] = ride['time'] ?? 'Not set';
-            ride['pricePerPassenger'] = ride['pricePerPassenger'] ?? 0;
-            ride['passengersBooked'] = ride['passengersBooked'] ?? [];
-
-            if (rideId.isNotEmpty) {
-              rides.add(ride);
-              print("Added ride: $rideId");
-            }
-          }
-        } catch (e) {
-          print("Error parsing ride: $e");
-          continue;
-        }
+        print("Fetched ${mappedRides.length} booked rides from API");
+        return mappedRides;
+      } else {
+        print("Failed to fetch booked rides. Status: ${response.statusCode}");
+        return [];
       }
-
-      print("Returning ${rides.length} rides without server validation");
-      return rides;
     } catch (e) {
-      print("Error in getBookedRides: $e");
+      print("Error fetching booked rides: $e");
       return [];
     }
   }
 
-  //---------------------SAVE BOOKED RIDE (IMPROVED)
+  //---------------------SAVE BOOKED RIDE (DISABLED)
   static Future<void> saveBookedRide(Map<String, dynamic> ride) async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      final ridesJson = prefs.getStringList("booked_rides") ?? [];
-
-      final rideId = ride['_id']?.toString() ?? '';
-      if (rideId.isEmpty) {
-        print("❌ Cannot save ride: Missing ride ID");
-        return;
-      }
-
-      // Check if ride already exists to avoid duplicates
-      bool alreadyExists = false;
-      List<String> updatedRides = [];
-
-      for (String existingRideStr in ridesJson) {
-        try {
-          final existingRide = jsonDecode(existingRideStr);
-          if (existingRide['_id'] == rideId) {
-            // ✅ Update existing ride instead of creating duplicate
-            updatedRides.add(jsonEncode(ride));
-            alreadyExists = true;
-            print("🔄 Updated existing ride in history: $rideId");
-          } else {
-            updatedRides.add(existingRideStr);
-          }
-        } catch (e) {
-          updatedRides.add(existingRideStr); // Keep unparseable rides
-        }
-      }
-
-      if (!alreadyExists) {
-        updatedRides.add(jsonEncode(ride));
-        print("✅ Added new ride to history: $rideId");
-      }
-
-      await prefs.setStringList("booked_rides", updatedRides);
-      print("💾 Ride history updated. Total rides: ${updatedRides.length}");
-    } catch (e) {
-      print("❌ Error saving booked ride: $e");
-    }
+    // Local storage disabled. We rely on the backend API.
   }
 
-  //---------------------REMOVE BOOKED RIDE FROM SHARED PREFERENCES
+  //---------------------REMOVE BOOKED RIDE FROM SHARED PREFERENCES (DISABLED)
   static Future<void> removeBookedRide(String rideId) async {
-    final prefs = await SharedPreferences.getInstance();
-    final ridesJson = prefs.getStringList("booked_rides") ?? [];
-
-    List<String> updatedRides = [];
-
-    for (String rideJsonStr in ridesJson) {
-      try {
-        final ride = jsonDecode(rideJsonStr);
-        if (ride['_id'] != rideId) {
-          updatedRides.add(rideJsonStr);
-        }
-      } catch (e) {
-        // Keep rides that can't be parsed (shouldn't happen normally)
-        updatedRides.add(rideJsonStr);
-      }
-    }
-
-    await prefs.setStringList("booked_rides", updatedRides);
-    print("🗑️ Removed ride from history: $rideId");
+    // Local storage disabled. We rely on the backend API.
   }
 
-  //---------------------CLEAR ALL BOOKED RIDES (UTILITY METHOD)
+  //---------------------CLEAR ALL BOOKED RIDES (DISABLED)
   static Future<void> clearAllBookedRides() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove("booked_rides");
-    print("🧹 Cleared all booked rides from history");
+    // Local storage disabled. We rely on the backend API.
   }
 }
 

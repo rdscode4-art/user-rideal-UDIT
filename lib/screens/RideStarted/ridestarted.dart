@@ -1124,134 +1124,91 @@ Future<void> _forceStatusCheck() async {
                     markers: _markers,
                     polylines: _polylines,
                     myLocationEnabled: true,
-                    myLocationButtonEnabled: false, // We'll create a custom one
-                    zoomControlsEnabled: false,
-                    compassEnabled: false,
-                    mapToolbarEnabled: false,
-                    style: _mapStyle, // Add custom map style
+                    myLocationButtonEnabled: false,
                   ),
 
-                  // Top Info Card
+                  // Top Info Card (Minimal Pill Design)
                   Positioned(
                     top: MediaQuery.of(context).padding.top + 16,
-                    left: 16.w,
-                    right: 16.w,
+                    left: 20.w,
+                    right: 20.w,
                     child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.w),
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20.r),
+                        color: Colors.white.withOpacity(0.95), // Slight frosted look
+                        borderRadius: BorderRadius.circular(100.r), // Pill shape
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.1),
-                            blurRadius: 20,
-                            offset: const Offset(0, 4),
+                            blurRadius: 15,
+                            offset: const Offset(0, 5),
                           ),
                         ],
                       ),
-                      child: Padding(
-                        padding: EdgeInsets.all(20.w),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.all(8.w),
-                                  decoration: BoxDecoration(
-                                    color: Colors.green.shade50,
-                                    borderRadius: BorderRadius.circular(10.r),
-                                  ),
-                                  child: Icon(
-                                    Icons.directions_car,
-                                    color: Colors.green.shade600,
-                                    size: 20,
-                                  ),
-                                ),
-                                SizedBox(width: 12.w),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Your Ride is Active",
-                                        style: TextStyle(
-                                          fontSize: 18.sp,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black87,
-                                        ),
-                                      ),
-                                      Text(
-                                        "Stay safe and enjoy your journey",
-                                        style: TextStyle(
-                                          fontSize: 13.sp,
-                                          color: Colors.grey.shade600,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(8.w),
+                            decoration: BoxDecoration(
+                              color: Colors.green.shade50,
+                              shape: BoxShape.circle,
                             ),
-
-                            SizedBox(height: 16.w),
-
-                            // Progress indicator
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 12.w,
-                                vertical: 8.w,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.blue.shade50,
-                                borderRadius: BorderRadius.circular(12.r),
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.location_on,
-                                    color: Colors.blue.shade600,
-                                    size: 16,
-                                  ),
-                                  SizedBox(width: 8.w),
-                                  Expanded(
-                                    child: Text(
-                                      _getCurrentDestinationText(),
-                                      style: TextStyle(
-                                        fontSize: 14.sp,
-                                        color: Colors.blue.shade700,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            child: Icon(
+                              Icons.directions_car,
+                              color: Colors.green.shade600,
+                              size: 18,
                             ),
-
-                            SizedBox(height: 8.w),
-
-                            // Sub info
-                            Row(
+                          ),
+                          SizedBox(width: 12.w),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
                               children: [
-                                Icon(
-                                  Icons.schedule,
-                                  color: Colors.grey.shade500,
-                                  size: 14,
-                                ),
-                                SizedBox(width: 6.w),
                                 Text(
-                                  _getRideProgressText(),
+                                  "En route",
                                   style: TextStyle(
-                                    fontSize: 12.sp,
+                                    fontSize: 11.sp,
                                     color: Colors.grey.shade600,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
+                                Text(
+                                  _getCurrentDestinationText(),
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black87,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ],
                             ),
-                          ],
-                        ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.w),
+                            decoration: BoxDecoration(
+                              color: Colors.blue.shade50,
+                              borderRadius: BorderRadius.circular(20.r),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(Icons.schedule, size: 14, color: Colors.blue.shade700),
+                                SizedBox(width: 4.w),
+                                Text(
+                                  _getRideProgressText().replaceAll('Stop ', ''),
+                                  style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.blue.shade700,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -1299,6 +1256,7 @@ Future<void> _forceStatusCheck() async {
                               SizedBox(height: 20.w),
                               // Replace the existing paid status section with this enhanced version
 
+/* === PAYMENT LOGIC COMMENTED OUT FOR REDESIGN ===
 SizedBox(
   height: 56.w,
   width: double.infinity,
@@ -1536,204 +1494,142 @@ Navigator.push(
           ),
         ),
 ),
-                              SizedBox(height: 20.w),
-                              // Action buttons
+*/
+                              SizedBox(height: 16.w),
+                              // Three secondary actions in one compact row
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Expanded(
+                                    child: _buildSecondaryAction(
+                                      icon: Icons.my_location,
+                                      label: 'Center',
+                                      onTap: () {
+                                        if (_controller != null && _userLocation != null) {
+                                          _controller!.animateCamera(
+                                            CameraUpdate.newLatLngZoom(_userLocation!, 16),
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                  SizedBox(width: 8.w),
+                                  Expanded(
+                                    child: _buildSecondaryAction(
+                                      icon: Icons.route,
+                                      label: 'Route',
+                                      onTap: () {
+                                        if (_controller != null &&
+                                            _userLocation != null &&
+                                            _currentDestination != null) {
+                                          _controller!.animateCamera(
+                                            CameraUpdate.newLatLngBounds(
+                                              _calculateBounds([
+                                                _userLocation!,
+                                                _currentDestination!,
+                                              ] + _stops + (_dropLocation != null ? [_dropLocation!] : [])),
+                                              100,
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                  SizedBox(width: 8.w),
+                                  Expanded(
+                                    child: _buildSecondaryAction(
+                                      icon: Icons.info_outline,
+                                      label: 'Info',
+                                      onTap: () => _showTripInfo(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              SizedBox(height: 12.w),
+
+                              // Action buttons (SOS, Report, Cancel) in a row
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
                                   // SOS Button
                                   Expanded(
                                     child: SizedBox(
-                                      height: 56.w,
+                                      height: 48.w,
                                       child: ElevatedButton.icon(
                                         onPressed: _sendSOS,
-                                        icon: Icon(Icons.sos, size: 22),
+                                        icon: Icon(Icons.sos, size: 18),
                                         label: Text(
                                           'SOS',
-                                          style: TextStyle(
-                                            fontSize: 16.sp,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                          style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
                                         ),
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: Colors.red.shade600,
                                           foregroundColor: Colors.white,
-                                          elevation: 3,
-                                          shadowColor: Colors.red.withOpacity(
-                                            0.3,
-                                          ),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                              16,
-                                            ),
-                                          ),
+                                          elevation: 2,
+                                          padding: EdgeInsets.symmetric(horizontal: 4.w),
+                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
                                         ),
                                       ),
                                     ),
                                   ),
-
-                                  SizedBox(width: 12.w),
-
+                                  SizedBox(width: 8.w),
                                   // Report Button
                                   Expanded(
                                     child: SizedBox(
-                                      height: 56.w,
+                                      height: 48.w,
                                       child: ElevatedButton.icon(
                                         onPressed: () async {
-                                          final prefs =
-                                              await SharedPreferences.getInstance();
-                                          String? rideId = prefs.getString(
-                                            'rideId',
-                                          );
-
+                                          final prefs = await SharedPreferences.getInstance();
+                                          String? rideId = prefs.getString('rideId');
                                           if (rideId != null) {
                                             Navigator.push(
                                               context,
-                                              MaterialPageRoute(
-                                                builder:
-                                                    (context) => ComplainScreen(
-                                                      rideId: rideId,
-                                                    ),
-                                              ),
-                                            );
-                                          } else {
-                                            print(
-                                              "⚠️ Ride ID not found in SharedPreferences",
+                                              MaterialPageRoute(builder: (context) => ComplainScreen(rideId: rideId)),
                                             );
                                           }
                                         },
-                                        icon: Icon(
-                                          Icons.report_problem,
-                                          size: 22,
-                                        ),
+                                        icon: Icon(Icons.report_problem, size: 18),
                                         label: Text(
                                           'Report',
-                                          style: TextStyle(
-                                            fontSize: 16.sp,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                          style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
                                         ),
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              Colors.orange.shade600,
+                                          backgroundColor: Colors.orange.shade600,
                                           foregroundColor: Colors.white,
-                                          elevation: 3,
-                                          shadowColor: Colors.orange
-                                              .withOpacity(0.3),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                              16,
-                                            ),
-                                          ),
+                                          elevation: 2,
+                                          padding: EdgeInsets.symmetric(horizontal: 4.w),
+                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 8.w),
+                                  // Cancel Ride Button
+                                  Expanded(
+                                    child: SizedBox(
+                                      height: 48.w,
+                                      child: OutlinedButton.icon(
+                                        onPressed: _cancelRide,
+                                        icon: Icon(Icons.cancel_outlined, size: 18, color: Colors.red.shade700),
+                                        label: Text(
+                                          'Cancel',
+                                          style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold, color: Colors.red.shade700),
+                                        ),
+                                        style: OutlinedButton.styleFrom(
+                                          side: BorderSide(color: Colors.red.shade400, width: 1.5),
+                                          padding: EdgeInsets.symmetric(horizontal: 4.w),
+                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
                                         ),
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
-
-                              SizedBox(height: 16.w),
-
-                              // Secondary actions
-                              Row(
-  children: [
-    // Cancel Ride Button
-    Expanded(
-      child: SizedBox(
-        height: 56.w,
-        child: ElevatedButton.icon(
-          onPressed: _cancelRide,
-          icon: Icon(Icons.cancel_outlined, size: 22),
-          label: Text(
-            'Cancel Ride',
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.red.shade600,
-            foregroundColor: Colors.white,
-            elevation: 3,
-            shadowColor: Colors.red.withOpacity(0.3),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16.r),
-            ),
-          ),
-        ),
-      ),
-    ),
-  ],
-),
-
-SizedBox(height: 12.w),
-
-// Other secondary actions in a row
-Row(
-  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  children: [
-    _buildSecondaryAction(
-      icon: Icons.my_location,
-      label: 'Center Map',
-      onTap: () {
-        if (_controller != null && _userLocation != null) {
-          _controller!.animateCamera(
-            CameraUpdate.newLatLngZoom(_userLocation!, 16),
-          );
-        }
-      },
-    ),
-    _buildSecondaryAction(
-      icon: Icons.route,
-      label: 'View Route',
-      onTap: () {
-        if (_controller != null &&
-            _userLocation != null &&
-            _currentDestination != null) {
-          _controller!.animateCamera(
-            CameraUpdate.newLatLngBounds(
-              _calculateBounds([
-                _userLocation!,
-                _currentDestination!,
-              ] + _stops + (_dropLocation != null ? [_dropLocation!] : [])),
-              100,
-            ),
-          );
-        }
-      },
-    ),
-    _buildSecondaryAction(
-      icon: Icons.info_outline,
-      label: 'Trip Info',
-      onTap: () => _showTripInfo(),
-    ),
-  ],
-),
                             ],
                           ),
                         ),
                       ),
-                    ),
-                  ),
-
-                  // Floating recenter button
-                  Positioned(
-                    right: 16.w,
-                    bottom: 200.w,
-                    child: FloatingActionButton(
-                      mini: true,
-                      backgroundColor: Colors.white,
-                      foregroundColor: Colors.blue.shade600,
-                      elevation: 4,
-                      onPressed: () {
-                        if (_controller != null && _userLocation != null) {
-                          _controller!.animateCamera(
-                            CameraUpdate.newLatLng(_userLocation!),
-                          );
-                        }
-                      },
-                      child: Icon(Icons.gps_fixed),
                     ),
                   ),
                 ],

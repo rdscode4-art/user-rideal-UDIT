@@ -628,33 +628,8 @@ class _FutureRidesHistoryState extends State<FutureRidesHistory> {
     );
   }
 Future<void> _saveUpdatedRide(Map<String, dynamic> updatedRide) async {
-  try {
-    final prefs = await SharedPreferences.getInstance();
-    final ridesJson = prefs.getStringList("booked_rides") ?? [];
-    
-    List<String> updatedRides = [];
-    final rideId = updatedRide['_id']?.toString();
-    
-    // Update the specific ride in the stored data
-    for (String rideJsonStr in ridesJson) {
-      try {
-        final storedRide = jsonDecode(rideJsonStr);
-        if (storedRide['_id'] == rideId) {
-          // Update with the new ride data
-          updatedRides.add(jsonEncode(updatedRide));
-        } else {
-          updatedRides.add(rideJsonStr);
-        }
-      } catch (e) {
-        updatedRides.add(rideJsonStr);
-      }
-    }
-    
-    await prefs.setStringList("booked_rides", updatedRides);
-    print("✅ Updated ride saved to storage: $rideId");
-  } catch (e) {
-    print("❌ Error saving updated ride: $e");
-  }
+  // Local storage for future rides is now disabled. 
+  // We rely on the backend API for history.
 }
   void _showRideDetails(BuildContext context, Map<String, dynamic> ride) {
   showModalBottomSheet(
@@ -750,7 +725,6 @@ Future<void> _saveUpdatedRide(Map<String, dynamic> updatedRide) async {
   );
 }
 
-// ✅ NEW METHOD: Show details without server validation
 Widget _buildDetailContentWithoutValidation(
   Map<String, dynamic> ride,
   Map<String, dynamic>? firstPassenger,
@@ -759,7 +733,8 @@ Widget _buildDetailContentWithoutValidation(
   final bookingStatus = ride['serverStatus']?.toString() ?? 
                        firstPassenger?['status']?.toString() ?? 'pending';
   final driverContact = ride['serverDriverContact']?.toString() ?? 
-                       'Tap "Check Status" for contact info';
+                       'Not available';
+  final otp = firstPassenger?['otp']?.toString();
 
 
   return Column(
@@ -800,6 +775,48 @@ Widget _buildDetailContentWithoutValidation(
         ),
       ],
       
+      if (bookingStatus.toLowerCase() == 'accepted' && otp != null) ...[
+        Divider(height: 32.w),
+        Container(
+          padding: EdgeInsets.all(16.w),
+          decoration: BoxDecoration(
+            color: Colors.green.shade50,
+            borderRadius: BorderRadius.circular(12.r),
+            border: Border.all(color: Colors.green.shade200),
+          ),
+          child: Row(
+            children: [
+              Icon(Icons.security, color: Colors.green.shade700, size: 28),
+              SizedBox(width: 12.w),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Show this OTP to the driver",
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        color: Colors.green.shade800,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      otp,
+                      style: TextStyle(
+                        fontSize: 24.sp,
+                        color: Colors.green.shade900,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 4,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+
       Divider(height: 32.w),
       
       // Contact information (show placeholder)
@@ -838,15 +855,32 @@ Widget _buildDetailContentWithoutValidation(
       SizedBox(height: 32.w),
       
       // Action buttons
-      Column(
+      Row(
         children: [
-          // ✅ NEW: Add explicit status check button
-          SizedBox(
-            width: double.infinity,
+          Expanded(
+            child: OutlinedButton.icon(
+              onPressed: () {
+                Navigator.pop(context); // Close the bottom sheet first
+                _refreshSingleRide(ride); // Then refresh
+              },
+              icon: Icon(Icons.refresh_rounded, size: 18),
+              label: Text("Refresh", style: TextStyle(fontWeight: FontWeight.bold)),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.black87,
+                side: BorderSide(color: Colors.grey.shade300, width: 1.5.w),
+                padding: EdgeInsets.symmetric(vertical: 14.w),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24.r),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(width: 12.w),
+          Expanded(
             child: ElevatedButton.icon(
-              onPressed: () => _checkRideStatus(context, ride),
-              icon: Icon(Icons.refresh_rounded, color: Colors.white, size: 18),
-              label: Text("Check Current Status", style: TextStyle(fontWeight: FontWeight.bold)),
+              onPressed: () => Navigator.pop(context),
+              icon: Icon(Icons.close_rounded, size: 18),
+              label: Text("Close", style: TextStyle(fontWeight: FontWeight.bold)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF0F9D58),
                 foregroundColor: Colors.white,
@@ -857,46 +891,6 @@ Widget _buildDetailContentWithoutValidation(
                 ),
               ),
             ),
-          ),
-          SizedBox(height: 12.w),
-          Row(
-            children: [
-              Expanded(
-                child: OutlinedButton.icon(
-                  onPressed: () => Navigator.pop(context),
-                  icon: Icon(Icons.close_rounded, size: 18),
-                  label: Text("Close", style: TextStyle(fontWeight: FontWeight.bold)),
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: Colors.black87,
-                    side: BorderSide(color: Colors.grey.shade300, width: 1.5.w),
-                    padding: EdgeInsets.symmetric(vertical: 14.w),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24.r),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(width: 12.w),
-              Expanded(
-                child: ElevatedButton.icon(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    _refreshRides();
-                  },
-                  icon: Icon(Icons.refresh_rounded, color: Color(0xFF0F9D58), size: 18),
-                  label: Text("Refresh List", style: TextStyle(fontWeight: FontWeight.bold)),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF0F9D58).withOpacity(0.1),
-                    foregroundColor: const Color(0xFF0F9D58),
-                    elevation: 0,
-                    padding: EdgeInsets.symmetric(vertical: 14.w),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24.r),
-                    ),
-                  ),
-                ),
-              ),
-            ],
           ),
         ],
       ),
@@ -950,9 +944,16 @@ void _checkRideStatus(BuildContext context, Map<String, dynamic> ride) {
         
         // Update the passenger status in the stored data
         firstPassenger['status'] = status['bookingStatus'];
+        if (status['otp'] != null) {
+          firstPassenger['otp'] = status['otp'];
+        }
+        
         _saveUpdatedRide(ride);
         // Show success dialog
         String message = "Status: ${status['bookingStatus']}\nDriver Contact: ${status['driverContact']}";
+        if (status['bookingStatus'].toString().toLowerCase() == 'accepted' && status['otp'] != null) {
+          message += "\n\nShow this OTP to the driver: ${status['otp']}";
+        }
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
@@ -1055,6 +1056,7 @@ void _showStatusDialog(BuildContext context, String message, String type) {
 
     final driverContact = datastatus['driverContact']?.toString() ?? 'Contact not available';
     final bookingStatus = datastatus['bookingStatus']?.toString() ?? 'Unknown';
+    final otp = datastatus['otp']?.toString() ?? firstPassenger?['otp']?.toString();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1089,6 +1091,48 @@ void _showStatusDialog(BuildContext context, String message, String type) {
             Icons.currency_rupee_rounded,
             "Total Amount",
             "₹${(int.tryParse(ride['pricePerPassenger']?.toString() ?? '0') ?? 0) * (firstPassenger['numOfSeats'] ?? 1)}",
+          ),
+        ],
+        
+        if (bookingStatus.toLowerCase() == 'accepted' && otp != null) ...[
+          Divider(height: 32.w),
+          Container(
+            padding: EdgeInsets.all(16.w),
+            decoration: BoxDecoration(
+              color: Colors.green.shade50,
+              borderRadius: BorderRadius.circular(12.r),
+              border: Border.all(color: Colors.green.shade200),
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.security, color: Colors.green.shade700, size: 28),
+                SizedBox(width: 12.w),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Show this OTP to the driver",
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          color: Colors.green.shade800,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
+                        otp,
+                        style: TextStyle(
+                          fontSize: 24.sp,
+                          color: Colors.green.shade900,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 4,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
         

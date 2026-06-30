@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:rideal/authservices.dart';
 import 'package:rideal/screens/dashboard/BottomNavigation.dart';
+import 'package:rideal/screens/wallet/wallet.dart';
 import 'package:intl/intl.dart';
 
 class Bookfuture extends StatefulWidget {
@@ -30,13 +31,13 @@ class _BookfutureState extends State<Bookfuture>
       duration: const Duration(milliseconds: 600),
       vsync: this,
     );
-    _fadeAnim =
-        CurvedAnimation(parent: _animController, curve: Curves.easeIn);
+    _fadeAnim = CurvedAnimation(parent: _animController, curve: Curves.easeIn);
     _slideAnim = Tween<Offset>(
       begin: const Offset(0, 0.15),
       end: Offset.zero,
     ).animate(
-        CurvedAnimation(parent: _animController, curve: Curves.easeOutCubic));
+      CurvedAnimation(parent: _animController, curve: Curves.easeOutCubic),
+    );
     _animController.forward();
   }
 
@@ -105,8 +106,11 @@ class _BookfutureState extends State<Bookfuture>
                             ),
                           ],
                         ),
-                        child: Icon(Icons.arrow_back,
-                            color: Colors.black87, size: 20),
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: Colors.black87,
+                          size: 20,
+                        ),
                       ),
                     ),
                     Text(
@@ -135,7 +139,10 @@ class _BookfutureState extends State<Bookfuture>
 
                         // Availability Card
                         _buildAvailabilityCard(
-                            availableSeats, maxPassengers, bookedSeats),
+                          availableSeats,
+                          maxPassengers,
+                          bookedSeats,
+                        ),
                         SizedBox(height: 16.w),
 
                         // Seat Selector
@@ -146,23 +153,32 @@ class _BookfutureState extends State<Bookfuture>
 
                         // Pricing Card
                         _buildPricingCard(
-                            price, priceNum, totalPrice, availableSeats),
+                          price,
+                          priceNum,
+                          totalPrice,
+                          availableSeats,
+                        ),
                         SizedBox(height: 16.w),
 
                         // Driver & Vehicle Card
                         _buildDriverCard(
-                            drivername, vehicleName, vehicle, driverPhone),
+                          drivername,
+                          vehicleName,
+                          vehicle,
+                          driverPhone,
+                        ),
                         SizedBox(height: 24.w),
 
                         // Book Button
-                        _buildBookButton(
-                            ride, availableSeats, totalPrice),
+                        _buildBookButton(ride, availableSeats, totalPrice),
                         SizedBox(height: 8.w),
 
                         Text(
                           'By booking, you agree to the ride sharing terms',
                           style: TextStyle(
-                              fontSize: 11.sp, color: Colors.grey.shade400),
+                            fontSize: 11.sp,
+                            color: Colors.grey.shade400,
+                          ),
                           textAlign: TextAlign.center,
                         ),
                       ],
@@ -178,7 +194,11 @@ class _BookfutureState extends State<Bookfuture>
   }
 
   Widget _buildRouteCard(
-      String date, String startTime, String from, String to) {
+    String date,
+    String startTime,
+    String from,
+    String to,
+  ) {
     return Container(
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
@@ -205,8 +225,7 @@ class _BookfutureState extends State<Bookfuture>
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.calendar_today_rounded,
-                    color: brandGreen, size: 13),
+                Icon(Icons.calendar_today_rounded, color: brandGreen, size: 13),
                 SizedBox(width: 6.w),
                 Text(
                   date,
@@ -240,10 +259,7 @@ class _BookfutureState extends State<Bookfuture>
                       ),
                     ),
                     SizedBox(height: 28.w),
-                    Text(
-                      '~',
-                      style: TextStyle(color: Colors.grey.shade400),
-                    ),
+                    Text('~', style: TextStyle(color: Colors.grey.shade400)),
                   ],
                 ),
               ),
@@ -295,20 +311,16 @@ class _BookfutureState extends State<Bookfuture>
     );
   }
 
-  Widget _buildAvailabilityCard(
-      int available, int max, int booked) {
+  Widget _buildAvailabilityCard(int available, int max, int booked) {
     final isAvailable = available > 0;
     return Container(
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: isAvailable
-            ? brandGreen.withOpacity(0.06)
-            : Colors.red.shade50,
+        color: isAvailable ? brandGreen.withOpacity(0.06) : Colors.red.shade50,
         borderRadius: BorderRadius.circular(16.r),
         border: Border.all(
-          color: isAvailable
-              ? brandGreen.withOpacity(0.3)
-              : Colors.red.shade200,
+          color:
+              isAvailable ? brandGreen.withOpacity(0.3) : Colors.red.shade200,
         ),
       ),
       child: Row(
@@ -332,16 +344,16 @@ class _BookfutureState extends State<Bookfuture>
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 14.sp,
-                    color: isAvailable
-                        ? brandGreen
-                        : Colors.red.shade600,
+                    color: isAvailable ? brandGreen : Colors.red.shade600,
                   ),
                 ),
                 SizedBox(height: 2.w),
                 Text(
                   '$booked of $max seats booked',
                   style: TextStyle(
-                      fontSize: 12.sp, color: Colors.grey.shade500),
+                    fontSize: 12.sp,
+                    color: Colors.grey.shade500,
+                  ),
                 ),
               ],
             ),
@@ -355,9 +367,10 @@ class _BookfutureState extends State<Bookfuture>
                 width: 10.w,
                 height: 10.w,
                 decoration: BoxDecoration(
-                  color: filled
-                      ? Colors.grey.shade300
-                      : brandGreen.withOpacity(0.4),
+                  color:
+                      filled
+                          ? Colors.grey.shade300
+                          : brandGreen.withOpacity(0.4),
                   shape: BoxShape.circle,
                 ),
               );
@@ -393,8 +406,11 @@ class _BookfutureState extends State<Bookfuture>
                   color: brandGreen.withOpacity(0.08),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(Icons.chair_alt_rounded,
-                    color: brandGreen, size: 18),
+                child: Icon(
+                  Icons.chair_alt_rounded,
+                  color: brandGreen,
+                  size: 18,
+                ),
               ),
               SizedBox(width: 10.w),
               Text(
@@ -409,54 +425,48 @@ class _BookfutureState extends State<Bookfuture>
           ),
           SizedBox(height: 14.w),
           Row(
-            children: List.generate(
-              availableSeats > 4 ? 4 : availableSeats,
-              (i) {
-                final n = i + 1;
-                final selected = selectedSeats == n;
-                return GestureDetector(
-                  onTap: () => setState(() => selectedSeats = n),
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 180),
-                    margin: EdgeInsets.only(right: 10.w),
-                    width: 50.w,
-                    height: 50.w,
-                    decoration: BoxDecoration(
-                      color: selected
-                          ? brandGreen
-                          : const Color(0xFFF8F9FA),
-                      borderRadius: BorderRadius.circular(14.r),
-                      border: Border.all(
-                        color: selected
-                            ? brandGreen
-                            : Colors.grey.shade200,
-                      ),
-                      boxShadow: selected
-                          ? [
+            children: List.generate(availableSeats > 4 ? 4 : availableSeats, (
+              i,
+            ) {
+              final n = i + 1;
+              final selected = selectedSeats == n;
+              return GestureDetector(
+                onTap: () => setState(() => selectedSeats = n),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 180),
+                  margin: EdgeInsets.only(right: 10.w),
+                  width: 50.w,
+                  height: 50.w,
+                  decoration: BoxDecoration(
+                    color: selected ? brandGreen : const Color(0xFFF8F9FA),
+                    borderRadius: BorderRadius.circular(14.r),
+                    border: Border.all(
+                      color: selected ? brandGreen : Colors.grey.shade200,
+                    ),
+                    boxShadow:
+                        selected
+                            ? [
                               BoxShadow(
                                 color: brandGreen.withOpacity(0.25),
                                 blurRadius: 8,
                                 offset: const Offset(0, 3),
                               ),
                             ]
-                          : [],
-                    ),
-                    child: Center(
-                      child: Text(
-                        '$n',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.sp,
-                          color: selected
-                              ? Colors.white
-                              : Colors.black54,
-                        ),
+                            : [],
+                  ),
+                  child: Center(
+                    child: Text(
+                      '$n',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.sp,
+                        color: selected ? Colors.white : Colors.black54,
                       ),
                     ),
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            }),
           ),
         ],
       ),
@@ -464,7 +474,11 @@ class _BookfutureState extends State<Bookfuture>
   }
 
   Widget _buildPricingCard(
-      String price, int priceNum, int totalPrice, int availableSeats) {
+    String price,
+    int priceNum,
+    int totalPrice,
+    int availableSeats,
+  ) {
     return Container(
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
@@ -491,8 +505,11 @@ class _BookfutureState extends State<Bookfuture>
                       color: brandGreen.withOpacity(0.08),
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(Icons.payments_rounded,
-                        color: brandGreen, size: 18),
+                    child: Icon(
+                      Icons.payments_rounded,
+                      color: brandGreen,
+                      size: 18,
+                    ),
                   ),
                   SizedBox(width: 10.w),
                   Text(
@@ -515,11 +532,7 @@ class _BookfutureState extends State<Bookfuture>
             padding: EdgeInsets.symmetric(vertical: 10.w),
             child: Divider(height: 1.w),
           ),
-          _priceRow(
-            'Total',
-            '₹$totalPrice',
-            isLabel: true,
-          ),
+          _priceRow('Total', '₹$totalPrice', isLabel: true),
         ],
       ),
     );
@@ -533,21 +546,22 @@ class _BookfutureState extends State<Bookfuture>
           label,
           style: TextStyle(
             fontSize: isLabel ? 15 : 13,
-            fontWeight:
-                isLabel ? FontWeight.w700 : FontWeight.w500,
+            fontWeight: isLabel ? FontWeight.w700 : FontWeight.w500,
             color: isLabel ? Colors.black87 : Colors.grey.shade500,
           ),
         ),
         Container(
-          padding: isLabel
-              ? EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.w)
-              : EdgeInsets.zero,
-          decoration: isLabel
-              ? BoxDecoration(
-                  color: brandGreen.withOpacity(0.08),
-                  borderRadius: BorderRadius.circular(10.r),
-                )
-              : null,
+          padding:
+              isLabel
+                  ? EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.w)
+                  : EdgeInsets.zero,
+          decoration:
+              isLabel
+                  ? BoxDecoration(
+                    color: brandGreen.withOpacity(0.08),
+                    borderRadius: BorderRadius.circular(10.r),
+                  )
+                  : null,
           child: Text(
             value,
             style: TextStyle(
@@ -562,7 +576,11 @@ class _BookfutureState extends State<Bookfuture>
   }
 
   Widget _buildDriverCard(
-      String drivername, String vehicleName, Map vehicle, String phone) {
+    String drivername,
+    String vehicleName,
+    Map vehicle,
+    String phone,
+  ) {
     return Container(
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
@@ -587,8 +605,11 @@ class _BookfutureState extends State<Bookfuture>
                   color: brandGreen.withOpacity(0.08),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(Icons.person_pin_circle_rounded,
-                    color: brandGreen, size: 18),
+                child: Icon(
+                  Icons.person_pin_circle_rounded,
+                  color: brandGreen,
+                  size: 18,
+                ),
               ),
               SizedBox(width: 10.w),
               Text(
@@ -612,8 +633,7 @@ class _BookfutureState extends State<Bookfuture>
                   color: brandGreen.withOpacity(0.1),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(Icons.person_rounded,
-                    color: brandGreen, size: 22),
+                child: Icon(Icons.person_rounded, color: brandGreen, size: 22),
               ),
               SizedBox(width: 12.w),
               Expanded(
@@ -629,9 +649,13 @@ class _BookfutureState extends State<Bookfuture>
                       ),
                     ),
                     SizedBox(height: 2.w),
-                    Text('Driver',
-                        style: TextStyle(
-                            fontSize: 12.sp, color: Colors.grey.shade500)),
+                    Text(
+                      'Driver',
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        color: Colors.grey.shade500,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -646,12 +670,14 @@ class _BookfutureState extends State<Bookfuture>
               _vehicleChip(Icons.directions_car_rounded, vehicleName),
               SizedBox(width: 8.w),
               _vehicleChip(
-                  Icons.confirmation_number_rounded,
-                  vehicle['numberPlate']?.toString() ?? ''),
+                Icons.confirmation_number_rounded,
+                vehicle['numberPlate']?.toString() ?? '',
+              ),
               SizedBox(width: 8.w),
               _vehicleChip(
-                  Icons.color_lens_rounded,
-                  vehicle['color']?.toString() ?? ''),
+                Icons.color_lens_rounded,
+                vehicle['color']?.toString() ?? '',
+              ),
             ],
           ),
         ],
@@ -662,8 +688,7 @@ class _BookfutureState extends State<Bookfuture>
   Widget _vehicleChip(IconData icon, String label) {
     return Flexible(
       child: Container(
-        padding:
-            EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.w),
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.w),
         decoration: BoxDecoration(
           color: const Color(0xFFF8F9FA),
           borderRadius: BorderRadius.circular(10.r),
@@ -677,8 +702,7 @@ class _BookfutureState extends State<Bookfuture>
             Flexible(
               child: Text(
                 label,
-                style: TextStyle(
-                    fontSize: 12.sp, fontWeight: FontWeight.w600),
+                style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -689,97 +713,226 @@ class _BookfutureState extends State<Bookfuture>
   }
 
   Widget _buildBookButton(
-      Map<String, dynamic> ride, int availableSeats, int totalPrice) {
+    Map<String, dynamic> ride,
+    int availableSeats,
+    int totalPrice,
+  ) {
     return SizedBox(
       width: double.infinity,
       height: 56.w,
       child: ElevatedButton(
-        onPressed: availableSeats > 0
-            ? () async {
-                showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (context) => Center(
-                    child: Container(
-                      padding: EdgeInsets.all(24.w),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20.r),
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                                brandGreen),
+        onPressed:
+            availableSeats > 0
+                ? () async {
+                  // 1. Show confirmation dialog before booking
+                  final bool? confirm = await showDialog<bool>(
+                    context: context,
+                    builder:
+                        (context) => AlertDialog(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.r),
                           ),
-                          SizedBox(height: 16.w),
-                          Text('Booking your ride...',
-                              style: TextStyle(fontWeight: FontWeight.w600)),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-
-                try {
-                  final rideId = widget.rideData['_id'];
-                  final result = await Authservices.bookFutureRide(
-                    rideId: rideId!,
-                    numOfSeats: selectedSeats,
-                    rideData: ride,
+                          title: Row(
+                            children: [
+                              Icon(Icons.info_outline, color: brandGreen),
+                              SizedBox(width: 8.w),
+                              Text("Confirm Booking"),
+                            ],
+                          ),
+                          content: Text(
+                            "Are you sure you want to book $selectedSeats seat(s) for ₹$totalPrice? The amount will be deducted from your wallet.",
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, false),
+                              child: Text(
+                                "Cancel",
+                                style: TextStyle(color: Colors.grey.shade700),
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: () => Navigator.pop(context, true),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: brandGreen,
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8.r),
+                                ),
+                              ),
+                              child: Text("Book Now"),
+                            ),
+                          ],
+                        ),
                   );
-                  Navigator.of(context).pop();
 
-                  if (result != null && result['error'] == null) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text("✅ Ride booked successfully!"),
-                        backgroundColor: brandGreen,
-                        behavior: SnackBarBehavior.floating,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12.r)),
-                      ),
+                  if (confirm != true) return;
+
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder:
+                        (context) => Center(
+                          child: Container(
+                            padding: EdgeInsets.all(24.w),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20.r),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    brandGreen,
+                                  ),
+                                ),
+                                SizedBox(height: 16.w),
+                                Text(
+                                  'Booking your ride...',
+                                  style: TextStyle(fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                  );
+
+                  try {
+                    final rideId = widget.rideData['_id'];
+                    final result = await Authservices.bookFutureRide(
+                      rideId: rideId!,
+                      numOfSeats: selectedSeats,
+                      rideData: ride,
                     );
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => BottomNavigationLogic()),
-                    );
-                  } else {
-                    String errorMessage = "Failed to book ride";
-                    if (result?['error'] != null) {
-                      try {
-                        final errorData = jsonDecode(result!['error']);
-                        errorMessage = errorData['msg'] ?? errorMessage;
-                      } catch (_) {
-                        errorMessage = result!['error'];
+                    Navigator.of(context).pop();
+
+                    if (result != null && result['error'] == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("✅ Ride booked successfully!"),
+                          backgroundColor: brandGreen,
+                          behavior: SnackBarBehavior.floating,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                        ),
+                      );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BottomNavigationLogic(),
+                        ),
+                      );
+                    } else {
+                      String errorMessage = "Failed to book ride";
+                      bool isInsufficientBalance = false;
+                      if (result?['error'] != null) {
+                        try {
+                          final errorData = jsonDecode(result!['error']);
+                          errorMessage =
+                              errorData['msg'] ??
+                              errorData['message'] ??
+                              errorMessage;
+                          if (errorMessage.toLowerCase().contains(
+                                'insufficient wallet balance',
+                              ) ||
+                              errorMessage.toLowerCase().contains('wallet')) {
+                            isInsufficientBalance = true;
+                          }
+                        } catch (_) {
+                          errorMessage = result!['error'];
+                          if (errorMessage.toLowerCase().contains(
+                                'insufficient wallet balance',
+                              ) ||
+                              errorMessage.toLowerCase().contains('wallet')) {
+                            isInsufficientBalance = true;
+                          }
+                        }
+                      }
+
+                      if (isInsufficientBalance) {
+                        showDialog(
+                          context: context,
+                          builder:
+                              (context) => AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16.r),
+                                ),
+                                title: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.account_balance_wallet,
+                                      color: Colors.red,
+                                    ),
+                                    SizedBox(width: 8.w),
+                                    Text("Insufficient Balance"),
+                                  ],
+                                ),
+                                content: Text(
+                                  "You do not have enough wallet balance for this booking. Please recharge your wallet.",
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    child: Text(
+                                      "Cancel",
+                                      style: TextStyle(
+                                        color: Colors.grey.shade700,
+                                      ),
+                                    ),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => const Wallet(),
+                                        ),
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: brandGreen,
+                                      foregroundColor: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                          8.r,
+                                        ),
+                                      ),
+                                    ),
+                                    child: Text("Recharge Wallet"),
+                                  ),
+                                ],
+                              ),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("❌ $errorMessage"),
+                            backgroundColor: Colors.red.shade400,
+                            behavior: SnackBarBehavior.floating,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.r),
+                            ),
+                          ),
+                        );
                       }
                     }
+                  } catch (e) {
+                    Navigator.of(context).pop();
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text("❌ $errorMessage"),
+                        content: Text("❌ Error: ${e.toString()}"),
                         backgroundColor: Colors.red.shade400,
                         behavior: SnackBarBehavior.floating,
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12.r)),
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
                       ),
                     );
                   }
-                } catch (e) {
-                  Navigator.of(context).pop();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text("❌ Error: ${e.toString()}"),
-                      backgroundColor: Colors.red.shade400,
-                      behavior: SnackBarBehavior.floating,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.r)),
-                    ),
-                  );
                 }
-              }
-            : null,
+                : null,
         style: ElevatedButton.styleFrom(
           backgroundColor: brandGreen,
           foregroundColor: Colors.white,
@@ -798,8 +951,7 @@ class _BookfutureState extends State<Bookfuture>
               availableSeats > 0
                   ? 'Request to Book · ₹$totalPrice'
                   : 'No Seats Available',
-              style: TextStyle(
-                  fontSize: 16.sp, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
             ),
           ],
         ),

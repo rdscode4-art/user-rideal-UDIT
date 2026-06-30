@@ -7,6 +7,44 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:235222897305:android:0c6d17f7d1ff6c52709e08",
+        "android_client_info": {
+          "package_name": "com.rds.ridealRental"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZLPd8T4J6RBmFIccqCYMxedNxdN2ERGw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:235222897305:android:79062f633ed4bdd7709e08",
+        "android_client_info": {
+          "package_name": "com.rds.ridealdriver"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZLPd8T4J6RBmFIccqCYMxedNxdN2ERGw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:235222897305:android:beed26c91744d9f8709e08",
         "android_client_info": {
           "package_name": "com.rds.ridealuser"

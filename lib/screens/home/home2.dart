@@ -347,6 +347,8 @@ class _Home2State extends State<Home2> {
                   desktop: 25.w,
                 ),
               ),
+              // Ongoing Ride Widget
+              const OngoingRideWidget(),
               // Recent Searches Section
               _buildRecentSearchesSection(
                 context,
@@ -354,8 +356,6 @@ class _Home2State extends State<Home2> {
                 isTablet,
                 isDesktop,
               ),
-              // Ongoing Ride Widget
-              const OngoingRideWidget(),
               // Explore Section
               _buildExploreSection(context, isMobile, isTablet, isDesktop),
               SizedBox(
