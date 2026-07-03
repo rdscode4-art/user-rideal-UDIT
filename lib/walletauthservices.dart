@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
+import 'meta_events_service.dart';
 
 class WalletAuthServices {
   static const String baseUrl = 'https://backend.ridealmobility.com';
@@ -104,6 +105,7 @@ class WalletAuthServices {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         print('Money added successfully to wallet');
+        await MetaEventsService.logWalletTopup(amount: amount);
         return true;
       } else {
         print('Failed to add money: ${response.statusCode}');

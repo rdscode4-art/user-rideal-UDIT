@@ -127,13 +127,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
       width: MediaQuery.of(context).size.width * 0.78,
       backgroundColor: Colors.transparent,
       elevation: 0,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(32.r),
-            bottomRight: Radius.circular(32.r),
-          ),
+      child: Material(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(32.r),
+          bottomRight: Radius.circular(32.r),
         ),
         child: SafeArea(
           child: Column(
@@ -316,27 +314,30 @@ class _CustomDrawerState extends State<CustomDrawer> {
             ? null
             : Icon(Icons.chevron_right_rounded, color: Colors.grey.shade300, size: 20),
         onTap: () async {
-          Navigator.pop(context);
-
           if (isLogout && widget.logoutUser != null) {
+            final nav = Navigator.of(context);
+            final messenger = ScaffoldMessenger.of(context);
+            
+            nav.pop(); // close drawer
+
             bool success = await widget.logoutUser!();
             if (success) {
-              ScaffoldMessenger.of(context).showSnackBar(
+              messenger.showSnackBar(
                 const SnackBar(content: Text('Logout successful')),
               );
               // Delay to show snackbar before navigating
               await Future.delayed(const Duration(seconds: 1));
-              Navigator.pushAndRemoveUntil( 
-                context,
+              nav.pushAndRemoveUntil( 
                 MaterialPageRoute(builder: (_) => const IntroScreen()),
                 (Route<dynamic> route) => false,
               );
             } else {
-              ScaffoldMessenger.of(context).showSnackBar(
+              messenger.showSnackBar(
                 const SnackBar(content: Text('Logout failed')),
               );
             }
           } else {
+            Navigator.pop(context);
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => screen),

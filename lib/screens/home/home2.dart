@@ -160,7 +160,10 @@ class _Home2State extends State<Home2> {
               return !typeName.contains('goods') &&
                   !typeName.contains('carrier') &&
                   !typeName.contains('freight') &&
-                  !typeName.contains('cargo');
+                  !typeName.contains('cargo') &&
+                  typeName != 'mini truck' &&
+                  typeName != 'pickup' &&
+                  typeName != 'truck';
             }).toList();
         isLoading = false;
       });
@@ -507,6 +510,11 @@ class _Home2State extends State<Home2> {
         'route': () => MultiStopRoutePlanner(),
       },
       {
+        'title': 'Transport',
+        'icon': Icons.local_shipping_outlined,
+        'route': () => const SearchScreen(isTransport: true),
+      },
+      {
         'title': 'Rentals',
         'icon': Icons.car_rental,
         'route': () => const RentalScreen(),
@@ -648,19 +656,15 @@ class _Home2State extends State<Home2> {
         final search = recentSearches[index];
         return Container(
           margin: EdgeInsets.only(bottom: 12.w),
-          decoration: BoxDecoration(
+          child: Material(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(12.r),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.02),
-                blurRadius: 4,
-                offset: const Offset(0, 2),
-              ),
-            ],
-            border: Border.all(color: Colors.grey.shade100),
-          ),
-          child: ListTile(
+            elevation: 0.5,
+            shadowColor: Colors.black.withOpacity(0.5),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12.r),
+              side: BorderSide(color: Colors.grey.shade100),
+            ),
+            child: ListTile(
             contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
             leading: Container(
               padding: EdgeInsets.all(8.w),
@@ -715,6 +719,7 @@ class _Home2State extends State<Home2> {
               );
               loadRecentSearches();
             },
+          ),
           ),
         );
       },

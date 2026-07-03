@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rideal/screens/RideHistory/ridehistory.dart';
 import 'model/ridermodel.dart';
 import 'model/ridetypemodel.dart';
+import 'meta_events_service.dart';
 
 class Authservices {
   static const String baseUrl = "https://backend.ridealmobility.com";
@@ -87,6 +88,7 @@ class Authservices {
             print("✅ Rider ID saved: $riderId");
           }
           print("✅ OTP verified, token = $token");
+          await MetaEventsService.logLogin(method: 'OTP');
           return true;
         } else {
           print("❌ OTP verified but token missing in response");
@@ -241,6 +243,7 @@ class Authservices {
         await prefs.setString('rideOtp', otp);
 
         print("✅ Ride booked successfully: $rideId");
+        await MetaEventsService.logRideBooking(rideId: rideId.toString(), price: 0, rideType: rideType.toString());
         return {"rideId": rideId, "status": status};
       } else {
         print(
@@ -1854,6 +1857,12 @@ static Future<Map<String, dynamic>?> deleteAccountRequest(String reason) async {
         print(
           "✅ Ride booked successfully with actual IDs: ride=$actualRideId, booking=$bookingId",
         );
+
+        double price = 0;
+        if (rideData['pricePerPassenger'] != null) {
+          price = (rideData['pricePerPassenger'] as num).toDouble() * numOfSeats;
+        }
+        await MetaEventsService.logRideBooking(rideId: actualRideId.toString(), price: price, rideType: 'Future');
 
         return res;
       } else {

@@ -11,11 +11,13 @@ import 'dart:convert';
 class SearchScreen extends StatefulWidget {
   final String? initialPickup;
   final String? initialDropoff;
+  final bool isTransport;
 
   const SearchScreen({
     super.key,
     this.initialPickup,
     this.initialDropoff,
+    this.isTransport = false,
   });
 
   @override
@@ -205,6 +207,12 @@ class _SearchScreenState extends State<SearchScreen> {
         );
       }
 
+      if (widget.isTransport) {
+        updatedRides = updatedRides.where((r) => r.type == 'mini_truck' || r.type == 'pickup' || r.type == 'truck').toList();
+      } else {
+        updatedRides = updatedRides.where((r) => r.type != 'mini_truck' && r.type != 'pickup' && r.type != 'truck').toList();
+      }
+
       setState(() {
         rideHistory = updatedRides;
         isHistoryLoading = false;
@@ -224,7 +232,8 @@ class _SearchScreenState extends State<SearchScreen> {
   Future<void> _saveRecentSearch(String pickup, String dropoff) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final searchesJson = prefs.getStringList('recent_searches') ?? [];
+      final key = widget.isTransport ? 'recent_searches_transport' : 'recent_searches';
+      final searchesJson = prefs.getStringList(key) ?? [];
 
       final newSearch = jsonEncode({
         'pickup': pickup,
@@ -246,7 +255,7 @@ class _SearchScreenState extends State<SearchScreen> {
         searchesJson.removeRange(10, searchesJson.length);
       }
 
-      await prefs.setStringList('recent_searches', searchesJson);
+      await prefs.setStringList(key, searchesJson);
       print('✅ Recent search saved');
     } catch (e) {
       print('❌ Error saving recent search: $e');
@@ -279,6 +288,7 @@ class _SearchScreenState extends State<SearchScreen> {
         builder: (_) => Book(
           pickupLocation: pickupLocation,
           dropoffLocation: dropoffLocation,
+          isTransport: widget.isTransport,
         ),
       ),
     );
@@ -326,7 +336,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                     SizedBox(width: 12.w),
                     Text(
-                      "Route Planner",
+                      widget.isTransport ? "Plan Transport Route" : "Route Planner",
                       style: TextStyle(
                         fontSize: 18.sp, // Scaled down
                         fontWeight: FontWeight.w700,
@@ -388,12 +398,13 @@ class _SearchScreenState extends State<SearchScreen> {
                     if (_pickupSuggestions.isNotEmpty)
                       Container(
                         margin: EdgeInsets.only(top: 8.w),
-                        decoration: BoxDecoration(
+                        child: Material(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(12.r),
-                          border: Border.all(color: Colors.grey.shade100),
-                        ),
-                        child: ListView.separated(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.r),
+                            side: BorderSide(color: Colors.grey.shade100),
+                          ),
+                          child: ListView.separated(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: _pickupSuggestions.length,
@@ -414,6 +425,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             );
                           },
                         ),
+                      ),
                       ),
                     
                     SizedBox(height: 12.w),
@@ -454,12 +466,13 @@ class _SearchScreenState extends State<SearchScreen> {
                     if (_dropSuggestions.isNotEmpty)
                       Container(
                         margin: EdgeInsets.only(top: 8.w),
-                        decoration: BoxDecoration(
+                        child: Material(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(12.r),
-                          border: Border.all(color: Colors.grey.shade100),
-                        ),
-                        child: ListView.separated(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.r),
+                            side: BorderSide(color: Colors.grey.shade100),
+                          ),
+                          child: ListView.separated(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: _dropSuggestions.length,
@@ -480,6 +493,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             );
                           },
                         ),
+                      ),
                       ),
                   ],
                 ),
@@ -566,19 +580,15 @@ class _SearchScreenState extends State<SearchScreen> {
                             final ride = rideHistory[index];
                             return Container(
                               margin: EdgeInsets.only(bottom: 8.w),
-                              decoration: BoxDecoration(
+                              child: Material(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(12.r),
-                                border: Border.all(color: Colors.grey.shade100),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.01),
-                                    blurRadius: 3,
-                                    offset: const Offset(0, 1),
-                                  ),
-                                ],
-                              ),
-                              child: ListTile(
+                                elevation: 0.5,
+                                shadowColor: Colors.black.withOpacity(0.5),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.r),
+                                  side: BorderSide(color: Colors.grey.shade100),
+                                ),
+                                child: ListTile(
                                 visualDensity: VisualDensity.compact,
                                 contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.w),
                                 leading: Container(
@@ -599,6 +609,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 onTap: () => _navigateToBook(
                                   selectedPlaceTitle: ride.dropoffStop.address,
                                 ),
+                              ),
                               ),
                             );
                           },

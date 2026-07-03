@@ -123,11 +123,13 @@ class RideType {
 class Book extends StatefulWidget {
   final String pickupLocation;
   final String dropoffLocation;
+  final bool isTransport;
 
   const Book({
     super.key,
     required this.pickupLocation,
     required this.dropoffLocation,
+    this.isTransport = false,
   });
 
   @override
@@ -651,6 +653,13 @@ class _BookState extends State<Book> {
           fareRates.forEach((key, value) {
             types.add(RideType.fromJson(key, value, vehicleImages));
           });
+          
+          if (widget.isTransport) {
+            types = types.where((t) => t.originalKey == 'mini_truck' || t.originalKey == 'pickup' || t.originalKey == 'truck').toList();
+          } else {
+            types = types.where((t) => t.originalKey != 'mini_truck' && t.originalKey != 'pickup' && t.originalKey != 'truck' && !t.originalKey.toLowerCase().contains('goods') && !t.originalKey.toLowerCase().contains('carrier')).toList();
+          }
+          
           setState(() {
             rideTypes = types;
             isLoading = false;
