@@ -114,25 +114,62 @@ class Authservices {
       return false;
     }
 
-    final url = Uri.parse('$baseUrl/auth/logout');
-    final response = await http.post(
-      url,
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token',
-      },
-    );
+    // Commented out API call to just clear locally as requested
+    // final url = Uri.parse('$baseUrl/auth/logout');
+    // final response = await http.post(
+    //   url,
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Authorization': 'Bearer $token',
+    //   },
+    // );
 
-    if (response.statusCode == 200) {
-      await prefs.remove('auth_token'); // remove only after success
-      await prefs.remove('cached_rider_profile'); // Clear cached profile
-      await prefs.remove('rider_id'); // Clear rider ID
-      print('🚪 Logout successful');
-      return true;
-    } else {
-      print('❌ Logout failed: ${response.body}');
-      return false;
+    // if (response.statusCode == 200) {
+    await prefs.remove('auth_token'); 
+    await prefs.remove('cached_rider_profile'); // Clear cached profile
+    await prefs.remove('rider_id'); // Clear rider ID
+    await _clearRideData(prefs); // Clear all ride data so next login is fully fresh
+    print('🚪 Local Logout successful');
+    return true;
+    // } else {
+    //   print('❌ Logout failed: ${response.body}');
+    //   return false;
+    // }
+  }
+
+  //------------------------------------ FETCH BANNERS
+  static Future<List<String>> fetchBanners() async {
+    try {
+      final response = await http.get(
+        Uri.parse('$baseUrl/api/banners'),
+      ).timeout(const Duration(seconds: 10));
+
+      print('📥 FETCH BANNERS STATUS: ${response.statusCode}');
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        if (data['success'] == true && data['banners'] != null) {
+          final List<dynamic> bannerList = data['banners'];
+          List<String> urls = [];
+          for (var b in bannerList) {
+            if (b['isActive'] == true && b['imageUrl'] != null) {
+              String imgUrl = b['imageUrl'].toString();
+              if (!imgUrl.startsWith('http')) {
+                if (!imgUrl.startsWith('/')) {
+                  imgUrl = '/$imgUrl';
+                }
+                imgUrl = '$baseUrl$imgUrl';
+              }
+              urls.add(imgUrl);
+            }
+          }
+          print('✅ Banners fetched: ${urls.length} urls');
+          return urls;
+        }
+      }
+    } catch (e) {
+      print("❌ Error fetching banners: $e");
     }
+    return [];
   }
 
   // -------------------------BOOK RIDE (token auto-retrieved from SharedPreferences)
@@ -505,15 +542,23 @@ static Future<Map<String, dynamic>?> deleteAccountRequest(String reason) async {
     String phone,
     String name,
     String gender,
-    String Address,
-  ) async {
+    String Address, {
+    String? referralCode,
+  }) async {
     final url = Uri.parse('$baseUrl/auth/register');
-    final body = jsonEncode({
+    
+    final Map<String, dynamic> requestBody = {
       "phone": phone,
       "name": name,
       "gender": gender,
       "address": Address,
-    });
+    };
+    
+    if (referralCode != null && referralCode.isNotEmpty) {
+      requestBody["referralCode"] = referralCode;
+    }
+    
+    final body = jsonEncode(requestBody);
 
     try {
       final response = await http.post(

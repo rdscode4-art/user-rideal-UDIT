@@ -16,8 +16,8 @@ class _PersonalDetailScreenState extends State<PersonalDetailScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _referralCodeController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
   String? _selectedGender;
   bool _isLoading = false;
 
@@ -104,6 +104,7 @@ class _PersonalDetailScreenState extends State<PersonalDetailScreen> {
       _nameController.text.trim(),
       _selectedGender!,
       _addressController.text.trim(),
+      referralCode: _referralCodeController.text.trim(),
     );
 
     setState(() => _isLoading = false);
@@ -325,6 +326,32 @@ class _PersonalDetailScreenState extends State<PersonalDetailScreen> {
                       }
                       return null;
                     },
+                  ),
+                ),
+                SizedBox(height: 16.w),
+                // Referral Code Field (Optional)
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(24.r),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.03),
+                        blurRadius: 15,
+                        offset: const Offset(0, 5),
+                      ),
+                    ],
+                  ),
+                  child: TextFormField(
+                    controller: _referralCodeController,
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.sp),
+                    textCapitalization: TextCapitalization.characters,
+                    decoration: InputDecoration(
+                      hintText: 'Referral Code (Optional)',
+                      prefixIcon: Icon(Icons.card_giftcard_rounded, color: Colors.black45),
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.w),
+                    ),
                   ),
                 ),
                 SizedBox(height: 32.w),

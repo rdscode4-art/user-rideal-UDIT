@@ -7,6 +7,7 @@ class Rider {
   final double rating;
   final bool isVerified;
   final String? profileImage;
+  final String? referralCode;
 
   Rider({
     required this.id,
@@ -17,6 +18,7 @@ class Rider {
     required this.rating,
     required this.isVerified,
     this.profileImage,
+    this.referralCode,
   });
 
   factory Rider.fromJson(Map<String, dynamic> json) {
@@ -29,6 +31,7 @@ class Rider {
       rating: (json['rating'] ?? 0).toDouble(),
       isVerified: json['isVerified'] ?? false,
       profileImage: json['profileImage'] ?? json['profilePhoto'],
+      referralCode: json['referralCode'],
     );
   }
 
@@ -40,6 +43,7 @@ class Rider {
     double? rating,
     bool? isVerified,
     String? profileImage,
+    String? referralCode,
   }) {
     return Rider(
       id: id,
@@ -50,6 +54,7 @@ class Rider {
       rating: rating ?? this.rating,
       isVerified: isVerified ?? this.isVerified,
       profileImage: profileImage ?? this.profileImage,
+      referralCode: referralCode ?? this.referralCode,
     );
   }
 
@@ -63,6 +68,7 @@ class Rider {
       "rating": rating,
       "isVerified": isVerified,
       "profileImage": profileImage,
+      "referralCode": referralCode,
     };
   }
 }

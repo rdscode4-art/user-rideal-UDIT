@@ -10,7 +10,6 @@ import 'package:rideal/screens/hiredriver/hiredriverscreen.dart';
 import 'package:rideal/screens/home/Drawar.dart';
 import 'package:rideal/screens/transport/confirmed.dart';
 import 'package:rideal/screens/transport/confirmpickup.dart';
-import 'package:rideal/screens/transport/goods_transport_screen.dart';
 import 'package:rideal/screens/rental/rental_screen.dart';
 import 'SearchScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -342,12 +341,13 @@ class _Home2State extends State<Home2> {
               SizedBox(height: 24.w),
               // Action Cards (replacing service chips)
               _buildActionCards(context),
+              const HomeBannerSection(),
               SizedBox(
                 height: ResponsiveHelper.getResponsiveValue(
                   context,
-                  mobile: 15,
-                  tablet: 20,
-                  desktop: 25.w,
+                  mobile: 10,
+                  tablet: 15,
+                  desktop: 20.w,
                 ),
               ),
               // Ongoing Ride Widget
@@ -1838,5 +1838,174 @@ class _OngoingRideWidgetState extends State<OngoingRideWidget> with RouteAware {
     await prefs.remove('ongoingRideIds');
     await prefs.remove('rideId');
     await prefs.remove('current_ride_id');
+  }
+}
+
+class HomeBannerSection extends StatefulWidget {
+  const HomeBannerSection({super.key});
+
+  @override
+  State<HomeBannerSection> createState() => _HomeBannerSectionState();
+}
+
+class _HomeBannerSectionState extends State<HomeBannerSection> {
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
+  Timer? _timer;
+  List<String> _bannerUrls = [];
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchBanners();
+  }
+
+  Future<void> _fetchBanners() async {
+    final urls = await Authservices.fetchBanners();
+    if (mounted) {
+      setState(() {
+        _bannerUrls = urls;
+        _isLoading = false;
+      });
+      if (urls.isNotEmpty) {
+        _startAutoScroll(urls.length);
+      } else {
+        _startAutoScroll(3);
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _startAutoScroll(int itemCount) {
+    _timer?.cancel();
+    if (itemCount <= 1) return;
+    _timer = Timer.periodic(const Duration(seconds: 4), (timer) {
+      if (_pageController.hasClients) {
+        int nextPage = (_currentPage + 1) % itemCount;
+        _pageController.animateToPage(
+          nextPage,
+          duration: const Duration(milliseconds: 600),
+          curve: Curves.easeInOut,
+        );
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_isLoading) {
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.w),
+        child: Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            height: 125.w,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16.r),
+            ),
+          ),
+        ),
+      );
+    }
+
+    if (_bannerUrls.isNotEmpty) {
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.w),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 125.w,
+              child: PageView.builder(
+                controller: _pageController,
+                onPageChanged: (index) {
+                  setState(() {
+                    _currentPage = index;
+                  });
+                },
+                itemCount: _bannerUrls.length,
+                itemBuilder: (context, index) {
+                  final url = _bannerUrls[index];
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const SearchScreen()),
+                      );
+                    },
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 4.w),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16.r),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.06),
+                            blurRadius: 8,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16.r),
+                        child: Image.network(
+                          url,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: Colors.grey.shade200,
+                              child: const Center(
+                                child: Icon(Icons.broken_image, color: Colors.grey, size: 40),
+                              ),
+                            );
+                          },
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return Shimmer.fromColors(
+                              baseColor: Colors.grey[300]!,
+                              highlightColor: Colors.grey[100]!,
+                              child: Container(
+                                color: Colors.white,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: 10.w),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                _bannerUrls.length,
+                (index) => Container(
+                  margin: EdgeInsets.symmetric(horizontal: 4.w),
+                  width: _currentPage == index ? 16.w : 6.w,
+                  height: 6.w,
+                  decoration: BoxDecoration(
+                    color: _currentPage == index
+                        ? const Color(0xFF0F9D58)
+                        : Colors.grey.shade300,
+                    borderRadius: BorderRadius.circular(3.r),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return const SizedBox.shrink();
   }
 }
