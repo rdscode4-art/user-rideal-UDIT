@@ -22,6 +22,7 @@ class HireDriverScreen extends StatefulWidget {
 }
 
 class _HireDriverScreenState extends State<HireDriverScreen> {
+  bool isHalfDay = false; // New flag for half day option
   int selectedHours = 0; // No additional hours
   int selectedDays = 1;
   double pricePerHour = 90.0;
@@ -153,11 +154,12 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
 
   // Maximum hours allowed based on days selected
   int get maxAllowedHours {
-    return selectedDays == 0 ? 8 : 23;
+    return isHalfDay ? 5 : (selectedDays == 0 ? 8 : 23);
   }
 
   // Total price: Days * 8 hours * rate + Days * food allowance
   double get totalPrice {
+    if (isHalfDay) return 600.0;
     int days = selectedDays > 0 ? selectedDays : 1;
     double dayPrice = 8 * pricePerHour;
     double foodAllowance = days * foodAllowancePerDay;
@@ -165,6 +167,7 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
   }
 
   int get totalHours {
+    if (isHalfDay) return 5;
     return (selectedDays > 0 ? selectedDays : 1) * 8;
   }
 
@@ -288,7 +291,7 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
       final body = {
         'riderId': riderId,
         'hours': totalHours,
-        'days': selectedDays,
+        'days': isHalfDay ? 0.5 : selectedDays,
         'price': totalPrice.toInt(),
         'requestedBy': "rider",
         'vehicleType': "non-vehichle",
@@ -820,17 +823,36 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                                           IconButton(
                                             padding: EdgeInsets.zero,
                                             constraints: BoxConstraints(minWidth: 36, minHeight: 36),
-                                            onPressed: selectedDays > 0 ? () => setState(() => selectedDays--) : null,
-                                            icon: Icon(Icons.remove, size: 16, color: selectedDays > 0 ? Colors.black87 : Colors.black26),
+                                            onPressed: () {
+                                              if (isHalfDay) return;
+                                              setState(() {
+                                                if (selectedDays > 1) {
+                                                  selectedDays--;
+                                                } else {
+                                                  isHalfDay = true;
+                                                  selectedDays = 0;
+                                                }
+                                              });
+                                            },
+                                            icon: Icon(Icons.remove, size: 16, color: isHalfDay ? Colors.black26 : Colors.black87),
                                           ),
                                           Text(
-                                            '$selectedDays',
+                                            isHalfDay ? 'Half' : '$selectedDays',
                                             style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w700, color: Colors.black87),
                                           ),
                                           IconButton(
                                             padding: EdgeInsets.zero,
                                             constraints: BoxConstraints(minWidth: 36, minHeight: 36),
-                                            onPressed: selectedDays < 30 ? () => setState(() => selectedDays++) : null,
+                                            onPressed: () {
+                                              setState(() {
+                                                if (isHalfDay) {
+                                                  isHalfDay = false;
+                                                  selectedDays = 1;
+                                                } else if (selectedDays < 30) {
+                                                  selectedDays++;
+                                                }
+                                              });
+                                            },
                                             icon: Icon(Icons.add, size: 16, color: selectedDays < 30 ? Colors.black87 : Colors.black26),
                                           ),
                                         ],
@@ -842,31 +864,61 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                                 SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
                                   child: Row(
-                                    children: [1, 2, 3, 5, 7, 10, 15].map((days) {
-                                      final isSelected = selectedDays == days;
-                                      return GestureDetector(
-                                        onTap: () => setState(() => selectedDays = days),
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () => setState(() {
+                                          isHalfDay = true;
+                                          selectedDays = 0;
+                                        }),
                                         child: Container(
                                           margin: EdgeInsets.only(right: 8.w),
                                           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
                                           decoration: BoxDecoration(
-                                            color: isSelected ? Colors.black87 : Colors.white,
+                                            color: isHalfDay ? Colors.black87 : Colors.white,
                                             borderRadius: BorderRadius.circular(12.r),
                                             border: Border.all(
-                                              color: isSelected ? Colors.black87 : Colors.grey.shade200,
+                                              color: isHalfDay ? Colors.black87 : Colors.grey.shade200,
                                             ),
                                           ),
                                           child: Text(
-                                            '$days days',
+                                            'Half Day',
                                             style: TextStyle(
                                               fontSize: 13.sp,
-                                              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                                              color: isSelected ? Colors.white : Colors.black87,
+                                              fontWeight: isHalfDay ? FontWeight.w600 : FontWeight.w500,
+                                              color: isHalfDay ? Colors.white : Colors.black87,
                                             ),
                                           ),
                                         ),
-                                      );
-                                    }).toList(),
+                                      ),
+                                      ...[1, 2, 3, 5, 7, 10, 15].map((days) {
+                                        final isSelected = !isHalfDay && selectedDays == days;
+                                        return GestureDetector(
+                                          onTap: () => setState(() {
+                                            isHalfDay = false;
+                                            selectedDays = days;
+                                          }),
+                                          child: Container(
+                                            margin: EdgeInsets.only(right: 8.w),
+                                            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
+                                            decoration: BoxDecoration(
+                                              color: isSelected ? Colors.black87 : Colors.white,
+                                              borderRadius: BorderRadius.circular(12.r),
+                                              border: Border.all(
+                                                color: isSelected ? Colors.black87 : Colors.grey.shade200,
+                                              ),
+                                            ),
+                                            child: Text(
+                                              '$days days',
+                                              style: TextStyle(
+                                                fontSize: 13.sp,
+                                                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                                                color: isSelected ? Colors.white : Colors.black87,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }).toList(),
+                                    ],
                                   ),
                                 ),
                               ],
@@ -898,7 +950,7 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                                       ),
                                       SizedBox(height: 4.w),
                                       Text(
-                                        '• 1 day = Fixed 8 hours at ₹720\n• Driver food allowance: ₹250/day',
+                                        '• Half day = 5 hours at ₹600 (Minimum booking)\n• 1 day = Fixed 8 hours at ₹720\n• Driver food allowance: ₹250/day (for full days)',
                                         style: TextStyle(fontSize: 12.sp, color: const Color(0xFFE65100).withOpacity(0.8), height: 1.5.w, fontWeight: FontWeight.w500),
                                       ),
                                     ],
@@ -986,20 +1038,20 @@ class _HireDriverScreenState extends State<HireDriverScreen> {
                                       style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.w800, color: Colors.black87),
                                     ),
                                     Text(
-                                      selectedDays == 1 ? '1 day (8 hours)' : '$selectedDays days (${selectedDays * 8} hrs)',
+                                      isHalfDay ? 'Half Day (5 hours)' : (selectedDays == 1 ? '1 day (8 hours)' : '$selectedDays days (${selectedDays * 8} hrs)'),
                                       style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600, color: Color(0xFF0F9D58)),
                                     ),
                                   ],
                                 ),
                                 GestureDetector(
-                                  onTap: (selectedDays == 0 && selectedHours == 0) || isLoading ? null : _createHireDriverRequest,
+                                  onTap: ((selectedDays == 0 && selectedHours == 0 && !isHalfDay) || isLoading) ? null : _createHireDriverRequest,
                                   child: Container(
                                     padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 14.w),
                                     decoration: BoxDecoration(
-                                      color: (selectedDays == 0 && selectedHours == 0) ? Colors.grey : const Color(0xFF0F9D58),
+                                      color: (selectedDays == 0 && selectedHours == 0 && !isHalfDay) ? Colors.grey : const Color(0xFF0F9D58),
                                       borderRadius: BorderRadius.circular(16.r),
                                       boxShadow: [
-                                        if (selectedDays > 0)
+                                        if (selectedDays > 0 || isHalfDay)
                                           BoxShadow(
                                             color: const Color(0xFF0F9D58).withOpacity(0.3),
                                             blurRadius: 10,

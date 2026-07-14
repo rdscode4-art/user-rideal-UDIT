@@ -448,8 +448,8 @@ class _HireDriverTrackingScreenState extends State<HireDriverTrackingScreen> {
                       SizedBox(height: 24.w),
                     ],
 
-                    // Action Buttons - Only show cancel if status is PENDING
-                    if (status.toUpperCase() == 'PENDING') ...[
+                    // Action Buttons - Show cancel if status is PENDING, ACCEPTED, or ASSIGNED
+                    if (status.toUpperCase() == 'PENDING' || status.toUpperCase() == 'ACCEPTED' || status.toUpperCase() == 'ASSIGNED') ...[
                       SizedBox(
                         width: double.infinity,
                         height: 56.w,
