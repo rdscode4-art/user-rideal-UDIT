@@ -351,16 +351,19 @@ class Authservices {
   }
 
   //------------------------------------CANCEL RIDE
-  static Future<Map<String, dynamic>?> cancelRide(String rideId) async {
+  static Future<Map<String, dynamic>?> cancelRide(String rideId, [String cancelReason = "Cancelled directly"]) async {
     try {
       final token = await getToken();
       final response = await http.post(
-        Uri.parse("$baseUrl/rides/cancel"),
+        Uri.parse("$baseUrl/api/rides/cancel"),
         headers: {
           "Authorization": "Bearer $token",
           "Content-Type": "application/json",
         },
-        body: jsonEncode({"rideId": rideId}),
+        body: jsonEncode({
+          "rideId": rideId,
+          "cancelReason": cancelReason,
+        }),
       );
 
       print("Cancel ride response: ${response.statusCode}");

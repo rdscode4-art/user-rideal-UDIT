@@ -183,7 +183,7 @@ Future<void> _cancelRide() async {
 
       if (rideId != null) {
         // Call your API to cancel the ride
-        final result = await Authservices.cancelRide(rideId!);
+        final result = await Authservices.cancelRide(rideId!, "Cancelled directly");
         
         // Close loading dialog
         Navigator.of(context).pop();
@@ -996,6 +996,37 @@ String _getTrafficText() {
               MaterialPageRoute(builder: (_) => const RideStarted(rideId: "",)),
             );
           }
+        } else if ((rideStatus == "cancelled" || rideStatus == "canceled") && !_navigated) {
+          _navigated = true;
+          _statusTimer?.cancel();
+          _driverLocationTimer?.cancel();
+
+          // Clear stored data
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.remove('rideId');
+          await prefs.remove('rideStatus');
+          await prefs.remove('rideOtp');
+
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Row(
+                  children: [
+                    const Icon(Icons.info_outline, color: Colors.white),
+                    SizedBox(width: 12.w),
+                    const Expanded(child: Text('Ride was cancelled by the driver.')),
+                  ],
+                ),
+                backgroundColor: Colors.orange.shade700,
+                behavior: SnackBarBehavior.floating,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+                duration: const Duration(seconds: 4),
+              ),
+            );
+            Navigator.of(context).popUntil((route) => route.isFirst);
+          }
         }
       } catch (e) {
         print("❌ Error polling ride status: $e");
@@ -1327,6 +1358,243 @@ String _getTrafficText() {
     );
   }
 
+  void _showCancelReasonSheet(BuildContext context) {
+    String selectedReason = "Changed my mind";
+    final TextEditingController customReasonController = TextEditingController();
+    final List<String> reasons = [
+      "Driver is too far",
+      "Changed my mind",
+      "Driver asked to cancel",
+      "Other"
+    ];
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (BuildContext sheetContext) {
+        return StatefulBuilder(
+          builder: (context, setSheetState) {
+            return Container(
+              padding: EdgeInsets.only(
+                left: 20.w,
+                right: 20.w,
+                top: 20.w,
+                bottom: MediaQuery.of(context).viewInsets.bottom + 20.w,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(24.r),
+                  topRight: Radius.circular(24.r),
+                ),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Container(
+                      width: 40.w,
+                      height: 5.w,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20.w),
+                  Text(
+                    "Cancel Ride",
+                    style: TextStyle(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  SizedBox(height: 8.w),
+                  Text(
+                    "Please select a reason for cancelling your ride",
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      color: Colors.grey.shade600,
+                    ),
+                  ),
+                  SizedBox(height: 20.w),
+                  ...reasons.map((reason) {
+                    return Padding(
+                      padding: EdgeInsets.only(bottom: 12.w),
+                      child: GestureDetector(
+                        onTap: () {
+                          setSheetState(() {
+                            selectedReason = reason;
+                          });
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              selectedReason == reason
+                                  ? Icons.radio_button_checked
+                                  : Icons.radio_button_unchecked,
+                              color: selectedReason == reason
+                                  ? Colors.red.shade600
+                                  : Colors.grey.shade400,
+                              size: 20.w,
+                            ),
+                            SizedBox(width: 12.w),
+                            Text(
+                              reason,
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                color: selectedReason == reason
+                                    ? Colors.black87
+                                    : Colors.grey.shade700,
+                                fontWeight: selectedReason == reason
+                                    ? FontWeight.w600
+                                    : FontWeight.normal,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                  Padding(
+                    padding: EdgeInsets.only(top: 8.w, bottom: 12.w),
+                    child: TextField(
+                      controller: customReasonController,
+                      decoration: InputDecoration(
+                        hintText: "Add custom message... (optional)",
+                        hintStyle: TextStyle(fontSize: 12.sp, color: Colors.grey),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.r),
+                          borderSide: BorderSide(color: Colors.grey.shade300),
+                        ),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.w),
+                      ),
+                      style: TextStyle(fontSize: 14.sp),
+                    ),
+                  ),
+                  SizedBox(height: 20.w),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 48.w,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        String finalReason = selectedReason;
+                        if (customReasonController.text.trim().isNotEmpty) {
+                          if (selectedReason == "Other") {
+                            finalReason = customReasonController.text.trim();
+                          } else {
+                            finalReason = "$selectedReason - ${customReasonController.text.trim()}";
+                          }
+                        }
+                        
+                        if (finalReason.isEmpty || finalReason == "Other") {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Please provide a valid reason')),
+                          );
+                          return;
+                        }
+
+                        Navigator.pop(sheetContext);
+                        _submitCancelRide(finalReason);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red.shade600,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
+                      ),
+                      child: Text(
+                        "Submit & Cancel",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Future<void> _submitCancelRide(String reason) async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(child: CircularProgressIndicator()),
+    );
+
+    if (rideId == null) {
+      if (mounted) Navigator.pop(context);
+      return;
+    }
+
+    final result = await Authservices.cancelRide(rideId!, reason);
+    
+    if (mounted) Navigator.pop(context);
+
+    if (result != null) {
+      // Clear stored data
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove('rideId');
+      await prefs.remove('rideStatus');
+      await prefs.remove('rideOtp');
+      
+      // Stop all timers
+      _statusTimer?.cancel();
+      _driverLocationTimer?.cancel();
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Row(
+              children: [
+                const Icon(Icons.check_circle, color: Colors.white),
+                SizedBox(width: 12.w),
+                const Expanded(child: Text('Ride cancelled successfully')),
+              ],
+            ),
+            backgroundColor: Colors.green.shade600,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.r),
+            ),
+            duration: const Duration(seconds: 3),
+          ),
+        );
+        Navigator.of(context).popUntil((route) => route.isFirst);
+      }
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Row(
+              children: [
+                const Icon(Icons.error, color: Colors.white),
+                SizedBox(width: 12.w),
+                const Expanded(child: Text('Failed to cancel ride. Please try again.')),
+              ],
+            ),
+            backgroundColor: Colors.red.shade600,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.r),
+            ),
+            duration: const Duration(seconds: 4),
+          ),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1353,40 +1621,40 @@ String _getTrafficText() {
                 fontSize: 18.sp,
               ),
             ),
-            // actions: [
-            //   // Cancel button in app bar
-            //   Container(
-            //     margin: EdgeInsets.only(right: 16.w, top: 8.w, bottom: 8.w),
-            //     child: OutlinedButton.icon(
-            //       onPressed: _cancelRide,
-            //       icon: Icon(
-            //         Icons.close,
-            //         size: 16,
-            //         color: Colors.red.shade600,
-            //       ),
-            //       label: Text(
-            //         'Cancel',
-            //         style: TextStyle(
-            //           fontSize: 12.sp,
-            //           fontWeight: FontWeight.w600,
-            //           color: Colors.red.shade600,
-            //         ),
-            //       ),
-            //       style: OutlinedButton.styleFrom(
-            //         side: BorderSide(
-            //           color: Colors.red.shade400,
-            //           width: 1.w,
-            //         ),
-            //         shape: RoundedRectangleBorder(
-            //           borderRadius: BorderRadius.circular(20.r),
-            //         ),
-            //         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.w),
-            //         minimumSize: Size.zero,
-            //         backgroundColor: Colors.red.shade50,
-            //       ),
-            //     ),
-            //   ),
-            // ],
+            actions: [
+              // Cancel button in app bar
+              Container(
+                margin: EdgeInsets.only(right: 16.w, top: 8.w, bottom: 8.w),
+                child: OutlinedButton.icon(
+                  onPressed: () => _showCancelReasonSheet(context),
+                  icon: Icon(
+                    Icons.close,
+                    size: 16,
+                    color: Colors.red.shade600,
+                  ),
+                  label: Text(
+                    'Cancel',
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.red.shade600,
+                    ),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    side: BorderSide(
+                      color: Colors.red.shade400,
+                      width: 1.w,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.w),
+                    minimumSize: Size.zero,
+                    backgroundColor: Colors.red.shade50,
+                  ),
+                ),
+              ),
+            ],
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(1),
               child: Container(
