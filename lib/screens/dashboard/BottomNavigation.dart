@@ -5,6 +5,7 @@ import 'package:rideal/screens/FutureRides/FutureRides.dart';
 import 'package:rideal/screens/home/home2.dart';
 import 'package:rideal/screens/profile/profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:upgrader/upgrader.dart';
 import 'CustomBottomNav.dart';
 
 class BottomNavigationLogic extends StatefulWidget {
@@ -55,12 +56,20 @@ class _BottomNavigationLogicState extends State<BottomNavigationLogic> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: true, // Enables the floating bottom nav effect
-      body: _screens[currentIndex],
-      bottomNavigationBar: CustomBottomNavBar(
-        currentIndex: currentIndex,
-        onTap: onTabChanged,
+    return UpgradeAlert(
+      showIgnore: false,
+      showLater: false,
+      barrierDismissible: false,
+      upgrader: Upgrader(
+        durationUntilAlertAgain: const Duration(seconds: 1),
+      ),
+      child: Scaffold(
+        extendBody: true, // Enables the floating bottom nav effect
+        body: _screens[currentIndex],
+        bottomNavigationBar: CustomBottomNavBar(
+          currentIndex: currentIndex,
+          onTap: onTabChanged,
+        ),
       ),
     );
   }

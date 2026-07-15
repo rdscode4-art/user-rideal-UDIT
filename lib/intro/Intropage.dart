@@ -1,5 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
+import 'package:upgrader/upgrader.dart';
 
 import 'onboardScreen.dart';
 
@@ -52,12 +53,19 @@ class _IntroScreenState extends State<IntroScreen> {
     final size = MediaQuery.of(context).size;
     final page = pages[currentIndex];
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Padding(
+    return UpgradeAlert(
+      showIgnore: false,
+      showLater: false,
+      barrierDismissible: false,
+      upgrader: Upgrader(
+        durationUntilAlertAgain: const Duration(seconds: 1),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: SafeArea(
+          child: Stack(
+            children: [
+              Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.0.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -160,6 +168,7 @@ class _IntroScreenState extends State<IntroScreen> {
           ],
         ),
       ),
+    ),
     );
   }
 }

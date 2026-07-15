@@ -122,18 +122,7 @@ class _RideShareAppState extends State<RideShareApp> {
         ),
       ),
       builder: (context, child) {
-        child = DevicePreview.appBuilder(context, child);
-        return UpgradeAlert(
-          navigatorKey: navigatorKey,
-          showIgnore: false,
-          showLater: false,
-          barrierDismissible: false,
-          upgrader: Upgrader(
-            durationUntilAlertAgain: const Duration(seconds: 1),
-            debugLogging: true,
-          ),
-          child: child ?? const SizedBox.shrink(),
-        );
+        return DevicePreview.appBuilder(context, child ?? const SizedBox.shrink());
       },
       home: const SplashScreen(),
       navigatorObservers: [routeObserver],

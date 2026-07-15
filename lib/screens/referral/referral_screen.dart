@@ -71,6 +71,7 @@ When you sign up, you get amazing benefits!
 ✅ Great discounts
 $bonusText
 Download the app and start your journey today!
+https://play.google.com/store/apps/details?id=com.rds.ridealuser
 ''';
     Share.share(message);
   }
