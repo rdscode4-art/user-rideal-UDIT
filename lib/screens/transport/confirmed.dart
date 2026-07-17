@@ -7,9 +7,14 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:rideal/screens/RideStarted/ridestarted.dart';
 import 'package:rideal/authservices.dart';
+import 'package:rideal/screens/chat/chat_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:ui' as ui;
+import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 
 class Confirmed extends StatefulWidget {
   final String rideType;
@@ -34,6 +39,16 @@ class _ConfirmedState extends State<Confirmed> with TickerProviderStateMixin {
   LatLng? _driverPosition;
   final Set<Marker> _markers = {};
   
+  BitmapDescriptor? _driverIcon;
+  BitmapDescriptor? _userIcon;
+  
+  // Smooth Car Animation variables
+  late AnimationController _carMovementController;
+  late Animation<double> _carMovementAnimation;
+  LatLng? _oldDriverPosition;
+  double _driverBearing = 0.0;
+  double _oldDriverBearing = 0.0;
+  
   // Animation controllers
   late AnimationController _slideController;
   late AnimationController _pulseController;
@@ -50,7 +65,30 @@ class _ConfirmedState extends State<Confirmed> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _initializeAnimations();
+    _loadCustomMarkers();
     _initializeEverything();
+  }
+
+  Future<Uint8List> _getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+  }
+
+  Future<void> _loadCustomMarkers() async {
+      String assetPath = 'assets/images/top_car.png';
+    
+    try {
+      final Uint8List driverMarker = await _getBytesFromAsset(assetPath, 120);
+      if (mounted) {
+        setState(() {
+          _driverIcon = BitmapDescriptor.fromBytes(driverMarker);
+        });
+      }
+    } catch (e) {
+      print("Error loading custom markers: $e");
+    }
   }
 Future<void> _cancelRide() async {
   // Show confirmation dialog
@@ -277,7 +315,6 @@ Future<void> _cancelRide() async {
       parent: _pulseController,
       curve: Curves.easeInOut,
     ));
-
     _fadeController = AnimationController(
       duration: const Duration(milliseconds: 600),
       vsync: this,
@@ -285,11 +322,55 @@ Future<void> _cancelRide() async {
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
-    ).animate(_fadeController);
+    ).animate(CurvedAnimation(
+      parent: _fadeController,
+      curve: Curves.easeIn,
+    ));
+
+    _carMovementController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 2000),
+    );
+    _carMovementAnimation = CurvedAnimation(
+      parent: _carMovementController,
+      curve: Curves.linear,
+    );
+    _carMovementController.addListener(() {
+      if (_oldDriverPosition != null && _driverPosition != null) {
+        final double v = _carMovementAnimation.value;
+        final lat = (_oldDriverPosition!.latitude * (1 - v)) + (_driverPosition!.latitude * v);
+        final lng = (_oldDriverPosition!.longitude * (1 - v)) + (_driverPosition!.longitude * v);
+        
+        // Smooth rotation tween handling 360 degree wrap-around
+        double diff = _driverBearing - _oldDriverBearing;
+        if (diff > 180) diff -= 360;
+        if (diff < -180) diff += 360;
+        double currentBearing = _oldDriverBearing + (diff * v);
+        
+        if (mounted) {
+          setState(() {
+            _markers.removeWhere((m) => m.markerId.value == "driver");
+            _markers.add(
+              Marker(
+                markerId: const MarkerId("driver"),
+                position: LatLng(lat, lng),
+                rotation: currentBearing,
+                anchor: const Offset(0.5, 0.5),
+                icon: _getCustomMarker('driver'),
+                infoWindow: InfoWindow(
+                  title: "Driver - ${_driverDetails?["name"] ?? 'Unknown'}",
+                  snippet: _driverDetails?["vehicleNumber"]?.toString(),
+                ),
+              ),
+            );
+          });
+        }
+      }
+    });
 
     _slideController.forward();
-    _fadeController.forward();
     _pulseController.repeat(reverse: true);
+    _fadeController.forward();
   }
 
   Future<void> _initializeEverything() async {
@@ -306,7 +387,7 @@ Future<void> _cancelRide() async {
       }
       
       if (rideId != null && _currentPosition != null) {
-        _startTrackingDriver();
+        _startSmartDriverTracking(); // Use the smart animated tracker
         _startPollingRideStatus();
       }
     } catch (e) {
@@ -314,25 +395,28 @@ Future<void> _cancelRide() async {
     }
   }
 
-  // Simpler method to get custom markers using default markers
+  // Method to get dynamic custom markers
   BitmapDescriptor _getCustomMarker(String type) {
     switch (type.toLowerCase()) {
       case 'user':
-        return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed);
+        return _userIcon ?? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed);
       case 'driver':
-        return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue);
+        return _driverIcon ?? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue);
       default:
         return BitmapDescriptor.defaultMarker;
     }
   }
 
   Future<void> _drawPolyline() async {
+    print("🚀 Inside _drawPolyline()...");
     if (_currentPosition != null && _driverPosition != null) {
+      print("🚀 Calling _getRouteCoordinates...");
       final routeCoordinates = await _getRouteCoordinates(
         _driverPosition!,
         _currentPosition!,
       );
 
+      print("🚀 Received ${routeCoordinates.length} route coordinates");
       if (routeCoordinates.isNotEmpty && mounted) {
         setState(() {
           _polylineCoordinates = routeCoordinates;
@@ -342,8 +426,8 @@ Future<void> _cancelRide() async {
               polylineId: const PolylineId("driver_to_user"),
               points: _polylineCoordinates,
               color: Theme.of(context).primaryColor,
-              width: 4.w.toInt(),
-              patterns: [PatternItem.dash(20), PatternItem.gap(10)],
+              width: 5,
+              // Removed dash patterns to make it a solid, real line
             ),
           );
         });
@@ -375,13 +459,28 @@ Future<void> _cancelRide() async {
     }
   }
 
+  double _calculateBearing(LatLng start, LatLng end) {
+    final startLat = start.latitude * pi / 180;
+    final startLng = start.longitude * pi / 180;
+    final endLat = end.latitude * pi / 180;
+    final endLng = end.longitude * pi / 180;
+
+    final dLong = endLng - startLng;
+    final y = sin(dLong) * cos(endLat);
+    final x = cos(startLat) * sin(endLat) - sin(startLat) * cos(endLat) * cos(dLong);
+    final bearing = atan2(y, x) * 180 / pi;
+    return (bearing + 360) % 360;
+  }
+
   @override
   void dispose() {
     _statusTimer?.cancel();
     _driverLocationTimer?.cancel();
+    _controller?.dispose();
     _slideController.dispose();
     _pulseController.dispose();
     _fadeController.dispose();
+    _carMovementController.dispose();
     super.dispose();
   }
 
@@ -404,18 +503,14 @@ Future<void> _cancelRide() async {
   }
 
   String getRideImage(String type) {
-    switch (type.toLowerCase()) {
-      case 'bike':
-        return 'assets/images/bike.png';
-      case 'sedan':
-        return 'assets/images/taxi.png';
-      case 'suv':
-        return 'assets/images/suv.png';
-      case 'ev':
-        return 'assets/images/ev.png';
-      default:
-        return 'assets/images/default.png';
-    }
+    final t = type.toLowerCase();
+    if (t.contains('bike') || t.contains('moto')) return 'assets/images/bike.png';
+    if (t.contains('auto') || t.contains('rickshaw')) return 'assets/images/auto.png';
+    if (t.contains('suv')) return 'assets/images/suv.png';
+    if (t.contains('sedan')) return 'assets/images/sedan.png';
+    if (t.contains('premium')) return 'assets/images/premium.png';
+    if (t.contains('ev')) return 'assets/images/ev.png';
+    return 'assets/images/car.png'; // default fallback for car/mini/city
   }
 
   // Enhanced ETA calculation using Google Directions API for more accurate time estimates
@@ -433,7 +528,13 @@ Future<void> _calculateAccurateETA() async {
           "traffic_model=best_guess&"
           "key=$googleAPIKey";
 
-      final response = await http.get(Uri.parse(url));
+      final response = await http.get(Uri.parse(url)).timeout(
+        const Duration(seconds: 5),
+        onTimeout: () {
+          print("⚠️ Directions API Timeout in ETA calculation!");
+          return http.Response('Error', 408); // Return timeout response
+        },
+      );
       
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
@@ -550,27 +651,74 @@ void _startSmartDriverTracking() {
             );
           }
           
-          setState(() {
+          if (_driverPosition != null) {
+            _oldDriverPosition = _driverPosition;
+            _oldDriverBearing = _driverBearing; // Store old bearing for smooth turning
+            
+            // Only update bearing if car moved significantly (prevents flipping upside down when stopped due to GPS jitter)
+            if (driverMovement > 2) {
+              _driverBearing = _calculateBearing(_oldDriverPosition!, newDriverPosition);
+            }
+            
             _driverPosition = newDriverPosition;
-            _markers.removeWhere((m) => m.markerId.value == "driver");
-            _markers.add(
-              Marker(
-                markerId: const MarkerId("driver"),
-                position: _driverPosition!,
-                icon: _getCustomMarker('driver'),
-                infoWindow: InfoWindow(
-                  title: "Driver - ${_driverDetails?["name"] ?? 'Unknown'}",
-                  snippet: _driverDetails?["vehicleNumber"]?.toString(),
+            
+            if (driverMovement > 200) {
+              // If driver jumped a huge distance, snap instantly
+              setState(() {
+                _markers.removeWhere((m) => m.markerId.value == "driver");
+                _markers.add(
+                  Marker(
+                    markerId: const MarkerId("driver"),
+                    position: _driverPosition!,
+                    rotation: _driverBearing,
+                    anchor: const Offset(0.5, 0.5),
+                    icon: _getCustomMarker('driver'),
+                    infoWindow: InfoWindow(
+                      title: "Driver - ${_driverDetails?["name"] ?? 'Unknown'}",
+                      snippet: _driverDetails?["vehicleNumber"]?.toString(),
+                    ),
+                  ),
+                );
+              });
+            } else {
+              // Set duration based on frequency and animate for normal driving
+              _carMovementController.duration = const Duration(milliseconds: 4500); 
+              _carMovementController.forward(from: 0.0);
+            }
+          } else {
+            setState(() {
+              _driverPosition = newDriverPosition;
+              if (_currentPosition != null) {
+                // Initialize bearing to point towards the user's pickup location on first load
+                _driverBearing = _calculateBearing(_driverPosition!, _currentPosition!);
+                _oldDriverBearing = _driverBearing;
+              }
+              _markers.removeWhere((m) => m.markerId.value == "driver");
+              _markers.add(
+                Marker(
+                  markerId: const MarkerId("driver"),
+                  position: _driverPosition!,
+                  rotation: _driverBearing,
+                  anchor: const Offset(0.5, 0.5),
+                  icon: _getCustomMarker('driver'),
+                  infoWindow: InfoWindow(
+                    title: "Driver - ${_driverDetails?["name"] ?? 'Unknown'}",
+                    snippet: _driverDetails?["vehicleNumber"]?.toString(),
+                  ),
                 ),
-              ),
-            );
-          });
+              );
+            });
+          }
           
           // Use accurate ETA calculation or fallback to basic
           await _calculateAccurateETA();
           
-          // Redraw polyline only if driver moved significantly (> 50m)
-          if (driverMovement > 50) {
+          print("🚗 SmartTracking -> Driver Movement: $driverMovement meters");
+          
+          // Redraw polyline if driver moved even slightly off-route (> 10m)
+          // This ensures the route updates dynamically if the driver takes a different road
+          if (driverMovement > 10) {
+            print("🚀 Redrawing Polyline because movement > 10m!");
             await _drawPolyline();
           }
           
@@ -593,8 +741,67 @@ void _startHighFrequencyTracking() {
   _driverLocationTimer = Timer.periodic(const Duration(seconds: 2), (_) async {
     if (rideId == null || !mounted) return;
     
-    // Similar logic but with 2-second updates instead of 5-second
-    // ... (implementation similar to above but with faster updates)
+    try {
+      final data = await Authservices.getDriverLocation(rideId!);
+      if (data != null && mounted) {
+        final lat = data["lat"];
+        final lng = data["lng"];
+        if (lat != null && lng != null) {
+          final newDriverPosition = LatLng(
+            (lat as num).toDouble(),
+            (lng as num).toDouble(),
+          );
+          
+          double driverMovement = 0;
+          if (_driverPosition != null) {
+            driverMovement = Geolocator.distanceBetween(
+              _driverPosition!.latitude,
+              _driverPosition!.longitude,
+              newDriverPosition.latitude,
+              newDriverPosition.longitude,
+            );
+          }
+          
+          if (_driverPosition != null) {
+            _oldDriverPosition = _driverPosition;
+            _oldDriverBearing = _driverBearing;
+            _driverBearing = _calculateBearing(_oldDriverPosition!, newDriverPosition);
+            _driverPosition = newDriverPosition;
+            
+            if (driverMovement > 200) {
+              // Snap instantly if teleported
+              setState(() {
+                _markers.removeWhere((m) => m.markerId.value == "driver");
+                _markers.add(
+                  Marker(
+                    markerId: const MarkerId("driver"),
+                    position: _driverPosition!,
+                    rotation: _driverBearing,
+                    anchor: const Offset(0.5, 0.5),
+                    icon: _getCustomMarker('driver'),
+                    infoWindow: InfoWindow(
+                      title: "Driver - ${_driverDetails?["name"] ?? 'Unknown'}",
+                      snippet: _driverDetails?["vehicleNumber"]?.toString(),
+                    ),
+                  ),
+                );
+              });
+            } else {
+              _carMovementController.duration = const Duration(milliseconds: 1800); 
+              _carMovementController.forward(from: 0.0);
+            }
+          }
+          
+          print("🏎️ HighFreqTracking -> Driver Movement: $driverMovement meters");
+          if (driverMovement > 10) {
+            print("🚀 HighFreqTracking: Redrawing Polyline because movement > 10m!");
+            await _drawPolyline();
+          }
+        }
+      }
+    } catch (e) {
+      print("❌ Error in high freq tracking: $e");
+    }
   });
 }
 
@@ -759,20 +966,40 @@ String _getTrafficText() {
 
   Future<void> _getUserLocation() async {
     try {
-      LocationPermission permission = await Geolocator.requestPermission();
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+      }
       if (permission == LocationPermission.denied ||
           permission == LocationPermission.deniedForever) {
         print("Location permission denied");
         return;
       }
 
-      Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
-      );
+      // Try getting last known position first for quick load
+      Position? lastPosition = await Geolocator.getLastKnownPosition();
 
-      if (mounted) {
+      if (lastPosition != null && mounted) {
         setState(() {
-          _currentPosition = LatLng(position.latitude, position.longitude);
+          _currentPosition = LatLng(lastPosition.latitude, lastPosition.longitude);
+        });
+      }
+
+      // Then fetch current position with a timeout
+      Position? currentPosition;
+      try {
+        currentPosition = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high,
+          timeLimit: const Duration(seconds: 5),
+        );
+      } catch (e) {
+        currentPosition = lastPosition;
+      }
+
+      if (currentPosition != null && mounted) {
+        setState(() {
+          _currentPosition = LatLng(currentPosition!.latitude, currentPosition.longitude);
+          _markers.removeWhere((m) => m.markerId.value == "user");
           _markers.add(
             Marker(
               markerId: const MarkerId("user"),
@@ -782,9 +1009,14 @@ String _getTrafficText() {
             ),
           );
         });
+      } else if (mounted) {
+        // Ultimate fallback to prevent infinite loading spinner
+        setState(() {
+          _currentPosition = const LatLng(28.570317, 77.3218196); // Noida Default
+        });
       }
     } catch (e) {
-      print("❌ Error getting user location: $e");
+      print("Error fetching location: $e");
     }
   }
 
@@ -811,6 +1043,8 @@ String _getTrafficText() {
                 Marker(
                   markerId: const MarkerId("driver"),
                   position: _driverPosition!,
+                  rotation: _driverBearing,
+                  anchor: const Offset(0.5, 0.5),
                   icon: _getCustomMarker('driver'),
                   infoWindow: InfoWindow(
                     title: "Driver - ${_driverDetails?["name"] ?? 'Unknown'}",
@@ -868,7 +1102,13 @@ String _getTrafficText() {
       final String url =
           "https://maps.googleapis.com/maps/api/directions/json?origin=${driverLocation.latitude},${driverLocation.longitude}&destination=${userLocation.latitude},${userLocation.longitude}&key=$googleAPIKey";
 
-      final response = await http.get(Uri.parse(url));
+      final response = await http.get(Uri.parse(url)).timeout(
+        const Duration(seconds: 5),
+        onTimeout: () {
+          print("⚠️ Directions API Timeout in getRouteCoordinates!");
+          return http.Response('Error', 408);
+        },
+      );
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
@@ -1275,29 +1515,77 @@ String _getTrafficText() {
                   ],
                 ),
               ),
-              // Call Button
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.green.withOpacity(0.3),
-                      blurRadius: 8,
-                      offset: const Offset(0, 4),
+              // Chat and Call Buttons
+              Row(
+                children: [
+                  // Chat Button
+                  Container(
+                    margin: EdgeInsets.only(right: 12.w),
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.blue.withOpacity(0.3),
+                          blurRadius: 8,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                child: IconButton(
-                  onPressed: () {
-                    String driverPhone = _driverDetails?["phone"]?.toString() ?? '';
-                    if (!driverPhone.startsWith('+91')) {
-                      driverPhone = '+91$driverPhone';
-                    }
-                    makePhoneCall(driverPhone);
-                  },
-                  icon: Icon(Icons.call, color: Colors.white, size: 24),
-                ),
+                    child: IconButton(
+                      onPressed: () {
+                        String driverId = _driverDetails?["_id"]?.toString() ?? 
+                                          _driverDetails?["id"]?.toString() ?? 
+                                          _driverDetails?["driverId"]?.toString() ?? '';
+                        String driverName = _driverDetails?["name"]?.toString() ?? 'Driver';
+                        
+                        print('💬 Chat Button Tapped -> RideId: $rideId, DriverId: $driverId');
+
+                        if (rideId != null && rideId!.isNotEmpty && driverId.isNotEmpty) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ChatScreen(
+                                rideId: rideId!,
+                                receiverId: driverId,
+                                receiverName: driverName,
+                              ),
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Cannot open chat: Missing Driver ID or Ride ID')),
+                          );
+                        }
+                      },
+                      icon: const Icon(Icons.chat_bubble_outline_rounded, color: Colors.white, size: 24),
+                    ),
+                  ),
+                  // Call Button
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.green.withOpacity(0.3),
+                          blurRadius: 8,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: IconButton(
+                      onPressed: () {
+                        String driverPhone = _driverDetails?["phone"]?.toString() ?? '';
+                        if (!driverPhone.startsWith('+91')) {
+                          driverPhone = '+91$driverPhone';
+                        }
+                        makePhoneCall(driverPhone);
+                      },
+                      icon: const Icon(Icons.call, color: Colors.white, size: 24),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -1698,6 +1986,11 @@ String _getTrafficText() {
                         ),
                       )
                     : GoogleMap(
+                        gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
+                          Factory<OneSequenceGestureRecognizer>(
+                            () => EagerGestureRecognizer(),
+                          ),
+                        },
                         initialCameraPosition: CameraPosition(
                           target: _currentPosition!,
                           zoom: 15,

@@ -2,7 +2,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
+import 'dart:ui' as ui;
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -22,12 +25,22 @@ class RideStarted extends StatefulWidget {
   State<RideStarted> createState() => _RideStartedState();
 }
 
-class _RideStartedState extends State<RideStarted> {
+class _RideStartedState extends State<RideStarted> with TickerProviderStateMixin {
   StreamSubscription<Position>? _positionStream;
   GoogleMapController? _controller;
   bool _isPaid = false;
   LatLng? _userLocation;
   String? _persistentRideId;
+  
+  // Smart Driver Tracking Variables
+  BitmapDescriptor? _driverIcon;
+  AnimationController? _carMovementController;
+  Animation<double>? _carMovementAnimation;
+  LatLng? _driverPosition;
+  LatLng? _oldDriverPosition;
+  double _driverBearing = 0.0;
+  double _oldDriverBearing = 0.0;
+  
   Future<List<Map<String, String>>> getEmergencyContacts() async {
     final prefs = await SharedPreferences.getInstance();
     final contactsList = prefs.getStringList('emergency_contacts') ?? [];
@@ -340,8 +353,48 @@ class _RideStartedState extends State<RideStarted> {
       }
     }
   }
+  Future<Uint8List> _getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+  }
+
+  Future<void> _loadCustomMarkers() async {
+    String assetPath = 'assets/images/top_car.png';
+    try {
+      final Uint8List driverMarker = await _getBytesFromAsset(assetPath, 120);
+      if (mounted) {
+        setState(() {
+          _driverIcon = BitmapDescriptor.fromBytes(driverMarker);
+        });
+      }
+    } catch (e) {
+      print("Error loading custom markers: $e");
+    }
+  }
+
+  double _calculateBearing(LatLng start, LatLng end) {
+    var lat1 = start.latitude * pi / 180;
+    var lng1 = start.longitude * pi / 180;
+    var lat2 = end.latitude * pi / 180;
+    var lng2 = end.longitude * pi / 180;
+
+    var dLon = (lng2 - lng1);
+
+    var y = sin(dLon) * cos(lat2);
+    var x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon);
+
+    var brng = atan2(y, x);
+
+    brng = brng * 180 / pi;
+    brng = (brng + 360) % 360;
+
+    return brng;
+  }
+
   @override
-void initState() {
+  void initState() {
   super.initState();
    _ensureRideId();
   _persistentRideId = widget.rideId;
@@ -352,6 +405,48 @@ void initState() {
       // Store in SharedPreferences immediately
       _storeRideId(_persistentRideId!);
     }
+    
+    _loadCustomMarkers();
+    
+    _carMovementController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 2000),
+    );
+    _carMovementAnimation = CurvedAnimation(
+      parent: _carMovementController!,
+      curve: Curves.linear,
+    );
+    
+    _carMovementController!.addListener(() {
+      if (_oldDriverPosition != null && _driverPosition != null) {
+        final double v = _carMovementAnimation!.value;
+        final lat = (_oldDriverPosition!.latitude * (1 - v)) + (_driverPosition!.latitude * v);
+        final lng = (_oldDriverPosition!.longitude * (1 - v)) + (_driverPosition!.longitude * v);
+        
+        double diff = _driverBearing - _oldDriverBearing;
+        if (diff > 180) diff -= 360;
+        if (diff < -180) diff += 360;
+        double currentBearing = _oldDriverBearing + (diff * v);
+        
+        if (mounted) {
+          setState(() {
+            _userLocation = LatLng(lat, lng);
+            _markers.removeWhere((m) => m.markerId.value == "user");
+            _markers.add(
+              Marker(
+                markerId: const MarkerId("user"),
+                position: _userLocation!,
+                rotation: currentBearing,
+                anchor: const Offset(0.5, 0.5),
+                infoWindow: const InfoWindow(title: "Your Ride"),
+                icon: _driverIcon ?? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+              ),
+            );
+          });
+        }
+      }
+    });
+    
     _initRide();
     _fetchRidePaymentStatus(widget.rideId);
 }
@@ -548,34 +643,119 @@ Future<void> _handleRideCompletion(String completedRideId) async {
     }
   }
 
-  // ✅ FIX 8: Reduce polling frequency to prevent overlaps
   Future<void> _fetchLocationPeriodically() async {
     print("🚀 Starting location + status polling at ${DateTime.now()}...");
     
-    await _updateUserLocation();
-    await _fetchRidePaymentStatus(_persistentRideId!);   // ← ADD THIS
+    // Initial fetch
+    await _fetchRidePaymentStatus(_persistentRideId!);
+    await _performSingleTrackingTick();
 
-    // Changed from 1 second to 3 seconds to prevent overlaps
-    _locationTimer = Timer.periodic(const Duration(seconds: 3), (_) async {
-      if (!_isNavigated && mounted) {
-        print("⏰ Periodic check at ${DateTime.now()}");
-        
-        try {
-          await _updateUserLocation();
-        } catch (e) {
-          print("⚠️ Location update failed: $e");
-        }
-        
-        try {
-          await _checkRideStatus();
-        } catch (e) {
-          print("⚠️ Status check failed: $e");
-        }
-      } else {
-        print("⏸️ Polling stopped - _isNavigated: $_isNavigated, mounted: $mounted");
-        _locationTimer?.cancel();
-      }
+    _locationTimer = Timer.periodic(const Duration(seconds: 5), (_) async {
+      await _performSingleTrackingTick();
     });
+  }
+
+  Future<void> _performSingleTrackingTick() async {
+    if (!_isNavigated && mounted) {
+      try {
+        await _checkRideStatus();
+      } catch (e) {
+        print("⚠️ Status check failed: $e");
+      }
+      
+      try {
+        final data = await Authservices.getDriverLocation(_persistentRideId!);
+        if (data != null && mounted) {
+          final lat = data["lat"];
+          final lng = data["lng"];
+          if (lat != null && lng != null) {
+            final newDriverPosition = LatLng(
+              (lat as num).toDouble(),
+              (lng as num).toDouble(),
+            );
+            
+            double driverMovement = 0;
+            if (_driverPosition != null) {
+              driverMovement = Geolocator.distanceBetween(
+                _driverPosition!.latitude,
+                _driverPosition!.longitude,
+                newDriverPosition.latitude,
+                newDriverPosition.longitude,
+              );
+            }
+            
+            if (_driverPosition != null) {
+              _oldDriverPosition = _driverPosition;
+              _oldDriverBearing = _driverBearing;
+              
+              if (driverMovement > 2) {
+                _driverBearing = _calculateBearing(_oldDriverPosition!, newDriverPosition);
+              }
+              
+              _driverPosition = newDriverPosition;
+              
+              print("🚗 RideStarted -> Driver Movement: $driverMovement meters");
+
+              if (driverMovement > 200) {
+                print("🚀 Movement > 200m! Teleporting to new position.");
+                setState(() {
+                  _userLocation = _driverPosition; // Use driver pos as user pos to center map
+                  _updateMarkersAndRoute(_polylineCoordinates); // Redraw markers
+                });
+              } else {
+                _carMovementController?.duration = const Duration(milliseconds: 4500); 
+                _carMovementController?.forward(from: 0.0);
+                
+                // Fetch new route periodically if moved significantly (10 meters) to keep polyline fresh
+                if (driverMovement > 10 && _currentDestination != null) {
+                  print("🛣️ Fetching new route because movement > 10m...");
+                  List<LatLng> newRoute = await _getRouteCoordinates(_driverPosition!, _currentDestination!);
+                  if (mounted && newRoute.isNotEmpty) {
+                    print("✅ New route fetched, redrawing polyline...");
+                    setState(() {
+                      _polylineCoordinates = newRoute;
+                      _polylines.clear();
+                      _polylines.add(
+                        Polyline(
+                          polylineId: const PolylineId("route"),
+                          points: _polylineCoordinates,
+                          color: Theme.of(context).primaryColor,
+                          width: 5,
+                        ),
+                      );
+                    });
+                  }
+                }
+              }
+            } else {
+              setState(() {
+                _driverPosition = newDriverPosition;
+                _userLocation = newDriverPosition; // Initial user location
+                if (_currentDestination != null) {
+                  _driverBearing = _calculateBearing(_driverPosition!, _currentDestination!);
+                  _oldDriverBearing = _driverBearing;
+                }
+                _updateMarkersAndRoute(_polylineCoordinates);
+              });
+              
+              // Fetch route on first load
+              if (_currentDestination != null) {
+                List<LatLng> newRoute = await _getRouteCoordinates(_driverPosition!, _currentDestination!);
+                if (mounted) {
+                  setState(() {
+                    _updateMarkersAndRoute(newRoute);
+                  });
+                }
+              }
+            }
+          }
+        }
+      } catch (e) {
+        print("❌ Error tracking driver: $e");
+      }
+    } else {
+      _locationTimer?.cancel();
+    }
   }
 
   Future<void> _sendSOS() async {
@@ -711,7 +891,6 @@ Future<void> _handleRideCompletion(String completedRideId) async {
 
     // ✅ Ride is valid & ongoing — start location updates
     _fetchLocationPeriodically();
-    _startLiveLocationUpdates();
   }
 
   Future<void> _parseRideDataFromRideObject(dynamic rideObj) async {
@@ -799,39 +978,6 @@ Future<void> _handleRideCompletion(String completedRideId) async {
     super.dispose();
   }
 
-  void _startLiveLocationUpdates() {
-    if (_currentDestination == null) {
-      print("⚠️ No destination set, cannot start location updates");
-      return;
-    }
-
-    LocationSettings locationSettings = const LocationSettings(
-      accuracy: LocationAccuracy.high,
-      distanceFilter: 10, // update every 10 meters
-    );
-
-    _positionStream = Geolocator.getPositionStream(
-      locationSettings: locationSettings,
-    ).listen((Position position) async {
-      LatLng newLocation = LatLng(position.latitude, position.longitude);
-
-      List<LatLng> newRoute = await _getRouteCoordinates(
-        newLocation,
-        _currentDestination!,
-      );
-
-      setState(() {
-        _userLocation = newLocation;
-        _updateMarkersAndRoute(newRoute);
-      });
-
-      // Check if reached current destination
-      await _checkDestinationReached(newLocation);
-
-      // Optional: move camera to follow user
-      _controller?.animateCamera(CameraUpdate.newLatLng(_userLocation!));
-    });
-  }
 
   Future<void> _checkDestinationReached(LatLng userLocation) async {
     if (_currentDestination == null) return;
@@ -877,19 +1023,19 @@ Future<void> _handleRideCompletion(String completedRideId) async {
     }
   }
 
-  void _updateMarkersAndRoute(List<LatLng> route) {
+  void _updateMarkersAndRoute(List<LatLng> route, [double? animatedBearing]) {
     _markers.clear();
 
-    // User location marker
+    // User location marker (Now acts as the car marker)
     if (_userLocation != null) {
       _markers.add(
         Marker(
           markerId: const MarkerId("user"),
           position: _userLocation!,
-          infoWindow: const InfoWindow(title: "You"),
-          icon: BitmapDescriptor.defaultMarkerWithHue(
-            BitmapDescriptor.hueGreen,
-          ),
+          rotation: animatedBearing ?? _driverBearing,
+          anchor: const Offset(0.5, 0.5),
+          infoWindow: const InfoWindow(title: "Your Ride"),
+          icon: _driverIcon ?? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
         ),
       );
     }
@@ -925,14 +1071,14 @@ Future<void> _handleRideCompletion(String completedRideId) async {
     // Update polyline
     _polylineCoordinates = route;
     _polylines.clear();
-    _polylines.add(
-      Polyline(
-        polylineId: const PolylineId("route"),
-        points: _polylineCoordinates,
-        color: Colors.blue,
-        width: 4.w.toInt(),
-      ),
-    );
+      _polylines.add(
+        Polyline(
+          polylineId: const PolylineId("route"),
+          points: _polylineCoordinates,
+          color: Theme.of(context).primaryColor,
+          width: 5,
+        ),
+      );
   }
 
   
@@ -952,9 +1098,26 @@ Future<void> _handleRideCompletion(String completedRideId) async {
       }
 
       print("📍 Getting current position...");
-      Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
-      );
+      Position? position;
+      try {
+        position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high,
+          timeLimit: const Duration(seconds: 5),
+        );
+      } catch (e) {
+        print("⚠️ Timeout getting position, using last known...");
+        position = await Geolocator.getLastKnownPosition();
+      }
+
+      if (position == null) {
+        print("⚠️ Failed to get any position, using fallback location");
+        // Use a default location (e.g. Noida) to prevent infinite loading spinner
+        position = Position(
+          longitude: 77.3218, latitude: 28.5703,
+          timestamp: DateTime.now(), accuracy: 1, altitude: 1, heading: 1, speed: 1, speedAccuracy: 1,
+          altitudeAccuracy: 1, headingAccuracy: 1,
+        );
+      }
 
       LatLng newLocation = LatLng(position.latitude, position.longitude);
       print(
@@ -967,10 +1130,12 @@ Future<void> _handleRideCompletion(String completedRideId) async {
         _currentDestination!,
       );
 
-      setState(() {
-        _userLocation = newLocation;
-        _updateMarkersAndRoute(newRoute);
-      });
+      if (mounted) {
+        setState(() {
+          _userLocation = newLocation;
+          _updateMarkersAndRoute(newRoute);
+        });
+      }
 
       // Check if reached destination
       await _checkDestinationReached(newLocation);
@@ -1023,7 +1188,13 @@ Future<void> _handleRideCompletion(String completedRideId) async {
       final String url =
           "https://maps.googleapis.com/maps/api/directions/json?origin=${origin.latitude},${origin.longitude}&destination=${destination.latitude},${destination.longitude}&key=$googleAPIKey";
 
-      final response = await http.get(Uri.parse(url));
+      final response = await http.get(Uri.parse(url)).timeout(
+        const Duration(seconds: 5),
+        onTimeout: () {
+          print("⚠️ Directions API Timeout in getRouteCoordinates!");
+          return http.Response('Error', 408);
+        },
+      );
       print("📡 Directions API status: ${response.statusCode}");
 
       if (response.statusCode == 200) {
@@ -1244,8 +1415,12 @@ Future<void> _forceStatusCheck() async {
                     },
                     markers: _markers,
                     polylines: _polylines,
-                    myLocationEnabled: true,
+                    myLocationEnabled: false, // Disabled to prevent blue dot overlapping with car marker
                     myLocationButtonEnabled: false,
+                    zoomControlsEnabled: false,
+                    mapToolbarEnabled: false,
+                    compassEnabled: true,
+                    trafficEnabled: false,
                   ),
 
                   // Top Info Card (Minimal Pill Design)
